@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kettlebell Pro</title>
-
+    
     <!-- PWA Meta Tags -->
     <meta name="description" content="Professional kettlebell workout app with strength circuits and HIIT training">
     <meta name="theme-color" content="#1a1a1a">
@@ -12,7 +12,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Kettlebell Pro">
     <meta name="msapplication-TileColor" content="#1a1a1a">
-
+    
     <!-- Manifest -->
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIktldHRsZWJlbGwgUHJvIiwKICAic2hvcnRfbmFtZSI6ICJLZXR0bGViZWxsIiwKICAiZGVzY3JpcHRpb24iOiAiUHJvZmVzc2lvbmFsIGtldHRsZWJlbGwgd29ya291dCBhcHAgd2l0aCBzdHJlbmd0aCBjaXJjdWl0cyBhbmQgSElJVCB0cmFpbmluZyIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFhMWExYSIsCiAgInRoZW1lX2NvbG9yIjogIiMxYTFhMWEiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU5USTBJaUJvWldsbmFIUTlJalV5TkNJZ2RtbGxkMEp2ZUQwaU1DQXdJRFV5TkNBMU1qUWlJR1pwYkd3OUlpTXdNR1ptTkRFaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BHTnBjbU5zWlNCamVEMGlNall5SWlCamVUMGlNall5SWlCeVBTSTJNQ0lnWm1sc2JEMGlJekF3Wm1ZME1TSWdMejQ4ZEdWNGRDQjRQU0l5TmpJaUlIazlJakkyTWlJZ1ptbHNiRDBpSTJabU16ZzJZbVFpSUdadmJuUXRabUZ0YVd4NVBTSnRiMjV2YzNCaFkyVWlJR1p2Ym5RdGMybDZaVDBpTlRRaUlIUmxlSFF0WVc1amFHOXlQU0p0YVdSa2JHVWlQang4UEM5MFpYaDBQand2YzNabkBlMCIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTlRJMElpQm9aV2xuYUhROUlqVXlOQ0lnZG1sbGQwSnZlRDBpTUNBd0lEVXlOQ0ExTWpRaUlHWnBiR3c5SWlNd01HWm1OREVpSUhodGJHNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUkrUEdOcGNtTnNaU0JqZUQwaU1qWXlJaUJqZVQwaU1qWXlJaUJ5UFNJMk1DSWdabWxzYkQwaUl6QXdabVkwTVNJZ0x6NDhkR1Y0ZENCNFBTSXlOaklpSUhrOUlqSTJNaUlnWm1sc2JEMGlJMlptTXpnMlltUWlJR1p2Ym5RdFptRnRhV3g1UFNKdGIyNXZjM0JoWTJVaUlHWnZiblF0YzJsNlpUMGlOVFFpSUhSbGVIUXRZVzVqYUc5eVBTSnRhV1JrYkdVaVB6eDhQQzlwWlhoMFB6d3ZjM1puUUdVd0lnPT0iLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXSwKICAiY2F0ZWdvcmllcyI6IFsiaGVhbHRoIiwgImZpdG5lc3MiLCAic3BvcnRzIl0sCiAgImxhbmciOiAiZW4iCn0="
     >
@@ -39,7 +39,7 @@
         * {
             touch-action: manipulation;
         }
-
+        
         body {
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
@@ -53,7 +53,7 @@
             overscroll-behavior: none;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
-
+        
         /* Allow text selection only on input fields */
         input, textarea {
             -webkit-user-select: text;
@@ -61,35 +61,35 @@
             -ms-user-select: text;
             user-select: text;
         }
-
+        
         /* Enhanced animations and effects */
         .timer-ring {
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
             transition: stroke-dashoffset 0.3s ease;
         }
-
+        
         .exercise-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
         }
-
+        
         .exercise-card:hover {
             transform: translateY(-4px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-
+        
         /* Button enhancements */
         button {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
-
+        
         button:active {
             transform: scale(0.98);
         }
-
+        
         /* Ripple effect for buttons */
         button::before {
             content: '';
@@ -104,33 +104,33 @@
             transform: translate(-50%, -50%);
             z-index: 0;
         }
-
+        
         button:active::before {
             width: 300px;
             height: 300px;
         }
-
+        
         button > * {
             position: relative;
             z-index: 1;
         }
-
+        
         /* Input field enhancements */
         input[type="number"] {
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
-
+        
         input[type="number"]:focus {
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
         }
-
+        
         /* Enhanced shadows */
         .shadow-lg {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-
+        
         /* Gradient text effects */
         .gradient-text {
             background: linear-gradient(135deg, #00ff41, #00bfff);
@@ -138,7 +138,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
+        
         /* Pulse animation for active elements */
         @keyframes pulse-glow {
             0%, 100% { 
@@ -148,81 +148,81 @@
                 box-shadow: 0 0 30px rgba(0, 255, 65, 0.6), 0 0 40px rgba(0, 255, 65, 0.3);
             }
         }
-
+        
         .pulse-active {
             animation: pulse-glow 2s infinite;
         }
-
+        
         /* Enhanced timer display */
         #timer-display {
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             font-weight: 700;
             letter-spacing: -0.02em;
         }
-
+        
         /* Smooth page transitions */
         #app > div {
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-
+        
         #app > div.hidden {
             opacity: 0;
             transform: translateY(10px);
             pointer-events: none;
         }
-
+        
         /* Enhanced stats cards */
         .stats-item {
             transition: transform 0.2s ease;
         }
-
+        
         .stats-item:hover {
             transform: scale(1.05);
         }
-
+        
         /* Progress ring enhancements */
         .timer-progress-container {
             filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
         }
-
+        
         /* Set completion animation */
         @keyframes set-complete {
             0% { transform: scale(1); }
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
         }
-
+        
         .set-complete-animation {
             animation: set-complete 0.4s ease;
         }
-
+        
         /* Loading states */
         .loading-shimmer {
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             animation: shimmer 1.5s infinite;
         }
-
+        
         @keyframes shimmer {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
-
+        
         /* Enhanced focus states */
         button:focus-visible, input:focus-visible {
             outline: 2px solid #00ff41;
             outline-offset: 2px;
         }
-
+        
         /* Improved scrolling */
         * {
             scroll-behavior: smooth;
         }
-
+        
         /* Enhanced modal animations */
         .modal-enter {
             animation: modal-fade-in 0.3s ease;
         }
-
+        
         @keyframes modal-fade-in {
             from { 
                 opacity: 0; 
@@ -491,33 +491,33 @@
             const isStrength = workoutType === 'strength';
             const primaryColor = isStrength ? '#00ff41' : '#00bfff';
             const primaryColorHover = isStrength ? '#00cc33' : '#0099cc';
-
+            
             // Update timer progress color
             document.getElementById('timer-progress').style.stroke = primaryColor;
-
+            
             // Update workout time display color
             const timeDisplay = document.getElementById('workout-time-display');
             timeDisplay.style.color = primaryColor;
-
+            
             // Update timer control button
             const timerBtn = document.getElementById('timer-control-btn');
             timerBtn.style.backgroundColor = primaryColor;
             timerBtn.style.color = 'black';
             timerBtn.onmouseover = () => timerBtn.style.backgroundColor = primaryColorHover;
             timerBtn.onmouseout = () => timerBtn.style.backgroundColor = primaryColor;
-
+            
             // Update completion screen
             const banner = document.getElementById('completion-banner');
             const returnBtn = document.getElementById('return-home-btn');
             const finalDuration = document.getElementById('final-duration');
             const finalExercises = document.getElementById('final-exercises');
-
+            
             banner.style.background = `linear-gradient(to right, ${primaryColor}, ${primaryColorHover})`;
             returnBtn.style.backgroundColor = primaryColor;
             returnBtn.style.color = 'black';
             returnBtn.onmouseover = () => returnBtn.style.backgroundColor = primaryColorHover;
             returnBtn.onmouseout = () => returnBtn.style.backgroundColor = primaryColor;
-
+            
             finalDuration.style.color = primaryColor;
             finalExercises.style.color = primaryColor;
         }
@@ -537,11 +537,11 @@
             currentSetIndex = 0;
             completedSets = [];
             workoutStartTime = Date.now();
-
+            
             applyWorkoutTheme(type);
             showScreen('workout-screen');
             document.getElementById('workout-title').textContent = currentWorkout.name;
-
+            
             if (currentWorkout.type === 'hiit') {
                 setupHIITWorkout();
             } else {
@@ -552,19 +552,19 @@
         function setupHIITWorkout() {
             workoutTimeRemaining = currentWorkout.totalDuration;
             currentRound = 1;
-
+            
             document.getElementById('workout-time-display').classList.remove('hidden');
             updateWorkoutTimeDisplay();
             startWorkoutTimer();
             updateWorkoutProgress();
-
+            
             timeRemaining = 10;
             updateTimerDisplay();
             document.getElementById('timer-label').textContent = 'Get Ready';
             document.getElementById('exercise-name').textContent = 'Prepare for HIIT';
             document.getElementById('exercise-reps').textContent = `Get ready to start your workout!`;
             document.getElementById('exercise-demo').classList.add('hidden');
-
+            
             document.getElementById('set-tracking').classList.add('hidden');
             startCountdown();
         }
@@ -583,7 +583,7 @@
             const exercise = currentWorkout.exercises[currentExerciseIndex];
             const container = document.getElementById('sets-container');
             container.innerHTML = '';
-
+            
             for (let i = 0; i < exercise.sets; i++) {
                 const setDiv = document.createElement('div');
                 setDiv.className = 'flex items-center justify-between p-3 bg-dark-bg rounded-lg';
@@ -602,7 +602,7 @@
                 `;
                 container.appendChild(setDiv);
             }
-
+            
             currentSetIndex = 0;
             updateSetButtons();
         }
@@ -613,36 +613,36 @@
                 // Get the rep count from input
                 const repsInput = document.getElementById(`reps-input-${currentSetIndex}`);
                 const reps = parseInt(repsInput.value) || 0;
-
+                
                 if (reps === 0) {
                     showCustomAlert("Please enter the number of reps completed");
                     repsInput.focus();
                     return;
                 }
-
+                
                 // Store the completed reps
                 if (!completedSets[currentExerciseIndex]) {
                     completedSets[currentExerciseIndex] = [];
                 }
                 completedSets[currentExerciseIndex][currentSetIndex] = reps;
-
+                
                 // Update total reps
                 totalStats.reps += reps;
                 updateTotalStats();
-
+                
                 // Mark set as complete and show reps
                 document.getElementById(`set-${currentSetIndex}`).className = 'w-6 h-6 bg-electric-green text-black rounded-full flex items-center justify-center text-xs font-bold';
                 document.getElementById(`set-${currentSetIndex}`).textContent = reps;
-
+                
                 // Hide current input and show next one
                 repsInput.classList.add('hidden');
                 currentSetIndex++;
-
+                
                 if (currentSetIndex < exercise.sets) {
                     // Show next input field
                     const nextInput = document.getElementById(`reps-input-${currentSetIndex}`);
                     nextInput.classList.remove('hidden');
-
+                    
                     // Start rest timer
                     timeRemaining = exercise.restTime;
                     document.getElementById('timer-section').classList.remove('hidden');
@@ -650,13 +650,13 @@
                     document.getElementById('workout-controls').classList.remove('hidden');
                     updateTimerDisplay();
                     startCountdown();
-
+                    
                     // Focus on next input after rest
                     setTimeout(() => {
                         nextInput.focus();
                     }, exercise.restTime * 1000 + 100);
                 }
-
+                
                 updateSetButtons();
             }
         }
@@ -665,7 +665,7 @@
             const exercise = currentWorkout.exercises[currentExerciseIndex];
             const completeBtn = document.getElementById('complete-set-btn');
             const nextBtn = document.getElementById('next-exercise-btn');
-
+            
             if (currentSetIndex >= exercise.sets) {
                 completeBtn.classList.add('hidden');
                 nextBtn.classList.remove('hidden');
@@ -678,12 +678,12 @@
         function nextExercise() {
             currentExerciseIndex++;
             currentSetIndex = 0;
-
+            
             if (currentExerciseIndex >= currentWorkout.exercises.length) {
                 completeWorkout();
                 return;
             }
-
+            
             showCurrentExercise();
             setupSetTracking();
             document.getElementById('timer-section').classList.add('hidden');
@@ -704,7 +704,7 @@
                 document.getElementById('exercise-description').textContent = exercise.description;
                 document.getElementById('exercise-demo').classList.remove('hidden');
             }
-
+            
             updateWorkoutProgress();
         }
 
@@ -720,7 +720,7 @@
 
         function startWorkoutTimer() {
             if (workoutTimerInterval) clearInterval(workoutTimerInterval);
-
+            
             workoutTimerInterval = setInterval(() => {
                 if (workoutTimeRemaining > 0) {
                     workoutTimeRemaining--;
@@ -741,23 +741,23 @@
 
         function startCountdown() {
             if (timerInterval) clearInterval(timerInterval);
-
+            
             timerInterval = setInterval(() => {
                 if (timeRemaining > 0) {
                     timeRemaining--;
-
+                    
                     // Audio cues for countdown
                     if (timeRemaining <= 3 && timeRemaining > 0) {
                         playAudioCue('countdown');
                     }
-
+                    
                     updateTimerDisplay();
                 } else {
                     clearInterval(timerInterval);
                     handleTimerComplete();
                 }
             }, 1000);
-
+            
             isTimerRunning = true;
             updateTimerButton();
         }
@@ -789,7 +789,7 @@
                 if (currentExerciseIndex >= currentWorkout.exercises.length) {
                     currentRound++;
                     currentExerciseIndex = 0;
-
+                    
                     timeRemaining = 60;
                     document.getElementById('timer-label').textContent = 'Round Rest';
                     document.getElementById('exercise-name').textContent = 'Round Complete!';
@@ -817,11 +817,11 @@
             const seconds = timeRemaining % 60;
             document.getElementById('timer-display').textContent = 
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
+            
             const totalTime = document.getElementById('timer-label').textContent === 'Work' ? 
                 currentWorkout.workTime : 
                 (document.getElementById('timer-label').textContent === 'Round Rest' ? 60 : currentWorkout.restTime || 90);
-
+            
             const progress = ((totalTime - timeRemaining) / totalTime) * 314;
             document.getElementById('timer-progress').style.strokeDashoffset = 314 - progress;
         }
@@ -874,13 +874,13 @@
         function completeWorkout() {
             if (timerInterval) clearInterval(timerInterval);
             if (workoutTimerInterval) clearInterval(workoutTimerInterval);
-
+            
             const duration = Math.round((Date.now() - workoutStartTime) / 1000 / 60);
             totalStats.workouts++;
             totalStats.time += duration;
-
+            
             document.getElementById('final-duration').textContent = `${duration}m`;
-
+            
             if (currentWorkout.type === 'hiit') {
                 document.getElementById('final-exercises').textContent = currentRound - 1;
                 document.querySelectorAll('#complete-screen .text-sm')[1].textContent = 'Rounds';
@@ -888,7 +888,7 @@
                 document.getElementById('final-exercises').textContent = currentWorkout.exercises.length;
                 document.querySelectorAll('#complete-screen .text-sm')[1].textContent = 'Exercises';
             }
-
+            
             updateTotalStats();
             playAudioCue('complete');
             showScreen('complete-screen');
@@ -939,28 +939,64 @@
         // Audio System
         let audioContext;
         let isAudioEnabled = true;
+        let audioInitialized = false;
 
-        // Initialize audio context
+        // Initialize audio context with user interaction
         function initAudio() {
             if (!audioContext) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
             }
+            
+            // Resume audio context if suspended (required by browser policies)
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
         }
+
+        // Enable audio with user interaction (required by browsers)
+        function enableAudio() {
+            if (!audioInitialized) {
+                initAudio();
+                audioInitialized = true;
+                
+                // Test audio to ensure it works
+                if (audioContext && audioContext.state === 'running') {
+                    // Play a very quiet test tone
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.001, audioContext.currentTime); // Very quiet
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.01);
+                    
+                    console.log('Audio enabled successfully');
+                }
+            }
+        }
+
+        // Add click event listeners to enable audio on first interaction
+        document.addEventListener('click', enableAudio, { once: true });
+        document.addEventListener('touchstart', enableAudio, { once: true });
 
         // Play different audio cues
         function playAudioCue(type) {
             if (!isAudioEnabled) return;
-
+            
             initAudio();
-
+            
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
-
+            
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
-
+            
             let frequency, duration, volume;
-
+            
             switch(type) {
                 case 'countdown':
                     frequency = 800;
@@ -991,39 +1027,39 @@
                     duration = 0.2;
                     volume = 0.3;
             }
-
+            
             oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
             oscillator.type = 'sine';
-
+            
             gainNode.gain.setValueAtTime(0, audioContext.currentTime);
             gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
             gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-
+            
             oscillator.start(audioContext.currentTime);
             oscillator.stop(audioContext.currentTime + duration);
         }
 
         function playSuccessChord() {
             if (!isAudioEnabled) return;
-
+            
             initAudio();
-
+            
             const frequencies = [523, 659, 784]; // C, E, G major chord
             frequencies.forEach((freq, index) => {
                 setTimeout(() => {
                     const oscillator = audioContext.createOscillator();
                     const gainNode = audioContext.createGain();
-
+                    
                     oscillator.connect(gainNode);
                     gainNode.connect(audioContext.destination);
-
+                    
                     oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
                     oscillator.type = 'sine';
-
+                    
                     gainNode.gain.setValueAtTime(0, audioContext.currentTime);
                     gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.01);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
-
+                    
                     oscillator.start(audioContext.currentTime);
                     oscillator.stop(audioContext.currentTime + 0.8);
                 }, index * 100);
@@ -1064,10 +1100,10 @@
                         );
                     });
                 `;
-
+                
                 const blob = new Blob([swScript], { type: 'application/javascript' });
                 const swUrl = URL.createObjectURL(blob);
-
+                
                 navigator.serviceWorker.register(swUrl)
                     .then(registration => {
                         console.log('SW registered: ', registration);
@@ -1088,7 +1124,7 @@
         function showInstallButton() {
             // Only show install button on home screen
             if (document.getElementById('home-screen').classList.contains('hidden')) return;
-
+            
             if (!installButton) {
                 installButton = document.createElement('button');
                 installButton.innerHTML = '📱 Install App';
@@ -1107,15 +1143,15 @@
 
         async function installApp() {
             if (!deferredPrompt) return;
-
+            
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
-
+            
             if (outcome === 'accepted') {
                 console.log('User accepted the install prompt');
                 hideInstallButton();
             }
-
+            
             deferredPrompt = null;
         }
 
@@ -1129,7 +1165,7 @@
         const originalShowScreen = showScreen;
         showScreen = function(screenId) {
             originalShowScreen(screenId);
-
+            
             // Show install button only on home screen
             if (screenId === 'home-screen' && deferredPrompt) {
                 showInstallButton();
