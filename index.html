@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kettlebell Pro</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Professional kettlebell workout app with strength circuits and HIIT training">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kettlebell Pro">
+    <meta name="msapplication-TileColor" content="#1a1a1a">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIktldHRsZWJlbGwgUHJvIiwKICAic2hvcnRfbmFtZSI6ICJLZXR0bGViZWxsIiwKICAiZGVzY3JpcHRpb24iOiAiUHJvZmVzc2lvbmFsIGtldHRsZWJlbGwgd29ya291dCBhcHAgd2l0aCBzdHJlbmd0aCBjaXJjdWl0cyBhbmQgSElJVCB0cmFpbmluZyIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFhMWExYSIsCiAgInRoZW1lX2NvbG9yIjogIiMxYTFhMWEiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU5USTBJaUJvWldsbmFIUTlJalV5TkNJZ2RtbGxkMEp2ZUQwaU1DQXdJRFV5TkNBMU1qUWlJR1pwYkd3OUlpTXdNR1ptTkRFaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BHTnBjbU5zWlNCamVEMGlNall5SWlCamVUMGlNall5SWlCeVBTSTJNQ0lnWm1sc2JEMGlJekF3Wm1ZME1TSWdMejQ4ZEdWNGRDQjRQU0l5TmpJaUlIazlJakkyTWlJZ1ptbHNiRDBpSTJabU16ZzJZbVFpSUdadmJuUXRabUZ0YVd4NVBTSnRiMjV2YzNCaFkyVWlJR1p2Ym5RdGMybDZaVDBpTlRRaUlIUmxlSFF0WVc1amFHOXlQU0p0YVdSa2JHVWlQang4UEM5MFpYaDBQand2YzNabkBlMCIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTlRJMElpQm9aV2xuYUhROUlqVXlOQ0lnZG1sbGQwSnZlRDBpTUNBd0lEVXlOQ0ExTWpRaUlHWnBiR3c5SWlNd01HWm1OREVpSUhodGJHNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUkrUEdOcGNtTnNaU0JqZUQwaU1qWXlJaUJqZVQwaU1qWXlJaUJ5UFNJMk1DSWdabWxzYkQwaUl6QXdabVkwTVNJZ0x6NDhkR1Y0ZENCNFBTSXlOaklpSUhrOUlqSTJNaUlnWm1sc2JEMGlJMlptTXpnMlltUWlJR1p2Ym5RdFptRnRhV3g1UFNKdGIyNXZjM0JoWTJVaUlHWnZiblF0YzJsNlpUMGlOVFFpSUhSbGVIUXRZVzVqYUc5eVBTSnRhV1JrYkdVaVB6eDhQQzlwWlhoMFB6d3ZjM1puUUdVd0lnPT0iLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXSwKICAiY2F0ZWdvcmllcyI6IFsiaGVhbHRoIiwgImZpdG5lc3MiLCAic3BvcnRzIl0sCiAgImxhbmciOiAiZW4iCn0="
+    >
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -733,6 +745,12 @@
             timerInterval = setInterval(() => {
                 if (timeRemaining > 0) {
                     timeRemaining--;
+
+                    // Audio cues for countdown
+                    if (timeRemaining <= 3 && timeRemaining > 0) {
+                        playAudioCue('countdown');
+                    }
+
                     updateTimerDisplay();
                 } else {
                     clearInterval(timerInterval);
@@ -748,6 +766,8 @@
             if (currentWorkout.type === 'hiit') {
                 handleHIITTimerComplete();
             } else {
+                // Strength workout rest period complete
+                playAudioCue('start');
                 document.getElementById('timer-section').classList.add('hidden');
                 document.getElementById('workout-controls').classList.add('hidden');
             }
@@ -755,12 +775,16 @@
 
         function handleHIITTimerComplete() {
             if (document.getElementById('timer-label').textContent === 'Get Ready') {
+                // Start work period
+                playAudioCue('start');
                 showCurrentExercise();
                 timeRemaining = currentWorkout.workTime;
                 document.getElementById('timer-label').textContent = 'Work';
                 updateTimerDisplay();
                 startCountdown();
             } else if (document.getElementById('timer-label').textContent === 'Work') {
+                // Work period complete, start rest
+                playAudioCue('rest');
                 currentExerciseIndex++;
                 if (currentExerciseIndex >= currentWorkout.exercises.length) {
                     currentRound++;
@@ -778,6 +802,8 @@
                 updateTimerDisplay();
                 startCountdown();
             } else {
+                // Rest period complete, start next work period
+                playAudioCue('start');
                 showCurrentExercise();
                 timeRemaining = currentWorkout.workTime;
                 document.getElementById('timer-label').textContent = 'Work';
@@ -864,6 +890,7 @@
             }
 
             updateTotalStats();
+            playAudioCue('complete');
             showScreen('complete-screen');
         }
 
@@ -908,6 +935,208 @@
             `;
             document.body.appendChild(modal);
         }
+
+        // Audio System
+        let audioContext;
+        let isAudioEnabled = true;
+
+        // Initialize audio context
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Play different audio cues
+        function playAudioCue(type) {
+            if (!isAudioEnabled) return;
+
+            initAudio();
+
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            let frequency, duration, volume;
+
+            switch(type) {
+                case 'countdown':
+                    frequency = 800;
+                    duration = 0.1;
+                    volume = 0.3;
+                    break;
+                case 'start':
+                    frequency = 600;
+                    duration = 0.3;
+                    volume = 0.4;
+                    break;
+                case 'rest':
+                    frequency = 400;
+                    duration = 0.5;
+                    volume = 0.3;
+                    break;
+                case 'complete':
+                    // Play a success chord
+                    playSuccessChord();
+                    return;
+                case 'warning':
+                    frequency = 1000;
+                    duration = 0.2;
+                    volume = 0.4;
+                    break;
+                default:
+                    frequency = 500;
+                    duration = 0.2;
+                    volume = 0.3;
+            }
+
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+
+        function playSuccessChord() {
+            if (!isAudioEnabled) return;
+
+            initAudio();
+
+            const frequencies = [523, 659, 784]; // C, E, G major chord
+            frequencies.forEach((freq, index) => {
+                setTimeout(() => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+
+                    oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+                    oscillator.type = 'sine';
+
+                    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.8);
+                }, index * 100);
+            });
+        }
+
+        // PWA Installation
+        let deferredPrompt;
+        let installButton;
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swScript = `
+                    const CACHE_NAME = 'kettlebell-pro-v1';
+                    const urlsToCache = [
+                        './',
+                        'https://cdn.tailwindcss.com'
+                    ];
+
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then(cache => cache.addAll(urlsToCache))
+                        );
+                    });
+
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then(response => {
+                                    if (response) {
+                                        return response;
+                                    }
+                                    return fetch(event.request);
+                                }
+                            )
+                        );
+                    });
+                `;
+
+                const blob = new Blob([swScript], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+
+                navigator.serviceWorker.register(swUrl)
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Install prompt handling
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallButton();
+        });
+
+        function showInstallButton() {
+            // Only show install button on home screen
+            if (document.getElementById('home-screen').classList.contains('hidden')) return;
+
+            if (!installButton) {
+                installButton = document.createElement('button');
+                installButton.innerHTML = '📱 Install App';
+                installButton.className = 'fixed bottom-4 right-4 bg-electric-green hover:bg-electric-green-dark text-black font-semibold py-3 px-4 rounded-full shadow-lg transition-all z-50';
+                installButton.onclick = installApp;
+                document.body.appendChild(installButton);
+            }
+        }
+
+        function hideInstallButton() {
+            if (installButton) {
+                installButton.remove();
+                installButton = null;
+            }
+        }
+
+        async function installApp() {
+            if (!deferredPrompt) return;
+
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+
+            if (outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+                hideInstallButton();
+            }
+
+            deferredPrompt = null;
+        }
+
+        // Handle successful installation
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            hideInstallButton();
+        });
+
+        // Enhanced showScreen function to handle install button
+        const originalShowScreen = showScreen;
+        showScreen = function(screenId) {
+            originalShowScreen(screenId);
+
+            // Show install button only on home screen
+            if (screenId === 'home-screen' && deferredPrompt) {
+                showInstallButton();
+            } else {
+                hideInstallButton();
+            }
+        };
 
         // Initialize app
         updateTotalStats();
