@@ -1,1197 +1,1434 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kettlebell Pro</title>
-    
-    <!-- PWA Meta Tags -->
-    <meta name="description" content="Professional kettlebell workout app with strength circuits and HIIT training">
-    <meta name="theme-color" content="#1a1a1a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Kettlebell Pro">
-    <meta name="msapplication-TileColor" content="#1a1a1a">
-    
-    <!-- Manifest -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIktldHRsZWJlbGwgUHJvIiwKICAic2hvcnRfbmFtZSI6ICJLZXR0bGViZWxsIiwKICAiZGVzY3JpcHRpb24iOiAiUHJvZmVzc2lvbmFsIGtldHRsZWJlbGwgd29ya291dCBhcHAgd2l0aCBzdHJlbmd0aCBjaXJjdWl0cyBhbmQgSElJVCB0cmFpbmluZyIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFhMWExYSIsCiAgInRoZW1lX2NvbG9yIjogIiMxYTFhMWEiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU5USTBJaUJvWldsbmFIUTlJalV5TkNJZ2RtbGxkMEp2ZUQwaU1DQXdJRFV5TkNBMU1qUWlJR1pwYkd3OUlpTXdNR1ptTkRFaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BHTnBjbU5zWlNCamVEMGlNall5SWlCamVUMGlNall5SWlCeVBTSTJNQ0lnWm1sc2JEMGlJekF3Wm1ZME1TSWdMejQ4ZEdWNGRDQjRQU0l5TmpJaUlIazlJakkyTWlJZ1ptbHNiRDBpSTJabU16ZzJZbVFpSUdadmJuUXRabUZ0YVd4NVBTSnRiMjV2YzNCaFkyVWlJR1p2Ym5RdGMybDZaVDBpTlRRaUlIUmxlSFF0WVc1amFHOXlQU0p0YVdSa2JHVWlQang4UEM5MFpYaDBQand2YzNabkBlMCIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTlRJMElpQm9aV2xuYUhROUlqVXlOQ0lnZG1sbGQwSnZlRDBpTUNBd0lEVXlOQ0ExTWpRaUlHWnBiR3c5SWlNd01HWm1OREVpSUhodGJHNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUkrUEdOcGNtTnNaU0JqZUQwaU1qWXlJaUJqZVQwaU1qWXlJaUJ5UFNJMk1DSWdabWxzYkQwaUl6QXdabVkwTVNJZ0x6NDhkR1Y0ZENCNFBTSXlOaklpSUhrOUlqSTJNaUlnWm1sc2JEMGlJMlptTXpnMlltUWlJR1p2Ym5RdFptRnRhV3g1UFNKdGIyNXZjM0JoWTJVaUlHWnZiblF0YzJsNlpUMGlOVFFpSUhSbGVIUXRZVzVqYUc5eVBTSnRhV1JrYkdVaVB6eDhQQzlwWlhoMFB6d3ZjM1puUUdVd0lnPT0iLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXSwKICAiY2F0ZWdvcmllcyI6IFsiaGVhbHRoIiwgImZpdG5lc3MiLCAic3BvcnRzIl0sCiAgImxhbmciOiAiZW4iCn0="
-    >
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'dark-bg': '#1a1a1a',
-                        'dark-card': '#2d2d2d',
-                        'dark-border': '#404040',
-                        'electric-green': '#00ff41',
-                        'electric-green-dark': '#00cc33',
-                        'electric-blue': '#00bfff',
-                        'electric-blue-dark': '#0099cc'
-                    }
-                }
-            }
-        }
-    </script>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>Simple Strength Program (PWA)</title>
+    <meta
+      name="description"
+      content="A Simple Strength Program — Clean + Press and Front Squat, 30-min alternating sets, ladders and fixed reps with autoregulation. Offline PWA."
+    />
+    <meta name="theme-color" content="#111827" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23111827'/%3E%3Cpath d='M45 26c0-7-5-12-13-12S19 19 19 26v2h2v-2c0-6 4-10 11-10s11 4 11 10v2h2v-2z' fill='%23f59e0b'/%3E%3Cpath d='M20 30h24c3 0 5 2 5 5v14c0 3-2 5-5 5H20c-3 0-5-2-5-5V35c0-3 2-5 5-5z' fill='%23f59e0b'/%3E%3C/svg%3E"
+    />
     <style>
-        /* Prevent zoom and maintain stable layout */
-        * {
-            touch-action: manipulation;
+      :root {
+        --bg: #0b1220;
+        --panel: #111827;
+        --muted: #94a3b8;
+        --text: #e5e7eb;
+        --accent: #f59e0b;
+        --accent-2: #22c55e;
+        --danger: #ef4444;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        -webkit-text-size-adjust: 100%;
+        touch-action: manipulation;
+        font: 16px/1.35 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+          Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+      }
+      .app {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: calc(16px + env(safe-area-inset-top, 0px)) 16px
+          calc(28px + env(safe-area-inset-bottom, 0px));
+        display: grid;
+        gap: 16px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0;
+        letter-spacing: 0.2px;
+      }
+      .badge {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .grid {
+        display: grid;
+        gap: 12px;
+      }
+      @media (min-width: 840px) {
+        .grid.cols-2 {
+          grid-template-columns: 1fr 1fr;
         }
-        
-        body {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            overscroll-behavior: none;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid #1f2937;
+        border-radius: 12px;
+        padding: 12px;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      select,
+      input[type="number"] {
+        background: #0b1020;
+        color: var(--text);
+        border: 1px solid #243047;
+        border-radius: 10px;
+        padding: 8px 10px;
+        font-size: 16px;
+        min-width: 100px;
+      }
+      .btn {
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-weight: 600;
+        background: #22283a;
+        color: #e5e7eb;
+        cursor: pointer;
+        touch-action: manipulation;
+        user-select: none;
+      }
+      .btn:hover {
+        filter: brightness(1.05);
+      }
+      .btn.accent {
+        background: var(--accent);
+        color: #111;
+      }
+      .btn.good {
+        background: var(--accent-2);
+        color: #051b10;
+      }
+      .btn.danger {
+        background: var(--danger);
+      }
+      .split {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+      .timer {
+        font-feature-settings: "tnum" 1, "ss01" 1;
+        font-variant-numeric: tabular-nums;
+        font-size: 42px;
+        text-align: center;
+        padding: 8px 0 2px;
+      }
+      .subtle {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .exercise {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: #0b1020;
+        border: 1px dashed #27324b;
+      }
+      .exercise.current {
+        border-style: solid;
+        border-color: var(--accent);
+      }
+      .pill {
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #1f2937;
+        color: #f1f5f9;
+      }
+      .pill.strong {
+        background: #f59e0b;
+        color: #111827;
+        font-weight: 700;
+      }
+      .log {
+        display: grid;
+        gap: 6px;
+        max-height: 280px;
+        overflow: auto;
+        padding-right: 4px;
+      }
+      .log-item {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 8px;
+        align-items: center;
+        background: #0b1020;
+        border: 1px solid #1f2b43;
+        border-radius: 10px;
+        padding: 8px 10px;
+      }
+      /* Micro-animations */
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
         }
-        
-        /* Allow text selection only on input fields */
-        input, textarea {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        
-        /* Enhanced animations and effects */
-        .timer-ring {
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
-            transition: stroke-dashoffset 0.3s ease;
+      }
+      .anim-in {
+        animation: fadeSlideIn 180ms ease-out;
+      }
+      @keyframes pillPulse {
+        0% {
+          transform: scale(1);
         }
-        
-        .exercise-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
+        30% {
+          transform: scale(1.06);
         }
-        
-        .exercise-card:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        100% {
+          transform: scale(1);
         }
-        
-        /* Button enhancements */
-        button {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+      }
+      .pill.strong.pulse {
+        animation: pillPulse 220ms ease-out;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .anim-in,
+        .pill.strong.pulse {
+          animation: none !important;
         }
-        
-        button:active {
-            transform: scale(0.98);
-        }
-        
-        /* Ripple effect for buttons */
-        button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-        }
-        
-        button:active::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        button > * {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Input field enhancements */
-        input[type="number"] {
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        input[type="number"]:focus {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-        }
-        
-        /* Enhanced shadows */
-        .shadow-lg {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Gradient text effects */
-        .gradient-text {
-            background: linear-gradient(135deg, #00ff41, #00bfff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Pulse animation for active elements */
-        @keyframes pulse-glow {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
-            }
-            50% { 
-                box-shadow: 0 0 30px rgba(0, 255, 65, 0.6), 0 0 40px rgba(0, 255, 65, 0.3);
-            }
-        }
-        
-        .pulse-active {
-            animation: pulse-glow 2s infinite;
-        }
-        
-        /* Enhanced timer display */
-        #timer-display {
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        /* Smooth page transitions */
-        #app > div {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        #app > div.hidden {
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-        }
-        
-        /* Enhanced stats cards */
-        .stats-item {
-            transition: transform 0.2s ease;
-        }
-        
-        .stats-item:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Progress ring enhancements */
-        .timer-progress-container {
-            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
-        }
-        
-        /* Set completion animation */
-        @keyframes set-complete {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
-        .set-complete-animation {
-            animation: set-complete 0.4s ease;
-        }
-        
-        /* Loading states */
-        .loading-shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 1.5s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        /* Enhanced focus states */
-        button:focus-visible, input:focus-visible {
-            outline: 2px solid #00ff41;
-            outline-offset: 2px;
-        }
-        
-        /* Improved scrolling */
-        * {
-            scroll-behavior: smooth;
-        }
-        
-        /* Enhanced modal animations */
-        .modal-enter {
-            animation: modal-fade-in 0.3s ease;
-        }
-        
-        @keyframes modal-fade-in {
-            from { 
-                opacity: 0; 
-                transform: scale(0.9);
-            }
-            to { 
-                opacity: 1; 
-                transform: scale(1);
-            }
-        }
+      }
+
+      .note {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+          "Liberation Mono", monospace;
+      }
+      .hr {
+        height: 1px;
+        background: #1f2937;
+        margin: 8px 0;
+      }
+      .toast {
+        position: fixed;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+        left: 50%;
+        transform: translateX(-50%) translateY(12px);
+        opacity: 0;
+        background: rgba(17, 24, 39, 0.92);
+        color: #e5e7eb;
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-size: 13px;
+        border: 1px solid #1f2937;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        pointer-events: none;
+        z-index: 999;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* End-of-session summary sheet */
+      .sheet {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: flex-end;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1200;
+        padding: 0 10px calc(env(safe-area-inset-bottom, 0px) + 10px);
+      }
+      .sheet.show {
+        display: flex;
+      }
+      .sheet .panel {
+        width: min(540px, 96vw);
+        background: var(--panel);
+        border: 1px solid #1f2937;
+        border-radius: 16px 16px 12px 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+        transform: translateY(20px);
+        opacity: 0;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      .sheet.show .panel {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .sheet .panel .head {
+        padding: 12px 12px 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .sheet .panel .body {
+        padding: 0 12px 12px;
+      }
+      .summary-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .kv {
+        background: #0b1020;
+        border: 1px solid #1f2b43;
+        border-radius: 10px;
+        padding: 8px 10px;
+      }
+      .kv .k {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .kv .v {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+          "Liberation Mono", monospace;
+        margin-top: 3px;
+      }
+      .sheet .actions {
+        display: flex;
+        gap: 8px;
+        padding: 8px 12px 12px;
+        flex-wrap: wrap;
+      }
     </style>
-</head>
-<body class="bg-dark-bg text-white min-h-screen">
-    <div id="app" class="max-w-4xl mx-auto p-4">
-        <!-- Header -->
-        <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">🏋️ Kettlebell Pro</h1>
-            <p class="text-gray-400">Master your kettlebell workouts with precision</p>
-        </header>
-
-        <!-- Main Content -->
-        <div id="home-screen" class="space-y-6">
-            <!-- Workout Templates -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Full-Body Strength Circuit -->
-                <div class="exercise-card bg-dark-card rounded-xl shadow-lg p-6 border border-dark-border">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-electric-green rounded-lg flex items-center justify-center text-black font-bold text-xl mr-4">💪</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-electric-green">Full-Body Strength Circuit</h3>
-                            <p class="text-sm text-gray-400">3-8 reps • 30-40 min</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-4">Build strength with Dan John's Five Fundamental Movements. Focus on quality over quantity.</p>
-                    <button onclick="startWorkout('strength')" class="w-full bg-electric-green hover:bg-electric-green-dark text-black font-semibold py-3 px-4 rounded-lg transition-colors">
-                        Start Strength Workout
-                    </button>
-                </div>
-
-                <!-- HIIT Conditioner -->
-                <div class="exercise-card bg-dark-card rounded-xl shadow-lg p-6 border border-dark-border">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-electric-blue rounded-lg flex items-center justify-center text-black font-bold text-xl mr-4">🔥</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-electric-blue">HIIT Conditioner</h3>
-                            <p class="text-sm text-gray-400">30s on/30s off • 30 min</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-4">High-intensity intervals for maximum cardiovascular benefits and fat loss.</p>
-                    <button onclick="startWorkout('hiit')" class="w-full bg-electric-blue hover:bg-electric-blue-dark text-black font-semibold py-3 px-4 rounded-lg transition-colors">
-                        Start HIIT Workout
-                    </button>
-                </div>
-            </div>
-
-            <!-- Quick Stats -->
-            <div class="bg-gradient-to-r from-electric-green to-electric-blue rounded-xl text-black p-6">
-                <h3 class="text-xl font-bold mb-4">Today's Session</h3>
-                <div class="grid grid-cols-3 gap-4 text-center">
-                    <div>
-                        <div class="text-2xl font-bold" id="total-workouts">0</div>
-                        <div class="text-sm opacity-80">Workouts</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold" id="total-time">0m</div>
-                        <div class="text-sm opacity-80">Total Time</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold" id="total-reps">0</div>
-                        <div class="text-sm opacity-80">Reps</div>
-                    </div>
-                </div>
-            </div>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>Simple Strength Program</h1>
+        <div class="row">
+          <button id="installBtn" class="btn" disabled>Install</button>
+          <span class="badge">Offline-ready</span>
         </div>
+      </header>
 
-        <!-- Workout Screen -->
-        <div id="workout-screen" class="hidden">
-            <!-- Workout Header -->
-            <div class="flex items-center justify-between mb-6">
-                <button onclick="exitWorkout()" class="flex items-center text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                    Back
-                </button>
-                <div class="text-center flex-1">
-                    <h2 id="workout-title" class="text-2xl font-bold"></h2>
-                    <p id="workout-progress" class="text-sm text-gray-400"></p>
-                    <div id="workout-time-display" class="hidden text-lg font-bold mt-1"></div>
-                </div>
-                <div class="w-16"></div>
+      <section class="card">
+        <div class="split">
+          <div>
+            <div class="row">
+              <label>Week</label>
+              <select id="weekSel">
+                <option value="1">Week 1</option>
+                <option value="2">Week 2</option>
+                <option value="3">Week 3</option>
+                <option value="4">Week 4</option>
+                <option value="5">Week 5</option>
+              </select>
+              <label>Day</label>
+              <select id="daySel">
+                <option value="1">Day 1</option>
+                <option value="2">Day 2</option>
+                <option value="3">Day 3</option>
+              </select>
+              <label>Timer</label>
+              <select id="timerSel">
+                <option value="30">30:00</option>
+                <option value="25">25:00</option>
+                <option value="35">35:00</option>
+                <option value="40">40:00</option>
+              </select>
             </div>
-
-            <!-- Timer Display -->
-            <div id="timer-section" class="text-center mb-8">
-                <div class="relative inline-block">
-                    <svg class="w-32 h-32 md:w-40 md:h-40" viewBox="0 0 120 120">
-                        <circle cx="60" cy="60" r="50" fill="none" stroke="#404040" stroke-width="8"/>
-                        <circle id="timer-progress" cx="60" cy="60" r="50" fill="none" stroke-width="8" 
-                                class="timer-ring" stroke-dasharray="314" stroke-dashoffset="314"/>
-                    </svg>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="text-center">
-                            <div id="timer-display" class="text-3xl md:text-4xl font-bold">00:30</div>
-                            <div id="timer-label" class="text-sm text-gray-400">Get Ready</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row" style="margin-top:6px">
+              <label>Bells</label>
+              <select id="bellsSel">
+                <option value="pair">Pair</option>
+                <option value="single">Single</option>
+              </select>
+              <label>Weight (lbs)</label>
+              <input
+                id="weightLbs"
+                type="number"
+                min="0"
+                step="1"
+                placeholder="lbs"
+              />
             </div>
-
-            <!-- Current Exercise -->
-            <div id="current-exercise" class="bg-dark-card rounded-xl shadow-lg p-6 mb-6 border border-dark-border">
-                <div class="text-center">
-                    <h3 id="exercise-name" class="text-2xl font-bold mb-2">Get Ready</h3>
-                    <p id="exercise-reps" class="text-gray-400 mb-4">Prepare for your workout</p>
-                    <div id="exercise-demo" class="bg-dark-bg rounded-lg p-4 text-sm text-gray-300 hidden">
-                        <h4 class="font-semibold mb-2">How to perform:</h4>
-                        <p id="exercise-description"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Set Tracking (for Strength workouts) -->
-            <div id="set-tracking" class="hidden bg-dark-card rounded-xl shadow-lg p-6 mb-6 border border-dark-border">
-                <h4 class="font-bold mb-4 text-electric-green">Track Your Sets</h4>
-                <div id="sets-container" class="space-y-3"></div>
-                <div class="flex gap-3 mt-4">
-                    <button onclick="completeSet()" id="complete-set-btn" class="flex-1 bg-electric-green hover:bg-electric-green-dark text-black font-semibold py-3 px-4 rounded-lg transition-colors">
-                        Complete Set
-                    </button>
-                    <button onclick="nextExercise()" id="next-exercise-btn" class="flex-1 bg-electric-green hover:bg-electric-green-dark text-black font-semibold py-3 px-4 rounded-lg transition-colors">
-                        Next Exercise
-                    </button>
-                </div>
-            </div>
-
-            <!-- Control Buttons -->
-            <div id="workout-controls" class="grid grid-cols-3 gap-3">
-                <button onclick="skipExercise()" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors">
-                    Skip
-                </button>
-                <button onclick="toggleTimer()" id="timer-control-btn" class="font-semibold py-3 px-4 rounded-lg transition-colors">
-                    Start
-                </button>
-                <button onclick="endWorkoutEarly()" class="bg-red-600 hover:bg-red-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors">
-                    End Workout
-                </button>
-            </div>
+          </div>
+          <div class="row" style="justify-content:flex-end">
+            <button id="resetSession" class="btn danger">Reset Session</button>
+          </div>
         </div>
-
-        <!-- Workout Complete Screen -->
-        <div id="complete-screen" class="hidden text-center">
-            <div id="completion-banner" class="rounded-xl text-black p-8 mb-6">
-                <div class="text-6xl mb-4">🎉</div>
-                <h2 class="text-3xl font-bold mb-2">Workout Complete!</h2>
-                <p class="text-lg opacity-90">Great job pushing through your session</p>
+        <div class="grid cols-2" style="margin-top:10px">
+          <div class="card" style="padding:10px">
+            <div class="timer mono" id="timer">30:00</div>
+            <div
+              class="row"
+              style="justify-content:center; gap:10px; margin-top:6px"
+            >
+              <button id="startBtn" class="btn accent">Start</button>
+              <button id="pauseBtn" class="btn">Pause</button>
+              <button id="resetBtn" class="btn">Reset</button>
             </div>
-
-            <div class="bg-dark-card rounded-xl shadow-lg p-6 mb-6 border border-dark-border">
-                <h3 class="text-xl font-bold mb-4">Session Summary</h3>
-                <div class="grid grid-cols-2 gap-4 text-center">
-                    <div>
-                        <div class="text-2xl font-bold" id="final-duration">0m</div>
-                        <div class="text-sm text-gray-400">Duration</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold" id="final-exercises">0</div>
-                        <div class="text-sm text-gray-400">Exercises</div>
-                    </div>
-                </div>
+            <div style="text-align:center; margin-top:6px" class="subtle">
+              Alternate A1 and A2. Stay fresh; no grinding.
             </div>
+          </div>
 
-            <button onclick="returnHome()" id="return-home-btn" class="w-full font-semibold py-3 px-4 rounded-lg transition-colors">
-                Back to Home
-            </button>
+          <div class="card" style="padding:10px">
+            <strong id="schemeTitle">Today</strong>
+            <div class="note" id="schemeText" style="margin-top:6px"></div>
+            <div class="hr"></div>
+            <div id="detailsBox" class="note"></div>
+          </div>
         </div>
+      </section>
+
+      <section class="card">
+        <div class="grid cols-2">
+          <div class="grid">
+            <div class="exercise current" id="currentBox">
+              <div>
+                <strong id="currentTitle">Do: Clean + Press (A1)</strong>
+                <div class="subtle">
+                  Target reps: <span id="currentTarget">—</span>
+                </div>
+              </div>
+              <div class="row">
+                <button id="logBtn" class="btn good">Log set</button>
+                <span class="pill mono strong" id="progressPill"
+                  >0 rounds</span
+                >
+              </div>
+            </div>
+
+            <div class="row">
+              <span class="pill mono"
+                >A1 C+P: <span id="setsA1Pill">0</span></span
+              >
+              <span class="pill mono"
+                >A2 FSQ: <span id="setsA2Pill">0</span></span
+              >
+            </div>
+
+            <div class="note">
+              Tip: Tap = fresh. Hold = mark “rest more.” The app flips to the
+              next exercise automatically.
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="row" style="justify-content:space-between">
+              <strong>Session Log</strong>
+              <div class="row">
+                <button id="undoBtn" class="btn">Undo</button>
+                <button id="saveBtn" class="btn">Save</button>
+              </div>
+            </div>
+            <div id="log" class="log"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="note" style="text-align:center">
+        By Geoff Neupert, CSCS. Train smart.
+      </div>
     </div>
 
+    <!-- End-of-session summary sheet -->
+    <div id="summarySheet" class="sheet" aria-modal="true" role="dialog">
+      <div class="panel">
+        <div class="head">
+          <strong>Session Summary</strong>
+          <button id="summaryCloseBtn" class="btn">Done</button>
+        </div>
+        <div class="body">
+          <div id="summaryText" class="note"></div>
+          <div class="summary-grid" style="margin-top:8px">
+            <div class="kv">
+              <div class="k">Mode</div>
+              <div class="v" id="sumMode">—</div>
+            </div>
+            <div class="kv">
+              <div class="k">Progress</div>
+              <div class="v" id="sumProgress">—</div>
+            </div>
+            <div class="kv">
+              <div class="k">A1 sets (C+P)</div>
+              <div class="v" id="sumA1">—</div>
+            </div>
+            <div class="kv">
+              <div class="k">A2 sets (FSQ)</div>
+              <div class="v" id="sumA2">—</div>
+            </div>
+            <div class="kv">
+              <div class="k">Total reps</div>
+              <div class="v" id="sumReps">—</div>
+            </div>
+            <div class="kv">
+              <div class="k">Fresh vs Rest</div>
+              <div class="v" id="sumFresh">—</div>
+            </div>
+            <div class="kv">
+              <div class="k">Best rung / set size</div>
+              <div class="v" id="sumBest">—</div>
+            </div>
+            <div class="kv">
+              <div class="k">Weight / Bells</div>
+              <div class="v" id="sumWB">—</div>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="copySummaryBtn" class="btn">Copy Summary</button>
+          <button id="exportCsvBtn" class="btn">Export CSV</button>
+          <button id="shareSummaryBtn" class="btn accent">Share</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
     <script>
-        // App State
-        let currentWorkout = null;
-        let currentExerciseIndex = 0;
-        let currentRound = 1;
-        let isTimerRunning = false;
-        let timeRemaining = 0;
-        let timerInterval = null;
-        let workoutStartTime = null;
-        let completedSets = [];
-        let currentSetIndex = 0;
-        let totalStats = { workouts: 0, time: 0, reps: 0 };
-        let workoutTimeRemaining = 0;
-        let workoutTimerInterval = null;
+      ;(() => {
+        const $ = (id) => document.getElementById(id)
 
-        // Workout Templates
-        const workoutTemplates = {
-            strength: {
-                name: "Full-Body Strength Circuit",
-                type: "strength",
-                exercises: [
-                    {
-                        name: "Goblet Squat",
-                        sets: 3,
-                        reps: "5-8",
-                        restTime: 90,
-                        description: "Hold kettlebell close to chest, squat down keeping chest up, drive through heels to stand."
-                    },
-                    {
-                        name: "Single-Arm Overhead Press",
-                        sets: 3,
-                        reps: "3-8 per side",
-                        restTime: 90,
-                        description: "Press kettlebell from shoulder to overhead, keep core tight, lower with control."
-                    },
-                    {
-                        name: "Single-Arm Bent-Over Row",
-                        sets: 3,
-                        reps: "5-8 per side",
-                        restTime: 90,
-                        description: "Hinge at hips, pull kettlebell to ribs, squeeze shoulder blade, lower with control."
-                    },
-                    {
-                        name: "Kettlebell Swings",
-                        sets: 5,
-                        reps: "10-15",
-                        restTime: 60,
-                        description: "Hinge at hips, swing kettlebell to shoulder height using hip drive, not arms."
-                    },
-                    {
-                        name: "Suitcase Carry",
-                        sets: 3,
-                        reps: "45 seconds per side",
-                        restTime: 60,
-                        description: "Hold kettlebell at side, walk while maintaining perfect posture and core engagement."
-                    }
-                ]
-            },
-            hiit: {
-                name: "HIIT Conditioner",
-                type: "hiit",
-                workTime: 30,
-                restTime: 30,
-                totalDuration: 1800,
-                exercises: [
-                    {
-                        name: "Single-Arm Swings (Right)",
-                        description: "Explosive hip drive, swing to eye level, one arm at a time for increased core demand."
-                    },
-                    {
-                        name: "Single-Arm Swings (Left)",
-                        description: "Switch to left arm, maintain same power and form as right side."
-                    },
-                    {
-                        name: "Goblet Squats",
-                        description: "Fast tempo squats, maintain depth and form despite fatigue."
-                    },
-                    {
-                        name: "Push-ups",
-                        description: "Standard push-ups or modify to knees if needed. Focus on good form."
-                    }
-                ]
+        const state = {
+          running: false,
+          endAt: null,
+          remaining: 30 * 60 * 1000,
+          tickHandle: null,
+          nextIsA1: true,
+          setsA1: 0,
+          setsA2: 0,
+          history: [], // {t, ex, reps|null, fresh}
+          targetIndex: 0,
+          installEvt: null,
+          pending5: false, // W4D1 optional 5 pair when both 4s are fresh
+          dropTo3: false, // W4D3 auto-drop to 3s after a grindy 4
+          ladderCycles: 0 // counts completed ladders only
+        }
+
+        const fmtTime = (ms) => {
+          const s = Math.max(0, Math.round(ms / 1000))
+          const m = Math.floor(s / 60)
+          const r = s % 60
+          return `${String(m).padStart(2, '0')}:${String(r).padStart(2, '0')}`
+        }
+        const beep = (freq = 880, ms = 120) => {
+          try {
+            const actx = new (window.AudioContext ||
+              window.webkitAudioContext)()
+            const o = actx.createOscillator()
+            const g = actx.createGain()
+            o.type = 'sine'
+            o.frequency.value = freq
+            o.connect(g)
+            g.connect(actx.destination)
+            g.gain.setValueAtTime(0.001, actx.currentTime)
+            g.gain.exponentialRampToValueAtTime(0.18, actx.currentTime + 0.01)
+            o.start()
+            setTimeout(() => {
+              g.gain.exponentialRampToValueAtTime(
+                0.0001,
+                actx.currentTime + 0.02
+              )
+              o.stop()
+              actx.close()
+            }, ms)
+          } catch {}
+        }
+        const nowISO = () => new Date().toISOString()
+
+        // Toasts
+        let toastTimer = null
+        function toast(msg) {
+          const t = $('toast')
+          t.textContent = msg
+          t.classList.add('show')
+          clearTimeout(toastTimer)
+          toastTimer = setTimeout(() => {
+            t.classList.remove('show')
+          }, 1800)
+        }
+
+        const getWD = () => ({
+          w: parseInt($('weekSel').value, 10),
+          d: parseInt($('daySel').value, 10)
+        })
+
+        function getScheme() {
+          const { w, d } = getWD()
+          if (w === 1) {
+            if (d === 1) return { mode: 'ladders123', text: 'Ladders 1-2-3' }
+            if (d === 2) return { mode: 'fixed1', text: 'Sets of 1' }
+            return { mode: 'fixed2', text: 'Sets of 2' }
+          }
+          if (w === 2) {
+            if (d === 1) return { mode: 'ladders123', text: 'Ladders 1-2-3' }
+            if (d === 2) return { mode: 'fixed1', text: 'Sets of 1' }
+            return { mode: 'fixed3', text: 'Sets of 3' }
+          }
+          if (w === 3) {
+            if (d === 1)
+              return { mode: 'ladders1234', text: 'Ladders 1-2-3-4' }
+            if (d === 2) return { mode: 'fixed2', text: 'Sets of 2' }
+            return { mode: 'fixed3', text: 'Sets of 3' }
+          }
+          if (w === 4) {
+            if (d === 1)
+              return {
+                mode: 'ladders1234opt5',
+                text: 'Ladders 1-2-3-4 (+ auto 5 if both 4s are fresh)'
+              }
+            if (d === 2) return { mode: 'fixed2', text: 'Sets of 2' }
+            return {
+              mode: 'alt34',
+              text: 'Alternate 3 and 4 (auto-drop to 3s if 4s slow)'
             }
-        };
-
-        // Theme Management
-        function applyWorkoutTheme(workoutType) {
-            const isStrength = workoutType === 'strength';
-            const primaryColor = isStrength ? '#00ff41' : '#00bfff';
-            const primaryColorHover = isStrength ? '#00cc33' : '#0099cc';
-            
-            // Update timer progress color
-            document.getElementById('timer-progress').style.stroke = primaryColor;
-            
-            // Update workout time display color
-            const timeDisplay = document.getElementById('workout-time-display');
-            timeDisplay.style.color = primaryColor;
-            
-            // Update timer control button
-            const timerBtn = document.getElementById('timer-control-btn');
-            timerBtn.style.backgroundColor = primaryColor;
-            timerBtn.style.color = 'black';
-            timerBtn.onmouseover = () => timerBtn.style.backgroundColor = primaryColorHover;
-            timerBtn.onmouseout = () => timerBtn.style.backgroundColor = primaryColor;
-            
-            // Update completion screen
-            const banner = document.getElementById('completion-banner');
-            const returnBtn = document.getElementById('return-home-btn');
-            const finalDuration = document.getElementById('final-duration');
-            const finalExercises = document.getElementById('final-exercises');
-            
-            banner.style.background = `linear-gradient(to right, ${primaryColor}, ${primaryColorHover})`;
-            returnBtn.style.backgroundColor = primaryColor;
-            returnBtn.style.color = 'black';
-            returnBtn.onmouseover = () => returnBtn.style.backgroundColor = primaryColorHover;
-            returnBtn.onmouseout = () => returnBtn.style.backgroundColor = primaryColor;
-            
-            finalDuration.style.color = primaryColor;
-            finalExercises.style.color = primaryColor;
-        }
-
-        // UI Functions
-        function showScreen(screenId) {
-            document.querySelectorAll('#app > div').forEach(screen => {
-                screen.classList.add('hidden');
-            });
-            document.getElementById(screenId).classList.remove('hidden');
-        }
-
-        function startWorkout(type) {
-            currentWorkout = workoutTemplates[type];
-            currentExerciseIndex = 0;
-            currentRound = 1;
-            currentSetIndex = 0;
-            completedSets = [];
-            workoutStartTime = Date.now();
-            
-            applyWorkoutTheme(type);
-            showScreen('workout-screen');
-            document.getElementById('workout-title').textContent = currentWorkout.name;
-            
-            if (currentWorkout.type === 'hiit') {
-                setupHIITWorkout();
-            } else {
-                setupStrengthWorkout();
+          }
+          if (d === 1)
+            return {
+              mode: 'cap3x3',
+              text: 'Perform 3×3 (cap at 6 alternating sets)'
             }
+          return {
+            mode: 'rmtest',
+            text: 'Test a new RM (Press). Use the timer if you like.'
+          }
         }
 
-        function setupHIITWorkout() {
-            workoutTimeRemaining = currentWorkout.totalDuration;
-            currentRound = 1;
-            
-            document.getElementById('workout-time-display').classList.remove('hidden');
-            updateWorkoutTimeDisplay();
-            startWorkoutTimer();
-            updateWorkoutProgress();
-            
-            timeRemaining = 10;
-            updateTimerDisplay();
-            document.getElementById('timer-label').textContent = 'Get Ready';
-            document.getElementById('exercise-name').textContent = 'Prepare for HIIT';
-            document.getElementById('exercise-reps').textContent = `Get ready to start your workout!`;
-            document.getElementById('exercise-demo').classList.add('hidden');
-            
-            document.getElementById('set-tracking').classList.add('hidden');
-            startCountdown();
+        const isLadderMode = (mode) => mode.startsWith('ladders')
+
+        function currentTargetReps() {
+          const { mode } = getScheme()
+          if (mode === 'rmtest') return 'As tested'
+          if (mode === 'cap3x3') return 3
+          if (mode === 'ladders123') return [1, 2, 3][state.targetIndex % 3]
+          if (mode === 'ladders1234')
+            return [1, 2, 3, 4][state.targetIndex % 4]
+          if (mode === 'ladders1234opt5') {
+            if (state.pending5) return 5
+            return [1, 2, 3, 4][state.targetIndex % 4]
+          }
+          if (mode === 'fixed1') return 1
+          if (mode === 'fixed2') return 2
+          if (mode === 'fixed3') return 3
+          if (mode === 'alt34') {
+            if (state.dropTo3) return 3
+            return state.targetIndex % 2 === 0 ? 3 : 4
+          }
+          return '—'
         }
 
-        function setupStrengthWorkout() {
-            document.getElementById('workout-time-display').classList.add('hidden');
-            updateWorkoutProgress();
-            showCurrentExercise();
-            document.getElementById('set-tracking').classList.remove('hidden');
-            document.getElementById('timer-section').classList.add('hidden');
-            document.getElementById('workout-controls').classList.add('hidden');
-            setupSetTracking();
+        function updateCurrentBox() {
+          const ex = state.nextIsA1 ? 'A1' : 'A2'
+          const title = ex === 'A1' ? 'Clean + Press (A1)' : 'Front Squat (A2)'
+          $('currentTitle').textContent = `Do: ${title}`
+          $('currentTarget').textContent = currentTargetReps()
         }
 
-        function setupSetTracking() {
-            const exercise = currentWorkout.exercises[currentExerciseIndex];
-            const container = document.getElementById('sets-container');
-            container.innerHTML = '';
-            
-            for (let i = 0; i < exercise.sets; i++) {
-                const setDiv = document.createElement('div');
-                setDiv.className = 'flex items-center justify-between p-3 bg-dark-bg rounded-lg';
-                setDiv.innerHTML = `
-                    <div class="flex items-center">
-                        <span class="text-white mr-3">Set ${i + 1}</span>
-                        <span class="text-sm text-gray-400">Target: ${exercise.reps}</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <input type="number" id="reps-input-${i}" placeholder="Reps" min="0" max="50" 
-                               class="w-16 px-2 py-1 bg-dark-card border border-dark-border rounded text-white text-center text-sm focus:border-electric-green focus:outline-none ${i === 0 ? '' : 'hidden'}" />
-                        <div class="w-6 h-6 border-2 border-gray-500 rounded-full flex items-center justify-center" id="set-${i}">
-                            <span id="set-reps-${i}" class="text-xs text-white hidden"></span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(setDiv);
-            }
-            
-            currentSetIndex = 0;
-            updateSetButtons();
+        // Timer
+        function setTimerFromSelect() {
+          const mins = parseInt($('timerSel').value, 10)
+          state.remaining = mins * 60 * 1000
+          $('timer').textContent = fmtTime(state.remaining)
+        }
+        function startTimer() {
+          if (state.running) return
+          state.running = true
+          state.endAt = Date.now() + state.remaining
+          tick()
+        }
+        function pauseTimer() {
+          if (!state.running) return
+          state.running = false
+          clearTimeout(state.tickHandle)
+          state.remaining = Math.max(0, state.endAt - Date.now())
+          $('timer').textContent = fmtTime(state.remaining)
+        }
+        function resetTimer() {
+          state.running = false
+          clearTimeout(state.tickHandle)
+          setTimerFromSelect()
+        }
+        function tick() {
+          const left = state.endAt - Date.now()
+          state.remaining = Math.max(0, left)
+          $('timer').textContent = fmtTime(left)
+          if (left <= 0) {
+            state.running = false
+            // Distinct end-of-session tones
+            beep(330, 200)
+            setTimeout(() => beep(660, 200), 60)
+            setTimeout(() => beep(880, 240), 120)
+            showSummarySheet()
+            toast('Time! Session summary ready.')
+            return
+          }
+          state.tickHandle = setTimeout(tick, 200)
         }
 
-        function completeSet() {
-            const exercise = currentWorkout.exercises[currentExerciseIndex];
-            if (currentSetIndex < exercise.sets) {
-                // Get the rep count from input
-                const repsInput = document.getElementById(`reps-input-${currentSetIndex}`);
-                const reps = parseInt(repsInput.value) || 0;
-                
-                if (reps === 0) {
-                    showCustomAlert("Please enter the number of reps completed");
-                    repsInput.focus();
-                    return;
-                }
-                
-                // Store the completed reps
-                if (!completedSets[currentExerciseIndex]) {
-                    completedSets[currentExerciseIndex] = [];
-                }
-                completedSets[currentExerciseIndex][currentSetIndex] = reps;
-                
-                // Update total reps
-                totalStats.reps += reps;
-                updateTotalStats();
-                
-                // Mark set as complete and show reps
-                document.getElementById(`set-${currentSetIndex}`).className = 'w-6 h-6 bg-electric-green text-black rounded-full flex items-center justify-center text-xs font-bold';
-                document.getElementById(`set-${currentSetIndex}`).textContent = reps;
-                
-                // Hide current input and show next one
-                repsInput.classList.add('hidden');
-                currentSetIndex++;
-                
-                if (currentSetIndex < exercise.sets) {
-                    // Show next input field
-                    const nextInput = document.getElementById(`reps-input-${currentSetIndex}`);
-                    nextInput.classList.remove('hidden');
-                    
-                    // Start rest timer
-                    timeRemaining = exercise.restTime;
-                    document.getElementById('timer-section').classList.remove('hidden');
-                    document.getElementById('timer-label').textContent = 'Rest';
-                    document.getElementById('workout-controls').classList.remove('hidden');
-                    updateTimerDisplay();
-                    startCountdown();
-                    
-                    // Focus on next input after rest
-                    setTimeout(() => {
-                        nextInput.focus();
-                    }, exercise.restTime * 1000 + 100);
-                }
-                
-                updateSetButtons();
-            }
-        }
+        // Details UI
+        function buildDetailsHTML() {
+          const { w, d } = getWD()
+          const { mode, text } = getScheme()
+          $('schemeTitle').textContent = `Today: Week ${w}, Day ${d}`
+          $('schemeText').textContent = text
 
-        function updateSetButtons() {
-            const exercise = currentWorkout.exercises[currentExerciseIndex];
-            const completeBtn = document.getElementById('complete-set-btn');
-            const nextBtn = document.getElementById('next-exercise-btn');
-            
-            if (currentSetIndex >= exercise.sets) {
-                completeBtn.classList.add('hidden');
-                nextBtn.classList.remove('hidden');
-            } else {
-                completeBtn.classList.remove('hidden');
-                nextBtn.classList.add('hidden');
-            }
-        }
-
-        function nextExercise() {
-            currentExerciseIndex++;
-            currentSetIndex = 0;
-            
-            if (currentExerciseIndex >= currentWorkout.exercises.length) {
-                completeWorkout();
-                return;
-            }
-            
-            showCurrentExercise();
-            setupSetTracking();
-            document.getElementById('timer-section').classList.add('hidden');
-            document.getElementById('workout-controls').classList.add('hidden');
-        }
-
-        function showCurrentExercise() {
-            if (currentWorkout.type === 'hiit') {
-                const exercise = currentWorkout.exercises[currentExerciseIndex];
-                document.getElementById('exercise-name').textContent = exercise.name;
-                document.getElementById('exercise-reps').textContent = `${currentWorkout.workTime} seconds`;
-                document.getElementById('exercise-description').textContent = exercise.description;
-                document.getElementById('exercise-demo').classList.remove('hidden');
-            } else {
-                const exercise = currentWorkout.exercises[currentExerciseIndex];
-                document.getElementById('exercise-name').textContent = exercise.name;
-                document.getElementById('exercise-reps').textContent = `${exercise.sets} sets of ${exercise.reps}`;
-                document.getElementById('exercise-description').textContent = exercise.description;
-                document.getElementById('exercise-demo').classList.remove('hidden');
-            }
-            
-            updateWorkoutProgress();
-        }
-
-        function updateWorkoutProgress() {
-            if (currentWorkout.type === 'hiit') {
-                document.getElementById('workout-progress').textContent = 
-                    `Round ${currentRound} • Exercise ${currentExerciseIndex + 1} of ${currentWorkout.exercises.length}`;
-            } else {
-                document.getElementById('workout-progress').textContent = 
-                    `Exercise ${currentExerciseIndex + 1} of ${currentWorkout.exercises.length}`;
-            }
-        }
-
-        function startWorkoutTimer() {
-            if (workoutTimerInterval) clearInterval(workoutTimerInterval);
-            
-            workoutTimerInterval = setInterval(() => {
-                if (workoutTimeRemaining > 0) {
-                    workoutTimeRemaining--;
-                    updateWorkoutTimeDisplay();
-                } else {
-                    clearInterval(workoutTimerInterval);
-                    completeWorkout();
-                }
-            }, 1000);
-        }
-
-        function updateWorkoutTimeDisplay() {
-            const minutes = Math.floor(workoutTimeRemaining / 60);
-            const seconds = workoutTimeRemaining % 60;
-            document.getElementById('workout-time-display').textContent = 
-                `Time Remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        function startCountdown() {
-            if (timerInterval) clearInterval(timerInterval);
-            
-            timerInterval = setInterval(() => {
-                if (timeRemaining > 0) {
-                    timeRemaining--;
-                    
-                    // Audio cues for countdown
-                    if (timeRemaining <= 3 && timeRemaining > 0) {
-                        playAudioCue('countdown');
-                    }
-                    
-                    updateTimerDisplay();
-                } else {
-                    clearInterval(timerInterval);
-                    handleTimerComplete();
-                }
-            }, 1000);
-            
-            isTimerRunning = true;
-            updateTimerButton();
-        }
-
-        function handleTimerComplete() {
-            if (currentWorkout.type === 'hiit') {
-                handleHIITTimerComplete();
-            } else {
-                // Strength workout rest period complete
-                playAudioCue('start');
-                document.getElementById('timer-section').classList.add('hidden');
-                document.getElementById('workout-controls').classList.add('hidden');
-            }
-        }
-
-        function handleHIITTimerComplete() {
-            if (document.getElementById('timer-label').textContent === 'Get Ready') {
-                // Start work period
-                playAudioCue('start');
-                showCurrentExercise();
-                timeRemaining = currentWorkout.workTime;
-                document.getElementById('timer-label').textContent = 'Work';
-                updateTimerDisplay();
-                startCountdown();
-            } else if (document.getElementById('timer-label').textContent === 'Work') {
-                // Work period complete, start rest
-                playAudioCue('rest');
-                currentExerciseIndex++;
-                if (currentExerciseIndex >= currentWorkout.exercises.length) {
-                    currentRound++;
-                    currentExerciseIndex = 0;
-                    
-                    timeRemaining = 60;
-                    document.getElementById('timer-label').textContent = 'Round Rest';
-                    document.getElementById('exercise-name').textContent = 'Round Complete!';
-                    document.getElementById('exercise-reps').textContent = `${currentRound-1} rounds completed`;
-                    updateWorkoutProgress();
-                } else {
-                    timeRemaining = currentWorkout.restTime;
-                    document.getElementById('timer-label').textContent = 'Rest';
-                }
-                updateTimerDisplay();
-                startCountdown();
-            } else {
-                // Rest period complete, start next work period
-                playAudioCue('start');
-                showCurrentExercise();
-                timeRemaining = currentWorkout.workTime;
-                document.getElementById('timer-label').textContent = 'Work';
-                updateTimerDisplay();
-                startCountdown();
-            }
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            document.getElementById('timer-display').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            const totalTime = document.getElementById('timer-label').textContent === 'Work' ? 
-                currentWorkout.workTime : 
-                (document.getElementById('timer-label').textContent === 'Round Rest' ? 60 : currentWorkout.restTime || 90);
-            
-            const progress = ((totalTime - timeRemaining) / totalTime) * 314;
-            document.getElementById('timer-progress').style.strokeDashoffset = 314 - progress;
-        }
-
-        function toggleTimer() {
-            if (isTimerRunning) {
-                clearInterval(timerInterval);
-                isTimerRunning = false;
-            } else {
-                startCountdown();
-            }
-            updateTimerButton();
-        }
-
-        function updateTimerButton() {
-            const btn = document.getElementById('timer-control-btn');
-            btn.textContent = isTimerRunning ? 'Pause' : 'Start';
-        }
-
-        function skipExercise() {
-            clearInterval(timerInterval);
-            handleTimerComplete();
-        }
-
-        function pauseWorkout() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                isTimerRunning = false;
-                updateTimerButton();
-            }
-            if (workoutTimerInterval) {
-                clearInterval(workoutTimerInterval);
-            }
-        }
-
-        function exitWorkout() {
-            if (timerInterval) clearInterval(timerInterval);
-            if (workoutTimerInterval) clearInterval(workoutTimerInterval);
-            showCustomConfirmDialog("Are you sure you want to exit this workout?", () => {
-                returnHome();
-            });
-        }
-
-        function endWorkoutEarly() {
-            showCustomConfirmDialog("Are you sure you want to end this workout early?", () => {
-                completeWorkout();
-            });
-        }
-
-        function completeWorkout() {
-            if (timerInterval) clearInterval(timerInterval);
-            if (workoutTimerInterval) clearInterval(workoutTimerInterval);
-            
-            const duration = Math.round((Date.now() - workoutStartTime) / 1000 / 60);
-            totalStats.workouts++;
-            totalStats.time += duration;
-            
-            document.getElementById('final-duration').textContent = `${duration}m`;
-            
-            if (currentWorkout.type === 'hiit') {
-                document.getElementById('final-exercises').textContent = currentRound - 1;
-                document.querySelectorAll('#complete-screen .text-sm')[1].textContent = 'Rounds';
-            } else {
-                document.getElementById('final-exercises').textContent = currentWorkout.exercises.length;
-                document.querySelectorAll('#complete-screen .text-sm')[1].textContent = 'Exercises';
-            }
-            
-            updateTotalStats();
-            playAudioCue('complete');
-            showScreen('complete-screen');
-        }
-
-        function returnHome() {
-            currentWorkout = null;
-            currentExerciseIndex = 0;
-            currentRound = 1;
-            showScreen('home-screen');
-        }
-
-        function updateTotalStats() {
-            document.getElementById('total-workouts').textContent = totalStats.workouts;
-            document.getElementById('total-time').textContent = `${totalStats.time}m`;
-            document.getElementById('total-reps').textContent = totalStats.reps;
-        }
-
-        function showCustomConfirmDialog(message, onConfirm) {
-            const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            modal.innerHTML = `
-                <div class="bg-dark-card p-6 rounded-lg shadow-lg max-w-sm w-full mx-4 border border-dark-border">
-                    <p class="text-gray-300 mb-4">${message}</p>
-                    <div class="flex justify-end space-x-3">
-                        <button class="px-4 py-2 text-gray-400 hover:bg-dark-bg rounded" onclick="this.closest('.fixed').remove()">Cancel</button>
-                        <button class="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded" onclick="this.closest('.fixed').remove(); (${onConfirm})()">Confirm</button>
-                    </div>
+          if (mode.startsWith('ladders')) {
+            const ladderText =
+              mode === 'ladders123'
+                ? '1-2-3'
+                : mode === 'ladders1234'
+                ? '1-2-3-4'
+                : '1-2-3-4 (+ optional 5 when fresh)'
+            return `
+              <div>
+                <div><strong>How ladders work:</strong></div>
+                <ul>
+                  <li>Alternate A1 and A2 with the same rep number.</li>
+                  <li>Cycle through ${ladderText}, then restart at 1.</li>
+                  ${
+                    mode === 'ladders1234opt5'
+                      ? '<li>If both 4-rep sets are fresh, one 5-rep pair is added, then the ladder restarts.</li>'
+                      : ''
+                  }
+                  <li>Progress pill shows <em>ladder sets</em> (completed ladders only).</li>
+                </ul>
+                <div class="mono" style="margin-left:12px">
+                  A1×1, A2×1, A1×2, A2×2, A1×3, A2×3 ...
                 </div>
-            `;
-            document.body.appendChild(modal);
+              </div>
+            `
+          }
+
+          if (mode === 'fixed1' || mode === 'fixed2' || mode === 'fixed3') {
+            const reps = mode === 'fixed1' ? 1 : mode === 'fixed2' ? 2 : 3
+            return `
+              <ul>
+                <li>Perform crisp sets of ${reps} reps.</li>
+                <li>Alternate A1 and A2 for the entire timer.</li>
+                <li>Progress pill shows <em>rounds</em> (completed A1+A2 pairs).</li>
+              </ul>
+            `
+          }
+
+          if (mode === 'alt34') {
+            return `
+              <ul>
+                <li>Alternate 3 and 4 reps: A1×3, A2×3, A1×4, A2×4, repeat.</li>
+                <li>If a 4 slows, hold on log; the app drops to 3s.</li>
+                <li>Progress pill shows <em>rounds</em> (completed A1+A2 pairs).</li>
+              </ul>
+            `
+          }
+
+          if (mode === 'cap3x3') {
+            return `
+              <ul>
+                <li>Perform 3×3 for each exercise, alternating (total 6 sets).</li>
+                <li>App caps logging at 6 sets. Progress pill shows rounds.</li>
+              </ul>
+            `
+          }
+
+          if (mode === 'rmtest') {
+            return `
+              <ul>
+                <li>Warm up, then test a new rep max for the Press.</li>
+                <li>Use the weight (lbs) field for reference. Log attempts.</li>
+                <li>Progress pill shows rounds if you alternate both lifts.</li>
+              </ul>
+            `
+          }
+
+          return ''
         }
 
-        function showCustomAlert(message) {
-            const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            modal.innerHTML = `
-                <div class="bg-dark-card p-6 rounded-lg shadow-lg max-w-sm w-full mx-4 border border-dark-border">
-                    <p class="text-gray-300 mb-4">${message}</p>
-                    <div class="flex justify-end">
-                        <button class="px-4 py-2 bg-electric-green text-black hover:bg-electric-green-dark rounded" onclick="this.closest('.fixed').remove()">OK</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
+        function updateDetails() {
+          $('detailsBox').innerHTML = buildDetailsHTML()
         }
 
-        // Audio System
-        let audioContext;
-        let isAudioEnabled = true;
-        let audioInitialized = false;
-
-        // Initialize audio context with user interaction
-        function initAudio() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            
-            // Resume audio context if suspended (required by browser policies)
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
+        // Log rendering helpers
+        function renderLogItem(h) {
+          const row = document.createElement('div')
+          row.className = 'log-item'
+          const when = new Date(h.t)
+          const side = document.createElement('div')
+          side.className = 'pill mono'
+          side.textContent = h.ex === 'A1' ? 'A1 C+P' : 'A2 FSQ'
+          const main = document.createElement('div')
+          main.innerHTML = `<div class="mono">${
+            h.reps != null ? `${h.reps} reps` : '—'
+          }</div>
+          <div class="subtle">${when.toLocaleTimeString()}</div>`
+          const r = document.createElement('div')
+          r.className = 'pill'
+          r.textContent = h.fresh ? 'fresh' : 'rest more'
+          row.appendChild(side)
+          row.appendChild(main)
+          row.appendChild(r)
+          return row
         }
 
-        // Enable audio with user interaction (required by browsers)
-        function enableAudio() {
-            if (!audioInitialized) {
-                initAudio();
-                audioInitialized = true;
-                
-                // Test audio to ensure it works
-                if (audioContext && audioContext.state === 'running') {
-                    // Play a very quiet test tone
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
-                    gainNode.gain.setValueAtTime(0.001, audioContext.currentTime); // Very quiet
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.01);
-                    
-                    console.log('Audio enabled successfully');
+        function renderLog() {
+          const el = $('log')
+          el.innerHTML = ''
+          state.history.forEach((h) => {
+            const item = renderLogItem(h)
+            el.appendChild(item)
+          })
+        }
+
+        function appendLastLogAnimated() {
+          const el = $('log')
+          const h = state.history[state.history.length - 1]
+          if (!h) return
+          const item = renderLogItem(h)
+          item.classList.add('anim-in')
+          el.appendChild(item)
+        }
+
+        // Stats and progress pill
+        function pulseProgress() {
+          const p = $('progressPill')
+          p.classList.remove('pulse')
+          // Force reflow so animation can replay
+          void p.offsetWidth
+          p.classList.add('pulse')
+        }
+
+        function renderStats() {
+          $('setsA1Pill').textContent = state.setsA1
+          $('setsA2Pill').textContent = state.setsA2
+          const { mode } = getScheme()
+          const pairs = Math.min(state.setsA1, state.setsA2)
+          if (isLadderMode(mode)) {
+            $('progressPill').textContent = `${state.ladderCycles} ladder set${
+              state.ladderCycles === 1 ? '' : 's'
+            }`
+          } else {
+            $('progressPill').textContent = `${pairs} round${
+              pairs === 1 ? '' : 's'
+            }`
+          }
+        }
+
+        function capReachedIfAny() {
+          const { mode } = getScheme()
+          if (mode === 'cap3x3') {
+            return state.history.length >= 6
+          }
+          return false
+        }
+
+        // Core logging (tap= fresh, hold= rest more)
+        function logSetInternal(ex, fresh) {
+          if (capReachedIfAny()) {
+            toast('Cap reached (Week 5 Day 1: 3×3 total).')
+            return
+          }
+          const reps = currentTargetReps()
+          const wasSecond = !state.nextIsA1
+
+          const entry = {
+            t: nowISO(),
+            ex,
+            reps: typeof reps === 'number' ? reps : null,
+            fresh
+          }
+          state.history.push(entry)
+          if (ex === 'A1') state.setsA1++
+          if (ex === 'A2') state.setsA2++
+
+          const { mode } = getScheme()
+
+          // W4D3: auto drop to 3s if a 4 is not fresh
+          if (mode === 'alt34' && entry.reps === 4 && !fresh) {
+            if (!state.dropTo3) toast('Dropping to 3s for the rest of today.')
+            state.dropTo3 = true
+          }
+
+          let justCompletedLadder = false
+
+          // After each pair, advance and possibly count ladder cycles
+          if (wasSecond) {
+            if (mode === 'ladders1234opt5') {
+              const n = state.history.length
+              const prev = state.history[n - 2]
+              let cycleDone = false
+
+              if (state.pending5 && entry.reps === 5) {
+                // Completed optional 5s pair -> full ladder done
+                state.pending5 = false
+                state.targetIndex = 0
+                cycleDone = true
+              } else if (entry.reps === 4 && prev && prev.reps === 4) {
+                // Finished the 4s pair; decide on optional 5s
+                if (prev.fresh && entry.fresh) {
+                  state.pending5 = true // add a 5-rep pair before restarting
+                  toast('Adding an optional 5-rep pair.')
+                } else {
+                  state.targetIndex++
+                  cycleDone = true // no 5s, so ladder completes at 4
                 }
+              } else {
+                state.targetIndex++
+              }
+
+              if (cycleDone) {
+                state.ladderCycles++
+                justCompletedLadder = true
+              }
+            } else if (mode === 'ladders123') {
+              state.targetIndex++
+              if (entry.reps === 3) {
+                state.ladderCycles++
+                justCompletedLadder = true
+              }
+            } else if (mode === 'ladders1234') {
+              state.targetIndex++
+              if (entry.reps === 4) {
+                state.ladderCycles++
+                justCompletedLadder = true
+              }
+            } else {
+              // Non-ladders
+              state.targetIndex++
             }
+          }
+
+          // Flip to the other exercise
+          state.nextIsA1 = !state.nextIsA1
+
+          // UI updates
+          updateCurrentBox()
+          renderStats()
+          appendLastLogAnimated()
+          beep(740, 100)
+          toast(
+            `${ex} ${typeof entry.reps === 'number' ? '×' + entry.reps : ''} ${
+              fresh ? '(fresh)' : '(rest more)'
+            }`
+          )
+          if (justCompletedLadder) {
+            pulseProgress()
+          }
         }
 
-        // Add click event listeners to enable audio on first interaction
-        document.addEventListener('click', enableAudio, { once: true });
-        document.addEventListener('touchstart', enableAudio, { once: true });
+        // Recompute from full history (for undo/scheme switch)
+        function recomputeFromHistory() {
+          const { mode } = getScheme()
+          state.setsA1 = 0
+          state.setsA2 = 0
+          state.targetIndex = 0
+          state.pending5 = false
+          state.dropTo3 = false
+          state.nextIsA1 = true
+          state.ladderCycles = 0
 
-        // Play different audio cues
-        async function playAudioCue(type) {
-            if (!isAudioEnabled) return;
-            
+          for (let i = 0; i < state.history.length; i++) {
+            const h = state.history[i]
+            const wasSecond = !state.nextIsA1
+            if (h.ex === 'A1') state.setsA1++
+            if (h.ex === 'A2') state.setsA2++
+
+            if (mode === 'alt34' && h.reps === 4 && h.fresh === false) {
+              state.dropTo3 = true
+            }
+
+            if (wasSecond) {
+              if (mode === 'ladders1234opt5') {
+                const prev = state.history[i - 1]
+                let cycleDone = false
+
+                if (state.pending5 && h.reps === 5) {
+                  state.pending5 = false
+                  state.targetIndex = 0
+                  cycleDone = true
+                } else if (h.reps === 4 && prev && prev.reps === 4) {
+                  if (prev.fresh && h.fresh) {
+                    state.pending5 = true
+                  } else {
+                    state.targetIndex++
+                    cycleDone = true
+                  }
+                } else {
+                  state.targetIndex++
+                }
+
+                if (cycleDone) state.ladderCycles++
+              } else if (mode === 'ladders123') {
+                state.targetIndex++
+                if (h.reps === 3) state.ladderCycles++
+              } else if (mode === 'ladders1234') {
+                state.targetIndex++
+                if (h.reps === 4) state.ladderCycles++
+              } else {
+                state.targetIndex++
+              }
+            }
+            state.nextIsA1 = !state.nextIsA1
+          }
+
+          updateCurrentBox()
+          renderStats()
+          renderLog()
+        }
+
+        // One-button logging (tap/hold)
+        function setupLogButton() {
+          const btn = $('logBtn')
+          let holdTimer = null
+          let didHold = false
+          function clearHold() {
+            clearTimeout(holdTimer)
+            holdTimer = null
+          }
+          btn.addEventListener('pointerdown', (e) => {
+            e.preventDefault()
+            didHold = false
+            holdTimer = setTimeout(() => {
+              didHold = true
+              const ex = state.nextIsA1 ? 'A1' : 'A2'
+              logSetInternal(ex, false) // rest more
+            }, 420)
+          })
+          btn.addEventListener('pointerup', (e) => {
+            e.preventDefault()
+            if (holdTimer) {
+              clearHold()
+              if (!didHold) {
+                const ex = state.nextIsA1 ? 'A1' : 'A2'
+                logSetInternal(ex, true) // fresh
+              }
+            }
+          })
+          btn.addEventListener('pointerleave', clearHold)
+          btn.addEventListener('pointercancel', clearHold)
+        }
+
+        function undo() {
+          state.history.pop()
+          recomputeFromHistory()
+        }
+
+        function resetSession() {
+          if (!confirm('Reset current session (timer, sets, log)?')) return
+          pauseTimer()
+          state.remaining = parseInt($('timerSel').value, 10) * 60 * 1000
+          $('timer').textContent = fmtTime(state.remaining)
+          state.setsA1 = 0
+          state.setsA2 = 0
+          state.history = []
+          state.targetIndex = 0
+          state.nextIsA1 = true
+          state.pending5 = false
+          state.dropTo3 = false
+          state.ladderCycles = 0
+          updateCurrentBox()
+          renderStats()
+          renderLog()
+          toast('Session reset.')
+        }
+
+        // Summary building
+        function computeSummary() {
+          const { mode, text } = getScheme()
+          const ladderMode = isLadderMode(mode)
+          const pairs = Math.min(state.setsA1, state.setsA2)
+          const totalReps = state.history.reduce(
+            (sum, h) => sum + (typeof h.reps === 'number' ? h.reps : 0),
+            0
+          )
+          const freshCount = state.history.filter((h) => h.fresh).length
+          const restCount = state.history.length - freshCount
+          const bestReps = state.history.reduce((m, h) => {
+            if (typeof h.reps === 'number') return Math.max(m, h.reps)
+            return m
+          }, 0)
+          const weight = parseFloat($('weightLbs').value || '0')
+          const bells = $('bellsSel').value
+
+          return {
+            modeText: text,
+            ladderMode,
+            progressText: ladderMode
+              ? `${state.ladderCycles} ladder set${
+                  state.ladderCycles === 1 ? '' : 's'
+                }`
+              : `${pairs} round${pairs === 1 ? '' : 's'}`,
+            setsA1: state.setsA1,
+            setsA2: state.setsA2,
+            totalReps,
+            freshCount,
+            restCount,
+            best: bestReps || '—',
+            weight,
+            bells,
+            week: $('weekSel').value,
+            day: $('daySel').value,
+            timerMin: $('timerSel').value
+          }
+        }
+
+        function buildSummaryText(s) {
+          const lines = [
+            `Simple Strength — Week ${s.week}, Day ${s.day}`,
+            `Mode: ${s.modeText}`,
+            `Progress: ${s.progressText}`,
+            `Sets — A1(C+P): ${s.setsA1}, A2(FSQ): ${s.setsA2}`,
+            `Total reps: ${s.totalReps}`,
+            `Fresh vs Rest: ${s.freshCount} / ${s.restCount}`,
+            `${s.ladderMode ? 'Best rung' : 'Best set size'}: ${s.best}`,
+            `Weight/Bells: ${s.weight || 0} lbs (${s.bells})`,
+            `Timer: ${s.timerMin} min`,
+            `Logged sets: ${state.history.length}`
+          ]
+          return lines.join('\n')
+        }
+
+        function buildCSV() {
+          const header = [
+            'timestamp',
+            'exercise',
+            'reps',
+            'fresh',
+            'week',
+            'day',
+            'bells',
+            'weight_lbs',
+            'timer_min'
+          ]
+          const s = computeSummary()
+          const rows = state.history.map((h) => [
+            h.t,
+            h.ex,
+            typeof h.reps === 'number' ? h.reps : '',
+            h.fresh ? 'fresh' : 'rest',
+            s.week,
+            s.day,
+            s.bells,
+            s.weight,
+            s.timerMin
+          ])
+          return [header, ...rows]
+            .map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(','))
+            .join('\n')
+        }
+
+        function showSummarySheet() {
+          const s = computeSummary()
+          $('sumMode').textContent = s.modeText
+          $('sumProgress').textContent = s.progressText
+          $('sumA1').textContent = s.setsA1
+          $('sumA2').textContent = s.setsA2
+          $('sumReps').textContent = s.totalReps
+          $('sumFresh').textContent = `${s.freshCount} / ${s.restCount}`
+          $('sumBest').textContent = s.best
+          $('sumWB').textContent = `${s.weight || 0} lbs (${s.bells})`
+          $('summaryText').textContent = `Week ${s.week}, Day ${s.day} — ${
+            s.modeText
+          }`
+
+          const sheet = $('summarySheet')
+          sheet.classList.add('show')
+        }
+        function hideSummarySheet() {
+          $('summarySheet').classList.remove('show')
+        }
+
+        function downloadCSV(csvText) {
+          const blob = new Blob([csvText], { type: 'text/csv' })
+          const url = URL.createObjectURL(blob)
+          const a = document.createElement('a')
+          const ts = new Date()
+            .toISOString()
+            .replace(/[-:]/g, '')
+            .replace(/\..+/, '')
+          a.href = url
+          a.download = `simple-strength-${ts}.csv`
+          document.body.appendChild(a)
+          a.click()
+          a.remove()
+          setTimeout(() => URL.revokeObjectURL(url), 1000)
+        }
+
+        // Save
+        function saveSession() {
+          const key = 'simple-strength-log'
+          const data = JSON.parse(localStorage.getItem(key) || '[]')
+          const { mode } = getScheme()
+          const pairs = Math.min(state.setsA1, state.setsA2)
+          data.push({
+            savedAt: nowISO(),
+            week: parseInt($('weekSel').value, 10),
+            day: parseInt($('daySel').value, 10),
+            bells: $('bellsSel').value,
+            weightLbs: parseFloat($('weightLbs').value || '0'),
+            timerMin: parseInt($('timerSel').value, 10),
+            metric: isLadderMode(mode)
+              ? 'ladderSets:' + state.ladderCycles
+              : 'rounds:' + pairs,
+            history: state.history
+          })
+          localStorage.setItem(key, JSON.stringify(data))
+          toast('Session saved locally.')
+        }
+
+        // Wire-up
+        $('startBtn').addEventListener('click', startTimer)
+        $('pauseBtn').addEventListener('click', pauseTimer)
+        $('resetBtn').addEventListener('click', resetTimer)
+        $('resetSession').addEventListener('click', resetSession)
+        $('undoBtn').addEventListener('click', undo)
+        $('saveBtn').addEventListener('click', saveSession)
+        setupLogButton()
+
+        ;['weekSel', 'daySel'].forEach((id) =>
+          $(id).addEventListener('change', () => {
+            // Recompute state against the selected scheme
+            updateDetails()
+            recomputeFromHistory()
+          })
+        )
+        $('timerSel').addEventListener('change', setTimerFromSelect)
+
+        // Summary actions
+        $('summaryCloseBtn').addEventListener('click', hideSummarySheet)
+        $('summarySheet').addEventListener('click', (e) => {
+          if (e.target === $('summarySheet')) hideSummarySheet()
+        })
+        $('copySummaryBtn').addEventListener('click', async () => {
+          const s = computeSummary()
+          const text = buildSummaryText(s)
+          try {
+            await navigator.clipboard.writeText(text)
+            toast('Summary copied to clipboard.')
+          } catch {
+            toast('Copy failed. Long-press to select text.')
+          }
+        })
+        $('exportCsvBtn').addEventListener('click', () => {
+          const csv = buildCSV()
+          downloadCSV(csv)
+        })
+        $('shareSummaryBtn').addEventListener('click', async () => {
+          const s = computeSummary()
+          const text = buildSummaryText(s)
+          if (navigator.share) {
             try {
-                initAudio();
-                
-                // Always ensure audio context is running before playing
-                if (audioContext.state === 'suspended') {
-                    await audioContext.resume();
-                }
-                
-                // Wait a moment for context to be fully ready
-                if (audioContext.state !== 'running') {
-                    console.log('Audio context not ready:', audioContext.state);
-                    return;
-                }
-                
-                let frequency, duration, volume;
-                
-                switch(type) {
-                    case 'countdown':
-                        frequency = 800;
-                        duration = 0.1;
-                        volume = 0.3;
-                        break;
-                    case 'start':
-                        frequency = 600;
-                        duration = 0.3;
-                        volume = 0.4;
-                        break;
-                    case 'rest':
-                        frequency = 400;
-                        duration = 0.5;
-                        volume = 0.3;
-                        break;
-                    case 'complete':
-                        // Play a success chord
-                        playSuccessChord();
-                        return;
-                    case 'warning':
-                        frequency = 1000;
-                        duration = 0.2;
-                        volume = 0.4;
-                        break;
-                    default:
-                        frequency = 500;
-                        duration = 0.2;
-                        volume = 0.3;
-                }
-                
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-                oscillator.type = 'sine';
-                
-                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-                gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + duration);
-                
-            } catch (error) {
-                console.log('Audio playback failed:', error);
+              await navigator.share({ text, title: 'Simple Strength Summary' })
+            } catch {}
+          } else {
+            try {
+              await navigator.clipboard.writeText(text)
+              toast('Copied summary (no Share available).')
+            } catch {
+              toast('Share not available. Try Export CSV.')
             }
+          }
+        })
+
+        // Prefs
+        function loadPrefs() {
+          const k = 'simple-strength-prefs'
+          const p = JSON.parse(localStorage.getItem(k) || '{}')
+          if (p.week) $('weekSel').value = p.week
+          if (p.day) $('daySel').value = p.day
+          if (p.timer) $('timerSel').value = p.timer
+          if (p.bells) $('bellsSel').value = p.bells
+          if (p.weightLbs != null) $('weightLbs').value = p.weightLbs
+        }
+        function savePrefs() {
+          const k = 'simple-strength-prefs'
+          const p = {
+            week: $('weekSel').value,
+            day: $('daySel').value,
+            timer: $('timerSel').value,
+            bells: $('bellsSel').value,
+            weightLbs: $('weightLbs').value
+          }
+          localStorage.setItem(k, JSON.stringify(p))
+        }
+        ;['weekSel', 'daySel', 'timerSel', 'bellsSel', 'weightLbs'].forEach(
+          (id) => $(id).addEventListener('change', savePrefs)
+        )
+
+        // Init
+        loadPrefs()
+        setTimerFromSelect()
+        updateDetails()
+        recomputeFromHistory()
+
+        // PWA manifest + SW
+        async function buildIcons() {
+          function draw(size) {
+            const c = document.createElement('canvas')
+            c.width = size
+            c.height = size
+            const ctx = c.getContext('2d')
+            ctx.fillStyle = '#111827'
+            ctx.fillRect(0, 0, size, size)
+            ctx.fillStyle = '#f59e0b'
+            const r = size * 0.34
+            ctx.beginPath()
+            ctx.ellipse(size / 2, size * 0.56, r, r * 0.75, 0, 0, Math.PI * 2)
+            ctx.fill()
+            ctx.fillRect(size * 0.25, size * 0.54, size * 0.5, size * 0.28)
+            ctx.beginPath()
+            ctx.lineWidth = size * 0.08
+            ctx.strokeStyle = '#f59e0b'
+            ctx.arc(size / 2, size * 0.34, size * 0.22, Math.PI, 0)
+            ctx.stroke()
+            return c.toDataURL('image/png')
+          }
+          return [
+            { src: draw(192), sizes: '192x192', type: 'image/png' },
+            {
+              src: draw(512),
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable'
+            }
+          ]
         }
 
-        function playSuccessChord() {
-            if (!isAudioEnabled) return;
-            
-            initAudio();
-            
-            const frequencies = [523, 659, 784]; // C, E, G major chord
-            frequencies.forEach((freq, index) => {
-                setTimeout(() => {
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
-                    oscillator.type = 'sine';
-                    
-                    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-                    gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.01);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.8);
-                }, index * 100);
+        async function setupManifest() {
+          const icons = await buildIcons()
+          const manifest = {
+            name: 'Simple Strength Program',
+            short_name: 'Strength',
+            description:
+              'Clean + Press and Front Squat alternating sets — ladders and fixed reps with autoregulation. Offline-ready.',
+            start_url: '.',
+            display: 'standalone',
+            background_color: '#111827',
+            theme_color: '#111827',
+            icons
+          }
+          const blob = new Blob([JSON.stringify(manifest)], {
+            type: 'application/json'
+          })
+          const url = URL.createObjectURL(blob)
+          const link = document.createElement('link')
+          link.rel = 'manifest'
+          link.href = url
+          document.head.appendChild(link)
+        }
+
+        async function setupSW() {
+          if (!('serviceWorker' in navigator)) return
+          const swCode = `
+            const CACHE = "simple-strength-v1";
+            self.addEventListener("install", (e) => {
+              e.waitUntil(
+                caches.open(CACHE).then((c) =>
+                  c.addAll([self.registration.scope || "./"])
+                )
+              );
+              self.skipWaiting();
             });
-        }
-
-        // PWA Installation
-        let deferredPrompt;
-        let installButton;
-
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                const swScript = `
-                    const CACHE_NAME = 'kettlebell-pro-v1';
-                    const urlsToCache = [
-                        './',
-                        'https://cdn.tailwindcss.com'
-                    ];
-
-                    self.addEventListener('install', event => {
-                        event.waitUntil(
-                            caches.open(CACHE_NAME)
-                                .then(cache => cache.addAll(urlsToCache))
-                        );
-                    });
-
-                    self.addEventListener('fetch', event => {
-                        event.respondWith(
-                            caches.match(event.request)
-                                .then(response => {
-                                    if (response) {
-                                        return response;
-                                    }
-                                    return fetch(event.request);
-                                }
-                            )
-                        );
-                    });
-                `;
-                
-                const blob = new Blob([swScript], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                
-                navigator.serviceWorker.register(swUrl)
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
+            self.addEventListener("activate", (e) => {
+              e.waitUntil(
+                caches.keys().then((keys) =>
+                  Promise.all(
+                    keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))
+                  )
+                )
+              );
+              self.clients.claim();
+            });
+            self.addEventListener("fetch", (e) => {
+              const req = e.request;
+              if (req.method !== "GET") return;
+              e.respondWith(
+                caches.match(req).then((hit) =>
+                  hit ||
+                  fetch(req)
+                    .then((res) => {
+                      const copy = res.clone();
+                      caches.open(CACHE).then((c) => c.put(req, copy));
+                      return res;
                     })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
+                    .catch(() => caches.match(self.registration.scope || "./"))
+                )
+              );
             });
+          `
+          const blob = new Blob([swCode], { type: 'text/javascript' })
+          const url = URL.createObjectURL(blob)
+          try {
+            await navigator.serviceWorker.register(url)
+          } catch (e) {
+            console.warn('SW registration failed', e)
+          }
         }
 
-        // Install prompt handling
+        // Install prompt (Chromium)
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            showInstallButton();
-        });
-
-        function showInstallButton() {
-            // Only show install button on home screen
-            if (document.getElementById('home-screen').classList.contains('hidden')) return;
-            
-            if (!installButton) {
-                installButton = document.createElement('button');
-                installButton.innerHTML = '📱 Install App';
-                installButton.className = 'fixed bottom-4 right-4 bg-electric-green hover:bg-electric-green-dark text-black font-semibold py-3 px-4 rounded-full shadow-lg transition-all z-50';
-                installButton.onclick = installApp;
-                document.body.appendChild(installButton);
+          e.preventDefault()
+          state.installEvt = e
+          $('installBtn').disabled = false
+        })
+        $('installBtn').addEventListener('click', async () => {
+          if (state.installEvt) {
+            try {
+              state.installEvt.prompt()
+              await state.installEvt.userChoice
+            } finally {
+              state.installEvt = null
             }
-        }
+          } else {
+            toast('Use your browser menu to Add to Home Screen.')
+          }
+        })
 
-        function hideInstallButton() {
-            if (installButton) {
-                installButton.remove();
-                installButton = null;
-            }
-        }
+        setupManifest()
+        setupSW()
 
-        async function installApp() {
-            if (!deferredPrompt) return;
-            
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            
-            if (outcome === 'accepted') {
-                console.log('User accepted the install prompt');
-                hideInstallButton();
-            }
-            
-            deferredPrompt = null;
-        }
-
-        // Handle successful installation
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA was installed');
-            hideInstallButton();
-        });
-
-        // Enhanced showScreen function to handle install button
-        const originalShowScreen = showScreen;
-        showScreen = function(screenId) {
-            originalShowScreen(screenId);
-            
-            // Show install button only on home screen
-            if (screenId === 'home-screen' && deferredPrompt) {
-                showInstallButton();
-            } else {
-                hideInstallButton();
-            }
-        };
-
-        // Initialize app
-        updateTotalStats();
+        // Native-like zoom guards (iOS/Safari)
+        // This intentionally disables page zoom (pinch, double-tap).
+        // Remove if you need accessibility zoom.
+        try {
+          document.addEventListener(
+            'gesturestart',
+            (e) => e.preventDefault(),
+            { passive: false }
+          )
+          document.addEventListener(
+            'gesturechange',
+            (e) => e.preventDefault(),
+            { passive: false }
+          )
+          document.addEventListener(
+            'dblclick',
+            (e) => e.preventDefault(),
+            { passive: false }
+          )
+        } catch {}
+      })()
     </script>
-</body>
+  </body>
 </html>
