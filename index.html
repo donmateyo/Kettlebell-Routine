@@ -5,13 +5,11 @@
 
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1.0,
-      user-scalable=no, viewport-fit=cover"
+      content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
 
     <title>Simple & Sinister</title>
 
-    <!-- PWA Meta -->
     <meta
       name="description"
       content="Progressive kettlebell workout app for Simple & Sinister training"
@@ -24,8 +22,8 @@
     />
     <meta name="apple-mobile-web-app-title" content="S&S Workout" />
 
-    <!-- Generate a beautiful icon and manifest (single-file, data URLs) -->
     <script>
+      // Single-file icons + manifest (generated at runtime, but fully inlined)
       (function generateIconsAndManifest() {
         function drawIcon(size) {
           const c = document.createElement("canvas");
@@ -39,7 +37,7 @@
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, size, size);
 
-          // Subtle vignette for depth
+          // Subtle vignette
           const vg = ctx.createRadialGradient(
             size * 0.5,
             size * 0.55,
@@ -53,7 +51,7 @@
           ctx.fillStyle = vg;
           ctx.fillRect(0, 0, size, size);
 
-          // Kettlebell silhouette with soft shadow
+          // Kettlebell silhouette with shadow
           ctx.save();
           const s = size / 512;
           ctx.scale(s, s);
@@ -72,7 +70,7 @@
           ctx.fill(body);
           ctx.restore();
 
-          // Soft top-left gloss
+          // Top-left gloss
           const gloss = ctx.createRadialGradient(
             size * 0.28,
             size * 0.24,
@@ -91,25 +89,21 @@
           return c.toDataURL("image/png");
         }
 
-        // Generate sizes
-        const icon180 = drawIcon(180); // iOS Home Screen
-        const icon192 = drawIcon(192); // Android
-        const icon512 = drawIcon(512); // Android large / maskable
+        const icon180 = drawIcon(180);
+        const icon192 = drawIcon(192);
+        const icon512 = drawIcon(512);
 
-        // Inject apple-touch-icon
         const apple = document.createElement("link");
         apple.rel = "apple-touch-icon";
         apple.href = icon180;
         document.head.appendChild(apple);
 
-        // Favicon (nice to have)
         const fav = document.createElement("link");
         fav.rel = "icon";
         fav.type = "image/png";
         fav.href = icon192;
         document.head.appendChild(fav);
 
-        // Manifest with inlined icons
         const manifest = {
           name: "Simple & Sinister Workout",
           short_name: "S&S Workout",
@@ -121,22 +115,18 @@
           description:
             "Progressive kettlebell workout app for Simple & Sinister training",
           icons: [
-            {
-              src: icon192,
-              sizes: "192x192",
-              type: "image/png"
-            },
+            { src: icon192, sizes: "192x192", type: "image/png" },
             {
               src: icon512,
               sizes: "512x512",
               type: "image/png",
-              purpose: "any maskable"
-            }
-          ]
+              purpose: "any maskable",
+            },
+          ],
         };
 
         const blob = new Blob([JSON.stringify(manifest)], {
-          type: "application/json"
+          type: "application/json",
         });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("link");
@@ -146,7 +136,6 @@
       })();
     </script>
 
-    <!-- Tailwind CDN (kept for simplicity; single-file app code, external CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -159,40 +148,20 @@
               secondary: "#3B82F6",
               accent: "#F59E0B",
               glass: "rgba(255, 255, 255, 0.1)",
-              "glass-border": "rgba(255, 255, 255, 0.2)"
+              "glass-border": "rgba(255, 255, 255, 0.2)",
             },
-            backdropBlur: {
-              xs: "2px"
-            }
-          }
-        }
+            backdropBlur: { xs: "2px" },
+          },
+        },
       };
     </script>
 
     <style>
-      /* Prevent zoom on iOS */
       input,
       select,
       textarea {
         font-size: 16px !important;
       }
-
-      /* Glass morphism styles */
-      .glass {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      }
-
-      .glass-dark {
-        background: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      }
-
-      /* Gradient background */
       body {
         background: linear-gradient(
           135deg,
@@ -202,7 +171,6 @@
         );
         min-height: 100vh;
       }
-
       body.dark {
         background: linear-gradient(
           135deg,
@@ -211,17 +179,13 @@
           #374151 100%
         );
       }
-
-      /* Custom styles for better mobile experience */
       .timer-display {
         font-variant-numeric: tabular-nums;
       }
-
       .pulse-ring {
-        animation: pulse-ring 2s
-          cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+          infinite;
       }
-
       @keyframes pulse-ring {
         0% {
           transform: scale(0.33);
@@ -233,33 +197,50 @@
           opacity: 0;
         }
       }
-
       .workout-button {
         transition: all 0.2s ease;
       }
-
       .workout-button:active {
         transform: scale(0.95);
       }
-
       .floating-card {
         background: rgba(255, 255, 255, 0.15);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.3);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
       }
-
       .dark .floating-card {
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
-
-      /* PWA display mode styles */
       @media all and (display-mode: standalone) {
         body {
           padding-top: env(safe-area-inset-top);
           padding-bottom: env(safe-area-inset-bottom);
         }
+      }
+      .pill-select {
+        appearance: none;
+        background: transparent;
+        padding-right: 1.25rem;
+      }
+      .chev {
+        pointer-events: none;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .btn {
+        @apply rounded-lg font-semibold workout-button;
+      }
+      .btn-danger {
+        @apply bg-red-500/60 hover:bg-red-500/80 text-white;
+      }
+      .btn-primary {
+        @apply bg-primary/60 hover:bg-primary/80 text-white;
+      }
+      .btn-muted {
+        @apply text-white/80 hover:text-white hover:bg-white/10;
       }
     </style>
   </head>
@@ -274,47 +255,74 @@
         <div class="flex justify-between items-center mt-2">
           <button
             id="infoBtn"
-            class="text-white/80 hover:text-white transition-colors p-2
-            rounded-lg hover:bg-white/10"
+            class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+            title="Info"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0
-                11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001
-                1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                 clip-rule="evenodd"
               />
             </svg>
           </button>
-          <div class="text-sm font-medium bg-white/20 px-3 py-1 rounded-full">
-            <span id="currentWeight">24kg</span>
+
+          <!-- Weight dropdown pill -->
+          <div
+            class="relative text-sm font-medium bg-white/20 px-3 py-1 rounded-full flex items-center"
+            title="Select kettlebell weight"
+          >
+            <select
+              id="weightDropdown"
+              class="pill-select text-white focus:outline-none"
+            >
+              <option value="35">35 lbs</option>
+              <option value="50" selected>50 lbs</option>
+              <option value="70">70 lbs</option>
+            </select>
+            <svg
+              class="w-4 h-4 absolute chev opacity-80"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
           </div>
-          <button
-            id="settingsBtn"
-            class="text-white/80 hover:text-white transition-colors p-2
-            rounded-lg hover:bg-white/10"
-          >
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532
-                1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106
-                2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561
-                2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734
-                2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561
-                2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836
-                2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379
-                1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532
-                1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </button>
+
+          <div class="flex gap-1">
+            <button
+              id="historyBtn"
+              class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+              title="History & streak"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M7 4a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1ZM4 9a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm3 5a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1Zm-3 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"
+                />
+              </svg>
+            </button>
+            <button
+              id="settingsBtn"
+              class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+              title="Settings"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
-      <!-- Main Workout Interface -->
+      <!-- Main -->
       <main class="p-4 space-y-6">
         <!-- Workout Status -->
         <div id="workoutStatus" class="text-center">
@@ -327,12 +335,10 @@
         <!-- Timer Display -->
         <div id="timerDisplay" class="text-center hidden">
           <div class="relative inline-flex items-center justify-center">
+            <div class="absolute inset-0 rounded-full bg-primary/30 pulse-ring">
+            </div>
             <div
-              class="absolute inset-0 rounded-full bg-primary/30 pulse-ring"
-            ></div>
-            <div
-              class="floating-card rounded-full w-36 h-36 flex items-center
-              justify-center border-2 border-white/30"
+              class="floating-card rounded-full w-36 h-36 flex items-center justify-center border-2 border-white/30"
             >
               <div class="text-center">
                 <div
@@ -349,15 +355,11 @@
           <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
             <div class="floating-card p-4 rounded-xl">
               <div class="text-white/70">Set</div>
-              <div id="currentSet" class="text-xl font-bold text-white">
-                1/10
-              </div>
+              <div id="currentSet" class="text-xl font-bold text-white">1/10</div>
             </div>
             <div class="floating-card p-4 rounded-xl">
               <div class="text-white/70">Hand</div>
-              <div id="currentHand" class="text-xl font-bold text-white">
-                Right
-              </div>
+              <div id="currentHand" class="text-xl font-bold text-white">Right</div>
             </div>
           </div>
         </div>
@@ -365,8 +367,7 @@
         <!-- Current Exercise Display -->
         <div id="exerciseDisplay" class="text-center hidden">
           <div
-            class="floating-card bg-gradient-to-r from-primary/30
-            to-secondary/30 text-white rounded-xl p-6 border-2 border-white/20"
+            class="floating-card bg-gradient-to-r from-primary/30 to-secondary/30 text-white rounded-xl p-6 border-2 border-white/20"
           >
             <div id="exerciseName" class="text-xl font-bold mb-2">
               Kettlebell Swings
@@ -374,20 +375,17 @@
             <div id="exerciseInstruction" class="text-lg">
               10 swings - Right hand
             </div>
-            <div class="text-sm mt-2 text-white/80" id="exerciseReps">
+            <div id="exerciseReps" class="text-sm mt-2 text-white/80">
               Switch hands each set
             </div>
           </div>
         </div>
 
-        <!-- Control Buttons -->
+        <!-- Controls -->
         <div class="space-y-3">
           <button
             id="startBtn"
-            class="w-full floating-card bg-gradient-to-r from-primary/40
-            to-secondary/40 hover:from-primary/60 hover:to-secondary/60
-            text-white py-4 rounded-xl text-lg font-semibold workout-button
-            transition-all border-2 border-white/30"
+            class="w-full floating-card bg-gradient-to-r from-primary/40 to-secondary/40 hover:from-primary/60 hover:to-secondary/60 text-white py-4 rounded-xl text-lg font-semibold workout-button transition-all border-2 border-white/30"
           >
             Start Workout
           </button>
@@ -395,19 +393,13 @@
           <div id="workoutControls" class="hidden space-y-3">
             <button
               id="pauseBtn"
-              class="w-full floating-card bg-gradient-to-r
-              from-yellow-500/40 to-yellow-400/40 hover:from-yellow-500/60
-              hover:to-yellow-400/60 text-white py-3 rounded-xl font-semibold
-              workout-button border-2 border-white/30"
+              class="w-full floating-card bg-gradient-to-r from-yellow-500/40 to-yellow-400/40 hover:from-yellow-500/60 hover:to-yellow-400/60 text-white py-3 rounded-xl font-semibold workout-button border-2 border-white/30"
             >
               Pause
             </button>
             <button
               id="stopBtn"
-              class="w-full floating-card bg-gradient-to-r
-              from-red-500/40 to-red-400/40 hover:from-red-500/60
-              hover:to-red-400/60 text-white py-3 rounded-xl font-semibold
-              workout-button border-2 border-white/30"
+              class="w-full floating-card bg-gradient-to-r from-red-500/40 to-red-400/40 hover:from-red-500/60 hover:to-red-400/60 text-white py-3 rounded-xl font-semibold workout-button border-2 border-white/30"
             >
               Stop Workout
             </button>
@@ -432,33 +424,45 @@
             </div>
           </div>
         </div>
+
+        <!-- Stats -->
+        <div id="statsCard" class="floating-card rounded-xl p-5">
+          <h3 class="font-semibold mb-3 text-white">Your Stats</h3>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div class="text-white/70 text-sm">Current Streak</div>
+              <div id="currentStreak" class="text-2xl font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-white/70 text-sm">Best Streak</div>
+              <div id="bestStreak" class="text-2xl font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-white/70 text-sm">Total Workouts</div>
+              <div id="totalWorkouts" class="text-2xl font-bold">0</div>
+            </div>
+          </div>
+        </div>
       </main>
 
       <!-- Settings Modal -->
       <div
         id="settingsModal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50
-        flex items-center justify-center p-4"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
       >
         <div
-          class="floating-card rounded-xl w-full max-w-sm p-6 text-white
-          border-2 border-white/30"
+          class="floating-card rounded-xl w-full max-w-sm p-6 text-white border-2 border-white/30"
         >
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold text-white">Settings</h2>
             <button
               id="closeSettings"
-              class="text-white/70 hover:text-white transition-colors p-1
-              rounded-lg hover:bg-white/10"
+              class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1
-                  1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0
-                  01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0
-                  01-1.414-1.414L8.586 10 4.293 5.707a1 1 0
-                  010-1.414z"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                   clip-rule="evenodd"
                 />
               </svg>
@@ -466,39 +470,6 @@
           </div>
 
           <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium mb-2 text-white/90">
-                Kettlebell Weight
-              </label>
-              <select
-                id="weightSelect"
-                class="w-full p-3 floating-card border border-white/30
-                rounded-lg text-white text-base bg-transparent"
-              >
-                <option value="16" class="bg-gray-800 text-white">
-                  16kg (35 lbs)
-                </option>
-                <option value="20" class="bg-gray-800 text-white">
-                  20kg (44 lbs)
-                </option>
-                <option value="24" selected class="bg-gray-800 text-white">
-                  24kg (53 lbs)
-                </option>
-                <option value="28" class="bg-gray-800 text-white">
-                  28kg (62 lbs)
-                </option>
-                <option value="32" class="bg-gray-800 text-white">
-                  32kg (70 lbs) - Simple Goal
-                </option>
-                <option value="36" class="bg-gray-800 text-white">
-                  36kg (80 lbs)
-                </option>
-                <option value="40" class="bg-gray-800 text-white">
-                  40kg (88 lbs)
-                </option>
-              </select>
-            </div>
-
             <div>
               <label class="block text-sm font-medium mb-2 text-white/90">
                 Sound Alerts
@@ -513,14 +484,14 @@
                 <span>Enable audio cues</span>
               </label>
             </div>
+            <p class="text-white/70 text-sm">
+              Weight can be changed from the header dropdown.
+            </p>
           </div>
 
           <button
             id="saveSettings"
-            class="w-full mt-6 floating-card bg-gradient-to-r
-            from-primary/40 to-secondary/40 hover:from-primary/60
-            hover:to-secondary/60 text-white py-3 rounded-lg font-semibold
-            workout-button border-2 border-white/30"
+            class="w-full mt-6 floating-card bg-gradient-to-r from-primary/40 to-secondary/40 hover:from-primary/60 hover:to-secondary/60 text-white py-3 rounded-lg font-semibold workout-button border-2 border-white/30"
           >
             Save Settings
           </button>
@@ -530,12 +501,10 @@
       <!-- Info Modal -->
       <div
         id="infoModal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50
-        flex items-center justify-center p-4"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
       >
         <div
-          class="floating-card rounded-xl w-full max-w-sm p-6
-          max-h-[80vh] overflow-y-auto text-white border-2 border-white/30"
+          class="floating-card rounded-xl w-full max-w-sm p-6 max-h-[80vh] overflow-y-auto text-white border-2 border-white/30"
         >
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold text-white">
@@ -543,17 +512,12 @@
             </h2>
             <button
               id="closeInfo"
-              class="text-white/70 hover:text-white transition-colors p-1
-              rounded-lg hover:bg-white/10"
+              class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1
-                  1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0
-                  01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0
-                  01-1.414-1.414L8.586 10 4.293 5.707a1 1 0
-                  010-1.414z"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                   clip-rule="evenodd"
                 />
               </svg>
@@ -564,10 +528,10 @@
             <div>
               <h3 class="font-semibold mb-2 text-white">Workout Structure</h3>
               <ul class="space-y-1 text-white/80">
-                <li>• 5 min: 10 one-hand swings every 30 seconds</li>
+                <li>• 5 minutes: 10 one-hand swings every 30 seconds</li>
                 <li>• Switch hands each set</li>
                 <li>• 1 minute rest</li>
-                <li>• 10 min: 1 get-up each minute</li>
+                <li>• 10 minutes: 1 get-up each minute</li>
                 <li>• Alternate sides each minute</li>
               </ul>
             </div>
@@ -575,8 +539,8 @@
             <div>
               <h3 class="font-semibold mb-2 text-white">Simple Goal</h3>
               <p class="text-white/80">
-                Complete the workout with 32kg (70 lbs) kettlebell with perfect
-                form and timing.
+                Complete the workout with 70 lbs kettlebell with perfect form
+                and timing.
               </p>
             </div>
 
@@ -593,17 +557,136 @@
             <div>
               <h3 class="font-semibold mb-2 text-white">Benefits</h3>
               <p class="text-white/80">
-                Research shows significant improvements in VO2max, body
-                composition, flexibility, and cardiovascular health.
+                Improvements in VO2max, body composition, flexibility, and
+                cardiovascular health.
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History Modal -->
+      <div
+        id="historyModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
+      >
+        <div
+          class="floating-card rounded-xl w-full max-w-sm p-6 text-white border-2 border-white/30 max-h-[85vh] overflow-y-auto"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold">History & Streak</h2>
+            <button
+              id="closeHistory"
+              class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Stats mirror -->
+          <div class="grid grid-cols-3 gap-4 text-center mb-4">
+            <div>
+              <div class="text-white/70 text-xs">Current</div>
+              <div id="curStreakModal" class="text-xl font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-white/70 text-xs">Best</div>
+              <div id="bestStreakModal" class="text-xl font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-white/70 text-xs">Total</div>
+              <div id="totalWorkoutsModal" class="text-xl font-bold">0</div>
+            </div>
+          </div>
+
+          <!-- Manual Entry -->
+          <div class="mb-4">
+            <h3 class="font-semibold mb-2 text-white">Add Manual Entry</h3>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="text-sm text-white/80">
+                Date
+                <input
+                  id="manualDate"
+                  type="date"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                />
+              </label>
+              <label class="text-sm text-white/80">
+                Weight
+                <select
+                  id="manualWeight"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                >
+                  <option value="35">35 lbs</option>
+                  <option value="50">50 lbs</option>
+                  <option value="70">70 lbs</option>
+                </select>
+              </label>
+              <label class="text-sm text-white/80">
+                Swings
+                <input
+                  id="manualSwings"
+                  type="number"
+                  min="0"
+                  step="10"
+                  value="100"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                />
+              </label>
+              <label class="text-sm text-white/80">
+                Get-ups
+                <input
+                  id="manualGetups"
+                  type="number"
+                  min="0"
+                  step="1"
+                  value="10"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                />
+              </label>
+              <label class="col-span-2 text-sm text-white/80">
+                Duration (min, optional)
+                <input
+                  id="manualDuration"
+                  type="number"
+                  min="0"
+                  step="1"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                />
+              </label>
+              <label class="col-span-2 text-sm text-white/80">
+                Notes
+                <textarea
+                  id="manualNotes"
+                  rows="2"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                ></textarea>
+              </label>
+            </div>
+            <div class="flex justify-end gap-2 mt-3">
+              <button id="addManualEntry" class="btn btn-primary px-4 py-2">
+                Add
+              </button>
+            </div>
+          </div>
+
+          <!-- History List -->
+          <div>
+            <h3 class="font-semibold mb-2 text-white">Recent Workouts</h3>
+            <div id="historyList" class="space-y-2"></div>
           </div>
         </div>
       </div>
     </div>
 
     <script>
-      // Dark mode detection
+      // Dark mode
       if (
         window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -620,21 +703,26 @@
           }
         });
 
+      // Local storage keys
+      const LS_PREFS_KEY = "ss_prefs_v2";
+      const LS_HISTORY_KEY = "ss_history_v2";
+
       // App state
       let workoutState = {
         isActive: false,
         isPaused: false,
-        phase: "swings", // 'swings', 'rest', 'getups', 'complete'
+        phase: "swings", // 'swings', 'rest', 'getups'
         currentSet: 1,
         currentHand: "right",
         timeRemaining: 30,
         swingsCompleted: 0,
         getupsCompleted: 0,
-        currentWeight: 24,
-        soundEnabled: true
+        weightLbs: 50,
+        soundEnabled: true,
       };
 
       let timer = null;
+      let startTimestamp = null;
 
       // DOM elements
       const startBtn = document.getElementById("startBtn");
@@ -649,62 +737,277 @@
       const currentSet = document.getElementById("currentSet");
       const currentHand = document.getElementById("currentHand");
       const exerciseName = document.getElementById("exerciseName");
-      const exerciseInstruction =
-        document.getElementById("exerciseInstruction");
+      const exerciseInstruction = document.getElementById(
+        "exerciseInstruction"
+      );
       const exerciseReps = document.getElementById("exerciseReps");
       const swingsCompleted = document.getElementById("swingsCompleted");
       const getupsCompleted = document.getElementById("getupsCompleted");
-      const currentWeight = document.getElementById("currentWeight");
+      const weightDropdown = document.getElementById("weightDropdown");
 
-      // Modal elements
+      // Modals
       const settingsModal = document.getElementById("settingsModal");
       const infoModal = document.getElementById("infoModal");
+      const historyModal = document.getElementById("historyModal");
       const settingsBtn = document.getElementById("settingsBtn");
       const infoBtn = document.getElementById("infoBtn");
+      const historyBtn = document.getElementById("historyBtn");
       const closeSettings = document.getElementById("closeSettings");
       const closeInfo = document.getElementById("closeInfo");
+      const closeHistory = document.getElementById("closeHistory");
       const saveSettings = document.getElementById("saveSettings");
-      const weightSelect = document.getElementById("weightSelect");
-      const soundAlerts = document.getElementById("soundAlerts");
 
-      // Audio context for beeps
+      // Stats UI
+      const currentStreakEl = document.getElementById("currentStreak");
+      const bestStreakEl = document.getElementById("bestStreak");
+      const totalWorkoutsEl = document.getElementById("totalWorkouts");
+      const curStreakModal = document.getElementById("curStreakModal");
+      const bestStreakModal = document.getElementById("bestStreakModal");
+      const totalWorkoutsModal = document.getElementById(
+        "totalWorkoutsModal"
+      );
+
+      // History UI
+      const manualDate = document.getElementById("manualDate");
+      const manualWeight = document.getElementById("manualWeight");
+      const manualSwings = document.getElementById("manualSwings");
+      const manualGetups = document.getElementById("manualGetups");
+      const manualDuration = document.getElementById("manualDuration");
+      const manualNotes = document.getElementById("manualNotes");
+      const addManualEntry = document.getElementById("addManualEntry");
+      const historyList = document.getElementById("historyList");
+
+      // Audio
       let audioContext = null;
-
       function initAudio() {
         if (!audioContext) {
           audioContext = new (window.AudioContext ||
             window.webkitAudioContext)();
         }
       }
-
       function playBeep(frequency = 800, duration = 200) {
         if (!workoutState.soundEnabled || !audioContext) return;
-
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-
-        oscillator.frequency.value = frequency;
-        oscillator.type = "sine";
-
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.frequency.value = frequency;
+        osc.type = "sine";
+        gain.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(
           0.01,
           audioContext.currentTime + duration / 1000
         );
-
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + duration / 1000);
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + duration / 1000);
       }
 
+      // Time helpers
       function formatTime(seconds) {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
         return `${mins}:${secs.toString().padStart(2, "0")}`;
       }
+      function toYMD(d) {
+        const dt = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+        return dt.toISOString().slice(0, 10);
+      }
+      function ymdToDate(ymd) {
+        return new Date(ymd + "T00:00:00");
+      }
 
+      // Storage helpers
+      function loadPrefs() {
+        try {
+          const p = JSON.parse(localStorage.getItem(LS_PREFS_KEY));
+          if (p && typeof p === "object") {
+            workoutState.soundEnabled =
+              typeof p.soundEnabled === "boolean"
+                ? p.soundEnabled
+                : workoutState.soundEnabled;
+            workoutState.weightLbs =
+              [35, 50, 70].includes(p.weightLbs) && p.weightLbs
+                ? p.weightLbs
+                : workoutState.weightLbs;
+          }
+        } catch {}
+      }
+      function savePrefs() {
+        const p = {
+          soundEnabled: workoutState.soundEnabled,
+          weightLbs: workoutState.weightLbs,
+        };
+        localStorage.setItem(LS_PREFS_KEY, JSON.stringify(p));
+      }
+      function loadHistory() {
+        try {
+          const h = JSON.parse(localStorage.getItem(LS_HISTORY_KEY));
+          return Array.isArray(h) ? h : [];
+        } catch {
+          return [];
+        }
+      }
+      function saveHistory(arr) {
+        localStorage.setItem(LS_HISTORY_KEY, JSON.stringify(arr));
+      }
+
+      // History + streaks
+      function genId() {
+        return (
+          Date.now().toString(36) +
+          Math.random().toString(36).slice(2, 8).toUpperCase()
+        );
+      }
+      function getHistory() {
+        if (!window._historyCache) window._historyCache = loadHistory();
+        return window._historyCache;
+      }
+      function setHistory(arr) {
+        window._historyCache = arr;
+        saveHistory(arr);
+        updateStatsUI();
+      }
+      function logAutoWorkout(durationSec) {
+        const entry = {
+          id: genId(),
+          source: "auto",
+          date: toYMD(new Date()),
+          swings: 100,
+          getups: 10,
+          durationSec,
+          weightLbs: workoutState.weightLbs,
+          notes: "",
+          createdAt: new Date().toISOString(),
+        };
+        const arr = getHistory();
+        arr.push(entry);
+        setHistory(arr);
+      }
+      function addManualWorkout(data) {
+        const entry = {
+          id: genId(),
+          source: "manual",
+          date: data.date,
+          swings: data.swings,
+          getups: data.getups,
+          durationSec: data.durationSec || 0,
+          weightLbs: data.weightLbs,
+          notes: data.notes || "",
+          createdAt: new Date().toISOString(),
+        };
+        const arr = getHistory();
+        arr.push(entry);
+        setHistory(arr);
+      }
+      function deleteEntry(id) {
+        const arr = getHistory().filter((e) => e.id !== id);
+        setHistory(arr);
+        renderHistoryList();
+      }
+      function computeStreakInfo() {
+        const entries = getHistory();
+        const daySet = new Set(entries.map((e) => e.date));
+        // Current streak
+        let cur = 0;
+        const d = new Date();
+        while (daySet.has(toYMD(d))) {
+          cur++;
+          d.setDate(d.getDate() - 1);
+        }
+        // Best streak
+        const days = Array.from(daySet)
+          .map((s) => ymdToDate(s))
+          .sort((a, b) => a - b);
+        let best = 0;
+        let run = 0;
+        for (let i = 0; i < days.length; i++) {
+          if (i === 0) {
+            run = 1;
+          } else {
+            const diff =
+              (days[i] - days[i - 1]) / (1000 * 60 * 60 * 24);
+            run = diff === 1 ? run + 1 : 1;
+          }
+          if (run > best) best = run;
+        }
+        return { current: cur, best, total: entries.length };
+      }
+      function updateStatsUI() {
+        const { current, best, total } = computeStreakInfo();
+        currentStreakEl.textContent = current;
+        bestStreakEl.textContent = best;
+        totalWorkoutsEl.textContent = total;
+        curStreakModal.textContent = current;
+        bestStreakModal.textContent = best;
+        totalWorkoutsModal.textContent = total;
+      }
+      function renderHistoryList() {
+        const arr = getHistory()
+          .slice()
+          .sort((a, b) => b.date.localeCompare(a.date) || (b.createdAt || "").localeCompare(a.createdAt || ""));
+        if (arr.length === 0) {
+          historyList.innerHTML =
+            '<div class="text-white/70 text-sm">No workouts yet. Go earn that streak 💪</div>';
+          return;
+        }
+        historyList.innerHTML = arr
+          .map((e) => {
+            const d = new Date(e.date + "T00:00:00");
+            const nice = d.toLocaleDateString(undefined, {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            });
+            const mins = e.durationSec
+              ? Math.round(e.durationSec / 60)
+              : null;
+            const dur = mins ? ` • ${mins} min` : "";
+            const src = e.source === "manual" ? "Manual" : "Auto";
+            return `
+              <div class="floating-card p-3 rounded-lg border border-white/20 flex items-start justify-between">
+                <div class="text-sm">
+                  <div class="font-semibold">${nice} • ${src}</div>
+                  <div class="text-white/80">
+                    ${e.swings} swings • ${e.getups} get-ups • ${e.weightLbs} lbs${dur}
+                  </div>
+                  ${
+                    e.notes
+                      ? `<div class="text-white/60 mt-1 italic">${escapeHtml(
+                          e.notes
+                        )}</div>`
+                      : ""
+                  }
+                </div>
+                <button
+                  class="btn btn-danger px-2 py-1 text-xs ml-3"
+                  data-del="${e.id}"
+                  title="Delete entry"
+                >
+                  Delete
+                </button>
+              </div>
+            `;
+          })
+          .join("");
+
+        historyList.querySelectorAll("[data-del]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-del");
+            showConfirmDialog("Delete this entry?", () => deleteEntry(id));
+          });
+        });
+      }
+      function escapeHtml(str) {
+        return str
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      // Update display
       function updateDisplay() {
         timeRemaining.textContent = formatTime(workoutState.timeRemaining);
         currentSet.textContent = `${workoutState.currentSet}/10`;
@@ -712,7 +1015,6 @@
           workoutState.currentHand === "right" ? "Right" : "Left";
         swingsCompleted.textContent = `${workoutState.swingsCompleted}/100`;
         getupsCompleted.textContent = `${workoutState.getupsCompleted}/10`;
-        currentWeight.textContent = `${workoutState.currentWeight}kg`;
 
         if (workoutState.phase === "swings") {
           timerPhase.textContent = "Swings";
@@ -736,6 +1038,7 @@
         }
       }
 
+      // Start/pause/stop
       function startWorkout() {
         initAudio();
         workoutState.isActive = true;
@@ -746,6 +1049,7 @@
         workoutState.timeRemaining = 30;
         workoutState.swingsCompleted = 0;
         workoutState.getupsCompleted = 0;
+        startTimestamp = Date.now();
 
         startBtn.classList.add("hidden");
         workoutControls.classList.remove("hidden");
@@ -757,13 +1061,10 @@
         updateDisplay();
         playBeep(1000, 300);
       }
-
       function startTimer() {
         if (timer) clearInterval(timer);
-
         timer = setInterval(() => {
           if (!workoutState.isActive || workoutState.isPaused) return;
-
           workoutState.timeRemaining--;
           updateDisplay();
 
@@ -773,19 +1074,15 @@
           ) {
             playBeep(600, 150);
           }
-
           if (workoutState.timeRemaining === 0) {
             handleTimerComplete();
           }
         }, 1000);
       }
-
       function handleTimerComplete() {
         playBeep(1200, 400);
-
         if (workoutState.phase === "swings") {
           workoutState.swingsCompleted += 10;
-
           if (workoutState.currentSet < 10) {
             workoutState.currentSet++;
             workoutState.currentHand =
@@ -802,7 +1099,6 @@
           workoutState.timeRemaining = 60;
         } else if (workoutState.phase === "getups") {
           workoutState.getupsCompleted += 1;
-
           if (workoutState.currentSet < 10) {
             workoutState.currentSet++;
             workoutState.currentHand =
@@ -813,13 +1109,18 @@
             return;
           }
         }
-
         updateDisplay();
       }
-
       function completeWorkout() {
         workoutState.isActive = false;
         clearInterval(timer);
+
+        // Log auto workout
+        const durationSec = Math.max(
+          0,
+          Math.round((Date.now() - (startTimestamp || Date.now())) / 1000)
+        );
+        logAutoWorkout(durationSec);
 
         timerDisplay.classList.add("hidden");
         exerciseDisplay.classList.add("hidden");
@@ -829,129 +1130,156 @@
 
         const statusDiv = workoutStatus.querySelector("div");
         statusDiv.innerHTML = `
-          <div class="text-2xl font-bold mb-2 text-green-600
-          dark:text-green-400">
+          <div class="text-2xl font-bold mb-2 text-green-600 dark:text-green-400">
             Workout Complete! 🎉
           </div>
-          <div class="text-gray-600 dark:text-gray-400">
-            100 Swings + 10 Get-ups completed<br>
-            Weight: ${workoutState.currentWeight}kg
+          <div class="text-gray-200">
+            100 Swings + 10 Get-ups • ${workoutState.weightLbs} lbs
           </div>
         `;
 
         playBeep(1500, 500);
       }
-
       function pauseWorkout() {
         workoutState.isPaused = !workoutState.isPaused;
         pauseBtn.textContent = workoutState.isPaused ? "Resume" : "Pause";
         pauseBtn.className = workoutState.isPaused
-          ? "w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold workout-button"
-          : "w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-lg font-semibold workout-button";
+          ? "w-full floating-card bg-green-500/40 hover:bg-green-500/60 text-white py-3 rounded-xl font-semibold workout-button border-2 border-white/30"
+          : "w-full floating-card bg-gradient-to-r from-yellow-500/40 to-yellow-400/40 hover:from-yellow-500/60 hover:to-yellow-400/60 text-white py-3 rounded-xl font-semibold workout-button border-2 border-white/30";
       }
-
       function stopWorkout() {
-        showConfirmDialog(
-          "Are you sure you want to stop the workout?",
-          () => {
-            workoutState.isActive = false;
-            workoutState.isPaused = false;
-            clearInterval(timer);
+        showConfirmDialog("Stop the workout?", () => {
+          workoutState.isActive = false;
+          workoutState.isPaused = false;
+          clearInterval(timer);
 
-            timerDisplay.classList.add("hidden");
-            exerciseDisplay.classList.add("hidden");
-            workoutControls.classList.add("hidden");
-            workoutStatus.classList.remove("hidden");
-            startBtn.classList.remove("hidden");
+          timerDisplay.classList.add("hidden");
+          exerciseDisplay.classList.add("hidden");
+          workoutControls.classList.add("hidden");
+          workoutStatus.classList.remove("hidden");
+          startBtn.classList.remove("hidden");
 
-            const statusDiv = workoutStatus.querySelector("div");
-            statusDiv.innerHTML = `
-              <div class="text-2xl font-bold mb-2">Ready to Start</div>
-              <div class="text-gray-600 dark:text-gray-400">
-                100 Swings + 10 Get-ups
-              </div>
-            `;
+          const statusDiv = workoutStatus.querySelector("div");
+          statusDiv.innerHTML = `
+            <div class="text-2xl font-bold mb-2">Ready to Start</div>
+            <div class="text-gray-200">
+              100 Swings + 10 Get-ups
+            </div>
+          `;
 
-            pauseBtn.textContent = "Pause";
-            pauseBtn.className =
-              "w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-lg font-semibold workout-button";
-          }
-        );
+          pauseBtn.textContent = "Pause";
+          pauseBtn.className =
+            "w-full floating-card bg-gradient-to-r from-yellow-500/40 to-yellow-400/40 hover:from-yellow-500/60 hover:to-yellow-400/60 text-white py-3 rounded-xl font-semibold workout-button border-2 border-white/30";
+        });
       }
 
+      // Confirm dialog
       function showConfirmDialog(message, onConfirm) {
         const modal = document.createElement("div");
         modal.className =
-          "fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center " +
-          "justify-center z-50 p-4";
+          "fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4";
         modal.innerHTML = `
           <div class="floating-card rounded-xl p-6 max-w-sm w-full text-white border-2 border-white/30">
             <p class="text-white/90 mb-4">${message}</p>
             <div class="flex justify-end space-x-3">
-              <button class="cancel-btn px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Cancel</button>
-              <button class="confirm-btn px-4 py-2 bg-red-500/60 text-white hover:bg-red-500/80 rounded-lg transition-colors">Confirm</button>
+              <button class="cancel-btn btn btn-muted px-4 py-2">Cancel</button>
+              <button class="confirm-btn btn btn-danger px-4 py-2">Confirm</button>
             </div>
           </div>
         `;
-
         modal.querySelector(".cancel-btn").onclick = () => modal.remove();
         modal.querySelector(".confirm-btn").onclick = () => {
           modal.remove();
           onConfirm();
         };
-
         document.body.appendChild(modal);
       }
 
       // Events
-      document.getElementById("startBtn").addEventListener("click", startWorkout);
-      document.getElementById("pauseBtn").addEventListener("click", pauseWorkout);
-      document.getElementById("stopBtn").addEventListener("click", stopWorkout);
+      startBtn.addEventListener("click", startWorkout);
+      pauseBtn.addEventListener("click", pauseWorkout);
+      stopBtn.addEventListener("click", stopWorkout);
 
-      document
-        .getElementById("settingsBtn")
-        .addEventListener("click", () => {
-          settingsModal.classList.remove("hidden");
-        });
-
-      document
-        .getElementById("closeSettings")
-        .addEventListener("click", () => {
-          settingsModal.classList.add("hidden");
-        });
-
-      document.getElementById("saveSettings").addEventListener("click", () => {
-        workoutState.currentWeight = parseInt(
-          document.getElementById("weightSelect").value
-        );
+      settingsBtn.addEventListener("click", () => {
+        settingsModal.classList.remove("hidden");
+      });
+      closeSettings.addEventListener("click", () => {
+        settingsModal.classList.add("hidden");
+      });
+      saveSettings.addEventListener("click", () => {
         workoutState.soundEnabled =
           document.getElementById("soundAlerts").checked;
-        updateDisplay();
+        savePrefs();
         settingsModal.classList.add("hidden");
       });
 
-      document.getElementById("infoBtn").addEventListener("click", () => {
+      infoBtn.addEventListener("click", () => {
         infoModal.classList.remove("hidden");
       });
-
-      document.getElementById("closeInfo").addEventListener("click", () => {
+      closeInfo.addEventListener("click", () => {
         infoModal.classList.add("hidden");
       });
 
-      settingsModal.addEventListener("click", (e) => {
-        if (e.target === settingsModal) {
-          settingsModal.classList.add("hidden");
-        }
+      historyBtn.addEventListener("click", () => {
+        historyModal.classList.remove("hidden");
+        primeManualDefaults();
+        renderHistoryList();
+      });
+      closeHistory.addEventListener("click", () => {
+        historyModal.classList.add("hidden");
       });
 
-      infoModal.addEventListener("click", (e) => {
-        if (e.target === infoModal) {
-          infoModal.classList.add("hidden");
-        }
+      [settingsModal, infoModal, historyModal].forEach((m) => {
+        m.addEventListener("click", (e) => {
+          if (e.target === m) m.classList.add("hidden");
+        });
       });
 
-      // Initialize display
+      // Weight dropdown
+      weightDropdown.addEventListener("change", () => {
+        workoutState.weightLbs = parseInt(weightDropdown.value, 10);
+        savePrefs();
+      });
+
+      // Manual entry add
+      addManualEntry.addEventListener("click", () => {
+        const date = manualDate.value || toYMD(new Date());
+        const w = parseInt(manualWeight.value, 10);
+        const swings = Math.max(0, parseInt(manualSwings.value || "0", 10));
+        const getups = Math.max(0, parseInt(manualGetups.value || "0", 10));
+        const durationSec = Math.max(
+          0,
+          Math.round((parseFloat(manualDuration.value || "0") || 0) * 60)
+        );
+        const notes = manualNotes.value.trim();
+        addManualWorkout({
+          date,
+          weightLbs: w,
+          swings,
+          getups,
+          durationSec,
+          notes,
+        });
+        primeManualDefaults();
+        renderHistoryList();
+      });
+
+      function primeManualDefaults() {
+        manualDate.value = toYMD(new Date());
+        manualWeight.value = String(workoutState.weightLbs);
+        manualSwings.value = "100";
+        manualGetups.value = "10";
+        manualDuration.value = "";
+        manualNotes.value = "";
+        updateStatsUI();
+      }
+
+      // Init
+      loadPrefs();
+      weightDropdown.value = String(workoutState.weightLbs);
       updateDisplay();
+      setHistory(loadHistory());
+      updateStatsUI();
     </script>
   </body>
 </html>
