@@ -141,10 +141,8 @@
         theme: {
           extend: {
             colors: {
-              primary: "#10B981",
-              "primary-dark": "#059669",
-              secondary: "#3B82F6",
-              accent: "#F59E0B"
+              primary: "#10B981", // green
+              accent: "#F59E0B" // amber
             },
             backdropBlur: { xs: "2px" }
           }
@@ -215,7 +213,7 @@
       .dark .floating-card {
         background: linear-gradient(
           180deg,
-          rgba(255, 255, 255, 0.10),
+          rgba(255, 255, 255, 0.1),
           rgba(255, 255, 255, 0.04)
         );
         border-color: rgba(255, 255, 255, 0.16);
@@ -278,10 +276,9 @@
       .field {
         min-width: 0; /* allow shrinking without overflow */
       }
-      /* Important: date fields should never be clipped */
       input[type="date"] {
         width: 100%;
-        box-sizing: border-box;
+        box-sizing: border-box; /* fix right-edge clipping */
       }
 
       .pill-select {
@@ -386,7 +383,7 @@
         <!-- Timer Display -->
         <div id="timerDisplay" class="text-center hidden">
           <div class="relative inline-flex items-center justify-center">
-            <div class="absolute inset-0 rounded-full bg-primary/30 pulse-ring">
+            <div class="absolute inset-0 rounded-full bg-white/20 pulse-ring">
             </div>
             <div
               class="floating-card rounded-full w-36 h-36 flex items-center justify-center border border-white/30"
