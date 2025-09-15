@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
@@ -12,7 +13,7 @@
       name="description"
       content="Progressive kettlebell workout app for Simple & Sinister training"
     />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
@@ -21,17 +22,17 @@
     <meta name="apple-mobile-web-app-title" content="S&S Workout" />
 
     <script>
-      // Single-file icons + manifest (dark, neutral to match glass UI)
+      // Single-file icons + manifest (neutral black)
       (function generateIconsAndManifest() {
         function drawIcon(size) {
           const c = document.createElement("canvas");
           c.width = c.height = size;
           const ctx = c.getContext("2d");
 
-          // Neutral black/dark gradient
+          // Pure black/charcoal gradient (no blue tint)
           const g = ctx.createLinearGradient(0, 0, size, size);
-          g.addColorStop(0, "#0b0f18"); // near-black
-          g.addColorStop(1, "#1f2937"); // slate-800
+          g.addColorStop(0, "#000000");
+          g.addColorStop(1, "#161616");
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, size, size);
 
@@ -107,8 +108,8 @@
           start_url: "/",
           scope: "/",
           display: "standalone",
-          background_color: "#0f172a",
-          theme_color: "#0f172a",
+          background_color: "#000000",
+          theme_color: "#000000",
           description:
             "Progressive kettlebell workout app for Simple & Sinister training",
           icons: [
@@ -137,19 +138,20 @@
       /* iOS: prevent zoom on input focus */
       input, select, textarea { font-size: 16px !important; }
 
+      /* Pure black background with faint bloom, no blue */
       body {
         background:
           radial-gradient(1200px 600px at 20% -20%, rgba(255,255,255,0.06), transparent 60%),
-          linear-gradient(135deg, #0b0f18 0%, #111827 50%, #0f172a 100%);
+          linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #111111 100%);
         min-height: 100vh;
       }
       body.dark {
         background:
           radial-gradient(1200px 600px at 20% -20%, rgba(255,255,255,0.06), transparent 60%),
-          linear-gradient(135deg, #0b0f18 0%, #0f172a 50%, #111827 100%);
+          linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #111111 100%);
       }
 
-      /* Liquid Glass */
+      /* Liquid Glass (applied everywhere) */
       .floating-card {
         position: relative;
         overflow: hidden;
@@ -159,7 +161,7 @@
         backdrop-filter: blur(18px) saturate(140%);
         -webkit-backdrop-filter: blur(18px) saturate(140%);
         box-shadow:
-          0 20px 40px rgba(0,0,0,0.35),
+          0 20px 40px rgba(0,0,0,0.45),
           inset 0 1px 0 rgba(255,255,255,0.25),
           inset 0 -1px 0 rgba(255,255,255,0.06);
       }
@@ -176,7 +178,7 @@
       }
       .floating-card > * { position: relative; z-index: 1; }
 
-      /* Inputs as glass */
+      /* Inputs as liquid glass */
       .floating-card input,
       .floating-card select,
       .floating-card textarea,
@@ -575,7 +577,6 @@
           <div class="mb-4">
             <h3 class="font-semibold mb-2 text-white">Add Manual Entry</h3>
             <div class="grid grid-cols-2 gap-3">
-              <!-- Date -->
               <div class="col-span-2 field">
                 <label class="text-sm text-white/80 block">Date</label>
                 <input
@@ -665,17 +666,14 @@
 
     <script>
       // Dark mode sync
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
+      if (window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches) {
         document.documentElement.classList.add("dark");
       }
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", (event) => {
-          document.documentElement.classList.toggle("dark", event.matches);
-        });
+      window.matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) =>
+          document.documentElement.classList.toggle("dark", e.matches)
+        );
 
       // Local storage keys
       const LS_PREFS_KEY = "ss_prefs_v2";
@@ -685,7 +683,7 @@
       let workoutState = {
         isActive: false,
         isPaused: false,
-        phase: "swings",
+        phase: "swings", // 'swings', 'rest', 'getups'
         currentSet: 1,
         currentHand: "right",
         timeRemaining: 30,
@@ -711,7 +709,8 @@
       const currentSet = document.getElementById("currentSet");
       const currentHand = document.getElementById("currentHand");
       const exerciseName = document.getElementById("exerciseName");
-      const exerciseInstruction = document.getElementById("exerciseInstruction");
+      const exerciseInstruction =
+        document.getElementById("exerciseInstruction");
       const exerciseReps = document.getElementById("exerciseReps");
       const swingsCompleted = document.getElementById("swingsCompleted");
       const getupsCompleted = document.getElementById("getupsCompleted");
@@ -735,7 +734,8 @@
       const totalWorkoutsEl = document.getElementById("totalWorkouts");
       const curStreakModal = document.getElementById("curStreakModal");
       const bestStreakModal = document.getElementById("bestStreakModal");
-      const totalWorkoutsModal = document.getElementById("totalWorkoutsModal");
+      const totalWorkoutsModal =
+        document.getElementById("totalWorkoutsModal");
 
       // History UI
       const manualDate = document.getElementById("manualDate");
@@ -1176,14 +1176,12 @@
       closeSettings.addEventListener("click", () => {
         settingsModal.classList.add("hidden");
       });
-      // Make checkbox toggling immediate and reliable
       const soundCheckbox = document.getElementById("soundAlerts");
       soundCheckbox.addEventListener("change", (e) => {
         workoutState.soundEnabled = e.target.checked;
         savePrefs();
       });
       saveSettings.addEventListener("click", () => {
-        // Also persist on save, in case
         workoutState.soundEnabled = soundCheckbox.checked;
         savePrefs();
         settingsModal.classList.add("hidden");
@@ -1211,13 +1209,11 @@
         });
       });
 
-      // Weight dropdown
       weightDropdown.addEventListener("change", () => {
         workoutState.weightLbs = parseInt(weightDropdown.value, 10);
         savePrefs();
       });
 
-      // Manual entry add
       addManualEntry.addEventListener("click", () => {
         const date = manualDate.value || toYMD(new Date());
         const w = parseInt(manualWeight.value, 10);
