@@ -21,17 +21,17 @@
     <meta name="apple-mobile-web-app-title" content="S&S Workout" />
 
     <script>
-      // Single-file icons + manifest (dark icon to match neutral glass UI)
+      // Single-file icons + manifest (dark, neutral to match glass UI)
       (function generateIconsAndManifest() {
         function drawIcon(size) {
           const c = document.createElement("canvas");
           c.width = c.height = size;
           const ctx = c.getContext("2d");
 
-          // Neutral dark gradient
+          // Neutral black/dark gradient
           const g = ctx.createLinearGradient(0, 0, size, size);
-          g.addColorStop(0, "#0b1220");
-          g.addColorStop(1, "#1f2937");
+          g.addColorStop(0, "#0b0f18"); // near-black
+          g.addColorStop(1, "#1f2937"); // slate-800
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, size, size);
 
@@ -39,17 +39,17 @@
           const vg = ctx.createRadialGradient(
             size * 0.5,
             size * 0.55,
-            size * 0.1,
+            size * 0.08,
             size * 0.5,
             size * 0.55,
-            size * 0.8
+            size * 0.82
           );
           vg.addColorStop(0, "rgba(0,0,0,0)");
           vg.addColorStop(1, "rgba(0,0,0,0.22)");
           ctx.fillStyle = vg;
           ctx.fillRect(0, 0, size, size);
 
-          // White kettlebell
+          // White kettlebell with soft shadow
           ctx.save();
           const s = size / 512;
           ctx.scale(s, s);
@@ -57,7 +57,6 @@
           ctx.shadowBlur = 28;
           ctx.shadowOffsetY = 16;
           ctx.fillStyle = "rgba(255,255,255,0.98)";
-
           const handle = new Path2D(
             "M176 176c0-44.2 35.8-80 80-80s80 35.8 80 80c0 12.2-2.8 23.7-7.8 33.9h-40.4c10.5-8.8 16.8-22 16.8-36.6 0-26.5-21.5-48-48-48s-48 21.5-48 48c0 14.6 6.3 27.8 16.8 36.6H183.8c-5-10.2-7.8-21.7-7.8-33.9z"
           );
@@ -141,18 +140,19 @@
       body {
         background:
           radial-gradient(1200px 600px at 20% -20%, rgba(255,255,255,0.06), transparent 60%),
-          linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%);
+          linear-gradient(135deg, #0b0f18 0%, #111827 50%, #0f172a 100%);
         min-height: 100vh;
       }
       body.dark {
         background:
           radial-gradient(1200px 600px at 20% -20%, rgba(255,255,255,0.06), transparent 60%),
-          linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #374151 100%);
+          linear-gradient(135deg, #0b0f18 0%, #0f172a 50%, #111827 100%);
       }
 
       /* Liquid Glass */
       .floating-card {
         position: relative;
+        overflow: hidden;
         background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
         border: 1px solid rgba(255,255,255,0.22);
         border-radius: 0.9rem;
@@ -172,7 +172,9 @@
           radial-gradient(60% 35% at 15% 5%, rgba(255,255,255,0.35), transparent 60%),
           radial-gradient(80% 60% at 110% -10%, rgba(255,255,255,0.12), transparent 60%);
         pointer-events: none;
+        z-index: 0;
       }
+      .floating-card > * { position: relative; z-index: 1; }
 
       /* Inputs as glass */
       .floating-card input,
@@ -199,13 +201,10 @@
       .workout-button:active { transform: scale(0.95); }
 
       @media all and (display-mode: standalone) {
-        body {
-          padding-top: env(safe-area-inset-top);
-          padding-bottom: env(safe-area-inset-bottom);
-        }
+        body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
       }
 
-      /* Prevent iOS clipping on date input */
+      /* Avoid iOS clipping on date input */
       .field { min-width: 0; }
       input[type="date"] { width: 100%; box-sizing: border-box; }
 
@@ -220,33 +219,69 @@
       <header class="floating-card text-white p-4 text-center relative m-4">
         <h1 class="text-xl font-bold">Simple &amp; Sinister</h1>
         <div class="flex justify-between items-center mt-2">
-          <button id="infoBtn" class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10" title="Info">
+          <button
+            id="infoBtn"
+            class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+            title="Info"
+          >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                clip-rule="evenodd"
+              />
             </svg>
           </button>
 
           <!-- Weight dropdown pill -->
-          <div class="relative text-sm font-medium bg-white/20 px-3 py-1 rounded-full flex items-center" title="Select kettlebell weight">
-            <select id="weightDropdown" class="pill-select text-white focus:outline-none">
+          <div
+            class="relative text-sm font-medium bg-white/20 px-3 py-1 rounded-full flex items-center"
+            title="Select kettlebell weight"
+          >
+            <select
+              id="weightDropdown"
+              class="pill-select text-white focus:outline-none"
+            >
               <option value="35">35 lbs</option>
               <option value="50" selected>50 lbs</option>
               <option value="70">70 lbs</option>
             </select>
-            <svg class="w-4 h-4 absolute chev opacity-80" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+            <svg
+              class="w-4 h-4 absolute chev opacity-80"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
             </svg>
           </div>
 
           <div class="flex gap-1">
-            <button id="historyBtn" class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10" title="History & streak">
+            <button
+              id="historyBtn"
+              class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+              title="History & streak"
+            >
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M7 4a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1ZM4 9a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm3 5a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1Zm-3 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"/>
+                <path
+                  d="M7 4a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1ZM4 9a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm3 5a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1Zm-3 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"
+                />
               </svg>
             </button>
-            <button id="settingsBtn" class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10" title="Settings">
+            <button
+              id="settingsBtn"
+              class="text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+              title="Settings"
+            >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                <path
+                  fill-rule="evenodd"
+                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                  clip-rule="evenodd"
+                />
               </svg>
             </button>
           </div>
@@ -255,6 +290,7 @@
 
       <!-- Main -->
       <main class="p-4 space-y-6">
+        <!-- Status -->
         <div id="workoutStatus" class="text-center">
           <div class="floating-card rounded-xl p-6">
             <div class="text-2xl font-bold mb-2">Ready to Start</div>
@@ -266,9 +302,16 @@
         <div id="timerDisplay" class="text-center hidden">
           <div class="relative inline-flex items-center justify-center">
             <div class="absolute inset-0 rounded-full bg-white/20 pulse-ring"></div>
-            <div class="floating-card rounded-full w-36 h-36 flex items-center justify-center border border-white/30">
+            <div
+              class="floating-card rounded-full w-36 h-36 flex items-center justify-center border border-white/30"
+            >
               <div class="text-center">
-                <div id="timeRemaining" class="text-3xl font-bold timer-display text-white">0:30</div>
+                <div
+                  id="timeRemaining"
+                  class="text-3xl font-bold timer-display text-white"
+                >
+                  0:30
+                </div>
                 <div id="timerPhase" class="text-xs text-white/70">Swings</div>
               </div>
             </div>
@@ -281,31 +324,50 @@
             </div>
             <div class="floating-card p-4 rounded-xl">
               <div class="text-white/70">Hand</div>
-              <div id="currentHand" class="text-xl font-bold text-white">Right</div>
+              <div id="currentHand" class="text-xl font-bold text-white">
+                Right
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Exercise -->
         <div id="exerciseDisplay" class="text-center hidden">
-          <div class="floating-card bg-gradient-to-r from-white/10 to-white/5 text-white rounded-xl p-6 border border-white/20">
-            <div id="exerciseName" class="text-xl font-bold mb-2">Kettlebell Swings</div>
-            <div id="exerciseInstruction" class="text-lg">10 swings - Right hand</div>
-            <div id="exerciseReps" class="text-sm mt-2 text-white/80">Switch hands each set</div>
+          <div
+            class="floating-card bg-gradient-to-r from-white/10 to-white/5 text-white rounded-xl p-6 border border-white/20"
+          >
+            <div id="exerciseName" class="text-xl font-bold mb-2">
+              Kettlebell Swings
+            </div>
+            <div id="exerciseInstruction" class="text-lg">
+              10 swings - Right hand
+            </div>
+            <div id="exerciseReps" class="text-sm mt-2 text-white/80">
+              Switch hands each set
+            </div>
           </div>
         </div>
 
         <!-- Controls -->
         <div class="space-y-3">
-          <button id="startBtn" class="w-full floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white py-4 rounded-xl text-lg font-semibold workout-button border border-white/30">
+          <button
+            id="startBtn"
+            class="w-full floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white py-4 rounded-xl text-lg font-semibold workout-button border border-white/30"
+          >
             Start Workout
           </button>
 
           <div id="workoutControls" class="hidden space-y-3">
-            <button id="pauseBtn" class="w-full floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white py-3 rounded-xl font-semibold workout-button border border-white/30">
+            <button
+              id="pauseBtn"
+              class="w-full floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white py-3 rounded-xl font-semibold workout-button border border-white/30"
+            >
               Pause
             </button>
-            <button id="stopBtn" class="w-full floating-card bg-gradient-to-r from-red-500/30 to-red-400/20 hover:from-red-500/45 hover:to-red-400/35 text-white py-3 rounded-xl font-semibold workout-button border border-white/30">
+            <button
+              id="stopBtn"
+              class="w-full floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white py-3 rounded-xl font-semibold workout-button border border-white/30"
+            >
               Stop Workout
             </button>
           </div>
@@ -317,11 +379,15 @@
           <div class="grid grid-cols-2 gap-4 text-sm">
             <div>
               <div class="text-white/70">Swings Completed</div>
-              <div id="swingsCompleted" class="text-lg font-bold text-white">0/100</div>
+              <div id="swingsCompleted" class="text-lg font-bold text-white">
+                0/100
+              </div>
             </div>
             <div>
               <div class="text-white/70">Get-ups Completed</div>
-              <div id="getupsCompleted" class="text-lg font-bold text-white">0/10</div>
+              <div id="getupsCompleted" class="text-lg font-bold text-white">
+                0/10
+              </div>
             </div>
           </div>
         </div>
@@ -330,47 +396,97 @@
         <div id="statsCard" class="floating-card rounded-xl p-5">
           <h3 class="font-semibold mb-3 text-white">Your Stats</h3>
           <div class="grid grid-cols-3 gap-4 text-center">
-            <div><div class="text-white/70 text-sm">Current Streak</div><div id="currentStreak" class="text-2xl font-bold">0</div></div>
-            <div><div class="text-white/70 text-sm">Best Streak</div><div id="bestStreak" class="text-2xl font-bold">0</div></div>
-            <div><div class="text-white/70 text-sm">Total Workouts</div><div id="totalWorkouts" class="text-2xl font-bold">0</div></div>
+            <div>
+              <div class="text-white/70 text-sm">Current Streak</div>
+              <div id="currentStreak" class="text-2xl font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-white/70 text-sm">Best Streak</div>
+              <div id="bestStreak" class="text-2xl font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-white/70 text-sm">Total Workouts</div>
+              <div id="totalWorkouts" class="text-2xl font-bold">0</div>
+            </div>
           </div>
         </div>
       </main>
 
       <!-- Settings Modal -->
-      <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+      <div
+        id="settingsModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
+      >
         <div class="floating-card w-full max-w-sm p-6 text-white">
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold text-white">Settings</h2>
-            <button id="closeSettings" class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            <button
+              id="closeSettings"
+              class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
           </div>
 
           <div class="space-y-4">
             <div>
-              <label class="block text-sm font-medium mb-2 text-white/90">Sound Alerts</label>
-              <label class="flex items-center text-white/90">
-                <input type="checkbox" id="soundAlerts" checked class="mr-2 w-4 h-4 accent-white/80" />
-                <span>Enable audio cues</span>
+              <label class="block text-sm font-medium mb-2 text-white/90">
+                Sound Alerts
               </label>
+              <div class="flex items-center text-white/90">
+                <input
+                  type="checkbox"
+                  id="soundAlerts"
+                  class="mr-2 w-5 h-5 cursor-pointer"
+                />
+                <label for="soundAlerts" class="cursor-pointer select-none">
+                  Enable audio cues
+                </label>
+              </div>
             </div>
-            <p class="text-white/70 text-sm">Weight can be changed from the header dropdown.</p>
+            <p class="text-white/70 text-sm">
+              Weight can be changed from the header dropdown.
+            </p>
           </div>
 
-          <button id="saveSettings" class="w-full mt-6 floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white py-3 rounded-lg font-semibold workout-button border border-white/30">
+          <button
+            id="saveSettings"
+            class="w-full mt-6 floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white py-3 rounded-lg font-semibold workout-button border border-white/30"
+          >
             Save Settings
           </button>
         </div>
       </div>
 
       <!-- Info Modal -->
-      <div id="infoModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="floating-card w-full max-w-sm p-6 max-h-[80vh] overflow-y-auto text-white">
+      <div
+        id="infoModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
+      >
+        <div
+          class="floating-card w-full max-w-sm p-6 max-h-[80vh] overflow-y-auto text-white"
+        >
           <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold text-white">Simple &amp; Sinister</h2>
-            <button id="closeInfo" class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            <h2 class="text-lg font-semibold text-white">
+              Simple &amp; Sinister
+            </h2>
+            <button
+              id="closeInfo"
+              class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
           </div>
 
@@ -385,10 +501,15 @@
                 <li>• Alternate sides each minute</li>
               </ul>
             </div>
+
             <div>
               <h3 class="font-semibold mb-2 text-white">Simple Goal</h3>
-              <p class="text-white/80">Complete the workout with 70 lbs kettlebell with perfect form and timing.</p>
+              <p class="text-white/80">
+                Complete the workout with 70 lbs kettlebell with perfect form
+                and timing.
+              </p>
             </div>
+
             <div>
               <h3 class="font-semibold mb-2 text-white">Key Points</h3>
               <ul class="space-y-1 text-white/80">
@@ -398,65 +519,135 @@
                 <li>• Controlled transitions on get-ups</li>
               </ul>
             </div>
+
             <div>
               <h3 class="font-semibold mb-2 text-white">Benefits</h3>
-              <p class="text-white/80">Improvements in VO2max, body composition, flexibility, and cardiovascular health.</p>
+              <p class="text-white/80">
+                Improvements in VO2max, body composition, flexibility, and
+                cardiovascular health.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- History Modal -->
-      <div id="historyModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="floating-card w-full max-w-sm p-6 text-white max-h-[85vh] overflow-y-auto">
+      <div
+        id="historyModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
+      >
+        <div
+          class="floating-card w-full max-w-sm p-6 text-white max-h-[85vh] overflow-y-auto"
+        >
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold">History & Streak</h2>
-            <button id="closeHistory" class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            <button
+              id="closeHistory"
+              class="text-white/70 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
           </div>
 
           <!-- Stats mirror -->
           <div class="grid grid-cols-3 gap-4 text-center mb-4">
-            <div><div class="text-white/70 text-xs">Current</div><div id="curStreakModal" class="text-xl font-bold">0</div></div>
-            <div><div class="text-white/70 text-xs">Best</div><div id="bestStreakModal" class="text-xl font-bold">0</div></div>
-            <div><div class="text-white/70 text-xs">Total</div><div id="totalWorkoutsModal" class="text-xl font-bold">0</div></div>
+            <div>
+              <div class="text-white/70 text-xs">Current</div>
+              <div id="curStreakModal" class="text-xl font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-white/70 text-xs">Best</div>
+              <div id="bestStreakModal" class="text-xl font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-white/70 text-xs">Total</div>
+              <div id="totalWorkoutsModal" class="text-xl font-bold">0</div>
+            </div>
           </div>
 
           <!-- Manual Entry -->
           <div class="mb-4">
             <h3 class="font-semibold mb-2 text-white">Add Manual Entry</h3>
             <div class="grid grid-cols-2 gap-3">
+              <!-- Date -->
               <div class="col-span-2 field">
                 <label class="text-sm text-white/80 block">Date</label>
-                <input id="manualDate" type="date" class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent" />
+                <input
+                  id="manualDate"
+                  type="date"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                />
               </div>
+
               <div class="field">
                 <label class="text-sm text-white/80 block">Weight</label>
-                <select id="manualWeight" class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent">
+                <select
+                  id="manualWeight"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                >
                   <option value="35">35 lbs</option>
                   <option value="50">50 lbs</option>
                   <option value="70">70 lbs</option>
                 </select>
               </div>
+
               <div class="field">
                 <label class="text-sm text-white/80 block">Swings</label>
-                <input id="manualSwings" type="number" min="0" step="10" value="100" class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent" />
+                <input
+                  id="manualSwings"
+                  type="number"
+                  min="0"
+                  step="10"
+                  value="100"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                />
               </div>
+
               <div class="field col-span-2 sm:col-span-1">
                 <label class="text-sm text-white/80 block">Get-ups</label>
-                <input id="manualGetups" type="number" min="0" step="1" value="10" class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent" />
+                <input
+                  id="manualGetups"
+                  type="number"
+                  min="0"
+                  step="1"
+                  value="10"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                />
               </div>
+
               <div class="col-span-2 field">
-                <label class="text-sm text-white/80 block">Duration (min, optional)</label>
-                <input id="manualDuration" type="number" min="0" step="1" class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent" />
+                <label class="text-sm text-white/80 block">
+                  Duration (min, optional)
+                </label>
+                <input
+                  id="manualDuration"
+                  type="number"
+                  min="0"
+                  step="1"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                />
               </div>
+
               <div class="col-span-2 field">
                 <label class="text-sm text-white/80 block">Notes</label>
-                <textarea id="manualNotes" rows="2" class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"></textarea>
+                <textarea
+                  id="manualNotes"
+                  rows="2"
+                  class="mt-1 w-full floating-card px-3 py-2 rounded-lg border border-white/30 bg-transparent"
+                ></textarea>
               </div>
+
               <div class="col-span-2 flex justify-end">
-                <button id="addManualEntry" class="floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white px-4 py-2 border border-white/30 rounded-lg">
+                <button
+                  id="addManualEntry"
+                  class="floating-card bg-gradient-to-r from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 text-white px-4 py-2 border border-white/30 rounded-lg"
+                >
                   Add
                 </button>
               </div>
@@ -474,14 +665,19 @@
 
     <script>
       // Dark mode sync
-      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
         document.documentElement.classList.add("dark");
       }
-      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
-        document.documentElement.classList.toggle("dark", event.matches);
-      });
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (event) => {
+          document.documentElement.classList.toggle("dark", event.matches);
+        });
 
-      // Storage keys
+      // Local storage keys
       const LS_PREFS_KEY = "ss_prefs_v2";
       const LS_HISTORY_KEY = "ss_history_v2";
 
@@ -555,7 +751,8 @@
       let audioContext = null;
       function initAudio() {
         if (!audioContext) {
-          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          audioContext = new (window.AudioContext ||
+            window.webkitAudioContext)();
         }
       }
       function playBeep(frequency = 800, duration = 200) {
@@ -567,7 +764,10 @@
         osc.frequency.value = frequency;
         osc.type = "sine";
         gain.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+        gain.gain.exponentialRampToValueAtTime(
+          0.01,
+          audioContext.currentTime + duration / 1000
+        );
         osc.start(audioContext.currentTime);
         osc.stop(audioContext.currentTime + duration / 1000);
       }
@@ -591,22 +791,29 @@
         try {
           const p = JSON.parse(localStorage.getItem(LS_PREFS_KEY));
           if (p && typeof p === "object") {
-            if (typeof p.soundEnabled === "boolean") workoutState.soundEnabled = p.soundEnabled;
-            if ([35, 50, 70].includes(p.weightLbs)) workoutState.weightLbs = p.weightLbs;
+            if (typeof p.soundEnabled === "boolean")
+              workoutState.soundEnabled = p.soundEnabled;
+            if ([35, 50, 70].includes(p.weightLbs))
+              workoutState.weightLbs = p.weightLbs;
           }
         } catch {}
       }
       function savePrefs() {
-        localStorage.setItem(LS_PREFS_KEY, JSON.stringify({
-          soundEnabled: workoutState.soundEnabled,
-          weightLbs: workoutState.weightLbs
-        }));
+        localStorage.setItem(
+          LS_PREFS_KEY,
+          JSON.stringify({
+            soundEnabled: workoutState.soundEnabled,
+            weightLbs: workoutState.weightLbs
+          })
+        );
       }
       function loadHistory() {
         try {
           const h = JSON.parse(localStorage.getItem(LS_HISTORY_KEY));
           return Array.isArray(h) ? h : [];
-        } catch { return []; }
+        } catch {
+          return [];
+        }
       }
       function saveHistory(arr) {
         localStorage.setItem(LS_HISTORY_KEY, JSON.stringify(arr));
@@ -614,49 +821,79 @@
 
       // History + streaks
       function genId() {
-        return Date.now().toString(36) + Math.random().toString(36).slice(2, 8).toUpperCase();
+        return (
+          Date.now().toString(36) +
+          Math.random().toString(36).slice(2, 8).toUpperCase()
+        );
       }
       function getHistory() {
         if (!window._historyCache) window._historyCache = loadHistory();
         return window._historyCache;
       }
       function setHistory(arr) {
-        window._historyCache = arr; saveHistory(arr); updateStatsUI();
+        window._historyCache = arr;
+        saveHistory(arr);
+        updateStatsUI();
       }
       function logAutoWorkout(durationSec) {
         const entry = {
-          id: genId(), source: "auto", date: toYMD(new Date()),
-          swings: 100, getups: 10, durationSec,
-          weightLbs: workoutState.weightLbs, notes: "", createdAt: new Date().toISOString()
+          id: genId(),
+          source: "auto",
+          date: toYMD(new Date()),
+          swings: 100,
+          getups: 10,
+          durationSec,
+          weightLbs: workoutState.weightLbs,
+          notes: "",
+          createdAt: new Date().toISOString()
         };
-        const arr = getHistory(); arr.push(entry); setHistory(arr);
+        const arr = getHistory();
+        arr.push(entry);
+        setHistory(arr);
       }
       function addManualWorkout(data) {
         const entry = {
-          id: genId(), source: "manual", date: data.date,
-          swings: data.swings, getups: data.getups, durationSec: data.durationSec || 0,
-          weightLbs: data.weightLbs, notes: data.notes || "", createdAt: new Date().toISOString()
+          id: genId(),
+          source: "manual",
+          date: data.date,
+          swings: data.swings,
+          getups: data.getups,
+          durationSec: data.durationSec || 0,
+          weightLbs: data.weightLbs,
+          notes: data.notes || "",
+          createdAt: new Date().toISOString()
         };
-        const arr = getHistory(); arr.push(entry); setHistory(arr);
+        const arr = getHistory();
+        arr.push(entry);
+        setHistory(arr);
       }
       function deleteEntry(id) {
         const arr = getHistory().filter((e) => e.id !== id);
-        setHistory(arr); renderHistoryList();
+        setHistory(arr);
+        renderHistoryList();
       }
       function computeStreakInfo() {
         const entries = getHistory();
         const daySet = new Set(entries.map((e) => e.date));
-
         // Current streak
-        let cur = 0; const d = new Date();
-        while (daySet.has(toYMD(d))) { cur++; d.setDate(d.getDate() - 1); }
-
+        let cur = 0;
+        const d = new Date();
+        while (daySet.has(toYMD(d))) {
+          cur++;
+          d.setDate(d.getDate() - 1);
+        }
         // Best streak
-        const days = Array.from(daySet).map(ymdToDate).sort((a,b)=>a-b);
-        let best = 0, run = 0;
-        for (let i=0;i<days.length;i++){
-          if (i===0) run = 1;
-          else run = ((days[i] - days[i-1]) / 86400000 === 1) ? run + 1 : 1;
+        const days = Array.from(daySet)
+          .map((s) => ymdToDate(s))
+          .sort((a, b) => a - b);
+        let best = 0;
+        let run = 0;
+        for (let i = 0; i < days.length; i++) {
+          if (i === 0) run = 1;
+          else {
+            const diff = (days[i] - days[i - 1]) / 86400000;
+            run = diff === 1 ? run + 1 : 1;
+          }
           if (run > best) best = run;
         }
         return { current: cur, best, total: entries.length };
@@ -671,51 +908,90 @@
         totalWorkoutsModal.textContent = total;
       }
       function renderHistoryList() {
-        const arr = getHistory().slice().sort((a,b)=> b.date.localeCompare(a.date) || (b.createdAt||"").localeCompare(a.createdAt||""));
-        if (!arr.length) {
-          historyList.innerHTML = '<div class="text-white/70 text-sm">No workouts yet. Go earn that streak 💪</div>';
+        const arr = getHistory()
+          .slice()
+          .sort(
+            (a, b) =>
+              b.date.localeCompare(a.date) ||
+              (b.createdAt || "").localeCompare(a.createdAt || "")
+          );
+        if (arr.length === 0) {
+          historyList.innerHTML =
+            '<div class="text-white/70 text-sm">No workouts yet. Go earn that streak 💪</div>';
           return;
         }
-        historyList.innerHTML = arr.map(e=>{
-          const d = new Date(e.date + "T00:00:00");
-          const nice = d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric",year:"numeric"});
-          const mins = e.durationSec ? Math.round(e.durationSec/60) : null;
-          const dur = mins ? ` • ${mins} min` : "";
-          const src = e.source === "manual" ? "Manual" : "Auto";
-          return `
-            <div class="floating-card p-3 rounded-lg border border-white/20 flex items-start justify-between">
-              <div class="text-sm">
-                <div class="font-semibold">${nice} • ${src}</div>
-                <div class="text-white/80">${e.swings} swings • ${e.getups} get-ups • ${e.weightLbs} lbs${dur}</div>
-                ${e.notes ? `<div class="text-white/60 mt-1 italic">${escapeHtml(e.notes)}</div>` : ""}
+        historyList.innerHTML = arr
+          .map((e) => {
+            const d = new Date(e.date + "T00:00:00");
+            const nice = d.toLocaleDateString(undefined, {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+              year: "numeric"
+            });
+            const mins = e.durationSec
+              ? Math.round(e.durationSec / 60)
+              : null;
+            const dur = mins ? ` • ${mins} min` : "";
+            const src = e.source === "manual" ? "Manual" : "Auto";
+            return `
+              <div class="floating-card p-3 rounded-lg border border-white/20 flex items-start justify-between">
+                <div class="text-sm">
+                  <div class="font-semibold">${nice} • ${src}</div>
+                  <div class="text-white/80">
+                    ${e.swings} swings • ${e.getups} get-ups • ${e.weightLbs} lbs${dur}
+                  </div>
+                  ${
+                    e.notes
+                      ? `<div class="text-white/60 mt-1 italic">${escapeHtml(
+                          e.notes
+                        )}</div>`
+                      : ""
+                  }
+                </div>
+                <button
+                  class="px-2 py-1 text-xs ml-3 rounded-lg bg-red-500/60 hover:bg-red-500/80"
+                  data-del="${e.id}"
+                  title="Delete entry"
+                >
+                  Delete
+                </button>
               </div>
-              <button class="px-2 py-1 text-xs ml-3 rounded-lg bg-red-500/60 hover:bg-red-500/80" data-del="${e.id}" title="Delete entry">Delete</button>
-            </div>
-          `;
-        }).join("");
-        historyList.querySelectorAll("[data-del]").forEach(btn=>{
-          btn.addEventListener("click",()=>{
+            `;
+          })
+          .join("");
+
+        historyList.querySelectorAll("[data-del]").forEach((btn) => {
+          btn.addEventListener("click", () => {
             const id = btn.getAttribute("data-del");
-            showConfirmDialog("Delete this entry?",()=>deleteEntry(id));
+            showConfirmDialog("Delete this entry?", () => deleteEntry(id));
           });
         });
       }
-      function escapeHtml(str){
-        return str.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+      function escapeHtml(str) {
+        return str
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
       }
 
-      // UI updates
+      // Display updates
       function updateDisplay() {
         timeRemaining.textContent = formatTime(workoutState.timeRemaining);
         currentSet.textContent = `${workoutState.currentSet}/10`;
-        currentHand.textContent = workoutState.currentHand === "right" ? "Right" : "Left";
+        currentHand.textContent =
+          workoutState.currentHand === "right" ? "Right" : "Left";
         swingsCompleted.textContent = `${workoutState.swingsCompleted}/100`;
         getupsCompleted.textContent = `${workoutState.getupsCompleted}/10`;
 
         if (workoutState.phase === "swings") {
           timerPhase.textContent = "Swings";
           exerciseName.textContent = "Kettlebell Swings";
-          exerciseInstruction.textContent = `10 swings - ${workoutState.currentHand === "right" ? "Right" : "Left"} hand`;
+          exerciseInstruction.textContent = `10 swings - ${
+            workoutState.currentHand === "right" ? "Right" : "Left"
+          } hand`;
           exerciseReps.textContent = "Switch hands each set";
         } else if (workoutState.phase === "rest") {
           timerPhase.textContent = "Rest";
@@ -725,7 +1001,9 @@
         } else if (workoutState.phase === "getups") {
           timerPhase.textContent = "Get-ups";
           exerciseName.textContent = "Turkish Get-up";
-          exerciseInstruction.textContent = `1 get-up - ${workoutState.currentHand === "right" ? "Right" : "Left"} side`;
+          exerciseInstruction.textContent = `1 get-up - ${
+            workoutState.currentHand === "right" ? "Right" : "Left"
+          } side`;
           exerciseReps.textContent = "Alternate sides each minute";
         }
       }
@@ -759,8 +1037,14 @@
           if (!workoutState.isActive || workoutState.isPaused) return;
           workoutState.timeRemaining--;
           updateDisplay();
-          if (workoutState.timeRemaining <= 3 && workoutState.timeRemaining > 0) playBeep(600, 150);
-          if (workoutState.timeRemaining === 0) handleTimerComplete();
+          if (
+            workoutState.timeRemaining <= 3 &&
+            workoutState.timeRemaining > 0
+          )
+            playBeep(600, 150);
+          if (workoutState.timeRemaining === 0) {
+            handleTimerComplete();
+          }
         }, 1000);
       }
       function handleTimerComplete() {
@@ -769,7 +1053,8 @@
           workoutState.swingsCompleted += 10;
           if (workoutState.currentSet < 10) {
             workoutState.currentSet++;
-            workoutState.currentHand = workoutState.currentHand === "right" ? "left" : "right";
+            workoutState.currentHand =
+              workoutState.currentHand === "right" ? "left" : "right";
             workoutState.timeRemaining = 30;
           } else {
             workoutState.phase = "rest";
@@ -784,7 +1069,8 @@
           workoutState.getupsCompleted += 1;
           if (workoutState.currentSet < 10) {
             workoutState.currentSet++;
-            workoutState.currentHand = workoutState.currentHand === "right" ? "left" : "right";
+            workoutState.currentHand =
+              workoutState.currentHand === "right" ? "left" : "right";
             workoutState.timeRemaining = 60;
           } else {
             completeWorkout();
@@ -797,7 +1083,10 @@
         workoutState.isActive = false;
         clearInterval(timer);
 
-        const durationSec = Math.max(0, Math.round((Date.now() - (startTimestamp || Date.now())) / 1000));
+        const durationSec = Math.max(
+          0,
+          Math.round((Date.now() - (startTimestamp || Date.now())) / 1000)
+        );
         logAutoWorkout(durationSec);
 
         timerDisplay.classList.add("hidden");
@@ -808,20 +1097,25 @@
 
         const statusDiv = workoutStatus.querySelector("div");
         statusDiv.innerHTML = `
-          <div class="text-2xl font-bold mb-2 text-white">Workout Complete! 🎉</div>
-          <div class="text-gray-200">100 Swings + 10 Get-ups • ${workoutState.weightLbs} lbs</div>
+          <div class="text-2xl font-bold mb-2 text-white">
+            Workout Complete! 🎉
+          </div>
+          <div class="text-gray-200">
+            100 Swings + 10 Get-ups • ${workoutState.weightLbs} lbs
+          </div>
         `;
+
         playBeep(1500, 500);
       }
       function pauseWorkout() {
         workoutState.isPaused = !workoutState.isPaused;
         pauseBtn.textContent = workoutState.isPaused ? "Resume" : "Pause";
         pauseBtn.className =
-          "w-full floating-card " +
+          "w-full floating-card bg-gradient-to-r " +
           (workoutState.isPaused
             ? "from-white/25 to-white/10"
             : "from-white/15 to-white/5 hover:from-white/25 hover:to-white/10") +
-          " bg-gradient-to-r text-white py-3 rounded-xl font-semibold workout-button border border-white/30";
+          " text-white py-3 rounded-xl font-semibold workout-button border border-white/30";
       }
       function stopWorkout() {
         showConfirmDialog("Stop the workout?", () => {
@@ -847,9 +1141,11 @@
         });
       }
 
+      // Confirm dialog
       function showConfirmDialog(message, onConfirm) {
         const modal = document.createElement("div");
-        modal.className = "fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4";
+        modal.className =
+          "fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4";
         modal.innerHTML = `
           <div class="floating-card rounded-xl p-6 max-w-sm w-full text-white">
             <p class="text-white/90 mb-4">${message}</p>
@@ -860,50 +1156,86 @@
           </div>
         `;
         modal.querySelector(".cancel-btn").onclick = () => modal.remove();
-        modal.querySelector(".confirm-btn").onclick = () => { modal.remove(); onConfirm(); };
+        modal.querySelector(".confirm-btn").onclick = () => {
+          modal.remove();
+          onConfirm();
+        };
         document.body.appendChild(modal);
       }
 
       // Events
-      document.getElementById("startBtn").addEventListener("click", startWorkout);
-      document.getElementById("pauseBtn").addEventListener("click", pauseWorkout);
-      document.getElementById("stopBtn").addEventListener("click", stopWorkout);
+      startBtn.addEventListener("click", startWorkout);
+      pauseBtn.addEventListener("click", pauseWorkout);
+      stopBtn.addEventListener("click", stopWorkout);
 
-      settingsBtn.addEventListener("click", () => settingsModal.classList.remove("hidden"));
-      closeSettings.addEventListener("click", () => settingsModal.classList.add("hidden"));
+      settingsBtn.addEventListener("click", () => {
+        settingsModal.classList.remove("hidden");
+        document.getElementById("soundAlerts").checked =
+          !!workoutState.soundEnabled;
+      });
+      closeSettings.addEventListener("click", () => {
+        settingsModal.classList.add("hidden");
+      });
+      // Make checkbox toggling immediate and reliable
+      const soundCheckbox = document.getElementById("soundAlerts");
+      soundCheckbox.addEventListener("change", (e) => {
+        workoutState.soundEnabled = e.target.checked;
+        savePrefs();
+      });
       saveSettings.addEventListener("click", () => {
-        workoutState.soundEnabled = document.getElementById("soundAlerts").checked;
+        // Also persist on save, in case
+        workoutState.soundEnabled = soundCheckbox.checked;
         savePrefs();
         settingsModal.classList.add("hidden");
       });
 
-      infoBtn.addEventListener("click", () => infoModal.classList.remove("hidden"));
-      closeInfo.addEventListener("click", () => infoModal.classList.add("hidden"));
+      infoBtn.addEventListener("click", () => {
+        infoModal.classList.remove("hidden");
+      });
+      closeInfo.addEventListener("click", () => {
+        infoModal.classList.add("hidden");
+      });
 
       historyBtn.addEventListener("click", () => {
         historyModal.classList.remove("hidden");
         primeManualDefaults();
         renderHistoryList();
       });
-      closeHistory.addEventListener("click", () => historyModal.classList.add("hidden"));
-
-      [settingsModal, infoModal, historyModal].forEach((m) => {
-        m.addEventListener("click", (e) => { if (e.target === m) m.classList.add("hidden"); });
+      closeHistory.addEventListener("click", () => {
+        historyModal.classList.add("hidden");
       });
 
+      [settingsModal, infoModal, historyModal].forEach((m) => {
+        m.addEventListener("click", (e) => {
+          if (e.target === m) m.classList.add("hidden");
+        });
+      });
+
+      // Weight dropdown
       weightDropdown.addEventListener("change", () => {
         workoutState.weightLbs = parseInt(weightDropdown.value, 10);
         savePrefs();
       });
 
+      // Manual entry add
       addManualEntry.addEventListener("click", () => {
         const date = manualDate.value || toYMD(new Date());
         const w = parseInt(manualWeight.value, 10);
         const swings = Math.max(0, parseInt(manualSwings.value || "0", 10));
         const getups = Math.max(0, parseInt(manualGetups.value || "0", 10));
-        const durationSec = Math.max(0, Math.round((parseFloat(manualDuration.value || "0") || 0) * 60));
+        const durationSec = Math.max(
+          0,
+          Math.round((parseFloat(manualDuration.value || "0") || 0) * 60)
+        );
         const notes = manualNotes.value.trim();
-        addManualWorkout({ date, weightLbs: w, swings, getups, durationSec, notes });
+        addManualWorkout({
+          date,
+          weightLbs: w,
+          swings,
+          getups,
+          durationSec,
+          notes
+        });
         primeManualDefaults();
         renderHistoryList();
       });
