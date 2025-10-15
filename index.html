@@ -6,10 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
-    <title>Simple & Sinister</title>
+    <title>Progressive Bodyweight Workout</title>
     <meta
       name="description"
-      content="Progressive kettlebell workout app for Simple & Sinister training"
+      content="Progressive bodyweight workout app with proven exercises for full-body training"
     />
     <meta name="theme-color" content="#1a1a1a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,105 +17,59 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <meta name="apple-mobile-web-app-title" content="S&S Workout" />
+    <meta name="apple-mobile-web-app-title" content="BW Workout" />
 
     <script>
-      // Industrial orange icon generation
+      // Generate icon
       (function generateIconsAndManifest() {
         function drawIcon(size) {
           const c = document.createElement("canvas");
           c.width = c.height = size;
           const ctx = c.getContext("2d");
 
-          // Industrial dark gray background with subtle texture
+          // Gradient background
           const g = ctx.createLinearGradient(0, 0, size, size);
-          g.addColorStop(0, "#1a1a1a");
-          g.addColorStop(0.5, "#2d2d2d");
-          g.addColorStop(1, "#1f1f1f");
+          g.addColorStop(0, "#1e3a8a");
+          g.addColorStop(0.5, "#3b82f6");
+          g.addColorStop(1, "#1e40af");
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, size, size);
 
-          // Industrial grid pattern
-          ctx.strokeStyle = "rgba(255, 111, 0, 0.08)";
-          ctx.lineWidth = 1;
-          for(let i = 0; i < size; i += size/8) {
-            ctx.beginPath();
-            ctx.moveTo(i, 0);
-            ctx.lineTo(i, size);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(0, i);
-            ctx.lineTo(size, i);
-            ctx.stroke();
-          }
-
-          // Orange glow effect
-          const glow = ctx.createRadialGradient(
-            size * 0.5,
-            size * 0.5,
-            size * 0.1,
-            size * 0.5,
-            size * 0.5,
-            size * 0.7
-          );
-          glow.addColorStop(0, "rgba(255, 111, 0, 0.3)");
-          glow.addColorStop(1, "rgba(255, 111, 0, 0)");
-          ctx.fillStyle = glow;
-          ctx.fillRect(0, 0, size, size);
-
-          // Kettlebell with industrial orange
+          // Muscle icon (simple representation)
           ctx.save();
           const s = size / 512;
           ctx.scale(s, s);
 
-          // Shadow
-          ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
-          ctx.shadowBlur = 30;
-          ctx.shadowOffsetY = 20;
+          // Glow effect
+          ctx.shadowColor = "rgba(59, 130, 246, 0.8)";
+          ctx.shadowBlur = 40;
+          
+          // Draw stylized person doing push-up
+          ctx.fillStyle = "#fff";
+          ctx.strokeStyle = "#fff";
+          ctx.lineWidth = 20;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
 
-          // Orange gradient for kettlebell
-          const kbGrad = ctx.createLinearGradient(128, 96, 384, 416);
-          kbGrad.addColorStop(0, "#ff9500");
-          kbGrad.addColorStop(0.5, "#ff6f00");
-          kbGrad.addColorStop(1, "#e65100");
-          ctx.fillStyle = kbGrad;
-
-          // Handle
-          const handle = new Path2D(
-            "M176 176c0-44.2 35.8-80 80-80s80 35.8 80 80c0 12.2-2.8 23.7-7.8 33.9h-40.4c10.5-8.8 16.8-22 16.8-36.6 0-26.5-21.5-48-48-48s-48 21.5-48 48c0 14.6 6.3 27.8 16.8 36.6H183.8c-5-10.2-7.8-21.7-7.8-33.9z"
-          );
-          const body = new Path2D(
-            "M128 320c0-53 43-96 96-96h64c53 0 96 43 96 96v8c0 69.6-56.4 128-126 128h-4c-69.6 0-126-58.4-126-128v-8z"
-          );
-          ctx.fill(handle);
-          ctx.fill(body);
-
-          // Industrial highlight
-          ctx.strokeStyle = "#ffa726";
-          ctx.lineWidth = 3;
-          ctx.stroke(handle);
-          ctx.stroke(body);
-
-          // Metallic shine
-          const shine = ctx.createLinearGradient(200, 200, 320, 400);
-          shine.addColorStop(0, "rgba(255, 255, 255, 0.3)");
-          shine.addColorStop(0.5, "rgba(255, 255, 255, 0.1)");
-          shine.addColorStop(1, "rgba(255, 255, 255, 0)");
-          ctx.fillStyle = shine;
-          ctx.fill(body);
+          // Body
+          ctx.beginPath();
+          ctx.arc(200, 180, 40, 0, Math.PI * 2); // Head
+          ctx.fill();
+          
+          // Arms and body
+          ctx.beginPath();
+          ctx.moveTo(200, 220);
+          ctx.lineTo(200, 320);
+          ctx.lineTo(120, 380);
+          ctx.moveTo(200, 320);
+          ctx.lineTo(280, 380);
+          ctx.moveTo(200, 240);
+          ctx.lineTo(120, 280);
+          ctx.moveTo(200, 240);
+          ctx.lineTo(280, 280);
+          ctx.stroke();
 
           ctx.restore();
-
-          // Corner bolts (industrial detail)
-          ctx.fillStyle = "#ff6f00";
-          const corners = [[size*0.1, size*0.1], [size*0.9, size*0.1], 
-                          [size*0.1, size*0.9], [size*0.9, size*0.9]];
-          corners.forEach(([x, y]) => {
-            ctx.beginPath();
-            ctx.arc(x, y, size*0.02, 0, Math.PI * 2);
-            ctx.fill();
-          });
-
           return c.toDataURL("image/png");
         }
 
@@ -135,29 +89,21 @@
         document.head.appendChild(fav);
 
         const manifest = {
-          name: "Simple & Sinister Workout",
-          short_name: "S&S Workout",
+          name: "Progressive Bodyweight Workout",
+          short_name: "BW Workout",
           start_url: "/",
           scope: "/",
           display: "standalone",
           background_color: "#1a1a1a",
-          theme_color: "#ff6f00",
-          description:
-            "Progressive kettlebell workout app for Simple & Sinister training",
+          theme_color: "#3b82f6",
+          description: "Progressive bodyweight workout app with proven exercises",
           icons: [
             { src: icon192, sizes: "192x192", type: "image/png" },
-            {
-              src: icon512,
-              sizes: "512x512",
-              type: "image/png",
-              purpose: "any maskable"
-            }
+            { src: icon512, sizes: "512x512", type: "image/png", purpose: "any maskable" }
           ]
         };
 
-        const blob = new Blob([JSON.stringify(manifest)], {
-          type: "application/json"
-        });
+        const blob = new Blob([JSON.stringify(manifest)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("link");
         link.rel = "manifest";
@@ -176,70 +122,62 @@
         color-scheme: dark;
       }
 
-      input,
-      select,
-      textarea {
+      input, select, textarea {
         font-size: 16px !important;
       }
 
-      /* Industrial dark background */
       body {
-        background: 
-          repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 100px,
-            rgba(255, 111, 0, 0.02) 100px,
-            rgba(255, 111, 0, 0.02) 101px
-          ),
-          repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 100px,
-            rgba(255, 111, 0, 0.02) 100px,
-            rgba(255, 111, 0, 0.02) 101px
-          ),
-          linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1f1f1f 100%);
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
         min-height: 100vh;
       }
 
-      /* Industrial card style */
-      .industrial-card {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(
-          145deg,
-          rgba(45, 45, 45, 0.95),
-          rgba(26, 26, 26, 0.95)
-        );
-        border: 2px solid #ff6f00;
-        box-shadow:
-          0 0 30px rgba(255, 111, 0, 0.2),
-          0 10px 40px rgba(0, 0, 0, 0.8),
-          inset 0 1px 0 rgba(255, 111, 0, 0.3),
-          inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+      .workout-card {
+        background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+        border: 2px solid #3b82f6;
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.2), 0 10px 40px rgba(0, 0, 0, 0.8);
+        transition: all 0.3s ease;
       }
 
-      .industrial-card::before {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(45deg, transparent, #ff6f00, transparent);
-        opacity: 0;
-        z-index: -1;
-        transition: opacity 0.3s;
+      .workout-card:hover {
+        border-color: #60a5fa;
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.3), 0 10px 50px rgba(0, 0, 0, 0.9);
       }
 
-      .industrial-card:hover::before {
-        opacity: 0.3;
+      .btn-primary {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        transition: all 0.2s ease;
       }
 
-      /* Orange accent elements */
-      .orange-glow {
-        box-shadow: 0 0 20px rgba(255, 111, 0, 0.5);
+      .btn-primary:hover {
+        background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .exercise-complete {
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.2));
+        border-color: #22c55e;
+      }
+
+      .progress-bar {
+        transition: width 0.5s ease;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+        }
+      }
+
+      .active-exercise {
+        animation: pulse-glow 2s infinite;
       }
 
       .timer-display {
@@ -247,112 +185,16 @@
         font-family: 'Courier New', monospace;
       }
 
-      .pulse-ring {
-        animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
-      }
-
-      @keyframes pulse-ring {
-        0% {
-          transform: scale(0.33);
-          opacity: 1;
-        }
-        80%, 100% {
-          transform: scale(1.33);
-          opacity: 0;
-        }
-      }
-
-      .workout-button {
-        transition: all 0.2s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .workout-button::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 111, 0, 0.5);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
-      }
-
-      .workout-button:active::after {
-        width: 300px;
-        height: 300px;
-      }
-
-      .workout-button:active {
-        transform: scale(0.98);
-      }
-
-      /* Industrial input styles */
       input, select, textarea {
-        background: rgba(26, 26, 26, 0.8) !important;
-        border: 1px solid #ff6f00 !important;
+        background: rgba(15, 23, 42, 0.8) !important;
+        border: 1px solid #3b82f6 !important;
+        color: #e2e8f0 !important;
       }
 
       input:focus, select:focus, textarea:focus {
         outline: none !important;
-        border-color: #ff9500 !important;
-        box-shadow: 0 0 10px rgba(255, 111, 0, 0.5) !important;
-      }
-
-      .pill-select {
-        -webkit-appearance: none;
-        appearance: none;
-        background-color: transparent !important;
-        border: none !important;
-        color: #ff6f00;
-        padding-right: 1.25rem;
-      }
-
-      .pill-select option {
-        background-color: #1a1a1a !important;
-        color: #ff6f00;
-      }
-
-      /* Industrial grid overlay */
-      .grid-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        pointer-events: none;
-        opacity: 0.03;
-        background-image: 
-          repeating-linear-gradient(0deg, #ff6f00 0px, transparent 1px, transparent 40px, #ff6f00 41px),
-          repeating-linear-gradient(90deg, #ff6f00 0px, transparent 1px, transparent 40px, #ff6f00 41px);
-        z-index: 1;
-      }
-
-      /* Corner brackets */
-      .corner-bracket::before,
-      .corner-bracket::after {
-        content: "";
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border: 2px solid #ff6f00;
-      }
-
-      .corner-bracket::before {
-        top: -2px;
-        left: -2px;
-        border-right: none;
-        border-bottom: none;
-      }
-
-      .corner-bracket::after {
-        bottom: -2px;
-        right: -2px;
-        border-left: none;
-        border-top: none;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.5) !important;
       }
 
       @media all and (display-mode: standalone) {
@@ -364,308 +206,223 @@
     </style>
   </head>
 
-  <body class="text-orange-500 min-h-screen">
-    <div class="grid-overlay"></div>
-
-    <div id="app" class="max-w-md mx-auto relative z-10">
+  <body class="text-slate-100 min-h-screen">
+    <div id="app" class="max-w-2xl mx-auto pb-20">
       <!-- Header -->
-      <header class="industrial-card corner-bracket text-orange-500 p-5 m-4">
-        <div class="flex items-center justify-center mb-3">
-          <div class="w-12 h-0.5 bg-orange-500"></div>
-          <h1 class="text-2xl font-bold mx-4 tracking-wider uppercase">S&S Protocol</h1>
-          <div class="w-12 h-0.5 bg-orange-500"></div>
-        </div>
-
-        <div class="flex justify-between items-center">
-          <button
-            id="infoBtn"
-            class="text-orange-500/80 hover:text-orange-400 transition-colors p-2 hover:bg-orange-500/10"
-            title="Info"
-          >
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </button>
-
-          <!-- Weight selector -->
-          <div class="relative bg-orange-500/20 px-4 py-2 border border-orange-500/50">
-            <select
-              id="weightDropdown"
-              class="pill-select font-bold"
-            >
-              <option value="35">35 LBS</option>
-              <option value="50" selected>50 LBS</option>
-              <option value="70">70 LBS</option>
-            </select>
-            <svg
-              class="w-4 h-4 absolute right-2 top-1/2 -translate-y-1/2 text-orange-500 pointer-events-none"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"
-                clip-rule="evenodd"
-              />
-            </svg>
+      <header class="workout-card text-blue-400 p-5 m-4 sticky top-4 z-40">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl font-bold tracking-wider">BODYWEIGHT</h1>
+            <p class="text-sm text-slate-400">Progressive Training</p>
           </div>
-
+          
           <div class="flex gap-2">
             <button
+              id="infoBtn"
+              class="text-blue-400/80 hover:text-blue-300 transition-colors p-2 hover:bg-blue-500/10 rounded"
+              title="Info"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <button
               id="historyBtn"
-              class="text-orange-500/80 hover:text-orange-400 transition-colors p-2 hover:bg-orange-500/10"
+              class="text-blue-400/80 hover:text-blue-300 transition-colors p-2 hover:bg-blue-500/10 rounded"
               title="History"
             >
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M7 4a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1ZM4 9a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm3 5a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1Zm-3 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"
-                />
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
               </svg>
             </button>
             <button
               id="settingsBtn"
-              class="text-orange-500/80 hover:text-orange-400 transition-colors p-2 hover:bg-orange-500/10"
+              class="text-blue-400/80 hover:text-blue-300 transition-colors p-2 hover:bg-blue-500/10 rounded"
               title="Settings"
             >
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                  clip-rule="evenodd"
-                />
+                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
               </svg>
             </button>
           </div>
         </div>
       </header>
 
-      <!-- Main -->
+      <!-- Main Content -->
       <main class="p-4 space-y-6">
-        <!-- Status Panel -->
-        <div id="workoutStatus">
-          <div class="industrial-card p-6 text-center">
-            <div class="text-xs uppercase tracking-widest text-orange-400 mb-2">System Status</div>
-            <div class="text-3xl font-bold uppercase mb-3">Ready</div>
-            <div class="text-orange-400">100 SWINGS + 10 GET-UPS</div>
-            <div class="flex justify-center mt-4 gap-2">
-              <div class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-              <div class="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
-              <div class="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+        <!-- Stats Dashboard -->
+        <div class="workout-card p-5">
+          <h3 class="font-bold text-blue-400 mb-3">PROGRESS STATS</h3>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-slate-900/50 p-3 rounded border border-blue-500/30 text-center">
+              <div class="text-slate-400 text-xs uppercase">Workouts</div>
+              <div id="totalWorkouts" class="text-2xl font-bold text-blue-400 mt-1">0</div>
+            </div>
+            <div class="bg-slate-900/50 p-3 rounded border border-blue-500/30 text-center">
+              <div class="text-slate-400 text-xs uppercase">This Week</div>
+              <div id="weekWorkouts" class="text-2xl font-bold text-blue-400 mt-1">0/3</div>
+            </div>
+            <div class="bg-slate-900/50 p-3 rounded border border-blue-500/30 text-center">
+              <div class="text-slate-400 text-xs uppercase">Level</div>
+              <div id="currentLevel" class="text-2xl font-bold text-blue-400 mt-1">1</div>
             </div>
           </div>
         </div>
 
-        <!-- Timer Display -->
-        <div id="timerDisplay" class="text-center hidden">
-          <div class="relative inline-flex items-center justify-center">
-            <div class="absolute inset-0 rounded-full bg-orange-500/20 pulse-ring"></div>
-            <div class="industrial-card w-40 h-40 flex items-center justify-center">
-              <div class="text-center">
-                <div
-                  id="timeRemaining"
-                  class="text-4xl font-bold timer-display"
-                >
-                  0:30
-                </div>
-                <div id="timerPhase" class="text-xs uppercase tracking-widest text-orange-400 mt-1">Swings</div>
+        <!-- Workout Status -->
+        <div id="workoutStatus" class="workout-card p-6 text-center">
+          <div class="text-sm uppercase tracking-wider text-blue-400 mb-2">Ready to Train</div>
+          <div class="text-3xl font-bold mb-3">FULL BODY WORKOUT</div>
+          <div class="text-slate-400 mb-4">8 exercises • Progressive difficulty</div>
+          <button
+            id="startWorkoutBtn"
+            class="btn-primary w-full py-4 text-lg font-bold uppercase tracking-wider rounded-lg"
+          >
+            Start Workout
+          </button>
+        </div>
+
+        <!-- Active Workout View -->
+        <div id="activeWorkout" class="hidden space-y-4">
+          <!-- Current Exercise -->
+          <div id="currentExerciseCard" class="workout-card p-6 active-exercise">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <div class="text-xs text-blue-400 uppercase tracking-wider mb-1">Current Exercise</div>
+                <h2 id="exerciseName" class="text-2xl font-bold mb-1">Push-ups</h2>
+                <p id="exerciseLevel" class="text-sm text-slate-400">Level 1: Standard</p>
+              </div>
+              <div class="text-right">
+                <div class="text-xs text-slate-400 uppercase">Exercise</div>
+                <div id="exerciseNumber" class="text-2xl font-bold text-blue-400">1/8</div>
               </div>
             </div>
+            
+            <div class="mb-4">
+              <div class="text-sm text-slate-400 mb-2">Target Reps</div>
+              <div id="targetReps" class="text-4xl font-bold text-blue-400">12</div>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-sm text-slate-400 mb-2">Reps Completed</label>
+              <input
+                id="repsInput"
+                type="number"
+                min="0"
+                class="w-full px-4 py-3 text-2xl font-bold text-center rounded"
+              />
+            </div>
+
+            <!-- Rest Timer -->
+            <div id="restTimer" class="hidden mb-4 text-center">
+              <div class="text-sm text-slate-400 mb-2">Rest Time</div>
+              <div id="restTimeDisplay" class="text-5xl font-bold text-blue-400 timer-display">90</div>
+              <div class="text-xs text-slate-400 mt-1">seconds</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <button
+                id="completeExerciseBtn"
+                class="btn-primary py-3 font-bold uppercase rounded-lg"
+              >
+                Complete
+              </button>
+              <button
+                id="skipExerciseBtn"
+                class="bg-slate-700 hover:bg-slate-600 py-3 font-bold uppercase rounded-lg transition-colors"
+              >
+                Skip
+              </button>
+            </div>
           </div>
 
-          <div class="mt-6 grid grid-cols-2 gap-4">
-            <div class="industrial-card p-4">
-              <div class="text-orange-400 text-xs uppercase tracking-wider">Set</div>
-              <div id="currentSet" class="text-2xl font-bold mt-1">1/10</div>
+          <!-- Progress Tracker -->
+          <div class="workout-card p-5">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="font-bold text-blue-400">WORKOUT PROGRESS</h3>
+              <span id="progressPercentage" class="text-sm text-slate-400">0%</span>
             </div>
-            <div class="industrial-card p-4">
-              <div class="text-orange-400 text-xs uppercase tracking-wider">Hand</div>
-              <div id="currentHand" class="text-2xl font-bold mt-1 uppercase">Right</div>
+            <div class="bg-slate-900/50 rounded-full h-3 mb-4 overflow-hidden">
+              <div id="progressBar" class="progress-bar bg-blue-500 h-full rounded-full" style="width: 0%"></div>
             </div>
+            <div id="exerciseList" class="space-y-2"></div>
           </div>
-        </div>
 
-        <!-- Exercise Display -->
-        <div id="exerciseDisplay" class="text-center hidden">
-          <div class="industrial-card p-6 orange-glow">
-            <div class="text-xs uppercase tracking-widest text-orange-400 mb-2">Current Exercise</div>
-            <div id="exerciseName" class="text-2xl font-bold uppercase mb-3">
-              Kettlebell Swings
-            </div>
-            <div id="exerciseInstruction" class="text-lg text-orange-300">
-              10 swings - Right hand
-            </div>
-            <div id="exerciseReps" class="text-sm mt-2 text-orange-400/80">
-              Switch hands each set
-            </div>
-          </div>
-        </div>
-
-        <!-- Control Panel -->
-        <div class="space-y-4">
           <button
-            id="startBtn"
-            class="w-full industrial-card bg-gradient-to-r from-orange-600/30 to-orange-700/20 hover:from-orange-600/50 hover:to-orange-700/30 py-4 text-lg font-bold uppercase tracking-wider workout-button"
+            id="stopWorkoutBtn"
+            class="w-full bg-red-600/80 hover:bg-red-600 py-3 font-bold uppercase rounded-lg transition-colors"
           >
-            <span class="relative z-10">Initiate Protocol</span>
+            End Workout
           </button>
-
-          <div id="workoutControls" class="hidden space-y-4">
-            <button
-              id="pauseBtn"
-              class="w-full industrial-card bg-gradient-to-r from-orange-600/30 to-orange-700/20 hover:from-orange-600/50 hover:to-orange-700/30 py-3 font-bold uppercase tracking-wider workout-button"
-            >
-              <span class="relative z-10">Pause</span>
-            </button>
-            <button
-              id="stopBtn"
-              class="w-full industrial-card bg-gradient-to-r from-red-600/30 to-red-700/20 hover:from-red-600/50 hover:to-red-700/30 py-3 font-bold uppercase tracking-wider workout-button text-red-500"
-            >
-              <span class="relative z-10">Abort Protocol</span>
-            </button>
-          </div>
         </div>
 
-        <!-- Progress Monitor -->
-        <div id="progressSummary" class="industrial-card p-5">
-          <h3 class="font-bold uppercase tracking-wider mb-4 text-orange-400">Progress Monitor</h3>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="bg-black/50 p-3 border border-orange-500/30">
-              <div class="text-orange-400/80 text-xs uppercase">Swings</div>
-              <div id="swingsCompleted" class="text-xl font-bold mt-1">0/100</div>
-            </div>
-            <div class="bg-black/50 p-3 border border-orange-500/30">
-              <div class="text-orange-400/80 text-xs uppercase">Get-ups</div>
-              <div id="getupsCompleted" class="text-xl font-bold mt-1">0/10</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stats Dashboard -->
-        <div id="statsCard" class="industrial-card p-5">
-          <h3 class="font-bold uppercase tracking-wider mb-4 text-orange-400">Performance Metrics</h3>
-          <div class="grid grid-cols-3 gap-3">
-            <div class="bg-black/50 p-3 border border-orange-500/30 text-center">
-              <div class="text-orange-400/80 text-xs uppercase">Streak</div>
-              <div id="currentStreak" class="text-2xl font-bold mt-1">0</div>
-            </div>
-            <div class="bg-black/50 p-3 border border-orange-500/30 text-center">
-              <div class="text-orange-400/80 text-xs uppercase">Best</div>
-              <div id="bestStreak" class="text-2xl font-bold mt-1">0</div>
-            </div>
-            <div class="bg-black/50 p-3 border border-orange-500/30 text-center">
-              <div class="text-orange-400/80 text-xs uppercase">Total</div>
-              <div id="totalWorkouts" class="text-2xl font-bold mt-1">0</div>
-            </div>
-          </div>
+        <!-- Workout Complete View -->
+        <div id="workoutComplete" class="hidden workout-card p-6 text-center">
+          <div class="text-5xl mb-4">🎉</div>
+          <div class="text-3xl font-bold mb-2">Workout Complete!</div>
+          <div id="workoutSummary" class="text-slate-400 mb-6"></div>
+          <div id="progressionAdvice" class="bg-blue-500/20 border border-blue-500/50 rounded p-4 mb-4 text-sm"></div>
+          <button
+            id="finishBtn"
+            class="btn-primary w-full py-3 font-bold uppercase rounded-lg"
+          >
+            Finish
+          </button>
         </div>
       </main>
 
-      <!-- Settings Modal -->
-      <div
-        id="settingsModal"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
-      >
-        <div class="industrial-card corner-bracket w-full max-w-sm p-6">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-bold uppercase tracking-wider">Settings</h2>
-            <button
-              id="closeSettings"
-              class="text-orange-500/70 hover:text-orange-400 transition-colors p-1"
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium mb-2 text-orange-400 uppercase">
-                Audio System
-              </label>
-              <div class="flex items-center">
-                <input
-                  type="checkbox"
-                  id="soundAlerts"
-                  class="mr-3 w-5 h-5 cursor-pointer accent-orange-500"
-                />
-                <label for="soundAlerts" class="cursor-pointer select-none">
-                  Enable audio alerts
-                </label>
-              </div>
-            </div>
-            <p class="text-orange-400/70 text-sm">
-              Weight configuration available in header.
-            </p>
-          </div>
-
-          <button
-            id="saveSettings"
-            class="w-full mt-6 industrial-card bg-gradient-to-r from-orange-600/30 to-orange-700/20 hover:from-orange-600/50 hover:to-orange-700/30 py-3 font-bold uppercase tracking-wider workout-button"
-          >
-            Save Configuration
-          </button>
-        </div>
-      </div>
-
       <!-- Info Modal -->
-      <div
-        id="infoModal"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
-      >
-        <div class="industrial-card corner-bracket w-full max-w-sm p-6 max-h-[80vh] overflow-y-auto">
+      <div id="infoModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="workout-card w-full max-w-lg p-6 max-h-[85vh] overflow-y-auto">
           <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-bold uppercase tracking-wider">
-              Protocol Info
-            </h2>
-            <button
-              id="closeInfo"
-              class="text-orange-500/70 hover:text-orange-400 transition-colors p-1"
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
+            <h2 class="text-xl font-bold text-blue-400">WORKOUT INFO</h2>
+            <button id="closeInfo" class="text-slate-400 hover:text-slate-200">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
             </button>
           </div>
 
           <div class="space-y-4 text-sm">
             <div>
-              <h3 class="font-bold mb-2 text-orange-400 uppercase">Structure</h3>
-              <ul class="space-y-1 text-orange-300">
-                <li>▸ 5 min: 10 swings every 30 sec</li>
-                <li>▸ Switch hands each set</li>
-                <li>▸ 1 min rest period</li>
-                <li>▸ 10 min: 1 get-up per minute</li>
-                <li>▸ Alternate sides</li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 class="font-bold mb-2 text-orange-400 uppercase">Objective</h3>
-              <p class="text-orange-300">
-                Complete with 70 lbs kettlebell maintaining perfect form and timing.
+              <h3 class="font-bold text-blue-400 mb-2">PROGRAM OVERVIEW</h3>
+              <p class="text-slate-300 mb-2">
+                A progressive full-body bodyweight routine designed for 3x per week training. 
+                The program uses proven exercises and progressive overload to build strength and muscle.
               </p>
             </div>
 
             <div>
-              <h3 class="font-bold mb-2 text-orange-400 uppercase">Critical Points</h3>
-              <ul class="space-y-1 text-orange-300">
-                <li>▸ Neutral spine alignment</li>
-                <li>▸ Packed shoulders</li>
-                <li>▸ Full hip/knee extension</li>
-                <li>▸ Controlled transitions</li>
+              <h3 class="font-bold text-blue-400 mb-2">EXERCISES</h3>
+              <ul class="space-y-1 text-slate-300">
+                <li>• <strong>Push-ups:</strong> Chest, shoulders, triceps</li>
+                <li>• <strong>Pull-ups:</strong> Back, biceps (use progressions if needed)</li>
+                <li>• <strong>Squats:</strong> Legs, glutes</li>
+                <li>• <strong>Dips:</strong> Triceps, chest</li>
+                <li>• <strong>Rows:</strong> Back, biceps</li>
+                <li>• <strong>Pike Push-ups:</strong> Shoulders</li>
+                <li>• <strong>Leg Raises:</strong> Core</li>
+                <li>• <strong>Plank:</strong> Core stability</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-blue-400 mb-2">PROGRESSION SYSTEM</h3>
+              <ul class="space-y-1 text-slate-300">
+                <li>• Complete target reps for 2 consecutive workouts to progress</li>
+                <li>• Each level increases difficulty with more reps or harder variations</li>
+                <li>• Track your performance to see improvements over time</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-blue-400 mb-2">TIPS</h3>
+              <ul class="space-y-1 text-slate-300">
+                <li>• Focus on proper form over reps</li>
+                <li>• Rest 90-120 seconds between exercises</li>
+                <li>• Train 3x per week with rest days between</li>
+                <li>• Stay consistent for best results</li>
               </ul>
             </div>
           </div>
@@ -673,720 +430,747 @@
       </div>
 
       <!-- History Modal -->
-      <div
-        id="historyModal"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4"
-      >
-        <div class="industrial-card corner-bracket w-full max-w-sm p-6 max-h-[85vh] overflow-y-auto">
+      <div id="historyModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="workout-card w-full max-w-lg p-6 max-h-[85vh] overflow-y-auto">
           <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-bold uppercase tracking-wider">Archive</h2>
-            <button
-              id="closeHistory"
-              class="text-orange-500/70 hover:text-orange-400 transition-colors p-1"
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
+            <h2 class="text-xl font-bold text-blue-400">WORKOUT HISTORY</h2>
+            <button id="closeHistory" class="text-slate-400 hover:text-slate-200">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
             </button>
           </div>
 
-          <!-- Stats -->
-          <div class="grid grid-cols-3 gap-3 mb-4">
-            <div class="bg-black/50 p-2 border border-orange-500/30 text-center">
-              <div class="text-orange-400/80 text-xs uppercase">Current</div>
-              <div id="curStreakModal" class="text-xl font-bold">0</div>
-            </div>
-            <div class="bg-black/50 p-2 border border-orange-500/30 text-center">
-              <div class="text-orange-400/80 text-xs uppercase">Best</div>
-              <div id="bestStreakModal" class="text-xl font-bold">0</div>
-            </div>
-            <div class="bg-black/50 p-2 border border-orange-500/30 text-center">
-              <div class="text-orange-400/80 text-xs uppercase">Total</div>
-              <div id="totalWorkoutsModal" class="text-xl font-bold">0</div>
-            </div>
+          <div id="historyList" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <!-- Settings Modal -->
+      <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="workout-card w-full max-w-sm p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-blue-400">SETTINGS</h2>
+            <button id="closeSettings" class="text-slate-400 hover:text-slate-200">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </button>
           </div>
 
-          <!-- Manual Entry -->
-          <div class="mb-4">
-            <h3 class="font-bold mb-3 uppercase text-orange-400">Manual Entry</h3>
-            <div class="grid grid-cols-2 gap-3">
-              <div class="col-span-2 field">
-                <label class="text-xs text-orange-400/80 uppercase block">Date</label>
-                <input
-                  id="manualDate"
-                  type="date"
-                  class="mt-1 w-full px-3 py-2 bg-black/50 border border-orange-500/50"
-                />
-              </div>
-
-              <div class="field">
-                <label class="text-xs text-orange-400/80 uppercase block">Weight</label>
-                <select
-                  id="manualWeight"
-                  class="mt-1 w-full px-3 py-2 bg-black/50 border border-orange-500/50"
-                >
-                  <option value="35">35 lbs</option>
-                  <option value="50">50 lbs</option>
-                  <option value="70">70 lbs</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label class="text-xs text-orange-400/80 uppercase block">Swings</label>
-                <input
-                  id="manualSwings"
-                  type="number"
-                  min="0"
-                  step="10"
-                  value="100"
-                  class="mt-1 w-full px-3 py-2 bg-black/50 border border-orange-500/50"
-                />
-              </div>
-
-              <div class="field">
-                <label class="text-xs text-orange-400/80 uppercase block">Get-ups</label>
-                <input
-                  id="manualGetups"
-                  type="number"
-                  min="0"
-                  step="1"
-                  value="10"
-                  class="mt-1 w-full px-3 py-2 bg-black/50 border border-orange-500/50"
-                />
-              </div>
-
-              <div class="field">
-                <label class="text-xs text-orange-400/80 uppercase block">Duration</label>
-                <input
-                  id="manualDuration"
-                  type="number"
-                  min="0"
-                  step="1"
-                  class="mt-1 w-full px-3 py-2 bg-black/50 border border-orange-500/50"
-                />
-              </div>
-
-              <div class="col-span-2 field">
-                <label class="text-xs text-orange-400/80 uppercase block">Notes</label>
-                <textarea
-                  id="manualNotes"
-                  rows="2"
-                  class="mt-1 w-full px-3 py-2 bg-black/50 border border-orange-500/50"
-                ></textarea>
-              </div>
-
-              <div class="col-span-2 flex justify-end">
-                <button
-                  id="addManualEntry"
-                  class="industrial-card bg-gradient-to-r from-orange-600/30 to-orange-700/20 hover:from-orange-600/50 hover:to-orange-700/30 px-4 py-2 uppercase font-bold"
-                >
-                  Add Entry
-                </button>
-              </div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-2 text-blue-400">
+                Rest Time (seconds)
+              </label>
+              <input
+                type="number"
+                id="restTimeSetting"
+                min="30"
+                max="300"
+                step="10"
+                value="90"
+                class="w-full px-4 py-2 rounded"
+              />
             </div>
-          </div>
 
-          <!-- History List -->
-          <div>
-            <h3 class="font-bold mb-3 uppercase text-orange-400">Log</h3>
-            <div id="historyList" class="space-y-2"></div>
+            <div>
+              <label class="flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  id="soundAlerts"
+                  class="mr-3 w-5 h-5 cursor-pointer accent-blue-500"
+                  checked
+                />
+                <span>Enable sound alerts</span>
+              </label>
+            </div>
+
+            <button
+              id="resetProgress"
+              class="w-full bg-red-600/80 hover:bg-red-600 py-3 font-bold uppercase rounded-lg transition-colors"
+            >
+              Reset All Progress
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <script>
-      // Dark mode
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        document.documentElement.classList.add("dark");
-      }
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", (e) =>
-          document.documentElement.classList.toggle("dark", e.matches)
-        );
-
-      // Storage keys
-      const LS_PREFS_KEY = "ss_prefs_v2";
-      const LS_HISTORY_KEY = "ss_history_v2";
+      // Exercise Database with Progressive Levels
+      const EXERCISES = [
+        {
+          id: 'pushups',
+          name: 'Push-ups',
+          category: 'Push',
+          levels: [
+            { level: 1, name: 'Standard Push-ups', reps: 12 },
+            { level: 2, name: 'Standard Push-ups', reps: 15 },
+            { level: 3, name: 'Standard Push-ups', reps: 20 },
+            { level: 4, name: 'Diamond Push-ups', reps: 12 },
+            { level: 5, name: 'Diamond Push-ups', reps: 15 },
+            { level: 6, name: 'Archer Push-ups', reps: 10 },
+            { level: 7, name: 'Archer Push-ups', reps: 12 },
+            { level: 8, name: 'One-Arm Push-up Progression', reps: 8 }
+          ]
+        },
+        {
+          id: 'pullups',
+          name: 'Pull-ups',
+          category: 'Pull',
+          levels: [
+            { level: 1, name: 'Assisted Pull-ups (Band)', reps: 8 },
+            { level: 2, name: 'Negative Pull-ups', reps: 5 },
+            { level: 3, name: 'Standard Pull-ups', reps: 5 },
+            { level: 4, name: 'Standard Pull-ups', reps: 8 },
+            { level: 5, name: 'Standard Pull-ups', reps: 10 },
+            { level: 6, name: 'L-Sit Pull-ups', reps: 6 },
+            { level: 7, name: 'Archer Pull-ups', reps: 5 },
+            { level: 8, name: 'One-Arm Pull-up Progression', reps: 3 }
+          ]
+        },
+        {
+          id: 'squats',
+          name: 'Squats',
+          category: 'Legs',
+          levels: [
+            { level: 1, name: 'Bodyweight Squats', reps: 15 },
+            { level: 2, name: 'Bodyweight Squats', reps: 20 },
+            { level: 3, name: 'Bodyweight Squats', reps: 25 },
+            { level: 4, name: 'Jump Squats', reps: 15 },
+            { level: 5, name: 'Bulgarian Split Squats', reps: 12 },
+            { level: 6, name: 'Pistol Squat Progression', reps: 8 },
+            { level: 7, name: 'Pistol Squats', reps: 8 },
+            { level: 8, name: 'Pistol Squats', reps: 10 }
+          ]
+        },
+        {
+          id: 'dips',
+          name: 'Dips',
+          category: 'Push',
+          levels: [
+            { level: 1, name: 'Bench Dips', reps: 12 },
+            { level: 2, name: 'Bench Dips', reps: 15 },
+            { level: 3, name: 'Parallel Bar Dips', reps: 8 },
+            { level: 4, name: 'Parallel Bar Dips', reps: 10 },
+            { level: 5, name: 'Parallel Bar Dips', reps: 12 },
+            { level: 6, name: 'Ring Dips', reps: 8 },
+            { level: 7, name: 'Weighted Dips', reps: 10 },
+            { level: 8, name: 'Weighted Dips', reps: 12 }
+          ]
+        },
+        {
+          id: 'rows',
+          name: 'Rows',
+          category: 'Pull',
+          levels: [
+            { level: 1, name: 'Incline Rows', reps: 12 },
+            { level: 2, name: 'Incline Rows', reps: 15 },
+            { level: 3, name: 'Horizontal Rows', reps: 10 },
+            { level: 4, name: 'Horizontal Rows', reps: 12 },
+            { level: 5, name: 'Horizontal Rows', reps: 15 },
+            { level: 6, name: 'Archer Rows', reps: 10 },
+            { level: 7, name: 'One-Arm Row Progression', reps: 8 },
+            { level: 8, name: 'One-Arm Rows', reps: 10 }
+          ]
+        },
+        {
+          id: 'pike_pushups',
+          name: 'Pike Push-ups',
+          category: 'Push',
+          levels: [
+            { level: 1, name: 'Pike Push-ups', reps: 10 },
+            { level: 2, name: 'Pike Push-ups', reps: 12 },
+            { level: 3, name: 'Pike Push-ups', reps: 15 },
+            { level: 4, name: 'Elevated Pike Push-ups', reps: 10 },
+            { level: 5, name: 'Elevated Pike Push-ups', reps: 12 },
+            { level: 6, name: 'Wall Handstand Push-up Progression', reps: 8 },
+            { level: 7, name: 'Handstand Push-ups (Wall)', reps: 5 },
+            { level: 8, name: 'Handstand Push-ups (Wall)', reps: 8 }
+          ]
+        },
+        {
+          id: 'leg_raises',
+          name: 'Leg Raises',
+          category: 'Core',
+          levels: [
+            { level: 1, name: 'Knee Raises', reps: 12 },
+            { level: 2, name: 'Knee Raises', reps: 15 },
+            { level: 3, name: 'Straight Leg Raises', reps: 10 },
+            { level: 4, name: 'Straight Leg Raises', reps: 12 },
+            { level: 5, name: 'Straight Leg Raises', reps: 15 },
+            { level: 6, name: 'Hanging Leg Raises', reps: 10 },
+            { level: 7, name: 'Toes to Bar', reps: 8 },
+            { level: 8, name: 'Toes to Bar', reps: 12 }
+          ]
+        },
+        {
+          id: 'plank',
+          name: 'Plank',
+          category: 'Core',
+          levels: [
+            { level: 1, name: 'Plank', reps: 30 },
+            { level: 2, name: 'Plank', reps: 45 },
+            { level: 3, name: 'Plank', reps: 60 },
+            { level: 4, name: 'Plank', reps: 75 },
+            { level: 5, name: 'Plank', reps: 90 },
+            { level: 6, name: 'Plank', reps: 120 },
+            { level: 7, name: 'Weighted Plank', reps: 60 },
+            { level: 8, name: 'Weighted Plank', reps: 90 }
+          ]
+        }
+      ];
 
       // State
-      let workoutState = {
-        isActive: false,
-        isPaused: false,
-        phase: "swings",
-        currentSet: 1,
-        currentHand: "right",
-        timeRemaining: 30,
-        swingsCompleted: 0,
-        getupsCompleted: 0,
-        weightLbs: 50,
-        soundEnabled: true
+      let state = {
+        workoutInProgress: false,
+        currentExerciseIndex: 0,
+        workoutData: [],
+        exerciseLevels: {},
+        settings: {
+          restTime: 90,
+          soundEnabled: true
+        },
+        history: [],
+        restTimerActive: false,
+        restSecondsRemaining: 0
       };
 
-      let timer = null;
-      let startTimestamp = null;
+      let restInterval = null;
+      let audioContext = null;
+
+      // Storage keys
+      const STORAGE_KEYS = {
+        LEVELS: 'bw_exercise_levels',
+        HISTORY: 'bw_workout_history',
+        SETTINGS: 'bw_settings'
+      };
 
       // Elements
-      const startBtn = document.getElementById("startBtn");
-      const pauseBtn = document.getElementById("pauseBtn");
-      const stopBtn = document.getElementById("stopBtn");
-      const workoutControls = document.getElementById("workoutControls");
-      const timerDisplay = document.getElementById("timerDisplay");
-      const exerciseDisplay = document.getElementById("exerciseDisplay");
-      const workoutStatus = document.getElementById("workoutStatus");
-      const timeRemaining = document.getElementById("timeRemaining");
-      const timerPhase = document.getElementById("timerPhase");
-      const currentSet = document.getElementById("currentSet");
-      const currentHand = document.getElementById("currentHand");
-      const exerciseName = document.getElementById("exerciseName");
-      const exerciseInstruction = document.getElementById("exerciseInstruction");
-      const exerciseReps = document.getElementById("exerciseReps");
-      const swingsCompleted = document.getElementById("swingsCompleted");
-      const getupsCompleted = document.getElementById("getupsCompleted");
-      const weightDropdown = document.getElementById("weightDropdown");
-
-      // Modals
-      const settingsModal = document.getElementById("settingsModal");
-      const infoModal = document.getElementById("infoModal");
-      const historyModal = document.getElementById("historyModal");
-      const settingsBtn = document.getElementById("settingsBtn");
-      const infoBtn = document.getElementById("infoBtn");
-      const historyBtn = document.getElementById("historyBtn");
-      const closeSettings = document.getElementById("closeSettings");
-      const closeInfo = document.getElementById("closeInfo");
-      const closeHistory = document.getElementById("closeHistory");
-      const saveSettings = document.getElementById("saveSettings");
+      const startWorkoutBtn = document.getElementById('startWorkoutBtn');
+      const workoutStatus = document.getElementById('workoutStatus');
+      const activeWorkout = document.getElementById('activeWorkout');
+      const workoutComplete = document.getElementById('workoutComplete');
+      const currentExerciseCard = document.getElementById('currentExerciseCard');
+      const exerciseName = document.getElementById('exerciseName');
+      const exerciseLevel = document.getElementById('exerciseLevel');
+      const exerciseNumber = document.getElementById('exerciseNumber');
+      const targetReps = document.getElementById('targetReps');
+      const repsInput = document.getElementById('repsInput');
+      const completeExerciseBtn = document.getElementById('completeExerciseBtn');
+      const skipExerciseBtn = document.getElementById('skipExerciseBtn');
+      const stopWorkoutBtn = document.getElementById('stopWorkoutBtn');
+      const progressBar = document.getElementById('progressBar');
+      const progressPercentage = document.getElementById('progressPercentage');
+      const exerciseList = document.getElementById('exerciseList');
+      const restTimer = document.getElementById('restTimer');
+      const restTimeDisplay = document.getElementById('restTimeDisplay');
+      const finishBtn = document.getElementById('finishBtn');
+      const workoutSummary = document.getElementById('workoutSummary');
+      const progressionAdvice = document.getElementById('progressionAdvice');
 
       // Stats
-      const currentStreakEl = document.getElementById("currentStreak");
-      const bestStreakEl = document.getElementById("bestStreak");
-      const totalWorkoutsEl = document.getElementById("totalWorkouts");
-      const curStreakModal = document.getElementById("curStreakModal");
-      const bestStreakModal = document.getElementById("bestStreakModal");
-      const totalWorkoutsModal = document.getElementById("totalWorkoutsModal");
+      const totalWorkouts = document.getElementById('totalWorkouts');
+      const weekWorkouts = document.getElementById('weekWorkouts');
+      const currentLevel = document.getElementById('currentLevel');
 
-      // History
-      const manualDate = document.getElementById("manualDate");
-      const manualWeight = document.getElementById("manualWeight");
-      const manualSwings = document.getElementById("manualSwings");
-      const manualGetups = document.getElementById("manualGetups");
-      const manualDuration = document.getElementById("manualDuration");
-      const manualNotes = document.getElementById("manualNotes");
-      const addManualEntry = document.getElementById("addManualEntry");
-      const historyList = document.getElementById("historyList");
+      // Modals
+      const infoModal = document.getElementById('infoModal');
+      const historyModal = document.getElementById('historyModal');
+      const settingsModal = document.getElementById('settingsModal');
+      const infoBtn = document.getElementById('infoBtn');
+      const historyBtn = document.getElementById('historyBtn');
+      const settingsBtn = document.getElementById('settingsBtn');
+      const closeInfo = document.getElementById('closeInfo');
+      const closeHistory = document.getElementById('closeHistory');
+      const closeSettings = document.getElementById('closeSettings');
+      const historyList = document.getElementById('historyList');
+      const restTimeSetting = document.getElementById('restTimeSetting');
+      const soundAlerts = document.getElementById('soundAlerts');
+      const resetProgress = document.getElementById('resetProgress');
+
+      // Initialize
+      function init() {
+        loadData();
+        updateStatsDisplay();
+        setupEventListeners();
+      }
+
+      // Load saved data
+      function loadData() {
+        try {
+          const savedLevels = localStorage.getItem(STORAGE_KEYS.LEVELS);
+          if (savedLevels) {
+            state.exerciseLevels = JSON.parse(savedLevels);
+          } else {
+            // Initialize all exercises at level 1
+            EXERCISES.forEach(ex => {
+              state.exerciseLevels[ex.id] = { level: 1, successCount: 0 };
+            });
+          }
+
+          const savedHistory = localStorage.getItem(STORAGE_KEYS.HISTORY);
+          if (savedHistory) {
+            state.history = JSON.parse(savedHistory);
+          }
+
+          const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
+          if (savedSettings) {
+            state.settings = JSON.parse(savedSettings);
+            restTimeSetting.value = state.settings.restTime;
+            soundAlerts.checked = state.settings.soundEnabled;
+          }
+        } catch (error) {
+          console.error('Error loading data:', error);
+        }
+      }
+
+      // Save data
+      function saveData() {
+        try {
+          localStorage.setItem(STORAGE_KEYS.LEVELS, JSON.stringify(state.exerciseLevels));
+          localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(state.history));
+          localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(state.settings));
+        } catch (error) {
+          console.error('Error saving data:', error);
+        }
+      }
+
+      // Update stats display
+      function updateStatsDisplay() {
+        totalWorkouts.textContent = state.history.length;
+        
+        // Count this week's workouts
+        const now = new Date();
+        const weekStart = new Date(now);
+        weekStart.setDate(now.getDate() - now.getDay()); // Start of week
+        weekStart.setHours(0, 0, 0, 0);
+        
+        const thisWeek = state.history.filter(w => new Date(w.date) >= weekStart).length;
+        weekWorkouts.textContent = `${thisWeek}/3`;
+
+        // Calculate average level
+        const avgLevel = Math.round(
+          Object.values(state.exerciseLevels).reduce((sum, ex) => sum + ex.level, 0) / 
+          EXERCISES.length
+        );
+        currentLevel.textContent = avgLevel;
+      }
 
       // Audio
-      let audioContext = null;
       function initAudio() {
         if (!audioContext) {
           audioContext = new (window.AudioContext || window.webkitAudioContext)();
         }
       }
+
       function playBeep(frequency = 800, duration = 200) {
-        if (!workoutState.soundEnabled || !audioContext) return;
+        if (!state.settings.soundEnabled || !audioContext) return;
         const osc = audioContext.createOscillator();
         const gain = audioContext.createGain();
         osc.connect(gain);
         gain.connect(audioContext.destination);
         osc.frequency.value = frequency;
-        osc.type = "sine";
+        osc.type = 'sine';
         gain.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gain.gain.exponentialRampToValueAtTime(
-          0.01,
-          audioContext.currentTime + duration / 1000
-        );
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
         osc.start(audioContext.currentTime);
         osc.stop(audioContext.currentTime + duration / 1000);
       }
 
-      // Helpers
-      function formatTime(seconds) {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins}:${secs.toString().padStart(2, "0")}`;
-      }
-      function toYMD(d) {
-        const dt = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
-        return dt.toISOString().slice(0, 10);
-      }
-      function ymdToDate(ymd) {
-        return new Date(ymd + "T00:00:00");
-      }
-
-      // Storage
-      function loadPrefs() {
-        try {
-          const p = JSON.parse(localStorage.getItem(LS_PREFS_KEY));
-          if (p && typeof p === "object") {
-            if (typeof p.soundEnabled === "boolean")
-              workoutState.soundEnabled = p.soundEnabled;
-            if ([35, 50, 70].includes(p.weightLbs))
-              workoutState.weightLbs = p.weightLbs;
-          }
-        } catch {}
-      }
-      function savePrefs() {
-        localStorage.setItem(
-          LS_PREFS_KEY,
-          JSON.stringify({
-            soundEnabled: workoutState.soundEnabled,
-            weightLbs: workoutState.weightLbs
-          })
-        );
-      }
-      function loadHistory() {
-        try {
-          const h = JSON.parse(localStorage.getItem(LS_HISTORY_KEY));
-          return Array.isArray(h) ? h : [];
-        } catch {
-          return [];
-        }
-      }
-      function saveHistory(arr) {
-        localStorage.setItem(LS_HISTORY_KEY, JSON.stringify(arr));
-      }
-
-      // History
-      function genId() {
-        return (
-          Date.now().toString(36) +
-          Math.random().toString(36).slice(2, 8).toUpperCase()
-        );
-      }
-      function getHistory() {
-        if (!window._historyCache) window._historyCache = loadHistory();
-        return window._historyCache;
-      }
-      function setHistory(arr) {
-        window._historyCache = arr;
-        saveHistory(arr);
-        updateStatsUI();
-      }
-      function logAutoWorkout(durationSec) {
-        const entry = {
-          id: genId(),
-          source: "auto",
-          date: toYMD(new Date()),
-          swings: 100,
-          getups: 10,
-          durationSec,
-          weightLbs: workoutState.weightLbs,
-          notes: "",
-          createdAt: new Date().toISOString()
-        };
-        const arr = getHistory();
-        arr.push(entry);
-        setHistory(arr);
-      }
-      function addManualWorkout(data) {
-        const entry = {
-          id: genId(),
-          source: "manual",
-          date: data.date,
-          swings: data.swings,
-          getups: data.getups,
-          durationSec: data.durationSec || 0,
-          weightLbs: data.weightLbs,
-          notes: data.notes || "",
-          createdAt: new Date().toISOString()
-        };
-        const arr = getHistory();
-        arr.push(entry);
-        setHistory(arr);
-      }
-      function deleteEntry(id) {
-        const arr = getHistory().filter((e) => e.id !== id);
-        setHistory(arr);
-        renderHistoryList();
-      }
-      function computeStreakInfo() {
-        const entries = getHistory();
-        const daySet = new Set(entries.map((e) => e.date));
-        let cur = 0;
-        const d = new Date();
-        while (daySet.has(toYMD(d))) {
-          cur++;
-          d.setDate(d.getDate() - 1);
-        }
-        const days = Array.from(daySet)
-          .map((s) => ymdToDate(s))
-          .sort((a, b) => a - b);
-        let best = 0;
-        let run = 0;
-        for (let i = 0; i < days.length; i++) {
-          if (i === 0) run = 1;
-          else {
-            const diff = (days[i] - days[i - 1]) / 86400000;
-            run = diff === 1 ? run + 1 : 1;
-          }
-          if (run > best) best = run;
-        }
-        return { current: cur, best, total: entries.length };
-      }
-      function updateStatsUI() {
-        const { current, best, total } = computeStreakInfo();
-        currentStreakEl.textContent = current;
-        bestStreakEl.textContent = best;
-        totalWorkoutsEl.textContent = total;
-        curStreakModal.textContent = current;
-        bestStreakModal.textContent = best;
-        totalWorkoutsModal.textContent = total;
-      }
-      function renderHistoryList() {
-        const arr = getHistory()
-          .slice()
-          .sort(
-            (a, b) =>
-              b.date.localeCompare(a.date) ||
-              (b.createdAt || "").localeCompare(a.createdAt || "")
-          );
-        if (arr.length === 0) {
-          historyList.innerHTML =
-            '<div class="text-orange-400/70 text-sm">No entries in archive.</div>';
-          return;
-        }
-        historyList.innerHTML = arr
-          .map((e) => {
-            const d = new Date(e.date + "T00:00:00");
-            const nice = d.toLocaleDateString(undefined, {
-              weekday: "short",
-              month: "short",
-              day: "numeric",
-              year: "numeric"
-            });
-            const mins = e.durationSec
-              ? Math.round(e.durationSec / 60)
-              : null;
-            const dur = mins ? ` • ${mins} min` : "";
-            const src = e.source === "manual" ? "MAN" : "AUTO";
-            return `
-              <div class="industrial-card p-3 flex items-start justify-between">
-                <div class="text-sm">
-                  <div class="font-bold text-orange-400">${nice} [${src}]</div>
-                  <div class="text-orange-300">
-                    ${e.swings} swings • ${e.getups} get-ups • ${e.weightLbs} lbs${dur}
-                  </div>
-                  ${
-                    e.notes
-                      ? `<div class="text-orange-400/60 mt-1 italic">${escapeHtml(
-                          e.notes
-                        )}</div>`
-                      : ""
-                  }
-                </div>
-                <button
-                  class="px-2 py-1 text-xs ml-3 bg-red-600/50 hover:bg-red-600/70 uppercase font-bold"
-                  data-del="${e.id}"
-                  title="Delete"
-                >
-                  Del
-                </button>
-              </div>
-            `;
-          })
-          .join("");
-
-        historyList.querySelectorAll("[data-del]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const id = btn.getAttribute("data-del");
-            showConfirmDialog("Delete entry?", () => deleteEntry(id));
-          });
-        });
-      }
-      function escapeHtml(str) {
-        return str
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#039;");
-      }
-
-      // Display
-      function updateDisplay() {
-        timeRemaining.textContent = formatTime(workoutState.timeRemaining);
-        currentSet.textContent = `${workoutState.currentSet}/10`;
-        currentHand.textContent =
-          workoutState.currentHand === "right" ? "RIGHT" : "LEFT";
-        swingsCompleted.textContent = `${workoutState.swingsCompleted}/100`;
-        getupsCompleted.textContent = `${workoutState.getupsCompleted}/10`;
-
-        if (workoutState.phase === "swings") {
-          timerPhase.textContent = "SWINGS";
-          exerciseName.textContent = "KETTLEBELL SWINGS";
-          exerciseInstruction.textContent = `10 swings - ${
-            workoutState.currentHand === "right" ? "Right" : "Left"
-          } hand`;
-          exerciseReps.textContent = "Switch hands each set";
-        } else if (workoutState.phase === "rest") {
-          timerPhase.textContent = "REST";
-          exerciseName.textContent = "REST PERIOD";
-          exerciseInstruction.textContent = "Prepare for get-ups";
-          exerciseReps.textContent = "Stay hydrated";
-        } else if (workoutState.phase === "getups") {
-          timerPhase.textContent = "GET-UPS";
-          exerciseName.textContent = "TURKISH GET-UP";
-          exerciseInstruction.textContent = `1 get-up - ${
-            workoutState.currentHand === "right" ? "Right" : "Left"
-          } side`;
-          exerciseReps.textContent = "Alternate sides each minute";
-        }
-      }
-
-      // Workout flow
+      // Start workout
       function startWorkout() {
         initAudio();
-        workoutState.isActive = true;
-        workoutState.isPaused = false;
-        workoutState.phase = "swings";
-        workoutState.currentSet = 1;
-        workoutState.currentHand = "right";
-        workoutState.timeRemaining = 30;
-        workoutState.swingsCompleted = 0;
-        workoutState.getupsCompleted = 0;
-        startTimestamp = Date.now();
+        state.workoutInProgress = true;
+        state.currentExerciseIndex = 0;
+        state.workoutData = EXERCISES.map(ex => {
+          const levelData = state.exerciseLevels[ex.id] || { level: 1 };
+          const exerciseLevel = ex.levels[levelData.level - 1];
+          return {
+            exercise: ex,
+            level: levelData.level,
+            targetReps: exerciseLevel.reps,
+            completedReps: null,
+            skipped: false
+          };
+        });
 
-        startBtn.classList.add("hidden");
-        workoutControls.classList.remove("hidden");
-        timerDisplay.classList.remove("hidden");
-        exerciseDisplay.classList.remove("hidden");
-        workoutStatus.classList.add("hidden");
-
-        startTimer();
-        updateDisplay();
+        workoutStatus.classList.add('hidden');
+        activeWorkout.classList.remove('hidden');
+        
+        displayCurrentExercise();
+        updateExerciseList();
         playBeep(1000, 300);
       }
-      function startTimer() {
-        if (timer) clearInterval(timer);
-        timer = setInterval(() => {
-          if (!workoutState.isActive || workoutState.isPaused) return;
-          workoutState.timeRemaining--;
-          updateDisplay();
-          if (
-            workoutState.timeRemaining <= 3 &&
-            workoutState.timeRemaining > 0
-          )
+
+      // Display current exercise
+      function displayCurrentExercise() {
+        if (state.currentExerciseIndex >= state.workoutData.length) {
+          finishWorkout();
+          return;
+        }
+
+        const current = state.workoutData[state.currentExerciseIndex];
+        const levelInfo = current.exercise.levels[current.level - 1];
+        
+        exerciseName.textContent = current.exercise.name;
+        exerciseLevel.textContent = `Level ${current.level}: ${levelInfo.name}`;
+        exerciseNumber.textContent = `${state.currentExerciseIndex + 1}/${state.workoutData.length}`;
+        
+        if (current.exercise.id === 'plank') {
+          targetReps.textContent = `${current.targetReps}s`;
+          repsInput.placeholder = 'Seconds held';
+        } else {
+          targetReps.textContent = current.targetReps;
+          repsInput.placeholder = 'Reps completed';
+        }
+        
+        repsInput.value = '';
+        repsInput.focus();
+
+        updateProgress();
+        scrollToTop();
+      }
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Update progress
+      function updateProgress() {
+        const total = state.workoutData.length;
+        const completed = state.workoutData.filter(ex => 
+          ex.completedReps !== null || ex.skipped
+        ).length;
+        const percentage = Math.round((completed / total) * 100);
+        
+        progressBar.style.width = `${percentage}%`;
+        progressPercentage.textContent = `${percentage}%`;
+      }
+
+      // Update exercise list
+      function updateExerciseList() {
+        exerciseList.innerHTML = state.workoutData.map((ex, idx) => {
+          let status = '';
+          let statusClass = '';
+          
+          if (ex.completedReps !== null) {
+            status = `✓ ${ex.completedReps}`;
+            statusClass = 'text-green-400';
+          } else if (ex.skipped) {
+            status = '⊘ Skipped';
+            statusClass = 'text-slate-500';
+          } else if (idx === state.currentExerciseIndex) {
+            status = 'In Progress';
+            statusClass = 'text-blue-400 font-bold';
+          } else {
+            status = `${ex.targetReps}${ex.exercise.id === 'plank' ? 's' : ''}`;
+            statusClass = 'text-slate-400';
+          }
+
+          return `
+            <div class="flex justify-between items-center text-sm ${idx === state.currentExerciseIndex ? 'bg-blue-500/10 p-2 rounded' : ''}">
+              <span class="${idx < state.currentExerciseIndex ? 'text-slate-400' : ''}">${ex.exercise.name}</span>
+              <span class="${statusClass}">${status}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Complete exercise
+      function completeExercise() {
+        const reps = parseInt(repsInput.value);
+        if (isNaN(reps) || reps < 0) {
+          alert('Please enter a valid number of reps');
+          return;
+        }
+
+        const current = state.workoutData[state.currentExerciseIndex];
+        current.completedReps = reps;
+
+        // Check for progression
+        if (reps >= current.targetReps) {
+          const exLevel = state.exerciseLevels[current.exercise.id];
+          exLevel.successCount = (exLevel.successCount || 0) + 1;
+          
+          // Progress after 2 successful workouts
+          if (exLevel.successCount >= 2 && exLevel.level < current.exercise.levels.length) {
+            exLevel.level++;
+            exLevel.successCount = 0;
+          }
+        } else {
+          // Reset success count if didn't hit target
+          state.exerciseLevels[current.exercise.id].successCount = 0;
+        }
+
+        saveData();
+        updateExerciseList();
+
+        // Start rest timer
+        if (state.currentExerciseIndex < state.workoutData.length - 1) {
+          startRestTimer();
+        } else {
+          state.currentExerciseIndex++;
+          displayCurrentExercise();
+        }
+
+        playBeep(1200, 200);
+      }
+
+      // Skip exercise
+      function skipExercise() {
+        const current = state.workoutData[state.currentExerciseIndex];
+        current.skipped = true;
+        state.exerciseLevels[current.exercise.id].successCount = 0;
+        
+        saveData();
+        updateExerciseList();
+
+        state.currentExerciseIndex++;
+        displayCurrentExercise();
+      }
+
+      // Rest timer
+      function startRestTimer() {
+        state.restTimerActive = true;
+        state.restSecondsRemaining = state.settings.restTime;
+        
+        repsInput.classList.add('hidden');
+        completeExerciseBtn.classList.add('hidden');
+        skipExerciseBtn.classList.add('hidden');
+        restTimer.classList.remove('hidden');
+        
+        restTimeDisplay.textContent = state.restSecondsRemaining;
+        
+        if (restInterval) clearInterval(restInterval);
+        
+        restInterval = setInterval(() => {
+          state.restSecondsRemaining--;
+          restTimeDisplay.textContent = state.restSecondsRemaining;
+          
+          if (state.restSecondsRemaining <= 3 && state.restSecondsRemaining > 0) {
             playBeep(600, 150);
-          if (workoutState.timeRemaining === 0) {
-            handleTimerComplete();
+          }
+          
+          if (state.restSecondsRemaining <= 0) {
+            clearInterval(restInterval);
+            endRestTimer();
+            playBeep(1000, 300);
           }
         }, 1000);
       }
-      function handleTimerComplete() {
-        playBeep(1200, 400);
-        if (workoutState.phase === "swings") {
-          workoutState.swingsCompleted += 10;
-          if (workoutState.currentSet < 10) {
-            workoutState.currentSet++;
-            workoutState.currentHand =
-              workoutState.currentHand === "right" ? "left" : "right";
-            workoutState.timeRemaining = 30;
-          } else {
-            workoutState.phase = "rest";
-            workoutState.timeRemaining = 60;
-          }
-        } else if (workoutState.phase === "rest") {
-          workoutState.phase = "getups";
-          workoutState.currentSet = 1;
-          workoutState.currentHand = "right";
-          workoutState.timeRemaining = 60;
-        } else if (workoutState.phase === "getups") {
-          workoutState.getupsCompleted += 1;
-          if (workoutState.currentSet < 10) {
-            workoutState.currentSet++;
-            workoutState.currentHand =
-              workoutState.currentHand === "right" ? "left" : "right";
-            workoutState.timeRemaining = 60;
-          } else {
-            completeWorkout();
-            return;
-          }
-        }
-        updateDisplay();
+
+      function endRestTimer() {
+        state.restTimerActive = false;
+        restTimer.classList.add('hidden');
+        repsInput.classList.remove('hidden');
+        completeExerciseBtn.classList.remove('hidden');
+        skipExerciseBtn.classList.remove('hidden');
+        
+        state.currentExerciseIndex++;
+        displayCurrentExercise();
       }
-      function completeWorkout() {
-        workoutState.isActive = false;
-        clearInterval(timer);
 
-        const durationSec = Math.max(
-          0,
-          Math.round((Date.now() - (startTimestamp || Date.now())) / 1000)
+      // Stop workout
+      function stopWorkout() {
+        if (!confirm('Are you sure you want to end this workout?')) return;
+        
+        if (restInterval) clearInterval(restInterval);
+        
+        state.workoutInProgress = false;
+        activeWorkout.classList.add('hidden');
+        workoutStatus.classList.remove('hidden');
+        
+        saveData();
+      }
+
+      // Finish workout
+      function finishWorkout() {
+        state.workoutInProgress = false;
+        
+        if (restInterval) clearInterval(restInterval);
+        
+        // Calculate stats
+        const completed = state.workoutData.filter(ex => ex.completedReps !== null).length;
+        const skipped = state.workoutData.filter(ex => ex.skipped).length;
+        const totalReps = state.workoutData.reduce((sum, ex) => 
+          sum + (ex.completedReps || 0), 0
         );
-        logAutoWorkout(durationSec);
 
-        timerDisplay.classList.add("hidden");
-        exerciseDisplay.classList.add("hidden");
-        workoutControls.classList.add("hidden");
-        workoutStatus.classList.remove("hidden");
-        startBtn.classList.remove("hidden");
+        // Check for progressions
+        const progressions = [];
+        state.workoutData.forEach(ex => {
+          const exLevel = state.exerciseLevels[ex.exercise.id];
+          if (exLevel.successCount === 1) {
+            progressions.push(`${ex.exercise.name}: One more successful workout to level up!`);
+          }
+        });
 
-        const statusDiv = workoutStatus.querySelector("div");
-        statusDiv.innerHTML = `
-          <div class="text-xs uppercase tracking-widest text-orange-400 mb-2">Protocol Status</div>
-          <div class="text-3xl font-bold uppercase mb-3">COMPLETE</div>
-          <div class="text-orange-400">100 SWINGS + 10 GET-UPS • ${workoutState.weightLbs} LBS</div>
-          <div class="flex justify-center mt-4 gap-2">
-            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-          </div>
+        // Save workout to history
+        state.history.push({
+          date: new Date().toISOString(),
+          exercises: state.workoutData.map(ex => ({
+            id: ex.exercise.id,
+            name: ex.exercise.name,
+            level: ex.level,
+            target: ex.targetReps,
+            completed: ex.completedReps,
+            skipped: ex.skipped
+          })),
+          totalReps,
+          duration: null
+        });
+
+        saveData();
+        updateStatsDisplay();
+
+        // Display summary
+        workoutSummary.innerHTML = `
+          <div class="text-lg mb-2">Completed: ${completed}/${state.workoutData.length} exercises</div>
+          <div class="text-sm">Total Reps: ${totalReps}</div>
+          ${skipped > 0 ? `<div class="text-sm text-slate-400">Skipped: ${skipped}</div>` : ''}
         `;
 
+        if (progressions.length > 0) {
+          progressionAdvice.innerHTML = `
+            <div class="font-bold mb-2 text-blue-400">🎯 Progress Update:</div>
+            ${progressions.map(p => `<div class="text-sm">• ${p}</div>`).join('')}
+          `;
+        } else {
+          progressionAdvice.innerHTML = `
+            <div class="font-bold mb-2 text-blue-400">💪 Keep Training!</div>
+            <div class="text-sm">Complete target reps for 2 consecutive workouts to level up exercises.</div>
+          `;
+        }
+
+        activeWorkout.classList.add('hidden');
+        workoutComplete.classList.remove('hidden');
+        
         playBeep(1500, 500);
+        scrollToTop();
       }
-      function pauseWorkout() {
-        workoutState.isPaused = !workoutState.isPaused;
-        pauseBtn.innerHTML = workoutState.isPaused 
-          ? '<span class="relative z-10">RESUME</span>' 
-          : '<span class="relative z-10">PAUSE</span>';
-      }
-      function stopWorkout() {
-        showConfirmDialog("ABORT PROTOCOL?", () => {
-          workoutState.isActive = false;
-          workoutState.isPaused = false;
-          clearInterval(timer);
 
-          timerDisplay.classList.add("hidden");
-          exerciseDisplay.classList.add("hidden");
-          workoutControls.classList.add("hidden");
-          workoutStatus.classList.remove("hidden");
-          startBtn.classList.remove("hidden");
+      // Finish button
+      finishBtn.addEventListener('click', () => {
+        workoutComplete.classList.add('hidden');
+        workoutStatus.classList.remove('hidden');
+      });
 
-          const statusDiv = workoutStatus.querySelector("div");
-          statusDiv.innerHTML = `
-            <div class="text-xs uppercase tracking-widest text-orange-400 mb-2">System Status</div>
-            <div class="text-3xl font-bold uppercase mb-3">Ready</div>
-            <div class="text-orange-400">100 SWINGS + 10 GET-UPS</div>
-            <div class="flex justify-center mt-4 gap-2">
-              <div class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-              <div class="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
-              <div class="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+      // Show history
+      function showHistory() {
+        const sortedHistory = [...state.history].reverse();
+        
+        if (sortedHistory.length === 0) {
+          historyList.innerHTML = '<div class="text-slate-400 text-center py-8">No workout history yet</div>';
+          return;
+        }
+
+        historyList.innerHTML = sortedHistory.map((workout, idx) => {
+          const date = new Date(workout.date);
+          const dateStr = date.toLocaleDateString(undefined, {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+          
+          const completed = workout.exercises.filter(ex => ex.completed !== null).length;
+          
+          return `
+            <div class="bg-slate-900/50 border border-blue-500/30 rounded p-4">
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <div class="font-bold text-blue-400">${dateStr}</div>
+                  <div class="text-sm text-slate-400">${completed}/${workout.exercises.length} exercises • ${workout.totalReps} reps</div>
+                </div>
+                <button 
+                  onclick="deleteWorkout(${state.history.length - 1 - idx})" 
+                  class="text-red-400 hover:text-red-300 text-sm"
+                  title="Delete"
+                >
+                  ×
+                </button>
+              </div>
+              <div class="space-y-1 text-xs">
+                ${workout.exercises.map(ex => {
+                  if (ex.skipped) return `<div class="text-slate-500">⊘ ${ex.name}</div>`;
+                  return `<div class="text-slate-300">✓ ${ex.name}: ${ex.completed}/${ex.target}</div>`;
+                }).join('')}
+              </div>
             </div>
           `;
+        }).join('');
+      }
 
-          pauseBtn.innerHTML = '<span class="relative z-10">PAUSE</span>';
+      // Delete workout
+      window.deleteWorkout = function(index) {
+        if (!confirm('Delete this workout?')) return;
+        state.history.splice(index, 1);
+        saveData();
+        updateStatsDisplay();
+        showHistory();
+      };
+
+      // Setup event listeners
+      function setupEventListeners() {
+        startWorkoutBtn.addEventListener('click', startWorkout);
+        completeExerciseBtn.addEventListener('click', completeExercise);
+        skipExerciseBtn.addEventListener('click', skipExercise);
+        stopWorkoutBtn.addEventListener('click', stopWorkout);
+
+        // Enter key on reps input
+        repsInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') completeExercise();
+        });
+
+        // Modals
+        infoBtn.addEventListener('click', () => infoModal.classList.remove('hidden'));
+        closeInfo.addEventListener('click', () => infoModal.classList.add('hidden'));
+        
+        historyBtn.addEventListener('click', () => {
+          showHistory();
+          historyModal.classList.remove('hidden');
+        });
+        closeHistory.addEventListener('click', () => historyModal.classList.add('hidden'));
+        
+        settingsBtn.addEventListener('click', () => settingsModal.classList.remove('hidden'));
+        closeSettings.addEventListener('click', () => {
+          state.settings.restTime = parseInt(restTimeSetting.value);
+          state.settings.soundEnabled = soundAlerts.checked;
+          saveData();
+          settingsModal.classList.add('hidden');
+        });
+
+        // Close modals on backdrop click
+        [infoModal, historyModal, settingsModal].forEach(modal => {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.classList.add('hidden');
+            }
+          });
+        });
+
+        // Reset progress
+        resetProgress.addEventListener('click', () => {
+          if (!confirm('Are you sure you want to reset ALL progress? This cannot be undone!')) return;
+          if (!confirm('Really reset? All workout history and levels will be lost!')) return;
+          
+          EXERCISES.forEach(ex => {
+            state.exerciseLevels[ex.id] = { level: 1, successCount: 0 };
+          });
+          state.history = [];
+          saveData();
+          updateStatsDisplay();
+          settingsModal.classList.add('hidden');
+          alert('Progress reset complete');
         });
       }
 
-      // Confirm
-      function showConfirmDialog(message, onConfirm) {
-        const modal = document.createElement("div");
-        modal.className =
-          "fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4";
-        modal.innerHTML = `
-          <div class="industrial-card p-6 max-w-sm w-full">
-            <p class="text-orange-400 mb-4 uppercase font-bold">${message}</p>
-            <div class="flex justify-end space-x-3">
-              <button class="cancel-btn text-orange-500/80 hover:text-orange-400 hover:bg-orange-500/10 px-4 py-2 uppercase font-bold">Cancel</button>
-              <button class="confirm-btn bg-red-600/60 hover:bg-red-600/80 text-white px-4 py-2 uppercase font-bold">Confirm</button>
-            </div>
-          </div>
-        `;
-        modal.querySelector(".cancel-btn").onclick = () => modal.remove();
-        modal.querySelector(".confirm-btn").onclick = () => {
-          modal.remove();
-          onConfirm();
-        };
-        document.body.appendChild(modal);
-      }
+      // Dark mode
+      document.documentElement.classList.add('dark');
 
-      // Events
-      startBtn.addEventListener("click", startWorkout);
-      pauseBtn.addEventListener("click", pauseWorkout);
-      stopBtn.addEventListener("click", stopWorkout);
-
-      settingsBtn.addEventListener("click", () => {
-        settingsModal.classList.remove("hidden");
-        document.getElementById("soundAlerts").checked =
-          !!workoutState.soundEnabled;
-      });
-      closeSettings.addEventListener("click", () => {
-        settingsModal.classList.add("hidden");
-      });
-      const soundCheckbox = document.getElementById("soundAlerts");
-      soundCheckbox.addEventListener("change", (e) => {
-        workoutState.soundEnabled = e.target.checked;
-        savePrefs();
-      });
-      saveSettings.addEventListener("click", () => {
-        workoutState.soundEnabled = soundCheckbox.checked;
-        savePrefs();
-        settingsModal.classList.add("hidden");
-      });
-
-      infoBtn.addEventListener("click", () => {
-        infoModal.classList.remove("hidden");
-      });
-      closeInfo.addEventListener("click", () => {
-        infoModal.classList.add("hidden");
-      });
-
-      historyBtn.addEventListener("click", () => {
-        historyModal.classList.remove("hidden");
-        primeManualDefaults();
-        renderHistoryList();
-      });
-      closeHistory.addEventListener("click", () => {
-        historyModal.classList.add("hidden");
-      });
-
-      [settingsModal, infoModal, historyModal].forEach((m) => {
-        m.addEventListener("click", (e) => {
-          if (e.target === m) m.classList.add("hidden");
-        });
-      });
-
-      weightDropdown.addEventListener("change", () => {
-        workoutState.weightLbs = parseInt(weightDropdown.value, 10);
-        savePrefs();
-      });
-
-      addManualEntry.addEventListener("click", () => {
-        const date = manualDate.value || toYMD(new Date());
-        const w = parseInt(manualWeight.value, 10);
-        const swings = Math.max(0, parseInt(manualSwings.value || "0", 10));
-        const getups = Math.max(0, parseInt(manualGetups.value || "0", 10));
-        const durationSec = Math.max(
-          0,
-          Math.round((parseFloat(manualDuration.value || "0") || 0) * 60)
-        );
-        const notes = manualNotes.value.trim();
-        addManualWorkout({
-          date,
-          weightLbs: w,
-          swings,
-          getups,
-          durationSec,
-          notes
-        });
-        primeManualDefaults();
-        renderHistoryList();
-      });
-
-      function primeManualDefaults() {
-        manualDate.value = toYMD(new Date());
-        manualWeight.value = String(workoutState.weightLbs);
-        manualSwings.value = "100";
-        manualGetups.value = "10";
-        manualDuration.value = "";
-        manualNotes.value = "";
-        updateStatsUI();
-      }
-
-      // Init
-      loadPrefs();
-      weightDropdown.value = String(workoutState.weightLbs);
-      updateDisplay();
-      setHistory(loadHistory());
-      updateStatsUI();
+      // Initialize app
+      init();
     </script>
   </body>
 </html>
