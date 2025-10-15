@@ -11,7 +11,7 @@
       name="description"
       content="Progressive bodyweight workout app with proven exercises for full-body training"
     />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
@@ -29,9 +29,9 @@
 
           // Gradient background
           const g = ctx.createLinearGradient(0, 0, size, size);
-          g.addColorStop(0, "#6366f1");
-          g.addColorStop(0.5, "#8b5cf6");
-          g.addColorStop(1, "#d946ef");
+          g.addColorStop(0, "#ff6b00");
+          g.addColorStop(0.5, "#ff8800");
+          g.addColorStop(1, "#000000");
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, size, size);
 
@@ -41,33 +41,37 @@
           ctx.scale(s, s);
 
           // Glow effect
-          ctx.shadowColor = "rgba(139, 92, 246, 0.8)";
+          ctx.shadowColor = "rgba(255, 107, 0, 0.8)";
           ctx.shadowBlur = 40;
           
-          // Draw stylized person doing push-up
+          // Draw flexing bicep
           ctx.fillStyle = "#fff";
           ctx.strokeStyle = "#fff";
-          ctx.lineWidth = 20;
+          ctx.lineWidth = 28;
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
 
-          // Body
+          // Arm outline (upper arm)
           ctx.beginPath();
-          ctx.arc(200, 180, 40, 0, Math.PI * 2); // Head
+          ctx.moveTo(200, 400);
+          ctx.lineTo(200, 280);
+          ctx.stroke();
+          
+          // Forearm bent at elbow
+          ctx.beginPath();
+          ctx.moveTo(200, 280);
+          ctx.quadraticCurveTo(220, 240, 280, 200);
+          ctx.stroke();
+          
+          // Flexed bicep bulge
+          ctx.beginPath();
+          ctx.arc(180, 260, 55, 0, Math.PI * 2);
           ctx.fill();
           
-          // Arms and body
+          // Fist
           ctx.beginPath();
-          ctx.moveTo(200, 220);
-          ctx.lineTo(200, 320);
-          ctx.lineTo(120, 380);
-          ctx.moveTo(200, 320);
-          ctx.lineTo(280, 380);
-          ctx.moveTo(200, 240);
-          ctx.lineTo(120, 280);
-          ctx.moveTo(200, 240);
-          ctx.lineTo(280, 280);
-          ctx.stroke();
+          ctx.arc(280, 200, 35, 0, Math.PI * 2);
+          ctx.fill();
 
           ctx.restore();
           return c.toDataURL("image/png");
@@ -94,8 +98,8 @@
           start_url: "/",
           scope: "/",
           display: "standalone",
-          background_color: "#0a0a0a",
-          theme_color: "#8b5cf6",
+          background_color: "#000000",
+          theme_color: "#ff6b00",
           description: "Progressive bodyweight workout app with proven exercises",
           icons: [
             { src: icon192, sizes: "192x192", type: "image/png" },
@@ -133,10 +137,10 @@
       }
 
       body {
-        background: #0a0a0a;
+        background: #000000;
         background-image: 
-          radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-          radial-gradient(at 100% 100%, rgba(217, 70, 239, 0.15) 0px, transparent 50%);
+          radial-gradient(at 0% 0%, rgba(255, 107, 0, 0.15) 0px, transparent 50%),
+          radial-gradient(at 100% 100%, rgba(255, 107, 0, 0.08) 0px, transparent 50%);
         background-attachment: fixed;
         min-height: 100vh;
       }
@@ -152,22 +156,22 @@
       }
 
       .glass-card:hover {
-        border-color: rgba(139, 92, 246, 0.3);
+        border-color: rgba(255, 107, 0, 0.3);
         box-shadow: 
-          0 12px 40px rgba(139, 92, 246, 0.2),
+          0 12px 40px rgba(255, 107, 0, 0.2),
           inset 0 1px 0 rgba(255, 255, 255, 0.08);
         transform: translateY(-2px);
       }
 
       .glass-card-active {
-        border-color: rgba(139, 92, 246, 0.5);
+        border-color: rgba(255, 107, 0, 0.5);
         box-shadow: 
-          0 0 0 1px rgba(139, 92, 246, 0.3),
-          0 20px 60px rgba(139, 92, 246, 0.3);
+          0 0 0 1px rgba(255, 107, 0, 0.3),
+          0 20px 60px rgba(255, 107, 0, 0.3);
       }
 
       .btn-gradient {
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+        background: linear-gradient(135deg, #ff6b00 0%, #ff8800 50%, #ff5500 100%);
         background-size: 200% 200%;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
@@ -189,7 +193,7 @@
       .btn-gradient:hover {
         background-position: 100% 0;
         transform: translateY(-2px);
-        box-shadow: 0 12px 40px rgba(139, 92, 246, 0.5);
+        box-shadow: 0 12px 40px rgba(255, 107, 0, 0.5);
       }
 
       .btn-gradient:hover::before {
@@ -225,9 +229,9 @@
       .shimmer {
         animation: shimmer 3s ease infinite;
         background: linear-gradient(90deg, 
-          rgba(99, 102, 241, 0.1) 0%, 
-          rgba(139, 92, 246, 0.2) 50%, 
-          rgba(99, 102, 241, 0.1) 100%);
+          rgba(255, 107, 0, 0.1) 0%, 
+          rgba(255, 136, 0, 0.2) 50%, 
+          rgba(255, 107, 0, 0.1) 100%);
         background-size: 200% 100%;
       }
 
@@ -238,20 +242,20 @@
 
       input, select, textarea {
         background: rgba(20, 20, 20, 0.8) !important;
-        border: 1px solid rgba(139, 92, 246, 0.2) !important;
+        border: 1px solid rgba(255, 107, 0, 0.2) !important;
         color: #f1f5f9 !important;
         transition: all 0.2s ease !important;
       }
 
       input:focus, select:focus, textarea:focus {
         outline: none !important;
-        border-color: rgba(139, 92, 246, 0.5) !important;
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        border-color: rgba(255, 107, 0, 0.5) !important;
+        box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1) !important;
       }
 
       .stat-card {
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.05));
-        border: 1px solid rgba(139, 92, 246, 0.2);
+        background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 136, 0, 0.05));
+        border: 1px solid rgba(255, 107, 0, 0.2);
       }
 
       @media all and (display-mode: standalone) {
@@ -271,12 +275,12 @@
       }
 
       ::-webkit-scrollbar-thumb {
-        background: rgba(139, 92, 246, 0.3);
+        background: rgba(255, 107, 0, 0.3);
         border-radius: 4px;
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background: rgba(139, 92, 246, 0.5);
+        background: rgba(255, 107, 0, 0.5);
       }
     </style>
   </head>
@@ -288,7 +292,7 @@
         <div class="glass-card rounded-2xl p-6">
           <div class="flex items-center justify-between">
             <div>
-              <h1 class="text-3xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h1 class="text-3xl font-bold tracking-tight bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 bg-clip-text text-transparent">
                 BODYWEIGHT
               </h1>
               <p class="text-sm text-slate-400 mt-1 font-medium">Progressive Training System</p>
@@ -297,29 +301,29 @@
             <div class="flex gap-2">
               <button
                 id="infoBtn"
-                class="glass-card p-2.5 rounded-xl hover:bg-purple-500/10 transition-all"
+                class="glass-card p-2.5 rounded-xl hover:bg-orange-500/10 transition-all"
                 title="Info"
               >
-                <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
                 </svg>
               </button>
               <button
                 id="historyBtn"
-                class="glass-card p-2.5 rounded-xl hover:bg-purple-500/10 transition-all"
+                class="glass-card p-2.5 rounded-xl hover:bg-orange-500/10 transition-all"
                 title="History"
               >
-                <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
                   <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
                 </svg>
               </button>
               <button
                 id="settingsBtn"
-                class="glass-card p-2.5 rounded-xl hover:bg-purple-500/10 transition-all"
+                class="glass-card p-2.5 rounded-xl hover:bg-orange-500/10 transition-all"
                 title="Settings"
               >
-                <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
                 </svg>
               </button>
@@ -332,21 +336,21 @@
       <main class="space-y-6">
         <!-- Stats Dashboard -->
         <div class="glass-card rounded-2xl p-6">
-          <h3 class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-4">Performance</h3>
+          <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-4">Performance</h3>
           <div class="grid grid-cols-3 gap-4">
             <div class="stat-card p-4 rounded-xl text-center">
               <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Total</div>
-              <div id="totalWorkouts" class="text-3xl font-bold text-transparent bg-gradient-to-br from-purple-400 to-pink-400 bg-clip-text mt-2">0</div>
+              <div id="totalWorkouts" class="text-3xl font-bold text-transparent bg-gradient-to-br from-orange-400 to-orange-500 bg-clip-text mt-2">0</div>
               <div class="text-xs text-slate-500 mt-1">Workouts</div>
             </div>
             <div class="stat-card p-4 rounded-xl text-center">
               <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Week</div>
-              <div id="weekWorkouts" class="text-3xl font-bold text-transparent bg-gradient-to-br from-indigo-400 to-purple-400 bg-clip-text mt-2">0/3</div>
+              <div id="weekWorkouts" class="text-3xl font-bold text-transparent bg-gradient-to-br from-orange-500 to-orange-600 bg-clip-text mt-2">0/3</div>
               <div class="text-xs text-slate-500 mt-1">Complete</div>
             </div>
             <div class="stat-card p-4 rounded-xl text-center">
               <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Level</div>
-              <div id="currentLevel" class="text-3xl font-bold text-transparent bg-gradient-to-br from-pink-400 to-rose-400 bg-clip-text mt-2">1</div>
+              <div id="currentLevel" class="text-3xl font-bold text-transparent bg-gradient-to-br from-orange-400 to-red-500 bg-clip-text mt-2">1</div>
               <div class="text-xs text-slate-500 mt-1">Average</div>
             </div>
           </div>
@@ -354,13 +358,13 @@
 
         <!-- Workout Status -->
         <div id="workoutStatus" class="glass-card rounded-2xl p-8 text-center shimmer">
-          <div class="inline-block px-4 py-1.5 bg-purple-500/20 rounded-full mb-4">
-            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Ready to Train</span>
+          <div class="inline-block px-4 py-1.5 bg-orange-500/20 rounded-full mb-4">
+            <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Ready to Train</span>
           </div>
-          <div class="text-4xl font-black mb-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <div class="text-4xl font-black mb-2 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 bg-clip-text text-transparent">
             FULL BODY
           </div>
-          <div class="text-slate-400 mb-6 font-medium">7 exercises • 3 sets each • Progressive difficulty</div>
+          <div class="text-slate-400 mb-6 font-medium">5 min warmup • 7 exercises • 3 sets each • Progressive difficulty</div>
           <button
             id="startWorkoutBtn"
             class="btn-gradient w-full py-4 text-lg font-bold uppercase tracking-wider rounded-xl shadow-2xl"
@@ -369,21 +373,71 @@
           </button>
         </div>
 
+        <!-- Warmup View -->
+        <div id="warmupView" class="hidden space-y-6">
+          <div class="glass-card glass-card-active rounded-2xl p-8">
+            <div class="inline-block px-4 py-1.5 bg-orange-500/20 rounded-full mb-4">
+              <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Warmup Phase</span>
+            </div>
+            <h2 id="warmupExerciseName" class="text-3xl font-black mb-2 text-white">Arm Circles</h2>
+            <p id="warmupExerciseDesc" class="text-sm text-slate-400 font-medium mb-6">Loosen shoulder joints and increase blood flow</p>
+            
+            <div class="mb-6">
+              <div class="text-sm text-slate-400 mb-2 font-semibold">Duration</div>
+              <div id="warmupDuration" class="text-6xl font-black text-transparent bg-gradient-to-br from-orange-500 via-orange-400 to-orange-300 bg-clip-text">30s</div>
+            </div>
+
+            <!-- Warmup Timer -->
+            <div id="warmupTimer" class="mb-6 text-center p-8 glass-card rounded-2xl">
+              <div class="text-sm text-slate-400 mb-4 font-semibold uppercase tracking-wide">Time Remaining</div>
+              <div id="warmupTimeDisplay" class="text-7xl font-black text-transparent bg-gradient-to-br from-orange-500 to-orange-400 bg-clip-text timer-display mb-2">30</div>
+              <div class="text-xs text-slate-500 uppercase tracking-wide font-semibold">seconds</div>
+            </div>
+
+            <div class="flex gap-4">
+              <button
+                id="skipWarmupExerciseBtn"
+                class="flex-1 glass-card hover:bg-slate-700/20 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
+              >
+                Skip Exercise
+              </button>
+              <button
+                id="skipAllWarmupBtn"
+                class="flex-1 glass-card hover:bg-red-500/20 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
+              >
+                Skip Warmup
+              </button>
+            </div>
+          </div>
+
+          <!-- Warmup Progress -->
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider">Warmup Progress</h3>
+              <span id="warmupProgressPercentage" class="text-sm font-bold text-orange-400">0%</span>
+            </div>
+            <div class="bg-black/40 rounded-full h-2.5 mb-6 overflow-hidden">
+              <div id="warmupProgressBar" class="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 h-full rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+            </div>
+            <div id="warmupExerciseList" class="space-y-3"></div>
+          </div>
+        </div>
+
         <!-- Active Workout View -->
         <div id="activeWorkout" class="hidden space-y-6">
           <!-- Current Exercise Card -->
           <div id="currentExerciseCard" class="glass-card glass-card-active rounded-2xl p-8">
             <div class="flex justify-between items-start mb-6">
               <div class="flex-1">
-                <div class="inline-block px-3 py-1 bg-purple-500/20 rounded-full mb-3">
-                  <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Current</span>
+                <div class="inline-block px-3 py-1 bg-orange-500/20 rounded-full mb-3">
+                  <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Current</span>
                 </div>
                 <h2 id="exerciseName" class="text-3xl font-black mb-2 text-white">Push-ups</h2>
                 <p id="exerciseLevel" class="text-sm text-slate-400 font-medium">Level 1: Standard</p>
               </div>
               <div class="text-right">
                 <div class="text-xs text-slate-500 uppercase font-semibold tracking-wide">Exercise</div>
-                <div id="exerciseNumber" class="text-3xl font-bold text-transparent bg-gradient-to-br from-purple-400 to-pink-400 bg-clip-text">1/7</div>
+                <div id="exerciseNumber" class="text-3xl font-bold text-transparent bg-gradient-to-br from-orange-400 to-orange-500 bg-clip-text">1/7</div>
               </div>
             </div>
 
@@ -395,7 +449,7 @@
             
             <div class="mb-6">
               <div class="text-sm text-slate-400 mb-2 font-semibold">Target Reps</div>
-              <div id="targetReps" class="text-6xl font-black text-transparent bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 bg-clip-text">12</div>
+              <div id="targetReps" class="text-6xl font-black text-transparent bg-gradient-to-br from-orange-500 via-orange-400 to-orange-300 bg-clip-text">12</div>
             </div>
 
             <div class="mb-6">
@@ -412,7 +466,7 @@
             <!-- Rest Timer -->
             <div id="restTimer" class="hidden mb-6 text-center p-8 glass-card rounded-2xl">
               <div class="text-sm text-slate-400 mb-4 font-semibold uppercase tracking-wide">Rest Period</div>
-              <div id="restTimeDisplay" class="text-7xl font-black text-transparent bg-gradient-to-br from-indigo-400 to-purple-400 bg-clip-text timer-display mb-2">90</div>
+              <div id="restTimeDisplay" class="text-7xl font-black text-transparent bg-gradient-to-br from-orange-500 to-orange-400 bg-clip-text timer-display mb-2">90</div>
               <div class="text-xs text-slate-500 uppercase tracking-wide font-semibold">seconds remaining</div>
             </div>
 
@@ -435,11 +489,11 @@
           <!-- Progress Overview -->
           <div class="glass-card rounded-2xl p-6">
             <div class="flex justify-between items-center mb-4">
-              <h3 class="text-xs font-bold text-purple-400 uppercase tracking-wider">Workout Progress</h3>
-              <span id="progressPercentage" class="text-sm font-bold text-purple-400">0%</span>
+              <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider">Workout Progress</h3>
+              <span id="progressPercentage" class="text-sm font-bold text-orange-400">0%</span>
             </div>
             <div class="bg-black/40 rounded-full h-2.5 mb-6 overflow-hidden">
-              <div id="progressBar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+              <div id="progressBar" class="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 h-full rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
             </div>
             <div id="exerciseList" class="space-y-3"></div>
           </div>
@@ -455,7 +509,7 @@
         <!-- Workout Complete View -->
         <div id="workoutComplete" class="hidden glass-card rounded-2xl p-8 text-center">
           <div class="text-6xl mb-4">🎉</div>
-          <div class="text-4xl font-black mb-3 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <div class="text-4xl font-black mb-3 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 bg-clip-text text-transparent">
             Workout Complete!
           </div>
           <div id="workoutSummary" class="text-slate-400 mb-6 font-medium"></div>
@@ -473,7 +527,7 @@
       <div id="infoModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
         <div class="glass-card w-full max-w-lg p-8 max-h-[85vh] overflow-y-auto rounded-2xl">
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">Workout Info</h2>
+            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text">Workout Info</h2>
             <button id="closeInfo" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
               <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -483,82 +537,103 @@
 
           <div class="space-y-5 text-sm">
             <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-purple-400 mb-3 text-base">Program Overview</h3>
+              <h3 class="font-bold text-orange-400 mb-3 text-base">Program Overview</h3>
               <p class="text-slate-300 leading-relaxed">
-                A progressive full-body bodyweight routine designed for 3x per week training. 
+                A progressive full-body bodyweight routine with a proven 5-minute dynamic warmup, designed for 3x per week training. 
                 Each exercise is performed for 3 sets, with progressive overload to build strength and muscle.
               </p>
             </div>
 
             <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-purple-400 mb-3 text-base">Exercises (3 Sets Each)</h3>
+              <h3 class="font-bold text-orange-400 mb-3 text-base">Warmup (5 Minutes)</h3>
+              <p class="text-slate-300 leading-relaxed mb-2">
+                10 dynamic warmup exercises proven to reduce injury risk and improve workout performance:
+              </p>
+              <ul class="space-y-1 text-slate-300">
+                <li class="flex items-start">
+                  <span class="text-orange-400 mr-2">•</span>
+                  <span>Arm circles, leg swings, torso twists</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-orange-400 mr-2">•</span>
+                  <span>High knees, jumping jacks for cardiovascular warmup</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-orange-400 mr-2">•</span>
+                  <span>Joint mobility and muscle activation exercises</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="glass-card p-5 rounded-xl">
+              <h3 class="font-bold text-orange-400 mb-3 text-base">Exercises (3 Sets Each)</h3>
               <ul class="space-y-2 text-slate-300">
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">•</span>
+                  <span class="text-orange-400 mr-2">•</span>
                   <span><strong>Push-ups:</strong> Chest, shoulders, triceps</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">•</span>
+                  <span class="text-orange-400 mr-2">•</span>
                   <span><strong>Squats:</strong> Legs, glutes</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">•</span>
+                  <span class="text-orange-400 mr-2">•</span>
                   <span><strong>Dips:</strong> Triceps, chest</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">•</span>
+                  <span class="text-orange-400 mr-2">•</span>
                   <span><strong>Rows:</strong> Back, biceps</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">•</span>
+                  <span class="text-orange-400 mr-2">•</span>
                   <span><strong>Pike Push-ups:</strong> Shoulders</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">•</span>
+                  <span class="text-orange-400 mr-2">•</span>
                   <span><strong>Leg Raises:</strong> Core</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">•</span>
+                  <span class="text-orange-400 mr-2">•</span>
                   <span><strong>Plank:</strong> Core stability</span>
                 </li>
               </ul>
             </div>
 
             <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-purple-400 mb-3 text-base">Progression System</h3>
+              <h3 class="font-bold text-orange-400 mb-3 text-base">Progression System</h3>
               <ul class="space-y-2 text-slate-300">
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">✓</span>
+                  <span class="text-orange-400 mr-2">✓</span>
                   <span>Complete all 3 sets with target reps for 2 consecutive workouts to progress</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">✓</span>
+                  <span class="text-orange-400 mr-2">✓</span>
                   <span>Each level increases difficulty with more reps or harder variations</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-purple-400 mr-2">✓</span>
+                  <span class="text-orange-400 mr-2">✓</span>
                   <span>Track your performance to see improvements over time</span>
                 </li>
               </ul>
             </div>
 
             <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-purple-400 mb-3 text-base">Training Tips</h3>
+              <h3 class="font-bold text-orange-400 mb-3 text-base">Training Tips</h3>
               <ul class="space-y-2 text-slate-300">
                 <li class="flex items-start">
-                  <span class="text-pink-400 mr-2">→</span>
+                  <span class="text-orange-400 mr-2">→</span>
                   <span>Focus on proper form over reps</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-pink-400 mr-2">→</span>
+                  <span class="text-orange-400 mr-2">→</span>
                   <span>Rest 90-120 seconds between sets</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-pink-400 mr-2">→</span>
+                  <span class="text-orange-400 mr-2">→</span>
                   <span>Train 3x per week with rest days between</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-pink-400 mr-2">→</span>
+                  <span class="text-orange-400 mr-2">→</span>
                   <span>Stay consistent for best results</span>
                 </li>
               </ul>
@@ -571,7 +646,7 @@
       <div id="historyModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
         <div class="glass-card w-full max-w-lg p-8 max-h-[85vh] overflow-y-auto rounded-2xl">
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">Workout History</h2>
+            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text">Workout History</h2>
             <button id="closeHistory" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
               <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -587,7 +662,7 @@
       <div id="settingsModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
         <div class="glass-card w-full max-w-md p-8 rounded-2xl">
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">Settings</h2>
+            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text">Settings</h2>
             <button id="closeSettings" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
               <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -597,7 +672,7 @@
 
           <div class="space-y-5">
             <div class="glass-card p-5 rounded-xl">
-              <label class="block text-sm font-semibold mb-3 text-purple-400">
+              <label class="block text-sm font-semibold mb-3 text-orange-400">
                 Rest Time Between Sets
               </label>
               <input
@@ -617,7 +692,7 @@
                 <input
                   type="checkbox"
                   id="soundAlerts"
-                  class="mr-3 w-5 h-5 cursor-pointer accent-purple-500"
+                  class="mr-3 w-5 h-5 cursor-pointer accent-orange-500"
                   checked
                 />
                 <span class="font-semibold">Enable sound alerts</span>
@@ -636,6 +711,80 @@
     </div>
 
     <script>
+      // Warmup exercises - scientifically proven to improve performance and reduce injury
+      const WARMUP_EXERCISES = [
+        {
+          id: 'arm_circles',
+          name: 'Arm Circles',
+          description: 'Loosen shoulder joints and increase blood flow',
+          duration: 30,
+          instructions: 'Make large circles with both arms, 15 seconds forward, 15 seconds backward'
+        },
+        {
+          id: 'leg_swings',
+          name: 'Leg Swings',
+          description: 'Dynamic hip mobility and leg activation',
+          duration: 30,
+          instructions: 'Swing each leg forward and back, then side to side, 15 seconds per leg'
+        },
+        {
+          id: 'torso_twists',
+          name: 'Torso Twists',
+          description: 'Activate core and improve spinal mobility',
+          duration: 30,
+          instructions: 'Stand with feet shoulder-width apart, twist torso side to side with controlled movement'
+        },
+        {
+          id: 'high_knees',
+          name: 'High Knees',
+          description: 'Elevate heart rate and activate leg muscles',
+          duration: 30,
+          instructions: 'March in place, bringing knees up to hip height, moderate pace'
+        },
+        {
+          id: 'shoulder_rolls',
+          name: 'Shoulder Rolls',
+          description: 'Release shoulder tension and improve range of motion',
+          duration: 30,
+          instructions: 'Roll shoulders in circles - 15 seconds backward, 15 seconds forward'
+        },
+        {
+          id: 'wrist_circles',
+          name: 'Wrist Circles',
+          description: 'Prepare wrists for bodyweight exercises',
+          duration: 30,
+          instructions: 'Rotate wrists in circles, both directions, flex and extend fingers'
+        },
+        {
+          id: 'cat_cow',
+          name: 'Cat-Cow Stretches',
+          description: 'Mobilize spine and activate core',
+          duration: 30,
+          instructions: 'On hands and knees, alternate arching and rounding your back slowly'
+        },
+        {
+          id: 'jumping_jacks',
+          name: 'Jumping Jacks',
+          description: 'Full body activation and cardiovascular warmup',
+          duration: 30,
+          instructions: 'Perform controlled jumping jacks to elevate heart rate'
+        },
+        {
+          id: 'squat_holds',
+          name: 'Bodyweight Squat Pulses',
+          description: 'Activate glutes and leg muscles',
+          duration: 30,
+          instructions: 'Perform slow, controlled squats with small pulses at the bottom'
+        },
+        {
+          id: 'scapular_pushups',
+          name: 'Scapular Push-ups',
+          description: 'Activate shoulder blade muscles for pushing exercises',
+          duration: 30,
+          instructions: 'In plank position, protract and retract shoulder blades without bending arms'
+        }
+      ];
+
       // Exercise Database with Progressive Levels (Pull-ups removed)
       const EXERCISES = [
         {
@@ -749,10 +898,13 @@
 
       // State
       let state = {
+        warmupInProgress: false,
+        currentWarmupIndex: 0,
         workoutInProgress: false,
         currentExerciseIndex: 0,
         currentSet: 1,
         workoutData: [],
+        warmupData: [],
         exerciseLevels: {},
         settings: {
           restTime: 90,
@@ -760,10 +912,13 @@
         },
         history: [],
         restTimerActive: false,
-        restSecondsRemaining: 0
+        restSecondsRemaining: 0,
+        warmupTimerActive: false,
+        warmupSecondsRemaining: 0
       };
 
       let restInterval = null;
+      let warmupInterval = null;
       let audioContext = null;
 
       // Storage keys
@@ -776,9 +931,22 @@
       // Elements
       const startWorkoutBtn = document.getElementById('startWorkoutBtn');
       const workoutStatus = document.getElementById('workoutStatus');
+      const warmupView = document.getElementById('warmupView');
       const activeWorkout = document.getElementById('activeWorkout');
       const workoutComplete = document.getElementById('workoutComplete');
       const currentExerciseCard = document.getElementById('currentExerciseCard');
+      
+      // Warmup elements
+      const warmupExerciseName = document.getElementById('warmupExerciseName');
+      const warmupExerciseDesc = document.getElementById('warmupExerciseDesc');
+      const warmupDuration = document.getElementById('warmupDuration');
+      const warmupTimer = document.getElementById('warmupTimer');
+      const warmupTimeDisplay = document.getElementById('warmupTimeDisplay');
+      const skipWarmupExerciseBtn = document.getElementById('skipWarmupExerciseBtn');
+      const skipAllWarmupBtn = document.getElementById('skipAllWarmupBtn');
+      const warmupProgressBar = document.getElementById('warmupProgressBar');
+      const warmupProgressPercentage = document.getElementById('warmupProgressPercentage');
+      const warmupExerciseList = document.getElementById('warmupExerciseList');
       const exerciseName = document.getElementById('exerciseName');
       const exerciseLevel = document.getElementById('exerciseLevel');
       const exerciseNumber = document.getElementById('exerciseNumber');
@@ -906,6 +1074,153 @@
         osc.stop(audioContext.currentTime + duration / 1000);
       }
 
+      // Start warmup (before workout)
+      function startWarmup() {
+        initAudio();
+        state.warmupInProgress = true;
+        state.currentWarmupIndex = 0;
+        
+        // Select 5 warmup exercises (5 minutes total)
+        state.warmupData = WARMUP_EXERCISES.slice(0, 10).map(ex => ({
+          exercise: ex,
+          completed: false
+        }));
+
+        workoutStatus.classList.add('hidden');
+        warmupView.classList.remove('hidden');
+        
+        displayCurrentWarmupExercise();
+        updateWarmupExerciseList();
+        playBeep(1000, 300);
+      }
+
+      // Display current warmup exercise
+      function displayCurrentWarmupExercise() {
+        if (state.currentWarmupIndex >= state.warmupData.length) {
+          finishWarmup();
+          return;
+        }
+
+        const current = state.warmupData[state.currentWarmupIndex];
+        const ex = current.exercise;
+        
+        warmupExerciseName.textContent = ex.name;
+        warmupExerciseDesc.textContent = ex.description;
+        warmupDuration.textContent = `${ex.duration}s`;
+        
+        updateWarmupProgress();
+        scrollToTop();
+        startWarmupTimer(ex.duration);
+      }
+
+      // Warmup timer
+      function startWarmupTimer(duration) {
+        state.warmupTimerActive = true;
+        state.warmupSecondsRemaining = duration;
+        
+        warmupTimeDisplay.textContent = state.warmupSecondsRemaining;
+        
+        if (warmupInterval) clearInterval(warmupInterval);
+        
+        warmupInterval = setInterval(() => {
+          state.warmupSecondsRemaining--;
+          warmupTimeDisplay.textContent = state.warmupSecondsRemaining;
+          
+          if (state.warmupSecondsRemaining <= 3 && state.warmupSecondsRemaining > 0) {
+            playBeep(600, 150);
+          }
+          
+          if (state.warmupSecondsRemaining <= 0) {
+            clearInterval(warmupInterval);
+            completeWarmupExercise();
+            playBeep(1000, 300);
+          }
+        }, 1000);
+      }
+
+      // Complete warmup exercise
+      function completeWarmupExercise() {
+        state.warmupTimerActive = false;
+        state.warmupData[state.currentWarmupIndex].completed = true;
+        
+        updateWarmupExerciseList();
+        
+        state.currentWarmupIndex++;
+        displayCurrentWarmupExercise();
+      }
+
+      // Skip warmup exercise
+      function skipWarmupExercise() {
+        if (warmupInterval) clearInterval(warmupInterval);
+        state.warmupTimerActive = false;
+        state.warmupData[state.currentWarmupIndex].completed = true;
+        
+        updateWarmupExerciseList();
+        
+        state.currentWarmupIndex++;
+        displayCurrentWarmupExercise();
+      }
+
+      // Skip all warmup
+      function skipAllWarmup() {
+        if (!confirm('Skip the entire warmup? Warming up reduces injury risk and improves performance.')) return;
+        
+        if (warmupInterval) clearInterval(warmupInterval);
+        state.warmupInProgress = false;
+        finishWarmup();
+      }
+
+      // Update warmup progress
+      function updateWarmupProgress() {
+        const total = state.warmupData.length;
+        const completed = state.warmupData.filter(ex => ex.completed).length;
+        
+        const percentage = Math.round((completed / total) * 100);
+        
+        warmupProgressBar.style.width = `${percentage}%`;
+        warmupProgressPercentage.textContent = `${percentage}%`;
+      }
+
+      // Update warmup exercise list
+      function updateWarmupExerciseList() {
+        warmupExerciseList.innerHTML = state.warmupData.map((ex, idx) => {
+          let status = '';
+          let statusClass = '';
+          
+          if (ex.completed) {
+            status = '✓ Complete';
+            statusClass = 'text-green-400 font-semibold';
+          } else if (idx === state.currentWarmupIndex) {
+            status = 'In Progress';
+            statusClass = 'text-orange-400 font-bold';
+          } else {
+            status = `${ex.exercise.duration}s`;
+            statusClass = 'text-slate-500';
+          }
+
+          return `
+            <div class="flex justify-between items-center text-sm font-medium ${idx === state.currentWarmupIndex ? 'glass-card p-3 rounded-xl bg-orange-500/10' : 'p-2'}">
+              <span class="${ex.completed ? 'text-slate-400' : 'text-slate-200'}">${ex.exercise.name}</span>
+              <span class="${statusClass}">${status}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Finish warmup and start workout
+      function finishWarmup() {
+        state.warmupInProgress = false;
+        
+        if (warmupInterval) clearInterval(warmupInterval);
+        
+        warmupView.classList.add('hidden');
+        
+        playBeep(1500, 400);
+        
+        // Start the actual workout
+        startWorkout();
+      }
+
       // Start workout
       function startWorkout() {
         initAudio();
@@ -932,7 +1247,11 @@
         
         displayCurrentExercise();
         updateExerciseList();
-        playBeep(1000, 300);
+        
+        // Only play beep if not coming from warmup
+        if (!state.warmupInProgress) {
+          playBeep(1000, 300);
+        }
       }
 
       // Display set indicators
@@ -950,7 +1269,7 @@
             classes += ' opacity-50';
             content = `<div class="text-xs text-slate-500 uppercase">Skip</div><div class="text-xl text-slate-500">⊘</div>`;
           } else if (setNum === state.currentSet) {
-            classes += ' border-2 border-purple-400 bg-purple-500/20';
+            classes += ' border-2 border-orange-400 bg-orange-500/20';
           }
           
           return `<div class="${classes}">${content}</div>`;
@@ -1025,7 +1344,7 @@
             statusClass = 'text-green-400 font-semibold';
           } else if (idx === state.currentExerciseIndex) {
             status = `In Progress (${completedSets}/${totalSets})`;
-            statusClass = 'text-purple-400 font-bold';
+            statusClass = 'text-orange-400 font-bold';
           } else if (completedSets > 0 || skippedSets > 0) {
             status = `${completedSets}/${totalSets} sets`;
             statusClass = 'text-slate-400';
@@ -1035,7 +1354,7 @@
           }
 
           return `
-            <div class="flex justify-between items-center text-sm font-medium ${idx === state.currentExerciseIndex ? 'glass-card p-3 rounded-xl bg-purple-500/10' : 'p-2'}">
+            <div class="flex justify-between items-center text-sm font-medium ${idx === state.currentExerciseIndex ? 'glass-card p-3 rounded-xl bg-orange-500/10' : 'p-2'}">
               <span class="${idx < state.currentExerciseIndex && completedSets === totalSets ? 'text-slate-400' : 'text-slate-200'}">${ex.exercise.name}</span>
               <span class="${statusClass}">${status}</span>
             </div>
@@ -1232,12 +1551,12 @@
 
         if (progressions.length > 0) {
           progressionAdvice.innerHTML = `
-            <div class="font-bold mb-3 text-purple-400 text-base">🎯 Progress Update</div>
+            <div class="font-bold mb-3 text-orange-400 text-base">🎯 Progress Update</div>
             ${progressions.map(p => `<div class="text-sm text-slate-300 mb-2">• ${p}</div>`).join('')}
           `;
         } else {
           progressionAdvice.innerHTML = `
-            <div class="font-bold mb-3 text-purple-400 text-base">💪 Keep Training!</div>
+            <div class="font-bold mb-3 text-orange-400 text-base">💪 Keep Training!</div>
             <div class="text-sm text-slate-300">Complete all 3 sets with target reps for 2 consecutive workouts to level up exercises.</div>
           `;
         }
@@ -1280,7 +1599,7 @@
             <div class="glass-card rounded-xl p-5">
               <div class="flex justify-between items-start mb-3">
                 <div>
-                  <div class="font-bold text-purple-400 mb-1">${dateStr}</div>
+                  <div class="font-bold text-orange-400 mb-1">${dateStr}</div>
                   <div class="text-sm text-slate-400">${totalSets}/${maxSets} sets • ${workout.totalReps} reps</div>
                 </div>
                 <button 
@@ -1319,10 +1638,14 @@
 
       // Setup event listeners
       function setupEventListeners() {
-        startWorkoutBtn.addEventListener('click', startWorkout);
+        startWorkoutBtn.addEventListener('click', startWarmup);
         completeSetBtn.addEventListener('click', completeSet);
         skipSetBtn.addEventListener('click', skipSet);
         stopWorkoutBtn.addEventListener('click', stopWorkout);
+        
+        // Warmup buttons
+        skipWarmupExerciseBtn.addEventListener('click', skipWarmupExercise);
+        skipAllWarmupBtn.addEventListener('click', skipAllWarmup);
 
         // Enter key on reps input
         repsInput.addEventListener('keypress', (e) => {
