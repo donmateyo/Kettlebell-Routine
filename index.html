@@ -11,7 +11,7 @@
       name="description"
       content="Progressive bodyweight workout app with proven exercises for full-body training"
     />
-    <meta name="theme-color" content="#1a1a1a" />
+    <meta name="theme-color" content="#0a0a0a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
@@ -29,9 +29,9 @@
 
           // Gradient background
           const g = ctx.createLinearGradient(0, 0, size, size);
-          g.addColorStop(0, "#1e3a8a");
-          g.addColorStop(0.5, "#3b82f6");
-          g.addColorStop(1, "#1e40af");
+          g.addColorStop(0, "#6366f1");
+          g.addColorStop(0.5, "#8b5cf6");
+          g.addColorStop(1, "#d946ef");
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, size, size);
 
@@ -41,7 +41,7 @@
           ctx.scale(s, s);
 
           // Glow effect
-          ctx.shadowColor = "rgba(59, 130, 246, 0.8)";
+          ctx.shadowColor = "rgba(139, 92, 246, 0.8)";
           ctx.shadowBlur = 40;
           
           // Draw stylized person doing push-up
@@ -94,8 +94,8 @@
           start_url: "/",
           scope: "/",
           display: "standalone",
-          background_color: "#1a1a1a",
-          theme_color: "#3b82f6",
+          background_color: "#0a0a0a",
+          theme_color: "#8b5cf6",
           description: "Progressive bodyweight workout app with proven exercises",
           icons: [
             { src: icon192, sizes: "192x192", type: "image/png" },
@@ -118,8 +118,14 @@
     </script>
 
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
       :root {
         color-scheme: dark;
+      }
+
+      * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       }
 
       input, select, textarea {
@@ -127,74 +133,125 @@
       }
 
       body {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        background: #0a0a0a;
+        background-image: 
+          radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+          radial-gradient(at 100% 100%, rgba(217, 70, 239, 0.15) 0px, transparent 50%);
+        background-attachment: fixed;
         min-height: 100vh;
       }
 
-      .workout-card {
-        background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-        border: 2px solid #3b82f6;
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.2), 0 10px 40px rgba(0, 0, 0, 0.8);
-        transition: all 0.3s ease;
+      .glass-card {
+        background: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .workout-card:hover {
-        border-color: #60a5fa;
-        box-shadow: 0 0 40px rgba(59, 130, 246, 0.3), 0 10px 50px rgba(0, 0, 0, 0.9);
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
-        transition: all 0.2s ease;
-      }
-
-      .btn-primary:hover {
-        background: linear-gradient(135deg, #60a5fa, #3b82f6);
+      .glass-card:hover {
+        border-color: rgba(139, 92, 246, 0.3);
+        box-shadow: 
+          0 12px 40px rgba(139, 92, 246, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
       }
 
-      .btn-primary:active {
+      .glass-card-active {
+        border-color: rgba(139, 92, 246, 0.5);
+        box-shadow: 
+          0 0 0 1px rgba(139, 92, 246, 0.3),
+          0 20px 60px rgba(139, 92, 246, 0.3);
+      }
+
+      .btn-gradient {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+        background-size: 200% 200%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-gradient::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .btn-gradient:hover {
+        background-position: 100% 0;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(139, 92, 246, 0.5);
+      }
+
+      .btn-gradient:hover::before {
+        transform: translateX(100%);
+      }
+
+      .btn-gradient:active {
         transform: translateY(0);
       }
 
-      .exercise-complete {
-        background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.2));
+      .set-indicator {
+        transition: all 0.3s ease;
+      }
+
+      .set-complete {
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(22, 163, 74, 0.3));
         border-color: #22c55e;
       }
 
-      .progress-bar {
-        transition: width 0.5s ease;
+      .progress-ring {
+        transition: stroke-dashoffset 0.5s ease;
       }
 
-      @keyframes pulse-glow {
+      @keyframes shimmer {
         0%, 100% {
-          box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+          background-position: 0% 50%;
         }
         50% {
-          box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+          background-position: 100% 50%;
         }
       }
 
-      .active-exercise {
-        animation: pulse-glow 2s infinite;
+      .shimmer {
+        animation: shimmer 3s ease infinite;
+        background: linear-gradient(90deg, 
+          rgba(99, 102, 241, 0.1) 0%, 
+          rgba(139, 92, 246, 0.2) 50%, 
+          rgba(99, 102, 241, 0.1) 100%);
+        background-size: 200% 100%;
       }
 
       .timer-display {
         font-variant-numeric: tabular-nums;
-        font-family: 'Courier New', monospace;
+        font-feature-settings: "tnum";
       }
 
       input, select, textarea {
-        background: rgba(15, 23, 42, 0.8) !important;
-        border: 1px solid #3b82f6 !important;
-        color: #e2e8f0 !important;
+        background: rgba(20, 20, 20, 0.8) !important;
+        border: 1px solid rgba(139, 92, 246, 0.2) !important;
+        color: #f1f5f9 !important;
+        transition: all 0.2s ease !important;
       }
 
       input:focus, select:focus, textarea:focus {
         outline: none !important;
-        border-color: #60a5fa !important;
-        box-shadow: 0 0 10px rgba(59, 130, 246, 0.5) !important;
+        border-color: rgba(139, 92, 246, 0.5) !important;
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.05));
+        border: 1px solid rgba(139, 92, 246, 0.2);
       }
 
       @media all and (display-mode: standalone) {
@@ -203,226 +260,307 @@
           padding-bottom: env(safe-area-inset-bottom);
         }
       }
+
+      /* Scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(20, 20, 20, 0.5);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(139, 92, 246, 0.3);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(139, 92, 246, 0.5);
+      }
     </style>
   </head>
 
-  <body class="text-slate-100 min-h-screen">
-    <div id="app" class="max-w-2xl mx-auto pb-20">
+  <body class="text-slate-100 min-h-screen antialiased">
+    <div id="app" class="max-w-3xl mx-auto pb-24 px-4">
       <!-- Header -->
-      <header class="workout-card text-blue-400 p-5 m-4 sticky top-4 z-40">
-        <div class="flex items-center justify-between">
-          <div>
-            <h1 class="text-2xl font-bold tracking-wider">BODYWEIGHT</h1>
-            <p class="text-sm text-slate-400">Progressive Training</p>
-          </div>
-          
-          <div class="flex gap-2">
-            <button
-              id="infoBtn"
-              class="text-blue-400/80 hover:text-blue-300 transition-colors p-2 hover:bg-blue-500/10 rounded"
-              title="Info"
-            >
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-              </svg>
-            </button>
-            <button
-              id="historyBtn"
-              class="text-blue-400/80 hover:text-blue-300 transition-colors p-2 hover:bg-blue-500/10 rounded"
-              title="History"
-            >
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
-              </svg>
-            </button>
-            <button
-              id="settingsBtn"
-              class="text-blue-400/80 hover:text-blue-300 transition-colors p-2 hover:bg-blue-500/10 rounded"
-              title="Settings"
-            >
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-              </svg>
-            </button>
+      <header class="sticky top-0 z-50 pt-6 pb-4 mb-6">
+        <div class="glass-card rounded-2xl p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-3xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                BODYWEIGHT
+              </h1>
+              <p class="text-sm text-slate-400 mt-1 font-medium">Progressive Training System</p>
+            </div>
+            
+            <div class="flex gap-2">
+              <button
+                id="infoBtn"
+                class="glass-card p-2.5 rounded-xl hover:bg-purple-500/10 transition-all"
+                title="Info"
+              >
+                <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+              <button
+                id="historyBtn"
+                class="glass-card p-2.5 rounded-xl hover:bg-purple-500/10 transition-all"
+                title="History"
+              >
+                <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                  <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+              <button
+                id="settingsBtn"
+                class="glass-card p-2.5 rounded-xl hover:bg-purple-500/10 transition-all"
+                title="Settings"
+              >
+                <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
       <!-- Main Content -->
-      <main class="p-4 space-y-6">
+      <main class="space-y-6">
         <!-- Stats Dashboard -->
-        <div class="workout-card p-5">
-          <h3 class="font-bold text-blue-400 mb-3">PROGRESS STATS</h3>
-          <div class="grid grid-cols-3 gap-3">
-            <div class="bg-slate-900/50 p-3 rounded border border-blue-500/30 text-center">
-              <div class="text-slate-400 text-xs uppercase">Workouts</div>
-              <div id="totalWorkouts" class="text-2xl font-bold text-blue-400 mt-1">0</div>
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-4">Performance</h3>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="stat-card p-4 rounded-xl text-center">
+              <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Total</div>
+              <div id="totalWorkouts" class="text-3xl font-bold text-transparent bg-gradient-to-br from-purple-400 to-pink-400 bg-clip-text mt-2">0</div>
+              <div class="text-xs text-slate-500 mt-1">Workouts</div>
             </div>
-            <div class="bg-slate-900/50 p-3 rounded border border-blue-500/30 text-center">
-              <div class="text-slate-400 text-xs uppercase">This Week</div>
-              <div id="weekWorkouts" class="text-2xl font-bold text-blue-400 mt-1">0/3</div>
+            <div class="stat-card p-4 rounded-xl text-center">
+              <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Week</div>
+              <div id="weekWorkouts" class="text-3xl font-bold text-transparent bg-gradient-to-br from-indigo-400 to-purple-400 bg-clip-text mt-2">0/3</div>
+              <div class="text-xs text-slate-500 mt-1">Complete</div>
             </div>
-            <div class="bg-slate-900/50 p-3 rounded border border-blue-500/30 text-center">
-              <div class="text-slate-400 text-xs uppercase">Level</div>
-              <div id="currentLevel" class="text-2xl font-bold text-blue-400 mt-1">1</div>
+            <div class="stat-card p-4 rounded-xl text-center">
+              <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Level</div>
+              <div id="currentLevel" class="text-3xl font-bold text-transparent bg-gradient-to-br from-pink-400 to-rose-400 bg-clip-text mt-2">1</div>
+              <div class="text-xs text-slate-500 mt-1">Average</div>
             </div>
           </div>
         </div>
 
         <!-- Workout Status -->
-        <div id="workoutStatus" class="workout-card p-6 text-center">
-          <div class="text-sm uppercase tracking-wider text-blue-400 mb-2">Ready to Train</div>
-          <div class="text-3xl font-bold mb-3">FULL BODY WORKOUT</div>
-          <div class="text-slate-400 mb-4">8 exercises • Progressive difficulty</div>
+        <div id="workoutStatus" class="glass-card rounded-2xl p-8 text-center shimmer">
+          <div class="inline-block px-4 py-1.5 bg-purple-500/20 rounded-full mb-4">
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Ready to Train</span>
+          </div>
+          <div class="text-4xl font-black mb-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            FULL BODY
+          </div>
+          <div class="text-slate-400 mb-6 font-medium">7 exercises • 3 sets each • Progressive difficulty</div>
           <button
             id="startWorkoutBtn"
-            class="btn-primary w-full py-4 text-lg font-bold uppercase tracking-wider rounded-lg"
+            class="btn-gradient w-full py-4 text-lg font-bold uppercase tracking-wider rounded-xl shadow-2xl"
           >
-            Start Workout
+            Start Training
           </button>
         </div>
 
         <!-- Active Workout View -->
-        <div id="activeWorkout" class="hidden space-y-4">
-          <!-- Current Exercise -->
-          <div id="currentExerciseCard" class="workout-card p-6 active-exercise">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <div class="text-xs text-blue-400 uppercase tracking-wider mb-1">Current Exercise</div>
-                <h2 id="exerciseName" class="text-2xl font-bold mb-1">Push-ups</h2>
-                <p id="exerciseLevel" class="text-sm text-slate-400">Level 1: Standard</p>
+        <div id="activeWorkout" class="hidden space-y-6">
+          <!-- Current Exercise Card -->
+          <div id="currentExerciseCard" class="glass-card glass-card-active rounded-2xl p-8">
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex-1">
+                <div class="inline-block px-3 py-1 bg-purple-500/20 rounded-full mb-3">
+                  <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Current</span>
+                </div>
+                <h2 id="exerciseName" class="text-3xl font-black mb-2 text-white">Push-ups</h2>
+                <p id="exerciseLevel" class="text-sm text-slate-400 font-medium">Level 1: Standard</p>
               </div>
               <div class="text-right">
-                <div class="text-xs text-slate-400 uppercase">Exercise</div>
-                <div id="exerciseNumber" class="text-2xl font-bold text-blue-400">1/8</div>
+                <div class="text-xs text-slate-500 uppercase font-semibold tracking-wide">Exercise</div>
+                <div id="exerciseNumber" class="text-3xl font-bold text-transparent bg-gradient-to-br from-purple-400 to-pink-400 bg-clip-text">1/7</div>
               </div>
             </div>
+
+            <!-- Set Indicator -->
+            <div class="mb-6">
+              <div class="text-xs text-slate-400 uppercase font-semibold tracking-wide mb-3">Current Set</div>
+              <div id="setIndicators" class="flex gap-3 justify-center"></div>
+            </div>
             
-            <div class="mb-4">
-              <div class="text-sm text-slate-400 mb-2">Target Reps</div>
-              <div id="targetReps" class="text-4xl font-bold text-blue-400">12</div>
+            <div class="mb-6">
+              <div class="text-sm text-slate-400 mb-2 font-semibold">Target Reps</div>
+              <div id="targetReps" class="text-6xl font-black text-transparent bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 bg-clip-text">12</div>
             </div>
 
-            <div class="mb-4">
-              <label class="block text-sm text-slate-400 mb-2">Reps Completed</label>
+            <div class="mb-6">
+              <label class="block text-sm text-slate-400 mb-3 font-semibold">Reps Completed</label>
               <input
                 id="repsInput"
                 type="number"
                 min="0"
-                class="w-full px-4 py-3 text-2xl font-bold text-center rounded"
+                class="w-full px-6 py-4 text-3xl font-bold text-center rounded-xl"
+                placeholder="0"
               />
             </div>
 
             <!-- Rest Timer -->
-            <div id="restTimer" class="hidden mb-4 text-center">
-              <div class="text-sm text-slate-400 mb-2">Rest Time</div>
-              <div id="restTimeDisplay" class="text-5xl font-bold text-blue-400 timer-display">90</div>
-              <div class="text-xs text-slate-400 mt-1">seconds</div>
+            <div id="restTimer" class="hidden mb-6 text-center p-8 glass-card rounded-2xl">
+              <div class="text-sm text-slate-400 mb-4 font-semibold uppercase tracking-wide">Rest Period</div>
+              <div id="restTimeDisplay" class="text-7xl font-black text-transparent bg-gradient-to-br from-indigo-400 to-purple-400 bg-clip-text timer-display mb-2">90</div>
+              <div class="text-xs text-slate-500 uppercase tracking-wide font-semibold">seconds remaining</div>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 gap-4">
               <button
-                id="completeExerciseBtn"
-                class="btn-primary py-3 font-bold uppercase rounded-lg"
+                id="completeSetBtn"
+                class="btn-gradient py-4 font-bold uppercase rounded-xl text-sm tracking-wider"
               >
-                Complete
+                Complete Set
               </button>
               <button
-                id="skipExerciseBtn"
-                class="bg-slate-700 hover:bg-slate-600 py-3 font-bold uppercase rounded-lg transition-colors"
+                id="skipSetBtn"
+                class="glass-card hover:bg-red-500/20 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
               >
-                Skip
+                Skip Set
               </button>
             </div>
           </div>
 
-          <!-- Progress Tracker -->
-          <div class="workout-card p-5">
-            <div class="flex justify-between items-center mb-3">
-              <h3 class="font-bold text-blue-400">WORKOUT PROGRESS</h3>
-              <span id="progressPercentage" class="text-sm text-slate-400">0%</span>
+          <!-- Progress Overview -->
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xs font-bold text-purple-400 uppercase tracking-wider">Workout Progress</h3>
+              <span id="progressPercentage" class="text-sm font-bold text-purple-400">0%</span>
             </div>
-            <div class="bg-slate-900/50 rounded-full h-3 mb-4 overflow-hidden">
-              <div id="progressBar" class="progress-bar bg-blue-500 h-full rounded-full" style="width: 0%"></div>
+            <div class="bg-black/40 rounded-full h-2.5 mb-6 overflow-hidden">
+              <div id="progressBar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
             </div>
-            <div id="exerciseList" class="space-y-2"></div>
+            <div id="exerciseList" class="space-y-3"></div>
           </div>
 
           <button
             id="stopWorkoutBtn"
-            class="w-full bg-red-600/80 hover:bg-red-600 py-3 font-bold uppercase rounded-lg transition-colors"
+            class="w-full glass-card bg-red-900/20 hover:bg-red-900/40 border-red-500/30 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
           >
-            End Workout
+            End Workout Early
           </button>
         </div>
 
         <!-- Workout Complete View -->
-        <div id="workoutComplete" class="hidden workout-card p-6 text-center">
-          <div class="text-5xl mb-4">🎉</div>
-          <div class="text-3xl font-bold mb-2">Workout Complete!</div>
-          <div id="workoutSummary" class="text-slate-400 mb-6"></div>
-          <div id="progressionAdvice" class="bg-blue-500/20 border border-blue-500/50 rounded p-4 mb-4 text-sm"></div>
+        <div id="workoutComplete" class="hidden glass-card rounded-2xl p-8 text-center">
+          <div class="text-6xl mb-4">🎉</div>
+          <div class="text-4xl font-black mb-3 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Workout Complete!
+          </div>
+          <div id="workoutSummary" class="text-slate-400 mb-6 font-medium"></div>
+          <div id="progressionAdvice" class="glass-card rounded-xl p-6 mb-6 text-sm"></div>
           <button
             id="finishBtn"
-            class="btn-primary w-full py-3 font-bold uppercase rounded-lg"
+            class="btn-gradient w-full py-4 font-bold uppercase rounded-xl text-sm tracking-wider"
           >
-            Finish
+            Finish & Return
           </button>
         </div>
       </main>
 
       <!-- Info Modal -->
-      <div id="infoModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="workout-card w-full max-w-lg p-6 max-h-[85vh] overflow-y-auto">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-blue-400">WORKOUT INFO</h2>
-            <button id="closeInfo" class="text-slate-400 hover:text-slate-200">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <div id="infoModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-lg p-8 max-h-[85vh] overflow-y-auto rounded-2xl">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">Workout Info</h2>
+            <button id="closeInfo" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
+              <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
             </button>
           </div>
 
-          <div class="space-y-4 text-sm">
-            <div>
-              <h3 class="font-bold text-blue-400 mb-2">PROGRAM OVERVIEW</h3>
-              <p class="text-slate-300 mb-2">
+          <div class="space-y-5 text-sm">
+            <div class="glass-card p-5 rounded-xl">
+              <h3 class="font-bold text-purple-400 mb-3 text-base">Program Overview</h3>
+              <p class="text-slate-300 leading-relaxed">
                 A progressive full-body bodyweight routine designed for 3x per week training. 
-                The program uses proven exercises and progressive overload to build strength and muscle.
+                Each exercise is performed for 3 sets, with progressive overload to build strength and muscle.
               </p>
             </div>
 
-            <div>
-              <h3 class="font-bold text-blue-400 mb-2">EXERCISES</h3>
-              <ul class="space-y-1 text-slate-300">
-                <li>• <strong>Push-ups:</strong> Chest, shoulders, triceps</li>
-                <li>• <strong>Pull-ups:</strong> Back, biceps (use progressions if needed)</li>
-                <li>• <strong>Squats:</strong> Legs, glutes</li>
-                <li>• <strong>Dips:</strong> Triceps, chest</li>
-                <li>• <strong>Rows:</strong> Back, biceps</li>
-                <li>• <strong>Pike Push-ups:</strong> Shoulders</li>
-                <li>• <strong>Leg Raises:</strong> Core</li>
-                <li>• <strong>Plank:</strong> Core stability</li>
+            <div class="glass-card p-5 rounded-xl">
+              <h3 class="font-bold text-purple-400 mb-3 text-base">Exercises (3 Sets Each)</h3>
+              <ul class="space-y-2 text-slate-300">
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">•</span>
+                  <span><strong>Push-ups:</strong> Chest, shoulders, triceps</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">•</span>
+                  <span><strong>Squats:</strong> Legs, glutes</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">•</span>
+                  <span><strong>Dips:</strong> Triceps, chest</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">•</span>
+                  <span><strong>Rows:</strong> Back, biceps</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">•</span>
+                  <span><strong>Pike Push-ups:</strong> Shoulders</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">•</span>
+                  <span><strong>Leg Raises:</strong> Core</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">•</span>
+                  <span><strong>Plank:</strong> Core stability</span>
+                </li>
               </ul>
             </div>
 
-            <div>
-              <h3 class="font-bold text-blue-400 mb-2">PROGRESSION SYSTEM</h3>
-              <ul class="space-y-1 text-slate-300">
-                <li>• Complete target reps for 2 consecutive workouts to progress</li>
-                <li>• Each level increases difficulty with more reps or harder variations</li>
-                <li>• Track your performance to see improvements over time</li>
+            <div class="glass-card p-5 rounded-xl">
+              <h3 class="font-bold text-purple-400 mb-3 text-base">Progression System</h3>
+              <ul class="space-y-2 text-slate-300">
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">✓</span>
+                  <span>Complete all 3 sets with target reps for 2 consecutive workouts to progress</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">✓</span>
+                  <span>Each level increases difficulty with more reps or harder variations</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-400 mr-2">✓</span>
+                  <span>Track your performance to see improvements over time</span>
+                </li>
               </ul>
             </div>
 
-            <div>
-              <h3 class="font-bold text-blue-400 mb-2">TIPS</h3>
-              <ul class="space-y-1 text-slate-300">
-                <li>• Focus on proper form over reps</li>
-                <li>• Rest 90-120 seconds between exercises</li>
-                <li>• Train 3x per week with rest days between</li>
-                <li>• Stay consistent for best results</li>
+            <div class="glass-card p-5 rounded-xl">
+              <h3 class="font-bold text-purple-400 mb-3 text-base">Training Tips</h3>
+              <ul class="space-y-2 text-slate-300">
+                <li class="flex items-start">
+                  <span class="text-pink-400 mr-2">→</span>
+                  <span>Focus on proper form over reps</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-pink-400 mr-2">→</span>
+                  <span>Rest 90-120 seconds between sets</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-pink-400 mr-2">→</span>
+                  <span>Train 3x per week with rest days between</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-pink-400 mr-2">→</span>
+                  <span>Stay consistent for best results</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -430,37 +568,37 @@
       </div>
 
       <!-- History Modal -->
-      <div id="historyModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="workout-card w-full max-w-lg p-6 max-h-[85vh] overflow-y-auto">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-blue-400">WORKOUT HISTORY</h2>
-            <button id="closeHistory" class="text-slate-400 hover:text-slate-200">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <div id="historyModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-lg p-8 max-h-[85vh] overflow-y-auto rounded-2xl">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">Workout History</h2>
+            <button id="closeHistory" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
+              <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
             </button>
           </div>
 
-          <div id="historyList" class="space-y-3"></div>
+          <div id="historyList" class="space-y-4"></div>
         </div>
       </div>
 
       <!-- Settings Modal -->
-      <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="workout-card w-full max-w-sm p-6">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-blue-400">SETTINGS</h2>
-            <button id="closeSettings" class="text-slate-400 hover:text-slate-200">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <div id="settingsModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-md p-8 rounded-2xl">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">Settings</h2>
+            <button id="closeSettings" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
+              <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
             </button>
           </div>
 
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium mb-2 text-blue-400">
-                Rest Time (seconds)
+          <div class="space-y-5">
+            <div class="glass-card p-5 rounded-xl">
+              <label class="block text-sm font-semibold mb-3 text-purple-400">
+                Rest Time Between Sets
               </label>
               <input
                 type="number"
@@ -469,25 +607,26 @@
                 max="300"
                 step="10"
                 value="90"
-                class="w-full px-4 py-2 rounded"
+                class="w-full px-4 py-3 rounded-xl font-semibold"
               />
+              <p class="text-xs text-slate-500 mt-2">Recommended: 90-120 seconds</p>
             </div>
 
-            <div>
+            <div class="glass-card p-5 rounded-xl">
               <label class="flex items-center cursor-pointer">
                 <input
                   type="checkbox"
                   id="soundAlerts"
-                  class="mr-3 w-5 h-5 cursor-pointer accent-blue-500"
+                  class="mr-3 w-5 h-5 cursor-pointer accent-purple-500"
                   checked
                 />
-                <span>Enable sound alerts</span>
+                <span class="font-semibold">Enable sound alerts</span>
               </label>
             </div>
 
             <button
               id="resetProgress"
-              class="w-full bg-red-600/80 hover:bg-red-600 py-3 font-bold uppercase rounded-lg transition-colors"
+              class="w-full glass-card bg-red-900/20 hover:bg-red-900/40 border-red-500/30 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
             >
               Reset All Progress
             </button>
@@ -497,7 +636,7 @@
     </div>
 
     <script>
-      // Exercise Database with Progressive Levels
+      // Exercise Database with Progressive Levels (Pull-ups removed)
       const EXERCISES = [
         {
           id: 'pushups',
@@ -512,21 +651,6 @@
             { level: 6, name: 'Archer Push-ups', reps: 10 },
             { level: 7, name: 'Archer Push-ups', reps: 12 },
             { level: 8, name: 'One-Arm Push-up Progression', reps: 8 }
-          ]
-        },
-        {
-          id: 'pullups',
-          name: 'Pull-ups',
-          category: 'Pull',
-          levels: [
-            { level: 1, name: 'Assisted Pull-ups (Band)', reps: 8 },
-            { level: 2, name: 'Negative Pull-ups', reps: 5 },
-            { level: 3, name: 'Standard Pull-ups', reps: 5 },
-            { level: 4, name: 'Standard Pull-ups', reps: 8 },
-            { level: 5, name: 'Standard Pull-ups', reps: 10 },
-            { level: 6, name: 'L-Sit Pull-ups', reps: 6 },
-            { level: 7, name: 'Archer Pull-ups', reps: 5 },
-            { level: 8, name: 'One-Arm Pull-up Progression', reps: 3 }
           ]
         },
         {
@@ -621,10 +745,13 @@
         }
       ];
 
+      const SETS_PER_EXERCISE = 3;
+
       // State
       let state = {
         workoutInProgress: false,
         currentExerciseIndex: 0,
+        currentSet: 1,
         workoutData: [],
         exerciseLevels: {},
         settings: {
@@ -641,8 +768,8 @@
 
       // Storage keys
       const STORAGE_KEYS = {
-        LEVELS: 'bw_exercise_levels',
-        HISTORY: 'bw_workout_history',
+        LEVELS: 'bw_exercise_levels_v2',
+        HISTORY: 'bw_workout_history_v2',
         SETTINGS: 'bw_settings'
       };
 
@@ -657,8 +784,8 @@
       const exerciseNumber = document.getElementById('exerciseNumber');
       const targetReps = document.getElementById('targetReps');
       const repsInput = document.getElementById('repsInput');
-      const completeExerciseBtn = document.getElementById('completeExerciseBtn');
-      const skipExerciseBtn = document.getElementById('skipExerciseBtn');
+      const completeSetBtn = document.getElementById('completeSetBtn');
+      const skipSetBtn = document.getElementById('skipSetBtn');
       const stopWorkoutBtn = document.getElementById('stopWorkoutBtn');
       const progressBar = document.getElementById('progressBar');
       const progressPercentage = document.getElementById('progressPercentage');
@@ -668,6 +795,7 @@
       const finishBtn = document.getElementById('finishBtn');
       const workoutSummary = document.getElementById('workoutSummary');
       const progressionAdvice = document.getElementById('progressionAdvice');
+      const setIndicators = document.getElementById('setIndicators');
 
       // Stats
       const totalWorkouts = document.getElementById('totalWorkouts');
@@ -743,7 +871,7 @@
         // Count this week's workouts
         const now = new Date();
         const weekStart = new Date(now);
-        weekStart.setDate(now.getDate() - now.getDay()); // Start of week
+        weekStart.setDate(now.getDate() - now.getDay());
         weekStart.setHours(0, 0, 0, 0);
         
         const thisWeek = state.history.filter(w => new Date(w.date) >= weekStart).length;
@@ -783,6 +911,7 @@
         initAudio();
         state.workoutInProgress = true;
         state.currentExerciseIndex = 0;
+        state.currentSet = 1;
         state.workoutData = EXERCISES.map(ex => {
           const levelData = state.exerciseLevels[ex.id] || { level: 1 };
           const exerciseLevel = ex.levels[levelData.level - 1];
@@ -790,8 +919,11 @@
             exercise: ex,
             level: levelData.level,
             targetReps: exerciseLevel.reps,
-            completedReps: null,
-            skipped: false
+            sets: [
+              { reps: null, skipped: false },
+              { reps: null, skipped: false },
+              { reps: null, skipped: false }
+            ]
           };
         });
 
@@ -801,6 +933,28 @@
         displayCurrentExercise();
         updateExerciseList();
         playBeep(1000, 300);
+      }
+
+      // Display set indicators
+      function displaySetIndicators() {
+        const current = state.workoutData[state.currentExerciseIndex];
+        setIndicators.innerHTML = current.sets.map((set, idx) => {
+          const setNum = idx + 1;
+          let classes = 'set-indicator w-20 h-20 rounded-xl flex flex-col items-center justify-center glass-card font-bold';
+          let content = `<div class="text-xs text-slate-400 uppercase">Set</div><div class="text-2xl">${setNum}</div>`;
+          
+          if (set.reps !== null) {
+            classes += ' set-complete';
+            content = `<div class="text-xs text-green-400 uppercase">✓</div><div class="text-xl text-green-400">${set.reps}</div>`;
+          } else if (set.skipped) {
+            classes += ' opacity-50';
+            content = `<div class="text-xs text-slate-500 uppercase">Skip</div><div class="text-xl text-slate-500">⊘</div>`;
+          } else if (setNum === state.currentSet) {
+            classes += ' border-2 border-purple-400 bg-purple-500/20';
+          }
+          
+          return `<div class="${classes}">${content}</div>`;
+        }).join('');
       }
 
       // Display current exercise
@@ -828,6 +982,7 @@
         repsInput.value = '';
         repsInput.focus();
 
+        displaySetIndicators();
         updateProgress();
         scrollToTop();
       }
@@ -838,11 +993,18 @@
 
       // Update progress
       function updateProgress() {
-        const total = state.workoutData.length;
-        const completed = state.workoutData.filter(ex => 
-          ex.completedReps !== null || ex.skipped
-        ).length;
-        const percentage = Math.round((completed / total) * 100);
+        const totalSets = state.workoutData.length * SETS_PER_EXERCISE;
+        let completedSets = 0;
+        
+        state.workoutData.forEach(ex => {
+          ex.sets.forEach(set => {
+            if (set.reps !== null || set.skipped) {
+              completedSets++;
+            }
+          });
+        });
+        
+        const percentage = Math.round((completedSets / totalSets) * 100);
         
         progressBar.style.width = `${percentage}%`;
         progressPercentage.textContent = `${percentage}%`;
@@ -851,34 +1013,38 @@
       // Update exercise list
       function updateExerciseList() {
         exerciseList.innerHTML = state.workoutData.map((ex, idx) => {
+          const completedSets = ex.sets.filter(s => s.reps !== null).length;
+          const skippedSets = ex.sets.filter(s => s.skipped).length;
+          const totalSets = ex.sets.length;
+          
           let status = '';
           let statusClass = '';
           
-          if (ex.completedReps !== null) {
-            status = `✓ ${ex.completedReps}`;
-            statusClass = 'text-green-400';
-          } else if (ex.skipped) {
-            status = '⊘ Skipped';
-            statusClass = 'text-slate-500';
+          if (completedSets === totalSets) {
+            status = `✓ Complete (${completedSets}/${totalSets})`;
+            statusClass = 'text-green-400 font-semibold';
           } else if (idx === state.currentExerciseIndex) {
-            status = 'In Progress';
-            statusClass = 'text-blue-400 font-bold';
-          } else {
-            status = `${ex.targetReps}${ex.exercise.id === 'plank' ? 's' : ''}`;
+            status = `In Progress (${completedSets}/${totalSets})`;
+            statusClass = 'text-purple-400 font-bold';
+          } else if (completedSets > 0 || skippedSets > 0) {
+            status = `${completedSets}/${totalSets} sets`;
             statusClass = 'text-slate-400';
+          } else {
+            status = `${totalSets} sets`;
+            statusClass = 'text-slate-500';
           }
 
           return `
-            <div class="flex justify-between items-center text-sm ${idx === state.currentExerciseIndex ? 'bg-blue-500/10 p-2 rounded' : ''}">
-              <span class="${idx < state.currentExerciseIndex ? 'text-slate-400' : ''}">${ex.exercise.name}</span>
+            <div class="flex justify-between items-center text-sm font-medium ${idx === state.currentExerciseIndex ? 'glass-card p-3 rounded-xl bg-purple-500/10' : 'p-2'}">
+              <span class="${idx < state.currentExerciseIndex && completedSets === totalSets ? 'text-slate-400' : 'text-slate-200'}">${ex.exercise.name}</span>
               <span class="${statusClass}">${status}</span>
             </div>
           `;
         }).join('');
       }
 
-      // Complete exercise
-      function completeExercise() {
+      // Complete set
+      function completeSet() {
         const reps = parseInt(repsInput.value);
         if (isNaN(reps) || reps < 0) {
           alert('Please enter a valid number of reps');
@@ -886,48 +1052,71 @@
         }
 
         const current = state.workoutData[state.currentExerciseIndex];
-        current.completedReps = reps;
-
-        // Check for progression
-        if (reps >= current.targetReps) {
-          const exLevel = state.exerciseLevels[current.exercise.id];
-          exLevel.successCount = (exLevel.successCount || 0) + 1;
-          
-          // Progress after 2 successful workouts
-          if (exLevel.successCount >= 2 && exLevel.level < current.exercise.levels.length) {
-            exLevel.level++;
-            exLevel.successCount = 0;
-          }
-        } else {
-          // Reset success count if didn't hit target
-          state.exerciseLevels[current.exercise.id].successCount = 0;
-        }
+        current.sets[state.currentSet - 1].reps = reps;
 
         saveData();
+        displaySetIndicators();
         updateExerciseList();
 
-        // Start rest timer
-        if (state.currentExerciseIndex < state.workoutData.length - 1) {
+        // Move to next set or exercise
+        if (state.currentSet < SETS_PER_EXERCISE) {
+          state.currentSet++;
           startRestTimer();
         } else {
+          // Check for progression after all sets
+          const allSetsComplete = current.sets.every(s => s.reps !== null && s.reps >= current.targetReps);
+          
+          if (allSetsComplete) {
+            const exLevel = state.exerciseLevels[current.exercise.id];
+            exLevel.successCount = (exLevel.successCount || 0) + 1;
+            
+            // Progress after 2 successful workouts
+            if (exLevel.successCount >= 2 && exLevel.level < current.exercise.levels.length) {
+              exLevel.level++;
+              exLevel.successCount = 0;
+            }
+          } else {
+            // Reset success count if didn't hit all targets
+            state.exerciseLevels[current.exercise.id].successCount = 0;
+          }
+
+          saveData();
+          
+          // Move to next exercise
           state.currentExerciseIndex++;
-          displayCurrentExercise();
+          state.currentSet = 1;
+          
+          if (state.currentExerciseIndex < state.workoutData.length) {
+            startRestTimer();
+          } else {
+            displayCurrentExercise();
+          }
         }
 
         playBeep(1200, 200);
       }
 
-      // Skip exercise
-      function skipExercise() {
+      // Skip set
+      function skipSet() {
         const current = state.workoutData[state.currentExerciseIndex];
-        current.skipped = true;
+        current.sets[state.currentSet - 1].skipped = true;
+        
+        // Reset success count
         state.exerciseLevels[current.exercise.id].successCount = 0;
         
         saveData();
+        displaySetIndicators();
         updateExerciseList();
 
-        state.currentExerciseIndex++;
-        displayCurrentExercise();
+        // Move to next set or exercise
+        if (state.currentSet < SETS_PER_EXERCISE) {
+          state.currentSet++;
+          displayCurrentExercise();
+        } else {
+          state.currentExerciseIndex++;
+          state.currentSet = 1;
+          displayCurrentExercise();
+        }
       }
 
       // Rest timer
@@ -936,8 +1125,8 @@
         state.restSecondsRemaining = state.settings.restTime;
         
         repsInput.classList.add('hidden');
-        completeExerciseBtn.classList.add('hidden');
-        skipExerciseBtn.classList.add('hidden');
+        completeSetBtn.classList.add('hidden');
+        skipSetBtn.classList.add('hidden');
         restTimer.classList.remove('hidden');
         
         restTimeDisplay.textContent = state.restSecondsRemaining;
@@ -964,16 +1153,15 @@
         state.restTimerActive = false;
         restTimer.classList.add('hidden');
         repsInput.classList.remove('hidden');
-        completeExerciseBtn.classList.remove('hidden');
-        skipExerciseBtn.classList.remove('hidden');
+        completeSetBtn.classList.remove('hidden');
+        skipSetBtn.classList.remove('hidden');
         
-        state.currentExerciseIndex++;
         displayCurrentExercise();
       }
 
       // Stop workout
       function stopWorkout() {
-        if (!confirm('Are you sure you want to end this workout?')) return;
+        if (!confirm('Are you sure you want to end this workout early?')) return;
         
         if (restInterval) clearInterval(restInterval);
         
@@ -991,11 +1179,22 @@
         if (restInterval) clearInterval(restInterval);
         
         // Calculate stats
-        const completed = state.workoutData.filter(ex => ex.completedReps !== null).length;
-        const skipped = state.workoutData.filter(ex => ex.skipped).length;
-        const totalReps = state.workoutData.reduce((sum, ex) => 
-          sum + (ex.completedReps || 0), 0
-        );
+        let completedSets = 0;
+        let skippedSets = 0;
+        let totalReps = 0;
+        
+        state.workoutData.forEach(ex => {
+          ex.sets.forEach(set => {
+            if (set.reps !== null) {
+              completedSets++;
+              totalReps += set.reps;
+            } else if (set.skipped) {
+              skippedSets++;
+            }
+          });
+        });
+
+        const totalSets = state.workoutData.length * SETS_PER_EXERCISE;
 
         // Check for progressions
         const progressions = [];
@@ -1014,10 +1213,10 @@
             name: ex.exercise.name,
             level: ex.level,
             target: ex.targetReps,
-            completed: ex.completedReps,
-            skipped: ex.skipped
+            sets: ex.sets
           })),
           totalReps,
+          totalSets: completedSets,
           duration: null
         });
 
@@ -1026,20 +1225,20 @@
 
         // Display summary
         workoutSummary.innerHTML = `
-          <div class="text-lg mb-2">Completed: ${completed}/${state.workoutData.length} exercises</div>
-          <div class="text-sm">Total Reps: ${totalReps}</div>
-          ${skipped > 0 ? `<div class="text-sm text-slate-400">Skipped: ${skipped}</div>` : ''}
+          <div class="text-xl mb-3 font-semibold">Completed ${completedSets}/${totalSets} sets</div>
+          <div class="text-sm text-slate-400">Total Reps: ${totalReps}</div>
+          ${skippedSets > 0 ? `<div class="text-sm text-slate-500 mt-1">Skipped: ${skippedSets} sets</div>` : ''}
         `;
 
         if (progressions.length > 0) {
           progressionAdvice.innerHTML = `
-            <div class="font-bold mb-2 text-blue-400">🎯 Progress Update:</div>
-            ${progressions.map(p => `<div class="text-sm">• ${p}</div>`).join('')}
+            <div class="font-bold mb-3 text-purple-400 text-base">🎯 Progress Update</div>
+            ${progressions.map(p => `<div class="text-sm text-slate-300 mb-2">• ${p}</div>`).join('')}
           `;
         } else {
           progressionAdvice.innerHTML = `
-            <div class="font-bold mb-2 text-blue-400">💪 Keep Training!</div>
-            <div class="text-sm">Complete target reps for 2 consecutive workouts to level up exercises.</div>
+            <div class="font-bold mb-3 text-purple-400 text-base">💪 Keep Training!</div>
+            <div class="text-sm text-slate-300">Complete all 3 sets with target reps for 2 consecutive workouts to level up exercises.</div>
           `;
         }
 
@@ -1061,7 +1260,7 @@
         const sortedHistory = [...state.history].reverse();
         
         if (sortedHistory.length === 0) {
-          historyList.innerHTML = '<div class="text-slate-400 text-center py-8">No workout history yet</div>';
+          historyList.innerHTML = '<div class="text-slate-400 text-center py-12 glass-card rounded-xl">No workout history yet.<br><span class="text-sm text-slate-500 mt-2 inline-block">Complete your first workout to see it here!</span></div>';
           return;
         }
 
@@ -1074,27 +1273,34 @@
             year: 'numeric'
           });
           
-          const completed = workout.exercises.filter(ex => ex.completed !== null).length;
+          const totalSets = workout.totalSets || 0;
+          const maxSets = workout.exercises.length * 3;
           
           return `
-            <div class="bg-slate-900/50 border border-blue-500/30 rounded p-4">
-              <div class="flex justify-between items-start mb-2">
+            <div class="glass-card rounded-xl p-5">
+              <div class="flex justify-between items-start mb-3">
                 <div>
-                  <div class="font-bold text-blue-400">${dateStr}</div>
-                  <div class="text-sm text-slate-400">${completed}/${workout.exercises.length} exercises • ${workout.totalReps} reps</div>
+                  <div class="font-bold text-purple-400 mb-1">${dateStr}</div>
+                  <div class="text-sm text-slate-400">${totalSets}/${maxSets} sets • ${workout.totalReps} reps</div>
                 </div>
                 <button 
                   onclick="deleteWorkout(${state.history.length - 1 - idx})" 
-                  class="text-red-400 hover:text-red-300 text-sm"
+                  class="glass-card p-2 rounded-lg hover:bg-red-500/20 text-red-400 transition-all"
                   title="Delete"
                 >
-                  ×
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                  </svg>
                 </button>
               </div>
-              <div class="space-y-1 text-xs">
+              <div class="space-y-2 text-xs">
                 ${workout.exercises.map(ex => {
-                  if (ex.skipped) return `<div class="text-slate-500">⊘ ${ex.name}</div>`;
-                  return `<div class="text-slate-300">✓ ${ex.name}: ${ex.completed}/${ex.target}</div>`;
+                  const completedSets = ex.sets ? ex.sets.filter(s => s.reps !== null).length : 0;
+                  const totalExSets = ex.sets ? ex.sets.length : 3;
+                  return `<div class="text-slate-300 flex justify-between">
+                    <span>${ex.name}</span>
+                    <span class="text-slate-500">${completedSets}/${totalExSets} sets</span>
+                  </div>`;
                 }).join('')}
               </div>
             </div>
@@ -1104,7 +1310,7 @@
 
       // Delete workout
       window.deleteWorkout = function(index) {
-        if (!confirm('Delete this workout?')) return;
+        if (!confirm('Delete this workout from history?')) return;
         state.history.splice(index, 1);
         saveData();
         updateStatsDisplay();
@@ -1114,13 +1320,13 @@
       // Setup event listeners
       function setupEventListeners() {
         startWorkoutBtn.addEventListener('click', startWorkout);
-        completeExerciseBtn.addEventListener('click', completeExercise);
-        skipExerciseBtn.addEventListener('click', skipExercise);
+        completeSetBtn.addEventListener('click', completeSet);
+        skipSetBtn.addEventListener('click', skipSet);
         stopWorkoutBtn.addEventListener('click', stopWorkout);
 
         // Enter key on reps input
         repsInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') completeExercise();
+          if (e.key === 'Enter') completeSet();
         });
 
         // Modals
