@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Bodyweight Workout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .workout-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .workout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .workout-header h2 {
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .week-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .exercise-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .exercise-card.completed {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-color: #4caf50;
+        }
+
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .exercise-info h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .exercise-info p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .exercise-target {
+            background: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: right;
+            min-width: 120px;
+        }
+
+        .exercise-target .label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .exercise-target .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .exercise-input {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 80px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .btn-complete {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+        }
+
+        .btn-complete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-complete:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-finish {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+
+        .btn-finish:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-reset {
+            background: #ff5252;
+            color: white;
+            padding: 15px 30px;
+        }
+
+        .btn-reset:hover {
+            background: #ff1744;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4);
+        }
+
+        .progress-indicator {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50 0%, #45a049 100%);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .tips {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #ff9800;
+        }
+
+        .tips h3 {
+            color: #e65100;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tips li {
+            padding: 8px 0;
+            color: #5d4037;
+            line-height: 1.5;
+        }
+
+        .tips li:before {
+            content: "💪 ";
+            margin-right: 8px;
+        }
+
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .celebration.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .celebration h2 {
+            color: #4caf50;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .celebration p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .workout-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .exercise-header {
+                flex-direction: column;
+            }
+
+            .exercise-target {
+                text-align: left;
+                width: 100%;
+            }
+        }
+
+        .history-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-top: 20px;
+        }
+
+        .history-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .history-item {
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-item .date {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .history-item .details {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💪 Progressive Bodyweight Workout</h1>
+            <p>Full Body Routine • 3x Per Week • Build Strength Naturally</p>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3 id="weekNumber">1</h3>
+                <p>Current Week</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="totalWorkouts">0</h3>
+                <p>Workouts Completed</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="weeklyProgress">0/3</h3>
+                <p>This Week</p>
+            </div>
+        </div>
+
+        <div class="workout-container">
+            <div class="workout-header">
+                <h2>Today's Workout</h2>
+                <div class="week-info">Week <span id="currentWeek">1</span></div>
+            </div>
+
+            <div class="progress-indicator">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+
+            <div class="exercise-list" id="exerciseList"></div>
+
+            <div class="action-buttons">
+                <button class="btn btn-finish" id="finishWorkout" onclick="finishWorkout()">
+                    Complete Workout ✓
+                </button>
+                <button class="btn btn-reset" onclick="resetProgress()">
+                    Reset All Progress
+                </button>
+            </div>
+        </div>
+
+        <div class="tips">
+            <h3>🎯 Training Tips</h3>
+            <ul>
+                <li>Rest 90-180 seconds between sets for optimal strength gains</li>
+                <li>Increase reps when you can complete all sets with good form</li>
+                <li>Progress to harder variations when you hit 12+ reps consistently</li>
+                <li>Take at least 1 day of rest between workouts</li>
+                <li>Focus on controlled movement - 2 seconds down, 1 second up</li>
+                <li>Week automatically progresses after completing 3 workouts</li>
+            </ul>
+        </div>
+
+        <div class="history-section">
+            <h2>Recent Workouts</h2>
+            <div class="history-list" id="historyList">
+                <p style="color: #999; text-align: center;">No workouts completed yet</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="celebration" id="celebration">
+        <h2>🎉 Awesome!</h2>
+        <p id="celebrationText">Workout completed!</p>
+        <button class="btn btn-complete" onclick="closeCelebration()">Continue</button>
+    </div>
+
+    <script>
+        // Exercise database with proven bodyweight exercises
+        const exercises = [
+            {
+                id: 'pushups',
+                name: 'Push-ups',
+                description: 'Targets chest, shoulders, and triceps. Keep body straight, lower until chest nearly touches ground.',
+                baseReps: 8,
+                baseSets: 3,
+                progression: 1
+            },
+            {
+                id: 'pullups',
+                name: 'Pull-ups / Inverted Rows',
+                description: 'Targets back and biceps. Use pull-up bar or inverted rows under a table. Full range of motion.',
+                baseReps: 5,
+                baseSets: 3,
+                progression: 1
+            },
+            {
+                id: 'squats',
+                name: 'Bodyweight Squats',
+                description: 'Targets quads, glutes, and core. Go below parallel, keep chest up, knees tracking over toes.',
+                baseReps: 12,
+                baseSets: 3,
+                progression: 2
+            },
+            {
+                id: 'lunges',
+                name: 'Walking Lunges',
+                description: 'Targets legs and glutes unilaterally. Step forward, lower back knee to ground, alternate legs.',
+                baseReps: 10,
+                baseSets: 3,
+                progression: 1
+            },
+            {
+                id: 'dips',
+                name: 'Dips / Bench Dips',
+                description: 'Targets triceps and chest. Use parallel bars or chair. Lower until upper arms are parallel to ground.',
+                baseReps: 8,
+                baseSets: 3,
+                progression: 1
+            },
+            {
+                id: 'plank',
+                name: 'Plank Hold',
+                description: 'Core stability. Hold straight body position, squeeze glutes and core. Time in seconds.',
+                baseReps: 30,
+                baseSets: 3,
+                progression: 5
+            },
+            {
+                id: 'legRaises',
+                name: 'Hanging Leg Raises / Lying Leg Raises',
+                description: 'Targets lower abs. Hang from bar or lie on ground, raise legs to 90 degrees, control the descent.',
+                baseReps: 8,
+                baseSets: 3,
+                progression: 1
+            }
+        ];
+
+        // Initialize app
+        let workoutState = {
+            currentWeek: 1,
+            totalWorkouts: 0,
+            weeklyWorkouts: 0,
+            exerciseProgress: {},
+            workoutHistory: [],
+            currentWorkout: []
+        };
+
+        function loadState() {
+            const saved = localStorage.getItem('bodyweightWorkoutState');
+            if (saved) {
+                workoutState = JSON.parse(saved);
+            } else {
+                initializeExerciseProgress();
+            }
+            renderWorkout();
+            updateStats();
+            renderHistory();
+        }
+
+        function saveState() {
+            localStorage.setItem('bodyweightWorkoutState', JSON.stringify(workoutState));
+        }
+
+        function initializeExerciseProgress() {
+            exercises.forEach(ex => {
+                workoutState.exerciseProgress[ex.id] = {
+                    sets: ex.baseSets,
+                    reps: ex.baseReps,
+                    completed: []
+                };
+            });
+        }
+
+        function renderWorkout() {
+            const container = document.getElementById('exerciseList');
+            workoutState.currentWorkout = exercises.map(ex => ({
+                ...ex,
+                ...workoutState.exerciseProgress[ex.id],
+                currentSets: 0,
+                currentReps: 0
+            }));
+
+            container.innerHTML = workoutState.currentWorkout.map((ex, idx) => `
+                <div class="exercise-card" id="exercise-${ex.id}">
+                    <div class="exercise-header">
+                        <div class="exercise-info">
+                            <h3>${ex.name}</h3>
+                            <p>${ex.description}</p>
+                        </div>
+                        <div class="exercise-target">
+                            <div class="label">Target</div>
+                            <div class="value">${ex.sets} × ${ex.reps}</div>
+                        </div>
+                    </div>
+                    <div class="exercise-input">
+                        <div class="input-group">
+                            <label>Sets</label>
+                            <input type="number" 
+                                   id="sets-${ex.id}" 
+                                   min="0" 
+                                   max="${ex.sets + 2}" 
+                                   value="0"
+                                   onchange="updateExercise('${ex.id}')">
+                        </div>
+                        <div class="input-group">
+                            <label>Reps</label>
+                            <input type="number" 
+                                   id="reps-${ex.id}" 
+                                   min="0" 
+                                   value="0"
+                                   onchange="updateExercise('${ex.id}')">
+                        </div>
+                        <button class="btn btn-complete" 
+                                id="btn-${ex.id}"
+                                onclick="completeExercise('${ex.id}')"
+                                disabled>
+                            Mark Complete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            updateProgress();
+        }
+
+        function updateExercise(exerciseId) {
+            const sets = parseInt(document.getElementById(`sets-${exerciseId}`).value) || 0;
+            const reps = parseInt(document.getElementById(`reps-${exerciseId}`).value) || 0;
+            const btn = document.getElementById(`btn-${exerciseId}`);
+            
+            if (sets > 0 && reps > 0) {
+                btn.disabled = false;
+            } else {
+                btn.disabled = true;
+            }
+        }
+
+        function completeExercise(exerciseId) {
+            const sets = parseInt(document.getElementById(`sets-${exerciseId}`).value);
+            const reps = parseInt(document.getElementById(`reps-${exerciseId}`).value);
+            
+            const card = document.getElementById(`exercise-${exerciseId}`);
+            card.classList.add('completed');
+            
+            const btn = document.getElementById(`btn-${exerciseId}`);
+            btn.textContent = '✓ Completed';
+            btn.disabled = true;
+            
+            document.getElementById(`sets-${exerciseId}`).disabled = true;
+            document.getElementById(`reps-${exerciseId}`).disabled = true;
+            
+            const exercise = workoutState.currentWorkout.find(ex => ex.id === exerciseId);
+            exercise.currentSets = sets;
+            exercise.currentReps = reps;
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const completed = workoutState.currentWorkout.filter(ex => 
+                document.getElementById(`exercise-${ex.id}`).classList.contains('completed')
+            ).length;
+            
+            const total = workoutState.currentWorkout.length;
+            const percentage = (completed / total) * 100;
+            
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('finishWorkout').disabled = completed !== total;
+        }
+
+        function finishWorkout() {
+            // Save workout results
+            const workoutData = {
+                date: new Date().toISOString(),
+                week: workoutState.currentWeek,
+                exercises: workoutState.currentWorkout.map(ex => ({
+                    id: ex.id,
+                    name: ex.name,
+                    sets: ex.currentSets,
+                    reps: ex.currentReps,
+                    target: `${ex.sets}×${ex.reps}`
+                }))
+            };
+            
+            workoutState.workoutHistory.unshift(workoutData);
+            if (workoutState.workoutHistory.length > 10) {
+                workoutState.workoutHistory = workoutState.workoutHistory.slice(0, 10);
+            }
+            
+            workoutState.totalWorkouts++;
+            workoutState.weeklyWorkouts++;
+            
+            // Check if week is complete
+            if (workoutState.weeklyWorkouts >= 3) {
+                workoutState.currentWeek++;
+                workoutState.weeklyWorkouts = 0;
+                progressToNextWeek();
+                showCelebration('Week Complete! 🎉', `Amazing work! You've completed Week ${workoutState.currentWeek - 1}. Your targets have increased!`);
+            } else {
+                showCelebration('Workout Complete! 💪', `Great job! ${3 - workoutState.weeklyWorkouts} more workout${3 - workoutState.weeklyWorkouts !== 1 ? 's' : ''} this week.`);
+            }
+            
+            saveState();
+            updateStats();
+            renderHistory();
+            
+            // Reset workout
+            setTimeout(() => {
+                renderWorkout();
+            }, 2000);
+        }
+
+        function progressToNextWeek() {
+            // Increase targets for next week
+            exercises.forEach(ex => {
+                const progress = workoutState.exerciseProgress[ex.id];
+                progress.reps += ex.progression;
+            });
+        }
+
+        function showCelebration(title, message) {
+            document.getElementById('celebration').querySelector('h2').textContent = title;
+            document.getElementById('celebrationText').textContent = message;
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('celebration').classList.add('show');
+        }
+
+        function closeCelebration() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('celebration').classList.remove('show');
+        }
+
+        function updateStats() {
+            document.getElementById('weekNumber').textContent = workoutState.currentWeek;
+            document.getElementById('currentWeek').textContent = workoutState.currentWeek;
+            document.getElementById('totalWorkouts').textContent = workoutState.totalWorkouts;
+            document.getElementById('weeklyProgress').textContent = `${workoutState.weeklyWorkouts}/3`;
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+            
+            if (workoutState.workoutHistory.length === 0) {
+                container.innerHTML = '<p style="color: #999; text-align: center;">No workouts completed yet</p>';
+                return;
+            }
+            
+            container.innerHTML = workoutState.workoutHistory.map(workout => {
+                const date = new Date(workout.date);
+                const dateStr = date.toLocaleDateString('en-US', { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                return `
+                    <div class="history-item">
+                        <div class="date">${dateStr}</div>
+                        <div class="details">Week ${workout.week} - ${workout.exercises.length} exercises</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+                localStorage.removeItem('bodyweightWorkoutState');
+                workoutState = {
+                    currentWeek: 1,
+                    totalWorkouts: 0,
+                    weeklyWorkouts: 0,
+                    exerciseProgress: {},
+                    workoutHistory: [],
+                    currentWorkout: []
+                };
+                initializeExerciseProgress();
+                renderWorkout();
+                updateStats();
+                renderHistory();
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', loadState);
+    </script>
+</body>
+</html>
