@@ -127,35 +127,45 @@
       }
 
       body {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        background:
+          radial-gradient(1200px 600px at -10% -10%, rgba(59,130,246,0.25), transparent 60%),
+          radial-gradient(900px 500px at 110% 10%, rgba(147,51,234,0.18), transparent 60%),
+          linear-gradient(135deg, #0a0f1f 0%, #0b1530 50%, #0a0f1f 100%);
         min-height: 100vh;
       }
 
       .workout-card {
-        background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-        border: 2px solid #3b82f6;
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.2), 0 10px 40px rgba(0, 0, 0, 0.8);
-        transition: all 0.3s ease;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(148, 163, 184, 0.15);
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6), 0 0 0 1px rgba(148, 163, 184, 0.05) inset;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 16px;
+        transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.2s ease;
       }
 
       .workout-card:hover {
-        border-color: #60a5fa;
-        box-shadow: 0 0 40px rgba(59, 130, 246, 0.3), 0 10px 50px rgba(0, 0, 0, 0.9);
+        border-color: rgba(148, 163, 184, 0.3);
+        box-shadow: 0 16px 40px rgba(2, 6, 23, 0.7), 0 0 0 1px rgba(148, 163, 184, 0.08) inset;
+        transform: translateY(-2px);
       }
 
       .btn-primary {
         background: linear-gradient(135deg, #3b82f6, #2563eb);
-        transition: all 0.2s ease;
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
+        transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+        border-radius: 12px;
       }
 
       .btn-primary:hover {
         background: linear-gradient(135deg, #60a5fa, #3b82f6);
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 14px 28px rgba(59, 130, 246, 0.45);
       }
 
       .btn-primary:active {
         transform: translateY(0);
+        box-shadow: 0 6px 14px rgba(59, 130, 246, 0.35);
       }
 
       .exercise-complete {
@@ -274,7 +284,7 @@
         <div id="workoutStatus" class="workout-card p-6 text-center">
           <div class="text-sm uppercase tracking-wider text-blue-400 mb-2">Ready to Train</div>
           <div class="text-3xl font-bold mb-3">FULL BODY WORKOUT</div>
-          <div class="text-slate-400 mb-4">8 exercises • Progressive difficulty</div>
+          <div class="text-slate-400 mb-4"><span id="exerciseCount">0</span> exercises • 3 sets each</div>
           <button
             id="startWorkoutBtn"
             class="btn-primary w-full py-4 text-lg font-bold uppercase tracking-wider rounded-lg"
@@ -299,9 +309,15 @@
               </div>
             </div>
             
-            <div class="mb-4">
-              <div class="text-sm text-slate-400 mb-2">Target Reps</div>
-              <div id="targetReps" class="text-4xl font-bold text-blue-400">12</div>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div>
+                <div class="text-xs text-slate-400 uppercase mb-1">Target Reps</div>
+                <div id="targetReps" class="text-4xl font-bold text-blue-400">12</div>
+              </div>
+              <div class="text-right">
+                <div class="text-xs text-slate-400 uppercase mb-1">Set</div>
+                <div id="setIndicator" class="text-2xl font-bold text-blue-400">1/3</div>
+              </div>
             </div>
 
             <div class="mb-4">
@@ -397,7 +413,6 @@
               <h3 class="font-bold text-blue-400 mb-2">EXERCISES</h3>
               <ul class="space-y-1 text-slate-300">
                 <li>• <strong>Push-ups:</strong> Chest, shoulders, triceps</li>
-                <li>• <strong>Pull-ups:</strong> Back, biceps (use progressions if needed)</li>
                 <li>• <strong>Squats:</strong> Legs, glutes</li>
                 <li>• <strong>Dips:</strong> Triceps, chest</li>
                 <li>• <strong>Rows:</strong> Back, biceps</li>
@@ -512,21 +527,6 @@
             { level: 6, name: 'Archer Push-ups', reps: 10 },
             { level: 7, name: 'Archer Push-ups', reps: 12 },
             { level: 8, name: 'One-Arm Push-up Progression', reps: 8 }
-          ]
-        },
-        {
-          id: 'pullups',
-          name: 'Pull-ups',
-          category: 'Pull',
-          levels: [
-            { level: 1, name: 'Assisted Pull-ups (Band)', reps: 8 },
-            { level: 2, name: 'Negative Pull-ups', reps: 5 },
-            { level: 3, name: 'Standard Pull-ups', reps: 5 },
-            { level: 4, name: 'Standard Pull-ups', reps: 8 },
-            { level: 5, name: 'Standard Pull-ups', reps: 10 },
-            { level: 6, name: 'L-Sit Pull-ups', reps: 6 },
-            { level: 7, name: 'Archer Pull-ups', reps: 5 },
-            { level: 8, name: 'One-Arm Pull-up Progression', reps: 3 }
           ]
         },
         {
@@ -656,6 +656,7 @@
       const exerciseLevel = document.getElementById('exerciseLevel');
       const exerciseNumber = document.getElementById('exerciseNumber');
       const targetReps = document.getElementById('targetReps');
+      const setIndicator = document.getElementById('setIndicator');
       const repsInput = document.getElementById('repsInput');
       const completeExerciseBtn = document.getElementById('completeExerciseBtn');
       const skipExerciseBtn = document.getElementById('skipExerciseBtn');
@@ -668,6 +669,7 @@
       const finishBtn = document.getElementById('finishBtn');
       const workoutSummary = document.getElementById('workoutSummary');
       const progressionAdvice = document.getElementById('progressionAdvice');
+      const exerciseCountEl = document.getElementById('exerciseCount');
 
       // Stats
       const totalWorkouts = document.getElementById('totalWorkouts');
@@ -692,6 +694,7 @@
       // Initialize
       function init() {
         loadData();
+        if (exerciseCountEl) exerciseCountEl.textContent = EXERCISES.length;
         updateStatsDisplay();
         setupEventListeners();
       }
@@ -708,6 +711,17 @@
               state.exerciseLevels[ex.id] = { level: 1, successCount: 0 };
             });
           }
+
+          // Ensure exercise levels only include current exercises and add missing ones
+          const validIds = new Set(EXERCISES.map(ex => ex.id));
+          Object.keys(state.exerciseLevels).forEach(id => {
+            if (!validIds.has(id)) delete state.exerciseLevels[id];
+          });
+          EXERCISES.forEach(ex => {
+            if (!state.exerciseLevels[ex.id]) {
+              state.exerciseLevels[ex.id] = { level: 1, successCount: 0 };
+            }
+          });
 
           const savedHistory = localStorage.getItem(STORAGE_KEYS.HISTORY);
           if (savedHistory) {
@@ -783,14 +797,15 @@
         initAudio();
         state.workoutInProgress = true;
         state.currentExerciseIndex = 0;
-        state.workoutData = EXERCISES.map(ex => {
-          const levelData = state.exerciseLevels[ex.id] || { level: 1 };
-          const exerciseLevel = ex.levels[levelData.level - 1];
+        state.workoutData = EXERCISES.map(exercise => {
+          const levelData = state.exerciseLevels[exercise.id] || { level: 1 };
+          const exerciseLevel = exercise.levels[levelData.level - 1];
           return {
-            exercise: ex,
+            exercise,
             level: levelData.level,
             targetReps: exerciseLevel.reps,
-            completedReps: null,
+            sets: [null, null, null],
+            currentSet: 0,
             skipped: false
           };
         });
@@ -817,6 +832,7 @@
         exerciseLevel.textContent = `Level ${current.level}: ${levelInfo.name}`;
         exerciseNumber.textContent = `${state.currentExerciseIndex + 1}/${state.workoutData.length}`;
         
+        setIndicator.textContent = `${current.currentSet + 1}/3`;
         if (current.exercise.id === 'plank') {
           targetReps.textContent = `${current.targetReps}s`;
           repsInput.placeholder = 'Seconds held';
@@ -840,7 +856,7 @@
       function updateProgress() {
         const total = state.workoutData.length;
         const completed = state.workoutData.filter(ex => 
-          ex.completedReps !== null || ex.skipped
+          (ex.sets && ex.sets.every(s => s !== null)) || ex.skipped
         ).length;
         const percentage = Math.round((completed / total) * 100);
         
@@ -851,27 +867,43 @@
       // Update exercise list
       function updateExerciseList() {
         exerciseList.innerHTML = state.workoutData.map((ex, idx) => {
-          let status = '';
-          let statusClass = '';
-          
-          if (ex.completedReps !== null) {
-            status = `✓ ${ex.completedReps}`;
-            statusClass = 'text-green-400';
-          } else if (ex.skipped) {
-            status = '⊘ Skipped';
-            statusClass = 'text-slate-500';
-          } else if (idx === state.currentExerciseIndex) {
-            status = 'In Progress';
-            statusClass = 'text-blue-400 font-bold';
+          const isCurrent = idx === state.currentExerciseIndex;
+          const isPlank = ex.exercise.id === 'plank';
+          const targetStr = `${ex.targetReps}${isPlank ? 's' : ''}`;
+          const doneSets = ex.sets ? ex.sets.filter(s => s !== null).length : 0;
+          const allDone = ex.sets && ex.sets.every(s => s !== null);
+          let rightLabel = '';
+          let rightClass = '';
+
+          if (ex.skipped) {
+            rightLabel = '⊘ Skipped';
+            rightClass = 'text-slate-500';
+          } else if (allDone) {
+            const sum = ex.sets.reduce((a, b) => a + (b || 0), 0);
+            rightLabel = `✓ ${sum}`;
+            rightClass = 'text-green-400';
+          } else if (isCurrent) {
+            rightLabel = `Set ${ex.currentSet + 1}/3`;
+            rightClass = 'text-blue-400 font-bold';
           } else {
-            status = `${ex.targetReps}${ex.exercise.id === 'plank' ? 's' : ''}`;
-            statusClass = 'text-slate-400';
+            rightLabel = `${targetStr}`;
+            rightClass = 'text-slate-400';
           }
 
+          const chips = (ex.sets || [null, null, null]).map((s, i) => {
+            const active = isCurrent && i === ex.currentSet;
+            const cls = s !== null ? 'bg-green-400' : active ? 'bg-blue-400' : 'bg-slate-600';
+            return `<span class="inline-block w-2.5 h-2.5 rounded-full mx-0.5 ${cls}"></span>`;
+          }).join('');
+
           return `
-            <div class="flex justify-between items-center text-sm ${idx === state.currentExerciseIndex ? 'bg-blue-500/10 p-2 rounded' : ''}">
+            <div class="flex justify-between items-center text-sm ${isCurrent ? 'bg-blue-500/10 p-2 rounded' : ''}">
               <span class="${idx < state.currentExerciseIndex ? 'text-slate-400' : ''}">${ex.exercise.name}</span>
-              <span class="${statusClass}">${status}</span>
+              <span class="flex items-center gap-2 ${rightClass}">
+                <span class="text-slate-400">${doneSets}/3</span>
+                <span class="hidden sm:inline">${chips}</span>
+                <span>${rightLabel}</span>
+              </span>
             </div>
           `;
         }).join('');
@@ -886,29 +918,39 @@
         }
 
         const current = state.workoutData[state.currentExerciseIndex];
-        current.completedReps = reps;
+        const setIdx = current.currentSet;
+        current.sets[setIdx] = reps;
 
-        // Check for progression
-        if (reps >= current.targetReps) {
-          const exLevel = state.exerciseLevels[current.exercise.id];
+        // If not the last set, advance set and rest
+        if (setIdx < 2) {
+          current.currentSet++;
+          saveData();
+          updateExerciseList();
+          startRestTimer();
+          playBeep(1200, 200);
+          return;
+        }
+
+        // Last set completed: decide progression based on all sets
+        const hitAllTargets = current.sets.every(s => (s || 0) >= current.targetReps);
+        const exLevel = state.exerciseLevels[current.exercise.id];
+        if (hitAllTargets) {
           exLevel.successCount = (exLevel.successCount || 0) + 1;
-          
-          // Progress after 2 successful workouts
           if (exLevel.successCount >= 2 && exLevel.level < current.exercise.levels.length) {
             exLevel.level++;
             exLevel.successCount = 0;
           }
         } else {
-          // Reset success count if didn't hit target
-          state.exerciseLevels[current.exercise.id].successCount = 0;
+          exLevel.successCount = 0;
         }
 
         saveData();
         updateExerciseList();
 
-        // Start rest timer
+        // Move to next exercise or finish
         if (state.currentExerciseIndex < state.workoutData.length - 1) {
-          startRestTimer();
+          state.currentExerciseIndex++;
+          displayCurrentExercise();
         } else {
           state.currentExerciseIndex++;
           displayCurrentExercise();
@@ -926,7 +968,7 @@
         saveData();
         updateExerciseList();
 
-        state.currentExerciseIndex++;
+        // After resting, continue with the next set of the same exercise
         displayCurrentExercise();
       }
 
@@ -991,11 +1033,12 @@
         if (restInterval) clearInterval(restInterval);
         
         // Calculate stats
-        const completed = state.workoutData.filter(ex => ex.completedReps !== null).length;
+        const completed = state.workoutData.filter(ex => ex.sets && ex.sets.every(s => s !== null)).length;
         const skipped = state.workoutData.filter(ex => ex.skipped).length;
-        const totalReps = state.workoutData.reduce((sum, ex) => 
-          sum + (ex.completedReps || 0), 0
-        );
+        const totalReps = state.workoutData.reduce((sum, ex) => {
+          const setSum = (ex.sets || []).reduce((a, b) => a + (b || 0), 0);
+          return sum + setSum;
+        }, 0);
 
         // Check for progressions
         const progressions = [];
@@ -1014,7 +1057,7 @@
             name: ex.exercise.name,
             level: ex.level,
             target: ex.targetReps,
-            completed: ex.completedReps,
+            sets: ex.sets,
             skipped: ex.skipped
           })),
           totalReps,
@@ -1074,7 +1117,7 @@
             year: 'numeric'
           });
           
-          const completed = workout.exercises.filter(ex => ex.completed !== null).length;
+          const completed = workout.exercises.filter(ex => Array.isArray(ex.sets) ? ex.sets.every(s => s !== null) : ex.completed !== null).length;
           
           return `
             <div class="bg-slate-900/50 border border-blue-500/30 rounded p-4">
@@ -1093,8 +1136,12 @@
               </div>
               <div class="space-y-1 text-xs">
                 ${workout.exercises.map(ex => {
-                  if (ex.skipped) return `<div class="text-slate-500">⊘ ${ex.name}</div>`;
-                  return `<div class="text-slate-300">✓ ${ex.name}: ${ex.completed}/${ex.target}</div>`;
+                  if (ex.skipped) return `<div class=\"text-slate-500\">⊘ ${ex.name}</div>`;
+                  if (Array.isArray(ex.sets)) {
+                    const values = ex.sets.map(s => s ?? '-').join('/');
+                    return `<div class=\"text-slate-300\">✓ ${ex.name}: ${values} (target ${ex.target}${ex.id === 'plank' ? 's' : ''})</div>`;
+                  }
+                  return `<div class=\"text-slate-300\">✓ ${ex.name}: ${ex.completed}/${ex.target}</div>`;
                 }).join('')}
               </div>
             </div>
