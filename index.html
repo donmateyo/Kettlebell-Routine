@@ -10,10 +10,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Cardio Sync">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0a0a0f">
+<meta name="theme-color" content="#000000">
 
 <!-- SVG Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a1a2e'/%3E%3Cstop offset='100%25' stop-color='%230a0a0f'/%3E%3C/linearGradient%3E%3ClinearGradient id='pulse' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23bg)'/%3E%3Cpath d='M25 95 L50 95 L60 70 L75 120 L90 50 L105 130 L120 80 L130 95 L155 95' stroke='url(%23pulse)' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23111111'/%3E%3Cstop offset='100%25' stop-color='%23000000'/%3E%3C/linearGradient%3E%3ClinearGradient id='pulse' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%2300d4ff'/%3E%3Cstop offset='100%25' stop-color='%230099ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23bg)'/%3E%3Cpath d='M25 95 L50 95 L60 70 L75 120 L90 50 L105 130 L120 80 L130 95 L155 95' stroke='url(%23pulse)' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,30 +21,30 @@
 
 <style>
 :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface-hover: #18182a;
-    --surface-elevated: #1e1e2e;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-light: rgba(255, 255, 255, 0.12);
-    --border-accent: rgba(99, 102, 241, 0.4);
+    --bg: #000000;
+    --surface: #0a0a0a;
+    --surface-hover: #111111;
+    --surface-elevated: #141414;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-accent: rgba(0, 212, 255, 0.4);
     
-    --primary: #6366f1;
-    --primary-light: #818cf8;
-    --primary-glow: rgba(99, 102, 241, 0.35);
-    --primary-dim: rgba(99, 102, 241, 0.15);
+    --primary: #00d4ff;
+    --primary-light: #00e5ff;
+    --primary-glow: rgba(0, 212, 255, 0.3);
+    --primary-dim: rgba(0, 212, 255, 0.12);
     
-    --accent: #22d3ee;
-    --accent-dim: rgba(34, 211, 238, 0.15);
+    --accent: #00d4ff;
+    --accent-dim: rgba(0, 212, 255, 0.12);
     
-    --success: #10b981;
-    --success-dim: rgba(16, 185, 129, 0.15);
-    --danger: #ef4444;
-    --danger-dim: rgba(239, 68, 68, 0.15);
+    --success: #00e676;
+    --success-dim: rgba(0, 230, 118, 0.12);
+    --danger: #ff3d5a;
+    --danger-dim: rgba(255, 61, 90, 0.12);
     
     --text: #ffffff;
-    --text-secondary: #a1a1aa;
-    --text-muted: #71717a;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
     
     --radius-sm: 12px;
     --radius-md: 16px;
@@ -137,7 +137,7 @@ body {
 
 .card-glow {
     border-color: var(--border-accent);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, var(--surface) 100%);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, var(--surface) 100%);
 }
 
 .card-header {
@@ -205,13 +205,13 @@ body {
 .tag.primary {
     background: var(--primary-dim);
     color: var(--primary-light);
-    border-color: rgba(99, 102, 241, 0.3);
+    border-color: rgba(0, 212, 255, 0.25);
 }
 
 .tag.danger {
     background: var(--danger-dim);
     color: var(--danger);
-    border-color: rgba(239, 68, 68, 0.3);
+    border-color: rgba(255, 61, 90, 0.25);
 }
 
 .btn-primary {
@@ -223,7 +223,7 @@ body {
     font-size: 15px;
     cursor: pointer;
     background: var(--primary);
-    color: white;
+    color: #000000;
     box-shadow: 0 4px 20px var(--primary-glow);
     -webkit-appearance: none;
     appearance: none;
@@ -275,7 +275,7 @@ body {
 
 .btn-icon.danger {
     color: var(--danger);
-    border-color: rgba(239, 68, 68, 0.4);
+    border-color: rgba(255, 61, 90, 0.4);
 }
 
 .stats-grid {
@@ -297,7 +297,7 @@ body {
     font-size: 28px;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 700;
-    color: var(--text);
+    color: var(--primary-light);
     margin-bottom: 4px;
 }
 
@@ -398,7 +398,7 @@ body {
 .history-detail {
     padding: 16px;
     border-top: 1px solid var(--border);
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .exercise-grid {
@@ -479,6 +479,7 @@ body {
     height: 8px;
     border-radius: 50%;
     background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
 }
 
 .install-steps {
@@ -674,6 +675,7 @@ body {
     stroke-dasharray: 842;
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 1s linear;
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
 }
 
 .timer-center {
@@ -690,6 +692,7 @@ body {
     font-weight: 700;
     font-family: 'JetBrains Mono', monospace;
     letter-spacing: -2px;
+    color: var(--text);
 }
 
 .timer-phase {
@@ -774,8 +777,8 @@ body {
 .control-btn.primary {
     background: var(--primary);
     border-color: var(--primary);
-    color: white;
-    box-shadow: 0 4px 16px var(--primary-glow);
+    color: #000000;
+    box-shadow: 0 4px 16px var(--primary-glow), 0 0 20px rgba(0, 212, 255, 0.2);
 }
 
 .control-btn svg {
@@ -790,7 +793,7 @@ nav {
     left: 0;
     width: 100%;
     height: calc(70px + var(--safe-bottom));
-    background: rgba(12, 12, 18, 0.95);
+    background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--border);
@@ -840,7 +843,7 @@ nav {
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     display: none;
@@ -904,6 +907,7 @@ nav {
 .modal-card textarea:focus {
     outline: none;
     border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-dim);
 }
 
 .modal-card textarea {
@@ -941,7 +945,7 @@ nav {
 
 .modal-btn-primary {
     background: var(--primary);
-    color: white;
+    color: #000000;
 }
 
 .modal-btn-danger {
@@ -974,13 +978,13 @@ nav {
     width: 88px;
     height: 88px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    background: linear-gradient(135deg, var(--success) 0%, #00c853 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 40px;
     margin: 0 auto 24px;
-    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 230, 118, 0.4);
 }
 
 .completion-title {
@@ -1025,6 +1029,7 @@ nav {
     font-size: 14px;
     font-weight: 700;
     font-family: 'JetBrains Mono', monospace;
+    color: var(--primary-light);
 }
 
 .completion-content label {
@@ -1057,6 +1062,7 @@ nav {
 .completion-content textarea:focus {
     outline: none;
     border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-dim);
 }
 
 .completion-actions {
@@ -1092,7 +1098,7 @@ nav {
 
 .toast.success {
     background: var(--success);
-    color: white;
+    color: #000000;
     border-color: var(--success);
 }
 
@@ -1248,8 +1254,8 @@ nav {
             <svg class="circle-svg" viewBox="0 0 300 300">
                 <defs>
                     <linearGradient id="timer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#6366f1"/>
-                        <stop offset="100%" stop-color="#22d3ee"/>
+                        <stop offset="0%" stop-color="#00d4ff"/>
+                        <stop offset="100%" stop-color="#0099ff"/>
                     </linearGradient>
                 </defs>
                 <circle class="circle-bg" cx="150" cy="150" r="134"></circle>
@@ -1342,10 +1348,10 @@ nav {
     canvas.height = 180;
     var ctx = canvas.getContext('2d');
     
-    // Background gradient
+    // Background gradient - pure black OLED
     var bgGrad = ctx.createLinearGradient(0, 0, 180, 180);
-    bgGrad.addColorStop(0, '#1a1a2e');
-    bgGrad.addColorStop(1, '#0a0a0f');
+    bgGrad.addColorStop(0, '#111111');
+    bgGrad.addColorStop(1, '#000000');
     
     // Draw rounded rectangle background
     ctx.beginPath();
@@ -1362,10 +1368,10 @@ nav {
     ctx.fillStyle = bgGrad;
     ctx.fill();
     
-    // Pulse line gradient
+    // Pulse line gradient - electric blue
     var lineGrad = ctx.createLinearGradient(20, 0, 160, 0);
-    lineGrad.addColorStop(0, '#6366f1');
-    lineGrad.addColorStop(1, '#22d3ee');
+    lineGrad.addColorStop(0, '#00d4ff');
+    lineGrad.addColorStop(1, '#0099ff');
     
     // Draw heartbeat/pulse line
     ctx.beginPath();
@@ -1382,6 +1388,11 @@ nav {
     ctx.lineWidth = 8;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
+    ctx.stroke();
+    
+    // Add glow effect
+    ctx.shadowColor = '#00d4ff';
+    ctx.shadowBlur = 15;
     ctx.stroke();
     
     // Convert to data URL and create link
