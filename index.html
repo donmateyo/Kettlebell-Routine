@@ -1,1705 +1,2198 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
-    <title>Progressive Bodyweight Workout</title>
-    <meta
-      name="description"
-      content="Progressive bodyweight workout app with proven exercises for full-body training"
-    />
-    <meta name="theme-color" content="#000000" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <meta name="apple-mobile-web-app-title" content="BW Workout" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Cardio Sync</title>
 
-    <script>
-      // Generate icon
-      (function generateIconsAndManifest() {
-        function drawIcon(size) {
-          const c = document.createElement("canvas");
-          c.width = c.height = size;
-          const ctx = c.getContext("2d");
+<!-- PWA Meta Tags -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cardio Sync">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a0f">
 
-          // Gradient background
-          const g = ctx.createLinearGradient(0, 0, size, size);
-          g.addColorStop(0, "#ff6b00");
-          g.addColorStop(0.5, "#ff8800");
-          g.addColorStop(1, "#000000");
-          ctx.fillStyle = g;
-          ctx.fillRect(0, 0, size, size);
+<!-- SVG Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a1a2e'/%3E%3Cstop offset='100%25' stop-color='%230a0a0f'/%3E%3C/linearGradient%3E%3ClinearGradient id='pulse' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23bg)'/%3E%3Cpath d='M25 95 L50 95 L60 70 L75 120 L90 50 L105 130 L120 80 L130 95 L155 95' stroke='url(%23pulse)' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
 
-          // Muscle icon (simple representation)
-          ctx.save();
-          const s = size / 512;
-          ctx.scale(s, s);
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
-          // Glow effect
-          ctx.shadowColor = "rgba(255, 107, 0, 0.8)";
-          ctx.shadowBlur = 40;
-          
-          // Draw flexing bicep
-          ctx.fillStyle = "#fff";
-          ctx.strokeStyle = "#fff";
-          ctx.lineWidth = 28;
-          ctx.lineCap = "round";
-          ctx.lineJoin = "round";
+<style>
+:root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface-hover: #18182a;
+    --surface-elevated: #1e1e2e;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(255, 255, 255, 0.12);
+    --border-accent: rgba(99, 102, 241, 0.4);
+    
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-glow: rgba(99, 102, 241, 0.35);
+    --primary-dim: rgba(99, 102, 241, 0.15);
+    
+    --accent: #22d3ee;
+    --accent-dim: rgba(34, 211, 238, 0.15);
+    
+    --success: #10b981;
+    --success-dim: rgba(16, 185, 129, 0.15);
+    --danger: #ef4444;
+    --danger-dim: rgba(239, 68, 68, 0.15);
+    
+    --text: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+    --radius-xl: 28px;
+    
+    --safe-top: env(safe-area-inset-top, 20px);
+    --safe-bottom: env(safe-area-inset-bottom, 20px);
+}
 
-          // Arm outline (upper arm)
-          ctx.beginPath();
-          ctx.moveTo(200, 400);
-          ctx.lineTo(200, 280);
-          ctx.stroke();
-          
-          // Forearm bent at elbow
-          ctx.beginPath();
-          ctx.moveTo(200, 280);
-          ctx.quadraticCurveTo(220, 240, 280, 200);
-          ctx.stroke();
-          
-          // Flexed bicep bulge
-          ctx.beginPath();
-          ctx.arc(180, 260, 55, 0, Math.PI * 2);
-          ctx.fill();
-          
-          // Fist
-          ctx.beginPath();
-          ctx.arc(280, 200, 35, 0, Math.PI * 2);
-          ctx.fill();
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+}
 
-          ctx.restore();
-          return c.toDataURL("image/png");
-        }
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
-        const icon180 = drawIcon(180);
-        const icon192 = drawIcon(192);
-        const icon512 = drawIcon(512);
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    overflow: hidden;
+}
 
-        const apple = document.createElement("link");
-        apple.rel = "apple-touch-icon";
-        apple.href = icon180;
-        document.head.appendChild(apple);
+.view {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+    padding-top: calc(var(--safe-top) + 12px);
+    padding-bottom: calc(90px + var(--safe-bottom));
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
 
-        const fav = document.createElement("link");
-        fav.rel = "icon";
-        fav.type = "image/png";
-        fav.href = icon192;
-        document.head.appendChild(fav);
+.view.active {
+    display: flex;
+}
 
-        const manifest = {
-          name: "Progressive Bodyweight Workout",
-          short_name: "BW Workout",
-          start_url: "/",
-          scope: "/",
-          display: "standalone",
-          background_color: "#000000",
-          theme_color: "#ff6b00",
-          description: "Progressive bodyweight workout app with proven exercises",
-          icons: [
-            { src: icon192, sizes: "192x192", type: "image/png" },
-            { src: icon512, sizes: "512x512", type: "image/png", purpose: "any maskable" }
-          ]
-        };
+.view::-webkit-scrollbar {
+    display: none;
+}
 
-        const blob = new Blob([JSON.stringify(manifest)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("link");
-        link.rel = "manifest";
-        link.href = url;
-        document.head.appendChild(link);
-      })();
-    </script>
+.page-header {
+    margin-bottom: 24px;
+}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = { darkMode: "class" };
-    </script>
+.page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
 
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+.page-title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0 0 4px;
+    color: var(--text);
+}
 
-      :root {
-        color-scheme: dark;
-      }
+.page-subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin: 0;
+}
 
-      * {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      }
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+}
 
-      input, select, textarea {
-        font-size: 16px !important;
-      }
+.card-glow {
+    border-color: var(--border-accent);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, var(--surface) 100%);
+}
 
-      body {
-        background: #000000;
-        background-image: 
-          radial-gradient(at 0% 0%, rgba(255, 107, 0, 0.15) 0px, transparent 50%),
-          radial-gradient(at 100% 100%, rgba(255, 107, 0, 0.08) 0px, transparent 50%);
-        background-attachment: fixed;
-        min-height: 100vh;
-      }
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 12px;
+}
 
-      .glass-card {
-        background: rgba(20, 20, 20, 0.8);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 
-          0 8px 32px rgba(0, 0, 0, 0.5),
-          inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
+.card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: var(--primary-dim);
+    flex-shrink: 0;
+}
 
-      .glass-card:hover {
-        border-color: rgba(255, 107, 0, 0.3);
-        box-shadow: 
-          0 12px 40px rgba(255, 107, 0, 0.2),
-          inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        transform: translateY(-2px);
-      }
+.card-icon.accent {
+    background: var(--accent-dim);
+}
 
-      .glass-card-active {
-        border-color: rgba(255, 107, 0, 0.5);
-        box-shadow: 
-          0 0 0 1px rgba(255, 107, 0, 0.3),
-          0 20px 60px rgba(255, 107, 0, 0.3);
-      }
+.card-icon.danger {
+    background: var(--danger-dim);
+}
 
-      .btn-gradient {
-        background: linear-gradient(135deg, #ff6b00 0%, #ff8800 50%, #ff5500 100%);
-        background-size: 200% 200%;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-      }
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin: 0 0 4px;
+}
 
-      .btn-gradient::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
-        transform: translateX(-100%);
-        transition: transform 0.6s;
-      }
+.card-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 16px;
+}
 
-      .btn-gradient:hover {
-        background-position: 100% 0;
-        transform: translateY(-2px);
-        box-shadow: 0 12px 40px rgba(255, 107, 0, 0.5);
-      }
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
 
-      .btn-gradient:hover::before {
-        transform: translateX(100%);
-      }
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    background: var(--surface-elevated);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
 
-      .btn-gradient:active {
-        transform: translateY(0);
-      }
+.tag.primary {
+    background: var(--primary-dim);
+    color: var(--primary-light);
+    border-color: rgba(99, 102, 241, 0.3);
+}
 
-      .set-indicator {
-        transition: all 0.3s ease;
-      }
+.tag.danger {
+    background: var(--danger-dim);
+    color: var(--danger);
+    border-color: rgba(239, 68, 68, 0.3);
+}
 
-      .set-complete {
-        background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(22, 163, 74, 0.3));
-        border-color: #22c55e;
-      }
+.btn-primary {
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    border: none;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 20px var(--primary-glow);
+    -webkit-appearance: none;
+    appearance: none;
+}
 
-      .progress-ring {
-        transition: stroke-dashoffset 0.5s ease;
-      }
+.btn-primary:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+}
 
-      @keyframes shimmer {
-        0%, 100% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-      }
+.btn-secondary {
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    background: var(--surface-elevated);
+    color: var(--text);
+    -webkit-appearance: none;
+    appearance: none;
+}
 
-      .shimmer {
-        animation: shimmer 3s ease infinite;
-        background: linear-gradient(90deg, 
-          rgba(255, 107, 0, 0.1) 0%, 
-          rgba(255, 136, 0, 0.2) 50%, 
-          rgba(255, 107, 0, 0.1) 100%);
-        background-size: 200% 100%;
-      }
+.btn-secondary:active {
+    background: var(--surface-hover);
+}
 
-      .timer-display {
-        font-variant-numeric: tabular-nums;
-        font-feature-settings: "tnum";
-      }
+.btn-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
 
-      input, select, textarea {
-        background: rgba(20, 20, 20, 0.8) !important;
-        border: 1px solid rgba(255, 107, 0, 0.2) !important;
-        color: #f1f5f9 !important;
-        transition: all 0.2s ease !important;
-      }
+.btn-icon:active {
+    background: var(--surface-hover);
+}
 
-      input:focus, select:focus, textarea:focus {
-        outline: none !important;
-        border-color: rgba(255, 107, 0, 0.5) !important;
-        box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1) !important;
-      }
+.btn-icon.danger {
+    color: var(--danger);
+    border-color: rgba(239, 68, 68, 0.4);
+}
 
-      .stat-card {
-        background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 136, 0, 0.05));
-        border: 1px solid rgba(255, 107, 0, 0.2);
-      }
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
 
-      @media all and (display-mode: standalone) {
-        body {
-          padding-top: env(safe-area-inset-top);
-          padding-bottom: env(safe-area-inset-bottom);
-        }
-      }
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 12px;
+    text-align: center;
+}
 
-      /* Scrollbar styling */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
+.stat-value {
+    font-size: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+}
 
-      ::-webkit-scrollbar-track {
-        background: rgba(20, 20, 20, 0.5);
-      }
+.stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
 
-      ::-webkit-scrollbar-thumb {
-        background: rgba(255, 107, 0, 0.3);
-        border-radius: 4px;
-      }
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    margin-top: 8px;
+}
 
-      ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 107, 0, 0.5);
-      }
-    </style>
-  </head>
+.section-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin: 0;
+}
 
-  <body class="text-slate-100 min-h-screen antialiased">
-    <div id="app" class="max-w-3xl mx-auto pb-24 px-4">
-      <!-- Header -->
-      <header class="sticky top-0 z-50 pt-6 pb-4 mb-6">
-        <div class="glass-card rounded-2xl p-6">
-          <div class="flex items-center justify-between">
+.section-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.history-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.history-panel summary {
+    list-style: none;
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.history-panel summary::-webkit-details-marker {
+    display: none;
+}
+
+.history-summary {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.history-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.history-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 6px;
+}
+
+.history-duration {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-light);
+    flex-shrink: 0;
+}
+
+.history-detail {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.exercise-chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+}
+
+.exercise-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.exercise-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.history-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.history-notes {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--primary);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+}
+
+.empty-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.empty-text {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.install-status {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.install-status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+}
+
+.install-steps {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    display: none;
+}
+
+.install-steps.show {
+    display: block;
+}
+
+.install-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.install-step:last-child {
+    border-bottom: none;
+}
+
+.step-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-dim);
+    color: var(--primary-light);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.mini-stats {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.mini-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.mini-stat-row:last-child {
+    border-bottom: none;
+}
+
+.mini-stat-date {
+    color: var(--text-muted);
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.mini-stat-type {
+    color: var(--text);
+    font-weight: 600;
+    flex: 1;
+    text-align: center;
+    padding: 0 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-stat-duration {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--primary-light);
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.empty-summary {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 20px;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--border);
+}
+
+#view-timer {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 500;
+    padding: 0;
+}
+
+#view-timer.active {
+    display: flex !important;
+}
+
+.timer-layout {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+}
+
+.timer-header {
+    position: absolute;
+    top: var(--safe-top);
+    left: 0;
+    width: 100%;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.timer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.timer-round {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--text);
+}
+
+.timer-next {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.timer-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.workout-elapsed {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+.circle-wrap {
+    position: relative;
+    width: min(260px, 65vw);
+    height: min(260px, 65vw);
+    margin-bottom: 28px;
+}
+
+.circle-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: var(--surface-elevated);
+    stroke-width: 10;
+}
+
+.circle-fg {
+    fill: none;
+    stroke: url(#timer-gradient);
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 842;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+}
+
+.timer-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-value {
+    font-size: clamp(44px, 11vw, 58px);
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -2px;
+}
+
+.timer-phase {
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    color: var(--primary-light);
+    margin-top: 6px;
+}
+
+.exercise-info {
+    text-align: center;
+    width: 100%;
+    max-width: 340px;
+    margin-bottom: 28px;
+    padding: 0 16px;
+}
+
+.exercise-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.3px;
+}
+
+.exercise-details {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 14px;
+}
+
+.editable {
+    color: var(--primary-light);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 3px;
+}
+
+.exercise-note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.timer-controls {
+    position: absolute;
+    bottom: calc(var(--safe-bottom) + 28px);
+    display: flex;
+    gap: 20px;
+}
+
+.control-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--border-light);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.control-btn:active {
+    background: var(--surface-hover);
+}
+
+.control-btn.primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.control-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(70px + var(--safe-bottom));
+    background: rgba(12, 12, 18, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: var(--safe-bottom);
+    z-index: 300;
+}
+
+.nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.nav-btn.active {
+    color: var(--primary-light);
+}
+
+.nav-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.nav-btn:active svg {
+    transform: scale(0.9);
+}
+
+.nav-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 900;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 340px;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 20px;
+}
+
+.modal-card label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: block;
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-card label:first-of-type {
+    margin-top: 0;
+}
+
+.modal-card input,
+.modal-card select,
+.modal-card textarea {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    background: var(--surface);
+    color: var(--text);
+    padding: 14px 16px;
+    font-size: 15px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.modal-card input:focus,
+.modal-card select:focus,
+.modal-card textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.modal-card textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.modal-btn:active {
+    opacity: 0.9;
+}
+
+.modal-btn-cancel {
+    background: var(--surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-light);
+}
+
+.modal-btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.modal-btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.completion-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 800;
+    display: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.completion-screen.show {
+    display: block !important;
+}
+
+.completion-content {
+    max-width: 380px;
+    margin: 0 auto;
+    padding: calc(var(--safe-top) + 40px) 24px calc(var(--safe-bottom) + 40px);
+    text-align: center;
+}
+
+.completion-badge {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 24px;
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4);
+}
+
+.completion-title {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0 0 8px;
+}
+
+.completion-subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0 0 28px;
+}
+
+.completion-stats {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 4px;
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.completion-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.completion-stat:last-child {
+    border-bottom: none;
+}
+
+.completion-stat-label {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.completion-stat-value {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.completion-content label {
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.completion-content textarea {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    background: var(--surface);
+    color: var(--text);
+    padding: 14px 16px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+    margin-bottom: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.completion-content textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.completion-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(90px + var(--safe-bottom));
+    transform: translate(-50%, 20px);
+    background: var(--surface-elevated);
+    color: var(--text);
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1200;
+    pointer-events: none;
+    max-width: calc(100% - 40px);
+    text-align: center;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.toast.success {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+}
+
+.toast.error {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
+.icon-btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn-content svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="tab-home" class="view active">
+    <header class="page-header">
+        <div class="page-header-row">
             <div>
-              <h1 class="text-3xl font-bold tracking-tight bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 bg-clip-text text-transparent">
-                BODYWEIGHT
-              </h1>
-              <p class="text-sm text-slate-400 mt-1 font-medium">Progressive Training System</p>
+                <h1 class="page-title">Cardio Sync</h1>
+                <p class="page-subtitle">Choose Your Protocol</p>
             </div>
-            
-            <div class="flex gap-2">
-              <button
-                id="infoBtn"
-                class="glass-card p-2.5 rounded-xl hover:bg-orange-500/10 transition-all"
-                title="Info"
-              >
-                  <svg class="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-                </svg>
-              </button>
-              <button
-                id="historyBtn"
-                class="glass-card p-2.5 rounded-xl hover:bg-orange-500/10 transition-all"
-                title="History"
-              >
-                  <svg class="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-                  <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
-                </svg>
-              </button>
-              <button
-                id="settingsBtn"
-                class="glass-card p-2.5 rounded-xl hover:bg-orange-500/10 transition-all"
-                title="Settings"
-              >
-                  <svg class="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <!-- Main Content -->
-      <main class="space-y-6">
-        <!-- Stats Dashboard -->
-        <div class="glass-card rounded-2xl p-6">
-          <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-4">Performance</h3>
-          <div class="grid grid-cols-3 gap-4">
-            <div class="stat-card p-4 rounded-xl text-center">
-              <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Total</div>
-              <div id="totalWorkouts" class="text-3xl font-bold text-transparent bg-gradient-to-br from-orange-400 to-orange-500 bg-clip-text mt-2">0</div>
-              <div class="text-xs text-slate-500 mt-1">Workouts</div>
-            </div>
-            <div class="stat-card p-4 rounded-xl text-center">
-              <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Week</div>
-              <div id="weekWorkouts" class="text-3xl font-bold text-transparent bg-gradient-to-br from-orange-500 to-orange-600 bg-clip-text mt-2">0/3</div>
-              <div class="text-xs text-slate-500 mt-1">Complete</div>
-            </div>
-            <div class="stat-card p-4 rounded-xl text-center">
-              <div class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Level</div>
-              <div id="currentLevel" class="text-3xl font-bold text-transparent bg-gradient-to-br from-orange-400 to-red-500 bg-clip-text mt-2">1</div>
-              <div class="text-xs text-slate-500 mt-1">Average</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Workout Status -->
-        <div id="workoutStatus" class="glass-card rounded-2xl p-8 text-center shimmer">
-          <div class="inline-block px-4 py-1.5 bg-orange-500/20 rounded-full mb-4">
-            <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Ready to Train</span>
-          </div>
-          <div class="text-4xl font-black mb-2 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 bg-clip-text text-transparent">
-            FULL BODY
-          </div>
-          <div class="text-slate-400 mb-6 font-medium">5 min warmup • 7 exercises • 3 sets each • Progressive difficulty</div>
-          <button
-            id="startWorkoutBtn"
-            class="btn-gradient w-full py-4 text-lg font-bold uppercase tracking-wider rounded-xl shadow-2xl"
-          >
-            Start Training
-          </button>
-        </div>
-
-        <!-- Warmup View -->
-        <div id="warmupView" class="hidden space-y-6">
-          <div class="glass-card glass-card-active rounded-2xl p-8">
-            <div class="inline-block px-4 py-1.5 bg-orange-500/20 rounded-full mb-4">
-              <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Warmup Phase</span>
-            </div>
-            <h2 id="warmupExerciseName" class="text-3xl font-black mb-2 text-white">Arm Circles</h2>
-            <p id="warmupExerciseDesc" class="text-sm text-slate-400 font-medium mb-6">Loosen shoulder joints and increase blood flow</p>
-            
-            <div class="mb-6">
-              <div class="text-sm text-slate-400 mb-2 font-semibold">Duration</div>
-              <div id="warmupDuration" class="text-6xl font-black text-transparent bg-gradient-to-br from-orange-500 via-orange-400 to-orange-300 bg-clip-text">30s</div>
-            </div>
-
-            <!-- Warmup Timer -->
-            <div id="warmupTimer" class="mb-6 text-center p-8 glass-card rounded-2xl">
-              <div class="text-sm text-slate-400 mb-4 font-semibold uppercase tracking-wide">Time Remaining</div>
-              <div id="warmupTimeDisplay" class="text-7xl font-black text-transparent bg-gradient-to-br from-orange-500 to-orange-400 bg-clip-text timer-display mb-2">30</div>
-              <div class="text-xs text-slate-500 uppercase tracking-wide font-semibold">seconds</div>
-            </div>
-
-            <div class="flex gap-4">
-              <button
-                id="skipWarmupExerciseBtn"
-                class="flex-1 glass-card hover:bg-slate-700/20 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
-              >
-                Skip Exercise
-              </button>
-              <button
-                id="skipAllWarmupBtn"
-                class="flex-1 glass-card hover:bg-red-500/20 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
-              >
-                Skip Warmup
-              </button>
-            </div>
-          </div>
-
-          <!-- Warmup Progress -->
-          <div class="glass-card rounded-2xl p-6">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider">Warmup Progress</h3>
-              <span id="warmupProgressPercentage" class="text-sm font-bold text-orange-400">0%</span>
-            </div>
-            <div class="bg-black/40 rounded-full h-2.5 mb-6 overflow-hidden">
-              <div id="warmupProgressBar" class="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 h-full rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
-            </div>
-            <div id="warmupExerciseList" class="space-y-3"></div>
-          </div>
-        </div>
-
-        <!-- Active Workout View -->
-        <div id="activeWorkout" class="hidden space-y-6">
-          <!-- Current Exercise Card -->
-          <div id="currentExerciseCard" class="glass-card glass-card-active rounded-2xl p-8">
-            <div class="flex justify-between items-start mb-6">
-              <div class="flex-1">
-                <div class="inline-block px-3 py-1 bg-orange-500/20 rounded-full mb-3">
-                  <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Current</span>
-                </div>
-                <h2 id="exerciseName" class="text-3xl font-black mb-2 text-white">Push-ups</h2>
-                <p id="exerciseLevel" class="text-sm text-slate-400 font-medium">Level 1: Standard</p>
-              </div>
-              <div class="text-right">
-                <div class="text-xs text-slate-500 uppercase font-semibold tracking-wide">Exercise</div>
-                <div id="exerciseNumber" class="text-3xl font-bold text-transparent bg-gradient-to-br from-orange-400 to-orange-500 bg-clip-text">1/7</div>
-              </div>
-            </div>
-
-            <!-- Set Indicator -->
-            <div class="mb-6">
-              <div class="text-xs text-slate-400 uppercase font-semibold tracking-wide mb-3">Current Set</div>
-              <div id="setIndicators" class="flex gap-3 justify-center"></div>
-            </div>
-            
-            <div class="mb-6">
-              <div class="text-sm text-slate-400 mb-2 font-semibold">Target Reps</div>
-              <div id="targetReps" class="text-6xl font-black text-transparent bg-gradient-to-br from-orange-500 via-orange-400 to-orange-300 bg-clip-text">12</div>
-            </div>
-
-            <div class="mb-6">
-              <label class="block text-sm text-slate-400 mb-3 font-semibold">Reps Completed</label>
-              <input
-                id="repsInput"
-                type="number"
-                min="0"
-                class="w-full px-6 py-4 text-3xl font-bold text-center rounded-xl"
-                placeholder="0"
-              />
-            </div>
-
-            <!-- Rest Timer -->
-            <div id="restTimer" class="hidden mb-6 text-center p-8 glass-card rounded-2xl">
-              <div class="text-sm text-slate-400 mb-4 font-semibold uppercase tracking-wide">Rest Period</div>
-              <div id="restTimeDisplay" class="text-7xl font-black text-transparent bg-gradient-to-br from-orange-500 to-orange-400 bg-clip-text timer-display mb-2">90</div>
-              <div class="text-xs text-slate-500 uppercase tracking-wide font-semibold">seconds remaining</div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-              <button
-                id="completeSetBtn"
-                class="btn-gradient py-4 font-bold uppercase rounded-xl text-sm tracking-wider"
-              >
-                Complete Set
-              </button>
-              <button
-                id="skipSetBtn"
-                class="glass-card hover:bg-red-500/20 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
-              >
-                Skip Set
-              </button>
-            </div>
-          </div>
-
-          <!-- Progress Overview -->
-          <div class="glass-card rounded-2xl p-6">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider">Workout Progress</h3>
-              <span id="progressPercentage" class="text-sm font-bold text-orange-400">0%</span>
-            </div>
-            <div class="bg-black/40 rounded-full h-2.5 mb-6 overflow-hidden">
-              <div id="progressBar" class="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 h-full rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
-            </div>
-            <div id="exerciseList" class="space-y-3"></div>
-          </div>
-
-          <button
-            id="stopWorkoutBtn"
-            class="w-full glass-card bg-red-900/20 hover:bg-red-900/40 border-red-500/30 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
-          >
-            End Workout Early
-          </button>
-        </div>
-
-        <!-- Workout Complete View -->
-        <div id="workoutComplete" class="hidden glass-card rounded-2xl p-8 text-center">
-          <div class="text-6xl mb-4">🎉</div>
-          <div class="text-4xl font-black mb-3 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 bg-clip-text text-transparent">
-            Workout Complete!
-          </div>
-          <div id="workoutSummary" class="text-slate-400 mb-6 font-medium"></div>
-          <div id="progressionAdvice" class="glass-card rounded-xl p-6 mb-6 text-sm"></div>
-          <button
-            id="finishBtn"
-            class="btn-gradient w-full py-4 font-bold uppercase rounded-xl text-sm tracking-wider"
-          >
-            Finish & Return
-          </button>
-        </div>
-      </main>
-
-      <!-- Info Modal -->
-      <div id="infoModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-lg p-8 max-h-[85vh] overflow-y-auto rounded-2xl">
-          <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text">Workout Info</h2>
-            <button id="closeInfo" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
-              <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
+            <button type="button" class="btn-icon" onclick="ui.tab('stats')" aria-label="View stats">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M3 13h2v8H3v-8zm4-6h2v14H7V7zm4-4h2v18h-2V3zm4 8h2v10h-2V11zm4-3h2v13h-2V8z"/></svg>
             </button>
-          </div>
-
-          <div class="space-y-5 text-sm">
-            <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-orange-400 mb-3 text-base">Program Overview</h3>
-              <p class="text-slate-300 leading-relaxed">
-                A progressive full-body bodyweight routine with a proven 5-minute dynamic warmup, designed for 3x per week training. 
-                Each exercise is performed for 3 sets, with progressive overload to build strength and muscle.
-              </p>
-            </div>
-
-            <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-orange-400 mb-3 text-base">Warmup (5 Minutes)</h3>
-              <p class="text-slate-300 leading-relaxed mb-2">
-                10 dynamic warmup exercises proven to reduce injury risk and improve workout performance:
-              </p>
-              <ul class="space-y-1 text-slate-300">
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span>Arm circles, leg swings, torso twists</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span>High knees, jumping jacks for cardiovascular warmup</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span>Joint mobility and muscle activation exercises</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-orange-400 mb-3 text-base">Exercises (3 Sets Each)</h3>
-              <ul class="space-y-2 text-slate-300">
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span><strong>Push-ups:</strong> Chest, shoulders, triceps</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span><strong>Squats:</strong> Legs, glutes</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span><strong>Dips:</strong> Triceps, chest</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span><strong>Rows:</strong> Back, biceps</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span><strong>Pike Push-ups:</strong> Shoulders</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span><strong>Leg Raises:</strong> Core</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">•</span>
-                  <span><strong>Plank:</strong> Core stability</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-orange-400 mb-3 text-base">Progression System</h3>
-              <ul class="space-y-2 text-slate-300">
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">✓</span>
-                  <span>Complete all 3 sets with target reps for 2 consecutive workouts to progress</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">✓</span>
-                  <span>Each level increases difficulty with more reps or harder variations</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">✓</span>
-                  <span>Track your performance to see improvements over time</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="glass-card p-5 rounded-xl">
-              <h3 class="font-bold text-orange-400 mb-3 text-base">Training Tips</h3>
-              <ul class="space-y-2 text-slate-300">
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">→</span>
-                  <span>Focus on proper form over reps</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">→</span>
-                  <span>Rest 90-120 seconds between sets</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">→</span>
-                  <span>Train 3x per week with rest days between</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-orange-400 mr-2">→</span>
-                  <span>Stay consistent for best results</span>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
+    </header>
 
-      <!-- History Modal -->
-      <div id="historyModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-lg p-8 max-h-[85vh] overflow-y-auto rounded-2xl">
-          <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text">Workout History</h2>
-            <button id="closeHistory" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
-              <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
-            </button>
-          </div>
-
-          <div id="historyList" class="space-y-4"></div>
-        </div>
-      </div>
-
-      <!-- Settings Modal -->
-      <div id="settingsModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-md p-8 rounded-2xl">
-          <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text">Settings</h2>
-            <button id="closeSettings" class="glass-card p-2 rounded-xl hover:bg-red-500/20 transition-all">
-              <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
-            </button>
-          </div>
-
-          <div class="space-y-5">
-            <div class="glass-card p-5 rounded-xl">
-              <label class="block text-sm font-semibold mb-3 text-orange-400">
-                Rest Time Between Sets
-              </label>
-              <input
-                type="number"
-                id="restTimeSetting"
-                min="30"
-                max="300"
-                step="10"
-                value="90"
-                class="w-full px-4 py-3 rounded-xl font-semibold"
-              />
-              <p class="text-xs text-slate-500 mt-2">Recommended: 90-120 seconds</p>
+    <div class="card card-glow">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">Zone 2: Steady State</h2>
             </div>
-
-            <div class="glass-card p-5 rounded-xl">
-              <label class="flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  id="soundAlerts"
-                  class="mr-3 w-5 h-5 cursor-pointer accent-orange-500"
-                  checked
-                />
-                <span class="font-semibold">Enable sound alerts</span>
-              </label>
-            </div>
-
-            <button
-              id="resetProgress"
-              class="w-full glass-card bg-red-900/20 hover:bg-red-900/40 border-red-500/30 py-4 font-bold uppercase rounded-xl transition-all text-sm tracking-wider"
-            >
-              Reset All Progress
-            </button>
-          </div>
+            <div class="card-icon">💧</div>
         </div>
-      </div>
+        <p class="card-desc">30–45 min aerobic circuit. Nasal breathing only for optimal mitochondrial stimulus.</p>
+        <div class="tags">
+            <span class="tag primary">25/35lb DB</span>
+            <span class="tag primary">35/50lb KB</span>
+        </div>
+        <button type="button" class="btn-primary" onclick="app.init('zone2')">Start Workout</button>
     </div>
 
-    <script>
-      // Warmup exercises - scientifically proven to improve performance and reduce injury
-      const WARMUP_EXERCISES = [
-        {
-          id: 'arm_circles',
-          name: 'Arm Circles',
-          description: 'Loosen shoulder joints and increase blood flow',
-          duration: 30,
-          instructions: 'Make large circles with both arms, 15 seconds forward, 15 seconds backward'
-        },
-        {
-          id: 'leg_swings',
-          name: 'Leg Swings',
-          description: 'Dynamic hip mobility and leg activation',
-          duration: 30,
-          instructions: 'Swing each leg forward and back, then side to side, 15 seconds per leg'
-        },
-        {
-          id: 'torso_twists',
-          name: 'Torso Twists',
-          description: 'Activate core and improve spinal mobility',
-          duration: 30,
-          instructions: 'Stand with feet shoulder-width apart, twist torso side to side with controlled movement'
-        },
-        {
-          id: 'high_knees',
-          name: 'High Knees',
-          description: 'Elevate heart rate and activate leg muscles',
-          duration: 30,
-          instructions: 'March in place, bringing knees up to hip height, moderate pace'
-        },
-        {
-          id: 'shoulder_rolls',
-          name: 'Shoulder Rolls',
-          description: 'Release shoulder tension and improve range of motion',
-          duration: 30,
-          instructions: 'Roll shoulders in circles - 15 seconds backward, 15 seconds forward'
-        },
-        {
-          id: 'wrist_circles',
-          name: 'Wrist Circles',
-          description: 'Prepare wrists for bodyweight exercises',
-          duration: 30,
-          instructions: 'Rotate wrists in circles, both directions, flex and extend fingers'
-        },
-        {
-          id: 'cat_cow',
-          name: 'Cat-Cow Stretches',
-          description: 'Mobilize spine and activate core',
-          duration: 30,
-          instructions: 'On hands and knees, alternate arching and rounding your back slowly'
-        },
-        {
-          id: 'jumping_jacks',
-          name: 'Jumping Jacks',
-          description: 'Full body activation and cardiovascular warmup',
-          duration: 30,
-          instructions: 'Perform controlled jumping jacks to elevate heart rate'
-        },
-        {
-          id: 'squat_holds',
-          name: 'Bodyweight Squat Pulses',
-          description: 'Activate glutes and leg muscles',
-          duration: 30,
-          instructions: 'Perform slow, controlled squats with small pulses at the bottom'
-        },
-        {
-          id: 'scapular_pushups',
-          name: 'Scapular Push-ups',
-          description: 'Activate shoulder blade muscles for pushing exercises',
-          duration: 30,
-          instructions: 'In plank position, protract and retract shoulder blades without bending arms'
-        }
-      ];
-
-      // Exercise Database with Progressive Levels (Pull-ups removed)
-      const EXERCISES = [
-        {
-          id: 'pushups',
-          name: 'Push-ups',
-          category: 'Push',
-          levels: [
-            { level: 1, name: 'Standard Push-ups', reps: 12 },
-            { level: 2, name: 'Standard Push-ups', reps: 15 },
-            { level: 3, name: 'Standard Push-ups', reps: 20 },
-            { level: 4, name: 'Diamond Push-ups', reps: 12 },
-            { level: 5, name: 'Diamond Push-ups', reps: 15 },
-            { level: 6, name: 'Archer Push-ups', reps: 10 },
-            { level: 7, name: 'Archer Push-ups', reps: 12 },
-            { level: 8, name: 'One-Arm Push-up Progression', reps: 8 }
-          ]
-        },
-        {
-          id: 'squats',
-          name: 'Squats',
-          category: 'Legs',
-          levels: [
-            { level: 1, name: 'Bodyweight Squats', reps: 15 },
-            { level: 2, name: 'Bodyweight Squats', reps: 20 },
-            { level: 3, name: 'Bodyweight Squats', reps: 25 },
-            { level: 4, name: 'Jump Squats', reps: 15 },
-            { level: 5, name: 'Bulgarian Split Squats', reps: 12 },
-            { level: 6, name: 'Pistol Squat Progression', reps: 8 },
-            { level: 7, name: 'Pistol Squats', reps: 8 },
-            { level: 8, name: 'Pistol Squats', reps: 10 }
-          ]
-        },
-        {
-          id: 'dips',
-          name: 'Dips',
-          category: 'Push',
-          levels: [
-            { level: 1, name: 'Bench Dips', reps: 12 },
-            { level: 2, name: 'Bench Dips', reps: 15 },
-            { level: 3, name: 'Parallel Bar Dips', reps: 8 },
-            { level: 4, name: 'Parallel Bar Dips', reps: 10 },
-            { level: 5, name: 'Parallel Bar Dips', reps: 12 },
-            { level: 6, name: 'Ring Dips', reps: 8 },
-            { level: 7, name: 'Weighted Dips', reps: 10 },
-            { level: 8, name: 'Weighted Dips', reps: 12 }
-          ]
-        },
-        {
-          id: 'rows',
-          name: 'Rows',
-          category: 'Pull',
-          levels: [
-            { level: 1, name: 'Incline Rows', reps: 12 },
-            { level: 2, name: 'Incline Rows', reps: 15 },
-            { level: 3, name: 'Horizontal Rows', reps: 10 },
-            { level: 4, name: 'Horizontal Rows', reps: 12 },
-            { level: 5, name: 'Horizontal Rows', reps: 15 },
-            { level: 6, name: 'Archer Rows', reps: 10 },
-            { level: 7, name: 'One-Arm Row Progression', reps: 8 },
-            { level: 8, name: 'One-Arm Rows', reps: 10 }
-          ]
-        },
-        {
-          id: 'pike_pushups',
-          name: 'Pike Push-ups',
-          category: 'Push',
-          levels: [
-            { level: 1, name: 'Pike Push-ups', reps: 10 },
-            { level: 2, name: 'Pike Push-ups', reps: 12 },
-            { level: 3, name: 'Pike Push-ups', reps: 15 },
-            { level: 4, name: 'Elevated Pike Push-ups', reps: 10 },
-            { level: 5, name: 'Elevated Pike Push-ups', reps: 12 },
-            { level: 6, name: 'Wall Handstand Push-up Progression', reps: 8 },
-            { level: 7, name: 'Handstand Push-ups (Wall)', reps: 5 },
-            { level: 8, name: 'Handstand Push-ups (Wall)', reps: 8 }
-          ]
-        },
-        {
-          id: 'leg_raises',
-          name: 'Leg Raises',
-          category: 'Core',
-          levels: [
-            { level: 1, name: 'Knee Raises', reps: 12 },
-            { level: 2, name: 'Knee Raises', reps: 15 },
-            { level: 3, name: 'Straight Leg Raises', reps: 10 },
-            { level: 4, name: 'Straight Leg Raises', reps: 12 },
-            { level: 5, name: 'Straight Leg Raises', reps: 15 },
-            { level: 6, name: 'Hanging Leg Raises', reps: 10 },
-            { level: 7, name: 'Toes to Bar', reps: 8 },
-            { level: 8, name: 'Toes to Bar', reps: 12 }
-          ]
-        },
-        {
-          id: 'plank',
-          name: 'Plank',
-          category: 'Core',
-          levels: [
-            { level: 1, name: 'Plank', reps: 30 },
-            { level: 2, name: 'Plank', reps: 45 },
-            { level: 3, name: 'Plank', reps: 60 },
-            { level: 4, name: 'Plank', reps: 75 },
-            { level: 5, name: 'Plank', reps: 90 },
-            { level: 6, name: 'Plank', reps: 120 },
-            { level: 7, name: 'Weighted Plank', reps: 60 },
-            { level: 8, name: 'Weighted Plank', reps: 90 }
-          ]
-        }
-      ];
-
-      const SETS_PER_EXERCISE = 3;
-
-      // State
-      let state = {
-        warmupInProgress: false,
-        currentWarmupIndex: 0,
-        workoutInProgress: false,
-        currentExerciseIndex: 0,
-        currentSet: 1,
-        workoutData: [],
-        warmupData: [],
-        exerciseLevels: {},
-        settings: {
-          restTime: 90,
-          soundEnabled: true
-        },
-        history: [],
-        restTimerActive: false,
-        restSecondsRemaining: 0,
-        warmupTimerActive: false,
-        warmupSecondsRemaining: 0
-      };
-
-      let restInterval = null;
-      let warmupInterval = null;
-      let audioContext = null;
-
-      // Storage keys
-      const STORAGE_KEYS = {
-        LEVELS: 'bw_exercise_levels_v2',
-        HISTORY: 'bw_workout_history_v2',
-        SETTINGS: 'bw_settings'
-      };
-
-      // Elements
-      const startWorkoutBtn = document.getElementById('startWorkoutBtn');
-      const workoutStatus = document.getElementById('workoutStatus');
-      const warmupView = document.getElementById('warmupView');
-      const activeWorkout = document.getElementById('activeWorkout');
-      const workoutComplete = document.getElementById('workoutComplete');
-      const currentExerciseCard = document.getElementById('currentExerciseCard');
-      
-      // Warmup elements
-      const warmupExerciseName = document.getElementById('warmupExerciseName');
-      const warmupExerciseDesc = document.getElementById('warmupExerciseDesc');
-      const warmupDuration = document.getElementById('warmupDuration');
-      const warmupTimer = document.getElementById('warmupTimer');
-      const warmupTimeDisplay = document.getElementById('warmupTimeDisplay');
-      const skipWarmupExerciseBtn = document.getElementById('skipWarmupExerciseBtn');
-      const skipAllWarmupBtn = document.getElementById('skipAllWarmupBtn');
-      const warmupProgressBar = document.getElementById('warmupProgressBar');
-      const warmupProgressPercentage = document.getElementById('warmupProgressPercentage');
-      const warmupExerciseList = document.getElementById('warmupExerciseList');
-      const exerciseName = document.getElementById('exerciseName');
-      const exerciseLevel = document.getElementById('exerciseLevel');
-      const exerciseNumber = document.getElementById('exerciseNumber');
-      const targetReps = document.getElementById('targetReps');
-      const repsInput = document.getElementById('repsInput');
-      const completeSetBtn = document.getElementById('completeSetBtn');
-      const skipSetBtn = document.getElementById('skipSetBtn');
-      const stopWorkoutBtn = document.getElementById('stopWorkoutBtn');
-      const progressBar = document.getElementById('progressBar');
-      const progressPercentage = document.getElementById('progressPercentage');
-      const exerciseList = document.getElementById('exerciseList');
-      const restTimer = document.getElementById('restTimer');
-      const restTimeDisplay = document.getElementById('restTimeDisplay');
-      const finishBtn = document.getElementById('finishBtn');
-      const workoutSummary = document.getElementById('workoutSummary');
-      const progressionAdvice = document.getElementById('progressionAdvice');
-      const setIndicators = document.getElementById('setIndicators');
-
-      // Stats
-      const totalWorkouts = document.getElementById('totalWorkouts');
-      const weekWorkouts = document.getElementById('weekWorkouts');
-      const currentLevel = document.getElementById('currentLevel');
-
-      // Modals
-      const infoModal = document.getElementById('infoModal');
-      const historyModal = document.getElementById('historyModal');
-      const settingsModal = document.getElementById('settingsModal');
-      const infoBtn = document.getElementById('infoBtn');
-      const historyBtn = document.getElementById('historyBtn');
-      const settingsBtn = document.getElementById('settingsBtn');
-      const closeInfo = document.getElementById('closeInfo');
-      const closeHistory = document.getElementById('closeHistory');
-      const closeSettings = document.getElementById('closeSettings');
-      const historyList = document.getElementById('historyList');
-      const restTimeSetting = document.getElementById('restTimeSetting');
-      const soundAlerts = document.getElementById('soundAlerts');
-      const resetProgress = document.getElementById('resetProgress');
-
-      // Initialize
-      function init() {
-        loadData();
-        updateStatsDisplay();
-        setupEventListeners();
-      }
-
-      // Load saved data
-      function loadData() {
-        try {
-          const savedLevels = localStorage.getItem(STORAGE_KEYS.LEVELS);
-          if (savedLevels) {
-            state.exerciseLevels = JSON.parse(savedLevels);
-          } else {
-            // Initialize all exercises at level 1
-            EXERCISES.forEach(ex => {
-              state.exerciseLevels[ex.id] = { level: 1, successCount: 0 };
-            });
-          }
-
-          const savedHistory = localStorage.getItem(STORAGE_KEYS.HISTORY);
-          if (savedHistory) {
-            state.history = JSON.parse(savedHistory);
-          }
-
-          const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
-          if (savedSettings) {
-            state.settings = JSON.parse(savedSettings);
-            restTimeSetting.value = state.settings.restTime;
-            soundAlerts.checked = state.settings.soundEnabled;
-          }
-        } catch (error) {
-          console.error('Error loading data:', error);
-        }
-      }
-
-      // Save data
-      function saveData() {
-        try {
-          localStorage.setItem(STORAGE_KEYS.LEVELS, JSON.stringify(state.exerciseLevels));
-          localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(state.history));
-          localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(state.settings));
-        } catch (error) {
-          console.error('Error saving data:', error);
-        }
-      }
-
-      // Update stats display
-      function updateStatsDisplay() {
-        totalWorkouts.textContent = state.history.length;
-        
-        // Count this week's workouts
-        const now = new Date();
-        const weekStart = new Date(now);
-        weekStart.setDate(now.getDate() - now.getDay());
-        weekStart.setHours(0, 0, 0, 0);
-        
-        const thisWeek = state.history.filter(w => new Date(w.date) >= weekStart).length;
-        weekWorkouts.textContent = `${thisWeek}/3`;
-
-        // Calculate average level
-        const avgLevel = Math.round(
-          Object.values(state.exerciseLevels).reduce((sum, ex) => sum + ex.level, 0) / 
-          EXERCISES.length
-        );
-        currentLevel.textContent = avgLevel;
-      }
-
-      // Audio
-      function initAudio() {
-        if (!audioContext) {
-          audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        }
-      }
-
-      function playBeep(frequency = 800, duration = 200) {
-        if (!state.settings.soundEnabled || !audioContext) return;
-        const osc = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-        osc.connect(gain);
-        gain.connect(audioContext.destination);
-        osc.frequency.value = frequency;
-        osc.type = 'sine';
-        gain.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
-        osc.start(audioContext.currentTime);
-        osc.stop(audioContext.currentTime + duration / 1000);
-      }
-
-      // Start warmup (before workout)
-      function startWarmup() {
-        initAudio();
-        state.warmupInProgress = true;
-        state.currentWarmupIndex = 0;
-        
-        // Select 5 warmup exercises (5 minutes total)
-        state.warmupData = WARMUP_EXERCISES.slice(0, 10).map(ex => ({
-          exercise: ex,
-          completed: false
-        }));
-
-        workoutStatus.classList.add('hidden');
-        warmupView.classList.remove('hidden');
-        
-        displayCurrentWarmupExercise();
-        updateWarmupExerciseList();
-        playBeep(1000, 300);
-      }
-
-      // Display current warmup exercise
-      function displayCurrentWarmupExercise() {
-        if (state.currentWarmupIndex >= state.warmupData.length) {
-          finishWarmup();
-          return;
-        }
-
-        const current = state.warmupData[state.currentWarmupIndex];
-        const ex = current.exercise;
-        
-        warmupExerciseName.textContent = ex.name;
-        warmupExerciseDesc.textContent = ex.description;
-        warmupDuration.textContent = `${ex.duration}s`;
-        
-        updateWarmupProgress();
-        scrollToTop();
-        startWarmupTimer(ex.duration);
-      }
-
-      // Warmup timer
-      function startWarmupTimer(duration) {
-        state.warmupTimerActive = true;
-        state.warmupSecondsRemaining = duration;
-        
-        warmupTimeDisplay.textContent = state.warmupSecondsRemaining;
-        
-        if (warmupInterval) clearInterval(warmupInterval);
-        
-        warmupInterval = setInterval(() => {
-          state.warmupSecondsRemaining--;
-          warmupTimeDisplay.textContent = state.warmupSecondsRemaining;
-          
-          if (state.warmupSecondsRemaining <= 3 && state.warmupSecondsRemaining > 0) {
-            playBeep(600, 150);
-          }
-          
-          if (state.warmupSecondsRemaining <= 0) {
-            clearInterval(warmupInterval);
-            completeWarmupExercise();
-            playBeep(1000, 300);
-          }
-        }, 1000);
-      }
-
-      // Complete warmup exercise
-      function completeWarmupExercise() {
-        state.warmupTimerActive = false;
-        state.warmupData[state.currentWarmupIndex].completed = true;
-        
-        updateWarmupExerciseList();
-        
-        state.currentWarmupIndex++;
-        displayCurrentWarmupExercise();
-      }
-
-      // Skip warmup exercise
-      function skipWarmupExercise() {
-        if (warmupInterval) clearInterval(warmupInterval);
-        state.warmupTimerActive = false;
-        state.warmupData[state.currentWarmupIndex].completed = true;
-        
-        updateWarmupExerciseList();
-        
-        state.currentWarmupIndex++;
-        displayCurrentWarmupExercise();
-      }
-
-      // Skip all warmup
-      function skipAllWarmup() {
-        if (!confirm('Skip the entire warmup? Warming up reduces injury risk and improves performance.')) return;
-        
-        if (warmupInterval) clearInterval(warmupInterval);
-        state.warmupInProgress = false;
-        finishWarmup();
-      }
-
-      // Update warmup progress
-      function updateWarmupProgress() {
-        const total = state.warmupData.length;
-        const completed = state.warmupData.filter(ex => ex.completed).length;
-        
-        const percentage = Math.round((completed / total) * 100);
-        
-        warmupProgressBar.style.width = `${percentage}%`;
-        warmupProgressPercentage.textContent = `${percentage}%`;
-      }
-
-      // Update warmup exercise list
-      function updateWarmupExerciseList() {
-        warmupExerciseList.innerHTML = state.warmupData.map((ex, idx) => {
-          let status = '';
-          let statusClass = '';
-          
-          if (ex.completed) {
-            status = '✓ Complete';
-            statusClass = 'text-green-400 font-semibold';
-          } else if (idx === state.currentWarmupIndex) {
-            status = 'In Progress';
-            statusClass = 'text-orange-400 font-bold';
-          } else {
-            status = `${ex.exercise.duration}s`;
-            statusClass = 'text-slate-500';
-          }
-
-          return `
-            <div class="flex justify-between items-center text-sm font-medium ${idx === state.currentWarmupIndex ? 'glass-card p-3 rounded-xl bg-orange-500/10' : 'p-2'}">
-              <span class="${ex.completed ? 'text-slate-400' : 'text-slate-200'}">${ex.exercise.name}</span>
-              <span class="${statusClass}">${status}</span>
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">Norwegian 4×4</h2>
             </div>
-          `;
-        }).join('');
-      }
+            <div class="card-icon danger">⚡</div>
+        </div>
+        <p class="card-desc">4 high-intensity work blocks. Push 85–95% HR with controlled active recovery periods.</p>
+        <div class="tags">
+            <span class="tag danger">Max Effort</span>
+        </div>
+        <button type="button" class="btn-primary" onclick="app.init('4x4')">Start Workout</button>
+    </div>
 
-      // Finish warmup and start workout
-      function finishWarmup() {
-        state.warmupInProgress = false;
-        
-        if (warmupInterval) clearInterval(warmupInterval);
-        
-        warmupView.classList.add('hidden');
-        
-        playBeep(1500, 400);
-        
-        // Start the actual workout
-        startWorkout();
-      }
-
-      // Start workout
-      function startWorkout() {
-        initAudio();
-        state.workoutInProgress = true;
-        state.currentExerciseIndex = 0;
-        state.currentSet = 1;
-        state.workoutData = EXERCISES.map(ex => {
-          const levelData = state.exerciseLevels[ex.id] || { level: 1 };
-          const exerciseLevel = ex.levels[levelData.level - 1];
-          return {
-            exercise: ex,
-            level: levelData.level,
-            targetReps: exerciseLevel.reps,
-            sets: [
-              { reps: null, skipped: false },
-              { reps: null, skipped: false },
-              { reps: null, skipped: false }
-            ]
-          };
-        });
-
-        workoutStatus.classList.add('hidden');
-        activeWorkout.classList.remove('hidden');
-        
-        displayCurrentExercise();
-        updateExerciseList();
-        
-        // Only play beep if not coming from warmup
-        if (!state.warmupInProgress) {
-          playBeep(1000, 300);
-        }
-      }
-
-      // Display set indicators
-      function displaySetIndicators() {
-        const current = state.workoutData[state.currentExerciseIndex];
-        setIndicators.innerHTML = current.sets.map((set, idx) => {
-          const setNum = idx + 1;
-          let classes = 'set-indicator w-20 h-20 rounded-xl flex flex-col items-center justify-center glass-card font-bold';
-          let content = `<div class="text-xs text-slate-400 uppercase">Set</div><div class="text-2xl">${setNum}</div>`;
-          
-          if (set.reps !== null) {
-            classes += ' set-complete';
-            content = `<div class="text-xs text-green-400 uppercase">✓</div><div class="text-xl text-green-400">${set.reps}</div>`;
-          } else if (set.skipped) {
-            classes += ' opacity-50';
-            content = `<div class="text-xs text-slate-500 uppercase">Skip</div><div class="text-xl text-slate-500">⊘</div>`;
-          } else if (setNum === state.currentSet) {
-            classes += ' border-2 border-orange-400 bg-orange-500/20';
-          }
-          
-          return `<div class="${classes}">${content}</div>`;
-        }).join('');
-      }
-
-      // Display current exercise
-      function displayCurrentExercise() {
-        if (state.currentExerciseIndex >= state.workoutData.length) {
-          finishWorkout();
-          return;
-        }
-
-        const current = state.workoutData[state.currentExerciseIndex];
-        const levelInfo = current.exercise.levels[current.level - 1];
-        
-        exerciseName.textContent = current.exercise.name;
-        exerciseLevel.textContent = `Level ${current.level}: ${levelInfo.name}`;
-        exerciseNumber.textContent = `${state.currentExerciseIndex + 1}/${state.workoutData.length}`;
-        
-        if (current.exercise.id === 'plank') {
-          targetReps.textContent = `${current.targetReps}s`;
-          repsInput.placeholder = 'Seconds held';
-        } else {
-          targetReps.textContent = current.targetReps;
-          repsInput.placeholder = 'Reps completed';
-        }
-        
-        repsInput.value = '';
-        repsInput.focus();
-
-        displaySetIndicators();
-        updateProgress();
-        scrollToTop();
-      }
-
-      function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      // Update progress
-      function updateProgress() {
-        const totalSets = state.workoutData.length * SETS_PER_EXERCISE;
-        let completedSets = 0;
-        
-        state.workoutData.forEach(ex => {
-          ex.sets.forEach(set => {
-            if (set.reps !== null || set.skipped) {
-              completedSets++;
-            }
-          });
-        });
-        
-        const percentage = Math.round((completedSets / totalSets) * 100);
-        
-        progressBar.style.width = `${percentage}%`;
-        progressPercentage.textContent = `${percentage}%`;
-      }
-
-      // Update exercise list
-      function updateExerciseList() {
-        exerciseList.innerHTML = state.workoutData.map((ex, idx) => {
-          const completedSets = ex.sets.filter(s => s.reps !== null).length;
-          const skippedSets = ex.sets.filter(s => s.skipped).length;
-          const totalSets = ex.sets.length;
-          
-          let status = '';
-          let statusClass = '';
-          
-          if (completedSets === totalSets) {
-            status = `✓ Complete (${completedSets}/${totalSets})`;
-            statusClass = 'text-green-400 font-semibold';
-          } else if (idx === state.currentExerciseIndex) {
-            status = `In Progress (${completedSets}/${totalSets})`;
-            statusClass = 'text-orange-400 font-bold';
-          } else if (completedSets > 0 || skippedSets > 0) {
-            status = `${completedSets}/${totalSets} sets`;
-            statusClass = 'text-slate-400';
-          } else {
-            status = `${totalSets} sets`;
-            statusClass = 'text-slate-500';
-          }
-
-          return `
-            <div class="flex justify-between items-center text-sm font-medium ${idx === state.currentExerciseIndex ? 'glass-card p-3 rounded-xl bg-orange-500/10' : 'p-2'}">
-              <span class="${idx < state.currentExerciseIndex && completedSets === totalSets ? 'text-slate-400' : 'text-slate-200'}">${ex.exercise.name}</span>
-              <span class="${statusClass}">${status}</span>
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">Install App</h2>
             </div>
-          `;
-        }).join('');
-      }
+            <div class="card-icon accent">📱</div>
+        </div>
+        <p class="card-desc">Add Cardio Sync to your home screen for the full-screen experience.</p>
+        <div class="install-status" id="install-status">Checking device...</div>
+        <ul id="install-steps" class="install-steps">
+            <li class="install-step">
+                <span class="step-number">1</span>
+                <span class="step-text">Tap the <strong>Share</strong> button in Safari</span>
+            </li>
+            <li class="install-step">
+                <span class="step-number">2</span>
+                <span class="step-text">Select <strong>Add to Home Screen</strong></span>
+            </li>
+            <li class="install-step">
+                <span class="step-number">3</span>
+                <span class="step-text">Tap <strong>Add</strong> to confirm</span>
+            </li>
+        </ul>
+        <button id="install-toggle" class="btn-secondary" type="button" onclick="toggleInstall()">Show Instructions</button>
+    </div>
 
-      // Complete set
-      function completeSet() {
-        const reps = parseInt(repsInput.value);
-        if (isNaN(reps) || reps < 0) {
-          alert('Please enter a valid number of reps');
-          return;
-        }
+    <div class="section-header">
+        <h3 class="section-title">Recent Activity</h3>
+        <button type="button" class="section-link" onclick="ui.tab('stats')">View All →</button>
+    </div>
+    <div id="mini-stats"></div>
+</div>
 
-        const current = state.workoutData[state.currentExerciseIndex];
-        current.sets[state.currentSet - 1].reps = reps;
+<!-- STATS -->
+<div id="tab-stats" class="view">
+    <header class="page-header">
+        <div class="page-header-row">
+            <div>
+                <h1 class="page-title">Progress</h1>
+                <p class="page-subtitle">Workout Analytics</p>
+            </div>
+            <button type="button" class="btn-icon" onclick="ui.modal('manual')" aria-label="Add manual log">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </button>
+        </div>
+    </header>
 
-        saveData();
-        displaySetIndicators();
-        updateExerciseList();
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">Total</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="stat-week">0</div>
+            <div class="stat-label">This Week</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="stat-streak">0</div>
+            <div class="stat-label">Streak</div>
+        </div>
+    </div>
 
-        // Move to next set or exercise
-        if (state.currentSet < SETS_PER_EXERCISE) {
-          state.currentSet++;
-          startRestTimer();
-        } else {
-          // Check for progression after all sets
-          const allSetsComplete = current.sets.every(s => s.reps !== null && s.reps >= current.targetReps);
-          
-          if (allSetsComplete) {
-            const exLevel = state.exerciseLevels[current.exercise.id];
-            exLevel.successCount = (exLevel.successCount || 0) + 1;
-            
-            // Progress after 2 successful workouts
-            if (exLevel.successCount >= 2 && exLevel.level < current.exercise.levels.length) {
-              exLevel.level++;
-              exLevel.successCount = 0;
-            }
-          } else {
-            // Reset success count if didn't hit all targets
-            state.exerciseLevels[current.exercise.id].successCount = 0;
-          }
+    <div class="section-header">
+        <h3 class="section-title">Workout History</h3>
+    </div>
+    <div id="full-stats"></div>
+</div>
 
-          saveData();
-          
-          // Move to next exercise
-          state.currentExerciseIndex++;
-          state.currentSet = 1;
-          
-          if (state.currentExerciseIndex < state.workoutData.length) {
-            startRestTimer();
-          } else {
-            displayCurrentExercise();
-          }
-        }
-
-        playBeep(1200, 200);
-      }
-
-      // Skip set
-      function skipSet() {
-        const current = state.workoutData[state.currentExerciseIndex];
-        current.sets[state.currentSet - 1].skipped = true;
-        
-        // Reset success count
-        state.exerciseLevels[current.exercise.id].successCount = 0;
-        
-        saveData();
-        displaySetIndicators();
-        updateExerciseList();
-
-        // Move to next set or exercise
-        if (state.currentSet < SETS_PER_EXERCISE) {
-          state.currentSet++;
-          displayCurrentExercise();
-        } else {
-          state.currentExerciseIndex++;
-          state.currentSet = 1;
-          displayCurrentExercise();
-        }
-      }
-
-      // Rest timer
-      function startRestTimer() {
-        state.restTimerActive = true;
-        state.restSecondsRemaining = state.settings.restTime;
-        
-        repsInput.classList.add('hidden');
-        completeSetBtn.classList.add('hidden');
-        skipSetBtn.classList.add('hidden');
-        restTimer.classList.remove('hidden');
-        
-        restTimeDisplay.textContent = state.restSecondsRemaining;
-        
-        if (restInterval) clearInterval(restInterval);
-        
-        restInterval = setInterval(() => {
-          state.restSecondsRemaining--;
-          restTimeDisplay.textContent = state.restSecondsRemaining;
-          
-          if (state.restSecondsRemaining <= 3 && state.restSecondsRemaining > 0) {
-            playBeep(600, 150);
-          }
-          
-          if (state.restSecondsRemaining <= 0) {
-            clearInterval(restInterval);
-            endRestTimer();
-            playBeep(1000, 300);
-          }
-        }, 1000);
-      }
-
-      function endRestTimer() {
-        state.restTimerActive = false;
-        restTimer.classList.add('hidden');
-        repsInput.classList.remove('hidden');
-        completeSetBtn.classList.remove('hidden');
-        skipSetBtn.classList.remove('hidden');
-        
-        displayCurrentExercise();
-      }
-
-      // Stop workout
-      function stopWorkout() {
-        if (!confirm('Are you sure you want to end this workout early?')) return;
-        
-        if (restInterval) clearInterval(restInterval);
-        
-        state.workoutInProgress = false;
-        activeWorkout.classList.add('hidden');
-        workoutStatus.classList.remove('hidden');
-        
-        saveData();
-      }
-
-      // Finish workout
-      function finishWorkout() {
-        state.workoutInProgress = false;
-        
-        if (restInterval) clearInterval(restInterval);
-        
-        // Calculate stats
-        let completedSets = 0;
-        let skippedSets = 0;
-        let totalReps = 0;
-        
-        state.workoutData.forEach(ex => {
-          ex.sets.forEach(set => {
-            if (set.reps !== null) {
-              completedSets++;
-              totalReps += set.reps;
-            } else if (set.skipped) {
-              skippedSets++;
-            }
-          });
-        });
-
-        const totalSets = state.workoutData.length * SETS_PER_EXERCISE;
-
-        // Check for progressions
-        const progressions = [];
-        state.workoutData.forEach(ex => {
-          const exLevel = state.exerciseLevels[ex.exercise.id];
-          if (exLevel.successCount === 1) {
-            progressions.push(`${ex.exercise.name}: One more successful workout to level up!`);
-          }
-        });
-
-        // Save workout to history
-        state.history.push({
-          date: new Date().toISOString(),
-          exercises: state.workoutData.map(ex => ({
-            id: ex.exercise.id,
-            name: ex.exercise.name,
-            level: ex.level,
-            target: ex.targetReps,
-            sets: ex.sets
-          })),
-          totalReps,
-          totalSets: completedSets,
-          duration: null
-        });
-
-        saveData();
-        updateStatsDisplay();
-
-        // Display summary
-        workoutSummary.innerHTML = `
-          <div class="text-xl mb-3 font-semibold">Completed ${completedSets}/${totalSets} sets</div>
-          <div class="text-sm text-slate-400">Total Reps: ${totalReps}</div>
-          ${skippedSets > 0 ? `<div class="text-sm text-slate-500 mt-1">Skipped: ${skippedSets} sets</div>` : ''}
-        `;
-
-        if (progressions.length > 0) {
-          progressionAdvice.innerHTML = `
-            <div class="font-bold mb-3 text-orange-400 text-base">🎯 Progress Update</div>
-            ${progressions.map(p => `<div class="text-sm text-slate-300 mb-2">• ${p}</div>`).join('')}
-          `;
-        } else {
-          progressionAdvice.innerHTML = `
-            <div class="font-bold mb-3 text-orange-400 text-base">💪 Keep Training!</div>
-            <div class="text-sm text-slate-300">Complete all 3 sets with target reps for 2 consecutive workouts to level up exercises.</div>
-          `;
-        }
-
-        activeWorkout.classList.add('hidden');
-        workoutComplete.classList.remove('hidden');
-        
-        playBeep(1500, 500);
-        scrollToTop();
-      }
-
-      // Finish button
-      finishBtn.addEventListener('click', () => {
-        workoutComplete.classList.add('hidden');
-        workoutStatus.classList.remove('hidden');
-      });
-
-      // Show history
-      function showHistory() {
-        const sortedHistory = [...state.history].reverse();
-        
-        if (sortedHistory.length === 0) {
-          historyList.innerHTML = '<div class="text-slate-400 text-center py-12 glass-card rounded-xl">No workout history yet.<br><span class="text-sm text-slate-500 mt-2 inline-block">Complete your first workout to see it here!</span></div>';
-          return;
-        }
-
-        historyList.innerHTML = sortedHistory.map((workout, idx) => {
-          const date = new Date(workout.date);
-          const dateStr = date.toLocaleDateString(undefined, {
-            weekday: 'short',
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-          });
-          
-          const totalSets = workout.totalSets || 0;
-          const maxSets = workout.exercises.length * 3;
-          
-          return `
-            <div class="glass-card rounded-xl p-5">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <div class="font-bold text-orange-400 mb-1">${dateStr}</div>
-                  <div class="text-sm text-slate-400">${totalSets}/${maxSets} sets • ${workout.totalReps} reps</div>
-                </div>
-                <button 
-                  onclick="deleteWorkout(${state.history.length - 1 - idx})" 
-                  class="glass-card p-2 rounded-lg hover:bg-red-500/20 text-red-400 transition-all"
-                  title="Delete"
-                >
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                  </svg>
+<!-- TIMER -->
+<div id="view-timer" class="view">
+    <div class="timer-layout">
+        <div class="timer-header">
+            <div class="timer-info">
+                <div id="t-round" class="timer-round">ROUND 1/4</div>
+                <div id="t-next" class="timer-next">NEXT: REST</div>
+            </div>
+            <div class="timer-header-right">
+                <div id="workout-elapsed" class="workout-elapsed">00:00</div>
+                <button type="button" class="btn-icon danger" onclick="app.showQuitModal()" aria-label="Quit">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
                 </button>
-              </div>
-              <div class="space-y-2 text-xs">
-                ${workout.exercises.map(ex => {
-                  const completedSets = ex.sets ? ex.sets.filter(s => s.reps !== null).length : 0;
-                  const totalExSets = ex.sets ? ex.sets.length : 3;
-                  return `<div class="text-slate-300 flex justify-between">
-                    <span>${ex.name}</span>
-                    <span class="text-slate-500">${completedSets}/${totalExSets} sets</span>
-                  </div>`;
-                }).join('')}
-              </div>
             </div>
-          `;
-        }).join('');
-      }
+        </div>
 
-      // Delete workout
-      window.deleteWorkout = function(index) {
-        if (!confirm('Delete this workout from history?')) return;
-        state.history.splice(index, 1);
-        saveData();
-        updateStatsDisplay();
-        showHistory();
-      };
+        <div class="circle-wrap">
+            <svg class="circle-svg" viewBox="0 0 300 300">
+                <defs>
+                    <linearGradient id="timer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#6366f1"/>
+                        <stop offset="100%" stop-color="#22d3ee"/>
+                    </linearGradient>
+                </defs>
+                <circle class="circle-bg" cx="150" cy="150" r="134"></circle>
+                <circle id="t-ring" class="circle-fg" cx="150" cy="150" r="134"></circle>
+            </svg>
+            <div class="timer-center">
+                <div id="t-val" class="timer-value">00:00</div>
+                <div id="t-label" class="timer-phase">WORK</div>
+            </div>
+        </div>
 
-      // Setup event listeners
-      function setupEventListeners() {
-        startWorkoutBtn.addEventListener('click', startWarmup);
-        completeSetBtn.addEventListener('click', completeSet);
-        skipSetBtn.addEventListener('click', skipSet);
-        stopWorkoutBtn.addEventListener('click', stopWorkout);
-        
-        // Warmup buttons
-        skipWarmupExerciseBtn.addEventListener('click', skipWarmupExercise);
-        skipAllWarmupBtn.addEventListener('click', skipAllWarmup);
+        <div class="exercise-info">
+            <div id="t-name" class="exercise-title">Exercise</div>
+            <div class="exercise-details">
+                <span id="t-weight" class="editable" onclick="app.editWeight()">--</span>
+                <span>•</span>
+                <span id="t-equip">--</span>
+            </div>
+            <div id="t-note" class="exercise-note">Instructions will appear here.</div>
+        </div>
 
-        // Enter key on reps input
-        repsInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') completeSet();
-        });
+        <div class="timer-controls">
+            <button type="button" class="control-btn" onclick="app.skip()" aria-label="Skip">
+                <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+            </button>
+            <button type="button" class="control-btn primary" onclick="app.addTime()" aria-label="Add 30s">+30</button>
+        </div>
+    </div>
+</div>
 
-        // Modals
-        infoBtn.addEventListener('click', () => infoModal.classList.remove('hidden'));
-        closeInfo.addEventListener('click', () => infoModal.classList.add('hidden'));
-        
-        historyBtn.addEventListener('click', () => {
-          showHistory();
-          historyModal.classList.remove('hidden');
-        });
-        closeHistory.addEventListener('click', () => historyModal.classList.add('hidden'));
-        
-        settingsBtn.addEventListener('click', () => settingsModal.classList.remove('hidden'));
-        closeSettings.addEventListener('click', () => {
-          state.settings.restTime = parseInt(restTimeSetting.value);
-          state.settings.soundEnabled = soundAlerts.checked;
-          saveData();
-          settingsModal.classList.add('hidden');
-        });
+<!-- COMPLETION -->
+<div id="completion-screen" class="completion-screen">
+    <div class="completion-content">
+        <div class="completion-badge">✓</div>
+        <h2 class="completion-title">Workout Complete!</h2>
+        <p class="completion-subtitle">Great work. Every rep counts.</p>
 
-        // Close modals on backdrop click
-        [infoModal, historyModal, settingsModal].forEach(modal => {
-          modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-              modal.classList.add('hidden');
+        <div class="completion-stats">
+            <div class="completion-stat">
+                <span class="completion-stat-label">Workout Type</span>
+                <span class="completion-stat-value" id="c-type">--</span>
+            </div>
+            <div class="completion-stat">
+                <span class="completion-stat-label">Total Duration</span>
+                <span class="completion-stat-value" id="c-duration">--</span>
+            </div>
+            <div class="completion-stat">
+                <span class="completion-stat-label">Exercises</span>
+                <span class="completion-stat-value" id="c-exercises">--</span>
+            </div>
+            <div class="completion-stat">
+                <span class="completion-stat-label">Date</span>
+                <span class="completion-stat-value" id="c-date">--</span>
+            </div>
+        </div>
+
+        <label for="completion-notes">Notes (optional)</label>
+        <textarea id="completion-notes" placeholder="How did it feel?"></textarea>
+
+        <div class="completion-actions">
+            <button type="button" class="btn-primary" onclick="app.saveCompletedWorkout(false)">Save Workout</button>
+            <button type="button" class="btn-secondary" onclick="app.saveCompletedWorkout(true)">Save & View Progress</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal"></div>
+
+<!-- TOAST -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- NAV -->
+<nav>
+    <button id="nav-train" class="nav-btn active" onclick="ui.tab('home')" type="button">
+        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span class="nav-label">Train</span>
+    </button>
+    <button id="nav-stats" class="nav-btn" onclick="ui.tab('stats')" type="button">
+        <svg viewBox="0 0 24 24"><path d="M3 13h2v8H3v-8zm4-6h2v14H7V7zm4-4h2v18h-2V3zm4 8h2v10h-2V11zm4-3h2v13h-2V8z"/></svg>
+        <span class="nav-label">Progress</span>
+    </button>
+</nav>
+
+<script>
+// Generate and inject apple-touch-icon dynamically
+(function() {
+    var canvas = document.createElement('canvas');
+    canvas.width = 180;
+    canvas.height = 180;
+    var ctx = canvas.getContext('2d');
+    
+    // Background gradient
+    var bgGrad = ctx.createLinearGradient(0, 0, 180, 180);
+    bgGrad.addColorStop(0, '#1a1a2e');
+    bgGrad.addColorStop(1, '#0a0a0f');
+    
+    // Draw rounded rectangle background
+    ctx.beginPath();
+    ctx.moveTo(40, 0);
+    ctx.lineTo(140, 0);
+    ctx.quadraticCurveTo(180, 0, 180, 40);
+    ctx.lineTo(180, 140);
+    ctx.quadraticCurveTo(180, 180, 140, 180);
+    ctx.lineTo(40, 180);
+    ctx.quadraticCurveTo(0, 180, 0, 140);
+    ctx.lineTo(0, 40);
+    ctx.quadraticCurveTo(0, 0, 40, 0);
+    ctx.closePath();
+    ctx.fillStyle = bgGrad;
+    ctx.fill();
+    
+    // Pulse line gradient
+    var lineGrad = ctx.createLinearGradient(20, 0, 160, 0);
+    lineGrad.addColorStop(0, '#6366f1');
+    lineGrad.addColorStop(1, '#22d3ee');
+    
+    // Draw heartbeat/pulse line
+    ctx.beginPath();
+    ctx.moveTo(20, 95);
+    ctx.lineTo(45, 95);
+    ctx.lineTo(55, 70);
+    ctx.lineTo(70, 120);
+    ctx.lineTo(90, 45);
+    ctx.lineTo(110, 135);
+    ctx.lineTo(125, 80);
+    ctx.lineTo(135, 95);
+    ctx.lineTo(160, 95);
+    ctx.strokeStyle = lineGrad;
+    ctx.lineWidth = 8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+    
+    // Convert to data URL and create link
+    var dataUrl = canvas.toDataURL('image/png');
+    var link = document.createElement('link');
+    link.rel = 'apple-touch-icon';
+    link.href = dataUrl;
+    document.head.appendChild(link);
+    
+    // Also add sizes variants
+    var link2 = document.createElement('link');
+    link2.rel = 'apple-touch-icon';
+    link2.sizes = '180x180';
+    link2.href = dataUrl;
+    document.head.appendChild(link2);
+    
+    var link3 = document.createElement('link');
+    link3.rel = 'apple-touch-icon-precomposed';
+    link3.href = dataUrl;
+    document.head.appendChild(link3);
+})();
+
+var CIRCUMFERENCE = 2 * Math.PI * 134;
+
+var WORKOUTS = {
+    zone2: {
+        title: "Zone 2: Steady State",
+        type: "Zone 2",
+        gen: function() {
+            var block = [
+                { n: "Weighted March", t: 180, w: "35/50lb KB", e: "Kettlebell", d: "Goblet hold, high knees, nasal breathing only." },
+                { n: "Farmer's Carry", t: 180, w: "25/35lb DB", e: "Dumbbells", d: "Tall spine, calm breath, steady gait." },
+                { n: "Step-Back Lunges", t: 120, w: "Bodyweight", e: "None", d: "Controlled alternating lunges, focus on balance." },
+                { n: "Halo Extension", t: 120, w: "35lb KB", e: "Kettlebell", d: "Smooth halo, brace core, light grip." },
+                { n: "Shadow Boxing", t: 120, w: "Light DB/BW", e: "Optional DB", d: "Snappy combos. Drop weight if HR spikes." }
+            ];
+            var queue = [];
+            for (var i = 1; i <= 4; i++) {
+                block.forEach(function(item) {
+                    queue.push({ n: item.n, t: item.t, w: item.w, e: item.e, d: item.d, r: "ROUND " + i + "/4" });
+                });
             }
-          });
+            return queue;
+        }
+    },
+    "4x4": {
+        title: "Norwegian 4×4",
+        type: "Norwegian 4×4",
+        gen: function() {
+            var queue = [
+                { n: "Warmup Flow", t: 300, w: "Bodyweight", e: "None", d: "Dynamic prep. Ease up to 60% HR.", r: "WARMUP" }
+            ];
+            for (var i = 1; i <= 4; i++) {
+                queue.push({ n: "KB Swings", t: 60, w: "35/50lb KB", e: "Kettlebell", d: "Explosive hip drive.", r: "ROUND " + i + "/4" });
+                queue.push({ n: "DB Thrusters", t: 60, w: "25lb DB", e: "Dumbbells", d: "Deep squat into press.", r: "ROUND " + i + "/4" });
+                queue.push({ n: "Mountain Climbers", t: 60, w: "Bodyweight", e: "None", d: "Sprint pace.", r: "ROUND " + i + "/4" });
+                queue.push({ n: "Farmer Sprint Walk", t: 60, w: "Heavy DB/KB", e: "DB/KB", d: "Fast walk, max tension.", r: "ROUND " + i + "/4" });
+                if (i < 4) {
+                    queue.push({ n: "Active Recovery", t: 180, w: "—", e: "None", d: "Walk, breathe, keep moving.", r: "RECOVERY" });
+                }
+            }
+            queue.push({ n: "Cool Down", t: 180, w: "—", e: "None", d: "Walk + stretch.", r: "COOLDOWN" });
+            return queue;
+        }
+    }
+};
+
+var storage = {
+    key: 'cardiosync_workouts',
+    
+    getAll: function() {
+        try {
+            var data = localStorage.getItem(this.key);
+            if (!data) return [];
+            var parsed = JSON.parse(data);
+            if (!Array.isArray(parsed)) return [];
+            return parsed.filter(function(w) {
+                return w && typeof w === 'object' && w.id && w.timestamp;
+            });
+        } catch (e) {
+            return [];
+        }
+    },
+    
+    save: function(workouts) {
+        try {
+            if (!Array.isArray(workouts)) return false;
+            localStorage.setItem(this.key, JSON.stringify(workouts));
+            return true;
+        } catch (e) {
+            return false;
+        }
+    },
+    
+    add: function(record) {
+        try {
+            if (!record || !record.id) return false;
+            var workouts = this.getAll();
+            workouts.unshift(record);
+            return this.save(workouts);
+        } catch (e) {
+            return false;
+        }
+    },
+    
+    delete: function(id) {
+        try {
+            if (!id) return false;
+            var workouts = this.getAll().filter(function(w) { return w.id !== id; });
+            return this.save(workouts);
+        } catch (e) {
+            return false;
+        }
+    }
+};
+
+var app = {
+    state: {
+        active: false,
+        queue: [],
+        index: 0,
+        timeLeft: 0,
+        workoutType: '',
+        workoutStart: null,
+        exerciseSummary: [],
+        actualDuration: 0,
+        saving: false
+    },
+    timer: null,
+    workoutTimer: null,
+    audioCtx: null,
+    cachedWorkouts: [],
+
+    resetState: function() {
+        this.state = {
+            active: false,
+            queue: [],
+            index: 0,
+            timeLeft: 0,
+            workoutType: '',
+            workoutStart: null,
+            exerciseSummary: [],
+            actualDuration: 0,
+            saving: false
+        };
+    },
+
+    init: function(type) {
+        var preset = WORKOUTS[type];
+        if (!preset) return;
+
+        this.stopTimers();
+        this.hideAllViews();
+
+        this.state = {
+            active: true,
+            queue: preset.gen(),
+            index: 0,
+            timeLeft: 0,
+            workoutType: preset.type,
+            workoutStart: Date.now(),
+            exerciseSummary: [],
+            actualDuration: 0,
+            saving: false
+        };
+
+        document.getElementById('view-timer').classList.add('active');
+        this.loadExercise();
+        this.startTimers();
+
+        if (!this.audioCtx) {
+            try {
+                this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {}
+        }
+    },
+
+    hideAllViews: function() {
+        document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+        document.getElementById('completion-screen').classList.remove('show');
+    },
+
+    startTimers: function() {
+        var self = this;
+        this.timer = setInterval(function() { self.tick(); }, 1000);
+        this.workoutTimer = setInterval(function() { self.updateElapsed(); }, 1000);
+    },
+
+    stopTimers: function() {
+        if (this.timer) { clearInterval(this.timer); this.timer = null; }
+        if (this.workoutTimer) { clearInterval(this.workoutTimer); this.workoutTimer = null; }
+    },
+
+    loadExercise: function() {
+        var s = this.state;
+        if (!s.queue || s.index >= s.queue.length) {
+            this.showCompletion();
+            return;
+        }
+        
+        var ex = s.queue[s.index];
+        if (!ex) {
+            this.showCompletion();
+            return;
+        }
+        
+        s.timeLeft = ex.t || 60;
+
+        document.getElementById('t-name').textContent = ex.n || 'Exercise';
+        document.getElementById('t-weight').textContent = ex.w || '--';
+        document.getElementById('t-equip').textContent = ex.e || '--';
+        document.getElementById('t-note').textContent = ex.d || '';
+        document.getElementById('t-val').textContent = this.formatClock(s.timeLeft);
+        document.getElementById('t-round').textContent = ex.r || 'WORK';
+        
+        var nextEx = s.queue[s.index + 1];
+        document.getElementById('t-next').textContent = nextEx ? 'NEXT: ' + (nextEx.n || '').toUpperCase() : 'FINISHING';
+
+        var label = (ex.n || '').toLowerCase().indexOf('warmup') >= 0 ? 'WARMUP' :
+                      ((ex.n || '').toLowerCase().indexOf('recover') >= 0 || (ex.n || '').toLowerCase().indexOf('cool') >= 0) ? 'RECOVER' : 'WORK';
+        document.getElementById('t-label').textContent = label;
+
+        this.updateRing(1);
+    },
+
+    tick: function() {
+        var s = this.state;
+        if (!s.active) return;
+
+        var current = s.queue && s.queue[s.index];
+        if (!current) {
+            this.showCompletion();
+            return;
+        }
+
+        s.timeLeft--;
+        if (s.timeLeft < 0) s.timeLeft = 0;
+
+        document.getElementById('t-val').textContent = this.formatClock(s.timeLeft);
+        this.updateRing(s.timeLeft / Math.max(current.t || 1, 1));
+
+        if (s.timeLeft <= 0) {
+            this.playBeep();
+            this.skip();
+        }
+    },
+
+    skip: function() {
+        if (!this.state.active) return;
+        this.state.index++;
+        this.loadExercise();
+    },
+
+    addTime: function() {
+        if (!this.state.active) return;
+        var current = this.state.queue && this.state.queue[this.state.index];
+        if (!current) return;
+
+        current.t = (current.t || 0) + 30;
+        this.state.timeLeft += 30;
+        document.getElementById('t-val').textContent = this.formatClock(this.state.timeLeft);
+        this.updateRing(this.state.timeLeft / Math.max(current.t, 1));
+        ui.toast('+30 seconds', 'info');
+    },
+
+    updateRing: function(progress) {
+        var clamped = Math.min(Math.max(progress || 0, 0), 1);
+        var offset = CIRCUMFERENCE * (1 - clamped);
+        var ring = document.getElementById('t-ring');
+        if (ring) ring.style.strokeDashoffset = offset;
+    },
+
+    updateElapsed: function() {
+        if (!this.state.workoutStart) return;
+        var elapsed = Math.floor((Date.now() - this.state.workoutStart) / 1000);
+        var el = document.getElementById('workout-elapsed');
+        if (el) el.textContent = this.formatClock(elapsed);
+    },
+
+    playBeep: function() {
+        if (!this.audioCtx) return;
+        try {
+            var osc = this.audioCtx.createOscillator();
+            var gain = this.audioCtx.createGain();
+            osc.frequency.value = 800;
+            gain.gain.value = 0.1;
+            osc.connect(gain).connect(this.audioCtx.destination);
+            osc.start();
+            osc.stop(this.audioCtx.currentTime + 0.1);
+        } catch (e) {}
+    },
+
+    showQuitModal: function() {
+        var elapsed = this.state.workoutStart ? Math.floor((Date.now() - this.state.workoutStart) / 1000) : 0;
+        ui.modal('quit', {
+            completed: this.state.index || 0,
+            total: (this.state.queue && this.state.queue.length) || 0,
+            duration: this.formatDuration(elapsed)
+        });
+    },
+
+    savePartial: function() {
+        var elapsed = this.state.workoutStart ? Math.floor((Date.now() - this.state.workoutStart) / 1000) : 0;
+        var queueSlice = this.state.queue ? this.state.queue.slice(0, this.state.index) : [];
+        var summary = this.buildSummary(queueSlice);
+
+        var success = storage.add({
+            id: Date.now(),
+            timestamp: Date.now(),
+            date: this.formatDate(new Date()),
+            type: (this.state.workoutType || 'Workout') + ' (Partial)',
+            duration: elapsed,
+            exercises: summary,
+            notes: 'Stopped early'
         });
 
-        // Reset progress
-        resetProgress.addEventListener('click', () => {
-          if (!confirm('Are you sure you want to reset ALL progress? This cannot be undone!')) return;
-          if (!confirm('Really reset? All workout history and levels will be lost!')) return;
-          
-          EXERCISES.forEach(ex => {
-            state.exerciseLevels[ex.id] = { level: 1, successCount: 0 };
-          });
-          state.history = [];
-          saveData();
-          updateStatsDisplay();
-          settingsModal.classList.add('hidden');
-          alert('Progress reset complete');
+        if (success) {
+            ui.toast('Partial workout saved', 'success');
+        } else {
+            ui.toast('Error saving workout', 'error');
+        }
+        
+        ui.closeModal();
+        this.stopTimers();
+        this.resetState();
+        this.hideAllViews();
+        ui.renderStats();
+        ui.tab('stats');
+    },
+
+    confirmQuit: function() {
+        this.stopTimers();
+        ui.closeModal();
+        this.resetState();
+        this.hideAllViews();
+        ui.tab('home');
+    },
+
+    showCompletion: function() {
+        this.stopTimers();
+        this.state.active = false;
+        this.hideAllViews();
+
+        var elapsed = this.state.workoutStart ? Math.floor((Date.now() - this.state.workoutStart) / 1000) : 0;
+        this.state.actualDuration = elapsed;
+        this.state.exerciseSummary = this.buildSummary(this.state.queue || []);
+
+        var cType = document.getElementById('c-type');
+        var cDuration = document.getElementById('c-duration');
+        var cExercises = document.getElementById('c-exercises');
+        var cDate = document.getElementById('c-date');
+        var completionNotes = document.getElementById('completion-notes');
+        
+        if (cType) cType.textContent = this.state.workoutType || '--';
+        if (cDuration) cDuration.textContent = this.formatDuration(elapsed);
+        
+        var exerciseCount = 0;
+        if (this.state.exerciseSummary && this.state.exerciseSummary.length) {
+            exerciseCount = this.state.exerciseSummary.reduce(function(sum, ex) { 
+                return sum + (ex && ex.rounds ? ex.rounds : 0); 
+            }, 0);
+        }
+        if (cExercises) cExercises.textContent = exerciseCount;
+        if (cDate) cDate.textContent = this.formatDate(new Date());
+        if (completionNotes) completionNotes.value = '';
+
+        document.getElementById('completion-screen').classList.add('show');
+    },
+
+    saveCompletedWorkout: function(goToStats) {
+        if (this.state.saving) return;
+        this.state.saving = true;
+
+        var self = this;
+        var notesEl = document.getElementById('completion-notes');
+        var notes = notesEl ? notesEl.value.trim() : '';
+
+        var record = {
+            id: Date.now(),
+            timestamp: Date.now(),
+            date: this.formatDate(new Date()),
+            type: this.state.workoutType || 'Workout',
+            duration: this.state.actualDuration || 0,
+            exercises: this.state.exerciseSummary || [],
+            notes: notes
+        };
+
+        var success = storage.add(record);
+
+        document.getElementById('completion-screen').classList.remove('show');
+
+        if (success) {
+            ui.toast('Workout saved!', 'success');
+        } else {
+            ui.toast('Error saving workout', 'error');
+        }
+
+        ui.renderStats();
+
+        setTimeout(function() {
+            ui.tab(goToStats ? 'stats' : 'home');
+            self.resetState();
+        }, 100);
+    },
+
+    buildSummary: function(list) {
+        if (!list || !Array.isArray(list) || !list.length) return [];
+        var map = {};
+        list.forEach(function(item) {
+            if (!item || !item.n) return;
+            var key = item.n;
+            if (!map[key]) {
+                map[key] = { name: key, weight: item.w || '--', equipment: item.e || '--', rounds: 0, totalSeconds: 0 };
+            }
+            map[key].rounds++;
+            map[key].totalSeconds += item.t || 0;
         });
-      }
+        return Object.values(map);
+    },
 
-      // Dark mode
-      document.documentElement.classList.add('dark');
+    editWeight: function() {
+        var current = this.state.queue && this.state.queue[this.state.index];
+        ui.modal('weight', { current: current ? (current.w || '') : '' });
+    },
 
-      // Initialize app
-      init();
-    </script>
-  </body>
+    saveWeight: function() {
+        var input = document.getElementById('m-weight');
+        var value = input ? input.value.trim() : '';
+        if (!value) return;
+        
+        if (this.state.queue && this.state.queue[this.state.index]) {
+            this.state.queue[this.state.index].w = value;
+        }
+        var weightEl = document.getElementById('t-weight');
+        if (weightEl) weightEl.textContent = value;
+        ui.closeModal();
+        ui.toast('Weight updated', 'success');
+    },
+
+    logManual: function() {
+        var typeEl = document.getElementById('m-type');
+        var durationEl = document.getElementById('m-duration');
+        var notesEl = document.getElementById('m-notes');
+        
+        var type = typeEl ? typeEl.value : 'Custom';
+        var minutes = durationEl ? parseInt(durationEl.value, 10) : 0;
+        var notes = notesEl ? notesEl.value.trim() : '';
+
+        if (!minutes || minutes <= 0 || isNaN(minutes)) {
+            ui.toast('Enter valid duration', 'error');
+            return;
+        }
+
+        var success = storage.add({
+            id: Date.now(),
+            timestamp: Date.now(),
+            date: this.formatDate(new Date()),
+            type: type,
+            duration: minutes * 60,
+            exercises: [],
+            notes: notes
+        });
+
+        if (success) {
+            ui.toast('Workout logged', 'success');
+        } else {
+            ui.toast('Error logging workout', 'error');
+        }
+        ui.closeModal();
+        ui.renderStats();
+    },
+
+    viewWorkout: function(idx) {
+        var workout = this.cachedWorkouts && this.cachedWorkouts[idx];
+        if (workout) ui.modal('view', { workout: workout });
+    },
+
+    deleteWorkout: function(id) {
+        if (id) ui.modal('delete', { id: id });
+    },
+
+    confirmDelete: function(id) {
+        if (!id) {
+            ui.closeModal();
+            return;
+        }
+        var success = storage.delete(id);
+        if (success) {
+            ui.toast('Deleted', 'info');
+        } else {
+            ui.toast('Error deleting', 'error');
+        }
+        ui.closeModal();
+        ui.renderStats();
+    },
+
+    formatClock: function(seconds) {
+        seconds = Math.max(0, parseInt(seconds, 10) || 0);
+        var m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        var s = (seconds % 60).toString().padStart(2, '0');
+        return m + ':' + s;
+    },
+
+    formatDuration: function(seconds) {
+        seconds = Math.max(0, parseInt(seconds, 10) || 0);
+        var h = Math.floor(seconds / 3600);
+        var m = Math.floor((seconds % 3600) / 60);
+        var s = seconds % 60;
+        if (h > 0) return h + 'h ' + m + 'm';
+        if (m > 0) return m + 'm ' + s + 's';
+        return s + 's';
+    },
+
+    formatDate: function(date) {
+        try {
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        } catch (e) {
+            return 'Unknown date';
+        }
+    },
+
+    getDuration: function(workout) {
+        if (workout && workout.duration != null) {
+            return this.formatClock(workout.duration);
+        }
+        return '00:00';
+    },
+
+    getExerciseCount: function(workout) {
+        if (workout && Array.isArray(workout.exercises) && workout.exercises.length) {
+            return workout.exercises.reduce(function(sum, ex) { 
+                return sum + (ex && ex.rounds ? ex.rounds : 0); 
+            }, 0);
+        }
+        return 0;
+    },
+
+    renderExercises: function(exercises) {
+        if (!exercises || !Array.isArray(exercises) || !exercises.length) {
+            return '<div class="empty-summary">No exercise data.</div>';
+        }
+        var self = this;
+        var html = exercises.map(function(ex) {
+            if (!ex || !ex.name) return '';
+            return '<div class="exercise-chip">' +
+                '<div class="exercise-name">' + (ex.name || 'Unknown') + '</div>' +
+                '<div class="exercise-meta">' + (ex.rounds || 0) + ' rounds · ' + self.formatClock(ex.totalSeconds || 0) + '</div>' +
+                '</div>';
+        }).join('');
+        return '<div class="exercise-grid">' + html + '</div>';
+    }
+};
+
+var ui = {
+    toastTimer: null,
+
+    renderStats: function() {
+        var data = storage.getAll();
+        app.cachedWorkouts = data;
+
+        var statTotal = document.getElementById('stat-total');
+        var statWeek = document.getElementById('stat-week');
+        var statStreak = document.getElementById('stat-streak');
+        
+        if (statTotal) statTotal.textContent = data.length;
+
+        var weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+        var thisWeek = data.filter(function(w) { 
+            return w && w.timestamp && w.timestamp >= weekAgo; 
+        }).length;
+        if (statWeek) statWeek.textContent = thisWeek;
+        if (statStreak) statStreak.textContent = this.computeStreak(data);
+
+        var html = '';
+        if (data.length) {
+            data.forEach(function(w, idx) {
+                if (!w) return;
+                var duration = app.getDuration(w);
+                var exercises = app.getExerciseCount(w);
+                var exerciseHtml = app.renderExercises(w.exercises);
+                var notes = w.notes ? '<div class="history-notes">"' + w.notes + '"</div>' : '';
+
+                html += '<details class="history-panel"><summary>' +
+                    '<div class="history-summary">' +
+                    '<div class="history-info">' +
+                    '<div class="history-title">' + (w.type || 'Workout') + '</div>' +
+                    '<div class="history-meta"><span>' + (w.date || 'Unknown') + '</span><span>·</span><span>' + exercises + ' exercises</span></div>' +
+                    '</div>' +
+                    '<div class="history-duration">' + duration + '</div>' +
+                    '</div></summary>' +
+                    '<div class="history-detail">' +
+                    exerciseHtml + notes +
+                    '<div class="history-actions">' +
+                    '<button type="button" class="btn-icon" onclick="app.viewWorkout(' + idx + ')" aria-label="View"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></button>' +
+                    '<button type="button" class="btn-icon danger" onclick="app.deleteWorkout(' + w.id + ')" aria-label="Delete"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>' +
+                    '</div></div></details>';
+            });
+        } else {
+            html = '<div class="empty-state"><div class="empty-icon">💪</div><div class="empty-text">No workouts yet.<br>Complete one to see progress.</div></div>';
+        }
+        var fullStats = document.getElementById('full-stats');
+        if (fullStats) fullStats.innerHTML = html;
+
+        var mini = data.slice(0, 3);
+        var miniHtml = '';
+        if (mini.length) {
+            miniHtml = '<div class="mini-stats">';
+            mini.forEach(function(w) {
+                if (!w) return;
+                miniHtml += '<div class="mini-stat-row">' +
+                    '<span class="mini-stat-date">' + (w.date || 'Unknown') + '</span>' +
+                    '<span class="mini-stat-type">' + (w.type || 'Workout') + '</span>' +
+                    '<span class="mini-stat-duration">' + app.getDuration(w) + '</span>' +
+                    '</div>';
+            });
+            miniHtml += '</div>';
+        } else {
+            miniHtml = '<div class="empty-state" style="padding:24px"><div class="empty-text">Complete a workout to see activity.</div></div>';
+        }
+        var miniStats = document.getElementById('mini-stats');
+        if (miniStats) miniStats.innerHTML = miniHtml;
+    },
+
+    computeStreak: function(workouts) {
+        if (!workouts || !Array.isArray(workouts) || !workouts.length) return 0;
+        
+        var daysSet = {};
+        workouts.forEach(function(w) {
+            if (w && w.timestamp) {
+                try {
+                    daysSet[new Date(w.timestamp).toDateString()] = true;
+                } catch (e) {}
+            }
+        });
+        
+        var days = Object.keys(daysSet);
+        if (!days.length) return 0;
+        
+        days.sort(function(a, b) { 
+            try {
+                return new Date(b) - new Date(a); 
+            } catch (e) {
+                return 0;
+            }
+        });
+        
+        var streak = 0;
+        var currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+
+        for (var i = 0; i < days.length; i++) {
+            try {
+                var dayDate = new Date(days[i]);
+                dayDate.setHours(0, 0, 0, 0);
+                var diff = Math.round((currentDate - dayDate) / (1000 * 60 * 60 * 24));
+                
+                if (diff <= 1) {
+                    streak++;
+                    currentDate = dayDate;
+                } else {
+                    break;
+                }
+            } catch (e) {
+                break;
+            }
+        }
+        return streak;
+    },
+
+    tab: function(name) {
+        document.querySelectorAll('.view').forEach(function(v) {
+            if (v.id !== 'view-timer' && v.id !== 'completion-screen') {
+                v.classList.remove('active');
+            }
+        });
+
+        var target = document.getElementById('tab-' + name);
+        if (target) target.classList.add('active');
+
+        document.querySelectorAll('.nav-btn').forEach(function(btn) { btn.classList.remove('active'); });
+        
+        if (name === 'home') {
+            var navTrain = document.getElementById('nav-train');
+            if (navTrain) navTrain.classList.add('active');
+        } else if (name === 'stats') {
+            var navStats = document.getElementById('nav-stats');
+            if (navStats) navStats.classList.add('active');
+            this.renderStats();
+        }
+    },
+
+    modal: function(type, data) {
+        data = data || {};
+        var modal = document.getElementById('modal');
+        if (!modal) return;
+        
+        var html = '';
+
+        if (type === 'weight') {
+            html = '<div class="modal-card">' +
+                '<h3 class="modal-title">Edit Weight</h3>' +
+                '<label for="m-weight">Weight / Load</label>' +
+                '<input id="m-weight" placeholder="e.g. 35lb KB" value="' + (data.current || '') + '">' +
+                '<div class="modal-actions">' +
+                '<button type="button" class="modal-btn modal-btn-cancel" onclick="ui.closeModal()">Cancel</button>' +
+                '<button type="button" class="modal-btn modal-btn-primary" onclick="app.saveWeight()">Save</button>' +
+                '</div></div>';
+        } else if (type === 'manual') {
+            html = '<div class="modal-card">' +
+                '<h3 class="modal-title">Log Workout</h3>' +
+                '<label for="m-type">Type</label>' +
+                '<select id="m-type"><option>Zone 2</option><option>Norwegian 4×4</option><option>Custom</option></select>' +
+                '<label for="m-duration">Duration (minutes)</label>' +
+                '<input id="m-duration" type="number" min="1" placeholder="30">' +
+                '<label for="m-notes">Notes</label>' +
+                '<textarea id="m-notes" rows="3" placeholder="How did it feel?"></textarea>' +
+                '<div class="modal-actions">' +
+                '<button type="button" class="modal-btn modal-btn-cancel" onclick="ui.closeModal()">Cancel</button>' +
+                '<button type="button" class="modal-btn modal-btn-primary" onclick="app.logManual()">Save</button>' +
+                '</div></div>';
+        } else if (type === 'quit') {
+            html = '<div class="modal-card">' +
+                '<h3 class="modal-title">End Workout?</h3>' +
+                '<p style="color:var(--text-secondary);margin:0 0 8px">Completed ' + (data.completed || 0) + '/' + (data.total || 0) + ' exercises</p>' +
+                '<p style="color:var(--text-muted);font-size:13px;margin:0 0 20px">Elapsed: ' + (data.duration || '0s') + '</p>' +
+                '<div style="display:flex;flex-direction:column;gap:10px">' +
+                '<button type="button" class="modal-btn modal-btn-primary" onclick="app.savePartial()">Save & Exit</button>' +
+                '<button type="button" class="modal-btn modal-btn-cancel" onclick="ui.closeModal()">Continue</button>' +
+                '<button type="button" class="modal-btn modal-btn-danger" onclick="app.confirmQuit()">Discard & Exit</button>' +
+                '</div></div>';
+        } else if (type === 'delete') {
+            html = '<div class="modal-card">' +
+                '<h3 class="modal-title">Delete Workout?</h3>' +
+                '<p style="color:var(--text-secondary);margin:0 0 20px">This cannot be undone.</p>' +
+                '<div class="modal-actions">' +
+                '<button type="button" class="modal-btn modal-btn-cancel" onclick="ui.closeModal()">Cancel</button>' +
+                '<button type="button" class="modal-btn modal-btn-danger" onclick="app.confirmDelete(' + (data.id || 0) + ')">Delete</button>' +
+                '</div></div>';
+        } else if (type === 'view') {
+            var w = data.workout || {};
+            html = '<div class="modal-card">' +
+                '<h3 class="modal-title">' + (w.type || 'Workout') + '</h3>' +
+                '<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:4px;margin-bottom:20px">' +
+                '<div style="display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)"><span style="color:var(--text-secondary);font-size:13px">Date</span><strong style="font-size:13px">' + (w.date || 'Unknown') + '</strong></div>' +
+                '<div style="display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)"><span style="color:var(--text-secondary);font-size:13px">Duration</span><strong style="font-size:13px">' + app.getDuration(w) + '</strong></div>' +
+                '<div style="display:flex;justify-content:space-between;padding:12px 16px"><span style="color:var(--text-secondary);font-size:13px">Exercises</span><strong style="font-size:13px">' + app.getExerciseCount(w) + '</strong></div>' +
+                '</div>' +
+                '<div style="margin-bottom:20px"><div style="font-size:11px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Breakdown</div>' +
+                app.renderExercises(w.exercises) + '</div>' +
+                (w.notes ? '<div class="history-notes" style="margin-bottom:20px">"' + w.notes + '"</div>' : '') +
+                '<button type="button" class="modal-btn modal-btn-primary" style="width:100%" onclick="ui.closeModal()">Close</button>' +
+                '</div>';
+        }
+
+        modal.innerHTML = html;
+        modal.classList.add('open');
+    },
+
+    closeModal: function() {
+        var modal = document.getElementById('modal');
+        if (modal) modal.classList.remove('open');
+    },
+
+    toast: function(message, type) {
+        type = type || 'info';
+        var toast = document.getElementById('toast');
+        if (!toast) return;
+        
+        toast.textContent = message || '';
+        toast.className = 'toast show ' + type;
+        
+        var self = this;
+        clearTimeout(this.toastTimer);
+        this.toastTimer = setTimeout(function() {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+};
+
+function toggleInstall() {
+    var steps = document.getElementById('install-steps');
+    var btn = document.getElementById('install-toggle');
+    if (steps) steps.classList.toggle('show');
+    if (btn) btn.textContent = (steps && steps.classList.contains('show')) ? 'Hide Instructions' : 'Show Instructions';
+}
+
+function updateInstallStatus() {
+    var status = document.getElementById('install-status');
+    if (!status) return;
+    
+    var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+    if (standalone) {
+        status.textContent = 'App is installed';
+        var btn = document.getElementById('install-toggle');
+        if (btn) {
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+        }
+    } else if (isIOS) {
+        status.textContent = 'iPhone detected';
+    } else {
+        status.textContent = 'Open in Safari on iPhone';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateInstallStatus();
+    ui.renderStats();
+});
+</script>
+</body>
 </html>
