@@ -22,8 +22,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" 
-        content="width=device-width,initial-scale=1,user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="Content-Security-Policy" 
         content="default-src 'self' data: blob:;
                  script-src 'self' 'unsafe-inline' blob:;
@@ -84,6 +83,7 @@
 html {
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 body {
@@ -112,6 +112,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  touch-action: manipulation;
 }
 
 button:hover, button:focus-visible {
@@ -1349,6 +1350,9 @@ header {
 <script>
 (function() {
   'use strict';
+
+  // Double-tap zoom prevention for iOS/Safari
+  (function(){let lt=0;document.addEventListener('touchend',function(e){const t2=e.timeStamp;if(t2-lt<300)e.preventDefault();lt=t2;},{passive:false});})();
 
   const DB_NAME = 'kb-tracker-db';
   const DB_VERSION = 1;
